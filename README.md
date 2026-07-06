@@ -18,6 +18,7 @@ The important boundary: Dispatch automates only what can be done through permitt
 - [Voice and content system](docs/08-voice-and-content-system.md)
 - [MCP client setup](docs/09-mcp-client-setup.md)
 - [Launch checklist](docs/10-launch-checklist.md)
+- [App and launch video plan](docs/11-app-and-launch-video-plan.md)
 - [Environment template](.env.example)
 
 Auth note: this app uses real passwordless magic links. `AUTH_PROVIDER=dev` generates local test links without sending email; `AUTH_PROVIDER=resend` sends production links through Resend. No password storage or password login flow is part of Dispatch.
