@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function AuthCallback() {
+function AuthCallbackContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<'verifying' | 'success' | 'error'>('verifying');
@@ -34,7 +34,6 @@ export default function AuthCallback() {
           setError(data.error || 'Failed to verify magic link.');
         } else {
           setStatus('success');
-          // Cookie is set by the API response, redirect to dashboard
           setTimeout(() => {
             router.push('/dashboard');
           }, 1000);
@@ -49,46 +48,59 @@ export default function AuthCallback() {
   }, [token, email, router]);
 
   return (
+    <div className="max-w-md w-full text-center">
+      {status === 'verifying' && (
+        <>
+          <div className="w-16 h-16 border-4 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto mb-6" />
+          <h1 className="text-2xl font-tarsius text-imperial-500 mb-2">Verifying your magic link...</h1>
+          <p className="text-ocean-500">Just a moment while we sign you in securely.</p>
+        </>
+      )}
+
+      {status === 'success' && (
+        <>
+          <div className="w-16 h-16 bg-sky-500 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-tarsius text-imperial-500 mb-2">You are signed in</h1>
+          <p className="text-ocean-500">Redirecting to your dashboard...</p>
+        </>
+      )}
+
+      {status === 'error' && (
+        <>
+          <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-tarsius text-imperial-500 mb-2">Sign-in failed</h1>
+          <p className="text-ocean-500 mb-6">{error}</p>
+          <a
+            href="/auth"
+            className="inline-flex items-center justify-center px-6 py-3 bg-sky-500 text-white font-mono text-sm uppercase tracking-wider rounded-lg hover:bg-sky-600 transition-colors"
+          >
+            Try Again
+          </a>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default function AuthCallback() {
+  return (
     <div className="min-h-screen flex items-center justify-center bg-white px-6">
-      <div className="max-w-md w-full text-center">
-        {status === 'verifying' && (
-          <>
-            <div className="w-16 h-16 border-4 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto mb-6" />
-            <h1 className="text-2xl font-tarsius text-imperial-500 mb-2">Verifying your magic link...</h1>
-            <p className="text-ocean-500">Just a moment while we sign you in securely.</p>
-          </>
-        )}
-
-        {status === 'success' && (
-          <>
-            <div className="w-16 h-16 bg-sky-500 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-            </div>
-            <h1 className="text-2xl font-tarsius text-imperial-500 mb-2">You are signed in</h1>
-            <p className="text-ocean-500">Redirecting to your dashboard...</p>
-          </>
-        )}
-
-        {status === 'error' && (
-          <>
-            <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </div>
-            <h1 className="text-2xl font-tarsius text-imperial-500 mb-2">Sign-in failed</h1>
-            <p className="text-ocean-500 mb-6">{error}</p>
-            <a
-              href="/auth"
-              className="inline-flex items-center justify-center px-6 py-3 bg-sky-500 text-white font-mono text-sm uppercase tracking-wider rounded-lg hover:bg-sky-600 transition-colors"
-            >
-              Try Again
-            </a>
-          </>
-        )}
-      </div>
+      <Suspense fallback={
+        <div className="max-w-md w-full text-center">
+          <div className="w-16 h-16 border-4 border-sky-500 border-t-transparent rounded-full animate-spin mx-auto mb-6" />
+          <h1 className="text-2xl font-tarsius text-imperial-500 mb-2">Loading...</h1>
+        </div>
+      }>
+        <AuthCallbackContent />
+      </Suspense>
     </div>
   );
 }
