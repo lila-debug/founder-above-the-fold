@@ -2,38 +2,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getOwnerFromRequest, logAudit } from '@/lib/api-utils';
 import { supabase } from '@/lib/supabase';
 import crypto from 'crypto';
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
 
-const POST_TEMPLATES = [
-  {
-    template: (theme: string, expertise: string) =>
-      `The biggest mistake I see in ${theme.toLowerCase()}:\n\n[Specific mistake]\n\nWhat works instead:\n\n[Solution]\n\nI learned this after ${expertise.toLowerCase()} for 10+ years. Save yourself the pain.`,
-    archetype: 'mistake_lesson',
-  },
-  {
-    template: (theme: string, expertise: string) =>
-      `Three things I wish I knew about ${theme.toLowerCase()} before starting:\n\n1. [Insight 1]\n\n2. [Insight 2]\n\n3. [Insight 3]\n\nThese would have saved months of work.`,
-    archetype: 'lessons_learned',
-  },
-  {
-    template: (theme: string, expertise: string) =>
-      `Everyone talks about ${theme.toLowerCase()}.\n\nAlmost no one does it right.\n\nHere's what actually works:\n\n[Specific tactic or framework]\n\nThis is how we scaled from [A] to [B].`,
-    archetype: 'contrarian_insight',
-  },
-  {
-    template: (theme: string, expertise: string) =>
-      `If you're working on ${theme.toLowerCase()}, here's the framework I use:\n\n1. [Step 1]\n2. [Step 2]\n3. [Step 3]\n4. [Step 4]\n\nThis simplified our process and saved 20+ hours per week.`,
-    archetype: 'framework',
-  },
-  {
-    template: (theme: string, expertise: string) =>
-      `Real talk about ${theme.toLowerCase()}:\n\nIt's harder than people say. But it's also simpler.\n\nHere's what matters:\n\n[Core principle]\n\nEverything else is noise.`,
-    archetype: 'real_talk',
-  },
-  {
-    template: (theme: string, expertise: string) =>
-      `Quick wins for ${theme.toLowerCase()}:\n\n• [Tactic 1]\n• [Tactic 2]\n• [Tactic 3]\n\nThese take less than a week to implement and produce immediate results.`,
-    archetype: 'quick_wins',
-  },
+const POST_ARCHETYPES = [
+  'mistake_lesson',
+  'lessons_learned',
+  'contrarian_insight',
+  'framework',
+  'real_talk',
+  'quick_wins',
+  'origin_story',
+  'unpopular_opinion',
 ];
 
 export async function POST(request: NextRequest) {
@@ -43,11 +23,19 @@ export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
     const {
+      fullName,
       currentRole,
       company,
+      industry,
+      yearsExperience,
+      targetAudience,
+      mainGoal,
       expertise1,
       expertise2,
+      expertise3,
+      achievements,
       contentThemes,
+      voiceTone,
     } = data;
 
     // Get content pillars
@@ -62,25 +50,64 @@ export async function POST(request: NextRequest) {
 
     const pillars = pillarsData || [];
 
-    // Generate 14 posts (2 weeks at ~1 post per day average)
+    // Generate 14 posts using AI
     const postsToCreate = [];
+    
     for (let i = 0; i < 14; i++) {
       const theme = themes[i % themes.length] || expertise1;
-      const template = POST_TEMPLATES[i % POST_TEMPLATES.length];
+      const archetype = POST_ARCHETYPES[i % POST_ARCHETYPES.length];
       const pillar = pillars[i % pillars.length];
-      
-      // Create post body from template
-      const body = template.template(theme, expertise1);
-      
-      postsToCreate.push({
-        owner_id: owner.id,
-        body,
-        body_hash: crypto.createHash('sha256').update(body).digest('hex'),
-        status: 'draft',
-        pillar: pillar?.name || theme,
-        archetype: template.archetype,
-        notes: `Auto-generated from onboarding. Edit before publishing.`,
-      });
+
+      const prompt = `You are writing a LinkedIn post for ${fullName}, a ${currentRole} at ${company} in ${industry}.
+
+Voice: ${voiceTone}
+Target audience: ${targetAudience}
+Expertise: ${expertise1}, ${expertise2}${expertise3 ? ', ' + expertise3 : ''}
+Notable achievements: ${achievements}
+
+Write a ${archetype} post about: ${theme}
+
+Rules:
+- British English only (colour, realise, organisation)
+- No emojis
+- No banned words: gonna, wanna, gotta, kinda, sorta
+- Keep sentences under 40 words
+- Make it actionable and credible
+- 150-250 words
+- Use first person
+- Professional but direct
+
+Output ONLY the post text. No title, no hashtags, no meta-commentary.`;
+
+      try {
+        const { text } = await generateText({
+          model: openai('gpt-4o-mini'),
+          prompt,
+          temperature: 0.8,
+        });
+
+        postsToCreate.push({
+          owner_id: owner.id,
+          body: text.trim(),
+          body_hash: crypto.createHash('sha256').update(text.trim()).digest('hex'),
+          status: 'draft',
+          pillar: pillar?.name || theme,
+          archetype,
+          notes: `AI-generated from onboarding. Review before publishing.`,
+        });
+      } catch (aiError) {
+        console.error('AI generation failed for post', i, aiError);
+        // Fallback to simple template if AI fails
+        postsToCreate.push({
+          owner_id: owner.id,
+          body: `Write about ${theme} here. Share a specific insight from your ${yearsExperience} of experience in ${expertise1}.`,
+          body_hash: crypto.createHash('sha256').update(`fallback-${i}`).digest('hex'),
+          status: 'draft',
+          pillar: pillar?.name || theme,
+          archetype,
+          notes: `Template fallback. Edit and personalize.`,
+        });
+      }
     }
 
     // Insert posts
@@ -95,7 +122,8 @@ export async function POST(request: NextRequest) {
 
     await logAudit(owner.id, 'create', 'posts', owner.id, { 
       source: 'onboarding',
-      count: postsToCreate.length 
+      count: postsToCreate.length,
+      ai_powered: true,
     });
 
     return NextResponse.json({ success: true, count: postsToCreate.length });
