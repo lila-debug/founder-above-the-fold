@@ -11,6 +11,7 @@ interface Post {
   archetype?: string;
   notes?: string;
   body_hash: string;
+  linkedin_post_id?: string;
   voice_checks?: {
     id: string;
     status: string;
@@ -31,6 +32,8 @@ export default function DraftDetailPage() {
   const [saving, setSaving] = useState(false);
   const [editBody, setEditBody] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+  const [publishLoading, setPublishLoading] = useState(false);
+  const [publishError, setPublishError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchPost();
@@ -100,6 +103,28 @@ export default function DraftDetailPage() {
       }
     } catch (err) {
       console.error('Failed to delete:', err);
+    }
+  }
+
+  async function publishPost() {
+    setPublishLoading(true);
+    setPublishError(null);
+
+    try {
+      const res = await fetch(`/api/posts/${postId}/publish`, { method: 'POST' });
+      const data = await res.json();
+
+      if (res.ok) {
+        setPost(data.post);
+        router.push('/dashboard');
+      } else {
+        setPublishError(data.error || 'Failed to publish post');
+      }
+    } catch (err) {
+      console.error('Publish failed:', err);
+      setPublishError('Failed to publish post');
+    } finally {
+      setPublishLoading(false);
     }
   }
 
@@ -241,23 +266,51 @@ export default function DraftDetailPage() {
         )}
       </div>
 
-      {/* Queue Action */}
-      {post.status === 'draft' && voicePassed && !bodyChanged && (
+      {/* Publish to LinkedIn */}
+      {post.status === 'published' && (
         <div className="p-6 border border-green-300 bg-green-50 rounded-lg">
-          <p className="text-green-700 mb-4">Voice check passed. Ready to queue.</p>
-          <a
-            href={`/dashboard/drafts/${post.id}/queue`}
-            className="inline-flex items-center px-6 py-3 bg-sky-500 text-white font-mono text-sm uppercase tracking-wider rounded-lg hover:bg-sky-600 transition-colors"
-          >
-            Schedule for Publishing
-          </a>
+          <p className="text-green-700 font-mono text-sm uppercase tracking-wider">✓ Published to LinkedIn</p>
+          {post.linkedin_post_id && (
+            <a
+              href={`https://www.linkedin.com/feed/update/${post.linkedin_post_id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-3 text-sky-500 hover:text-sky-600 font-mono text-xs uppercase tracking-wider"
+            >
+              View on LinkedIn →
+            </a>
+          )}
         </div>
       )}
 
-      {post.status === 'draft' && !voicePassed && (
-        <div className="p-6 border border-yellow-300 bg-yellow-50 rounded-lg">
-          <p className="text-yellow-700">Voice check must pass before queueing. Run the voice check above.</p>
-        </div>
+      {post.status === 'draft' && (
+        <>
+          {publishError && (
+            <div className="p-6 border border-red-300 bg-red-50 rounded-lg">
+              <p className="text-red-700 font-mono text-sm uppercase tracking-wider mb-2">Error Publishing</p>
+              <p className="text-red-600 text-sm">{publishError}</p>
+            </div>
+          )}
+
+          {voicePassed && !bodyChanged && (
+            <div className="p-6 border border-green-300 bg-green-50 rounded-lg">
+              <p className="text-green-700 mb-4">Voice check passed. Ready to publish.</p>
+              <button
+                onClick={publishPost}
+                disabled={publishLoading}
+                className="inline-flex items-center px-6 py-3 bg-sky-500 text-white font-mono text-sm uppercase tracking-wider rounded-lg hover:bg-sky-600 transition-colors disabled:opacity-50"
+              >
+                {publishLoading ? 'Publishing...' : 'Publish to LinkedIn Now'}
+              </button>
+            </div>
+          )}
+
+          {!voicePassed && (
+            <div className="p-6 border border-yellow-300 bg-yellow-50 rounded-lg">
+              <p className="text-yellow-700">Voice check must pass before publishing. Run the voice check above.</p>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
