@@ -29,10 +29,10 @@ export default function LandingPage() {
               Get Early Access
             </Link>
             <Link
-              href="/how-it-works"
+              href="/tutorial"
               className="inline-flex items-center justify-center px-8 py-4 border-2 border-imperial-500 text-imperial-500 font-mono text-sm uppercase tracking-wider rounded-lg hover:bg-imperial-500 hover:text-white transition-colors"
             >
-              See How It Works
+              How It Works
             </Link>
           </div>
 
