@@ -35,7 +35,12 @@ function AuthCallbackContent() {
         } else {
           setStatus('success');
           setTimeout(() => {
-            router.push('/dashboard');
+            // Redirect to onboarding if new user, otherwise dashboard
+            if (data.isNewUser) {
+              router.push('/onboarding');
+            } else {
+              router.push('/dashboard');
+            }
           }, 1000);
         }
       } catch (err) {

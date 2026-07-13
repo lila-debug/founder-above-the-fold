@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyMagicLink, createSession, getOrCreateOwner } from '@/lib/auth';
+import { supabase } from '@/lib/supabase';
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,11 +19,20 @@ export async function POST(request: NextRequest) {
     // Get or create owner
     const owner = await getOrCreateOwner(email);
 
+    // Check if this is a new user (no profile copy yet)
+    const { data: profileCopy } = await supabase
+      .from('profile_copy')
+      .select('id')
+      .eq('owner_id', owner.id)
+      .limit(1);
+
+    const isNewUser = !profileCopy || profileCopy.length === 0;
+
     // Create session
     const sessionToken = await createSession(email);
 
     // Set cookie
-    const response = NextResponse.json({ success: true, owner });
+    const response = NextResponse.json({ success: true, owner, isNewUser });
     response.cookies.set('fatf_session', sessionToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
