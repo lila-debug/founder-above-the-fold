@@ -3,19 +3,23 @@ import { BrandFooter } from "../components/brand-footer";
 
 const dataRows = [
   {
-    label: "Owner account",
+    label: "Owner cabinet",
     detail:
-      "Email, session state, LinkedIn OAuth identity, and private setup settings for the single owner.",
+      "Email, session state, purchase state, and private setup settings used to open one owner's cabinet.",
   },
   {
     label: "LinkedIn content",
     detail:
-      "After database setup: drafts, voice-check results, and profile-copy versions. Queue records, templates, published-post analytics, and live publishing are planned and are not collected by this build.",
+      "Drafts, approved voice transcripts, uploaded files, chosen profile photos, public links, voice-check results, and profile-copy versions. The product does not require a LinkedIn password.",
   },
   {
     label: "System records",
     detail:
-      "Setup health and safe error summaries needed to operate the app. Audit-event and publishing-job history are planned for later rails.",
+      "Purchase receipt state, device capability, setup health, consent choices, and safe error summaries needed to operate the app.",
+  },
+  {
+    label: "Audio and local AI",
+    detail: "Microphone access begins only after an owner action. The proposed default is to retain the transcript—not the recording. Compatible-device AI work stays on device; any future cloud processing requires a separate, named choice.",
   },
 ];
 
@@ -31,10 +35,9 @@ export default function PrivacyPage() {
         </Link>
         <h1 className="mt-6 text-4xl font-semibold md:text-6xl">Privacy</h1>
         <p className="mt-4 max-w-3xl text-base leading-7 text-[#1768ac]">
-          Founder Above the Fold is designed as a private, single-owner command
-          centre. After database setup, this build stores only owner drafts,
-          voice-check results, and canonical profile copy. Queueing, publishing,
-          analytics, and templates remain planned rails.
+          Founder Above the Fold is designed as a private, owner-controlled command
+          centre sold as a one-time licence. It keeps collection narrow, makes voice
+          and camera access explicit, and keeps LinkedIn publishing intentionally locked.
         </p>
 
         <div className="mt-8 grid gap-4">
@@ -48,6 +51,11 @@ export default function PrivacyPage() {
             </article>
           ))}
         </div>
+
+        <section className="mt-8 grid gap-4 md:grid-cols-2">
+          <article className="rounded-lg border border-[#1768ac]/25 bg-[#f4fbff] p-4"><h2 className="text-lg font-semibold">Owner choices</h2><p className="mt-2 text-sm leading-6 text-[#1768ac]">Access, correct, export, or request deletion of owner content. Optional collection and future cloud AI must remain off until chosen. Consent can be withdrawn, subject to legal retention duties.</p></article>
+          <article className="rounded-lg border border-[#1768ac]/25 bg-[#f4fbff] p-4"><h2 className="text-lg font-semibold">Before public launch</h2><p className="mt-2 text-sm leading-6 text-[#1768ac]">Fit the verified legal entity, privacy contact, service providers, storage regions, retention periods, deletion route, breach process, Quebec assessment, and App Store privacy answers.</p></article>
+        </section>
 
         <section className="mt-8 rounded-lg border border-[#1768ac]/25 p-4">
           <h2 className="text-lg font-semibold">Consent And Cookies</h2>

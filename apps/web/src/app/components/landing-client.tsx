@@ -128,17 +128,17 @@ export function OwnerAccessPanel() {
   }
 
   return (
-    <section className="w-full rounded-lg border border-[#1768ac]/25 bg-white p-4">
+    <section className="panel w-full bg-white p-4">
       <div className="flex items-center gap-2">
-        <Mail size={19} strokeWidth={1.9} />
-        <h3 className="text-base font-semibold">Magic link access</h3>
+        <Mail size={19} strokeWidth={2.2} />
+        <h3 className="text-base font-black uppercase">Magic link access</h3>
       </div>
       <form className="mt-4 grid gap-3" onSubmit={sendMagicLink}>
-        <label className="block text-sm font-medium text-[#1768ac]" htmlFor="owner-email">
+        <label className="rail-label block text-xs font-black uppercase text-[#1768ac]" htmlFor="owner-email">
           Email
         </label>
         <input
-          className="h-11 w-full rounded-md border border-[#1768ac]/35 bg-white px-3 text-sm text-[#03256c] outline-none focus:border-[#06bee1] focus:ring-2 focus:ring-[#06bee1]/25"
+          className="h-11 w-full border-2 border-[#03256c]/35 bg-white px-3 text-sm text-[#03256c] outline-none focus:border-[#06bee1] focus:ring-2 focus:ring-[#06bee1]/25"
           id="owner-email"
           type="email"
           value={email}
@@ -147,18 +147,18 @@ export function OwnerAccessPanel() {
           required
         />
         <button
-          className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-[#03256c] px-4 text-sm font-semibold text-white hover:bg-[#2541b2] disabled:cursor-not-allowed disabled:bg-[#1768ac]/55"
+          className="panel panel-tap inline-flex h-11 w-full items-center justify-center gap-2 bg-[#03256c] px-4 text-sm font-black uppercase text-white disabled:cursor-not-allowed disabled:bg-[#1768ac]/55"
           disabled={magicState === "sending"}
           type="submit"
         >
-          <KeyRound size={17} strokeWidth={1.9} />
+          <KeyRound size={17} strokeWidth={2.2} />
           {magicState === "sending" ? "Sending" : "Send magic link"}
         </button>
         {message ? (
           <p
-            className={`text-sm font-medium ${
+            className={`text-sm font-bold ${
               magicState === "error" || magicState === "missing"
-                ? "text-[#2541b2]"
+                ? "text-[#d94841]"
                 : "text-[#1768ac]"
             }`}
           >
@@ -167,31 +167,31 @@ export function OwnerAccessPanel() {
         ) : null}
         {magicLink ? (
           <a
-            className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-md border border-[#1768ac]/35 px-3 text-sm font-semibold hover:border-[#06bee1] hover:bg-[#06bee1]/10"
+            className="panel panel-tap inline-flex h-10 w-full items-center justify-center gap-2 bg-white px-3 text-sm font-black uppercase text-[#03256c]"
             href={magicLink}
           >
             Open local magic link
-            <ArrowRight size={16} strokeWidth={1.9} />
+            <ArrowRight size={16} strokeWidth={2.2} />
           </a>
         ) : null}
         {sessionMessage ? (
-          <div className="grid gap-3 rounded-lg border border-[#1768ac]/20 bg-[#f4fbff] p-3">
-            <p className="text-sm font-semibold text-[#1768ac]">{sessionMessage}</p>
+          <div className="grid gap-3 border-2 border-[#03256c]/20 bg-[#eafaff] p-3">
+            <p className="text-sm font-bold text-[#1768ac]">{sessionMessage}</p>
             {sessionMessage.includes("ready") ? (
               <a
-                className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-md bg-[#03256c] px-3 text-sm font-semibold text-white hover:bg-[#2541b2]"
+                className="panel panel-tap inline-flex h-10 w-full items-center justify-center gap-2 bg-[#03256c] px-3 text-sm font-black uppercase text-white"
                 href="/dashboard"
               >
                 Open private workbench
-                <ArrowRight size={16} strokeWidth={1.9} />
+                <ArrowRight size={16} strokeWidth={2.2} />
               </a>
             ) : null}
           </div>
         ) : null}
       </form>
-      <div className="mt-5 rounded-lg border border-[#1768ac]/20 bg-[#f4fbff] p-4">
-        <div className="flex items-center gap-2 text-sm font-semibold">
-          <CheckCircle2 size={17} strokeWidth={1.9} />
+      <div className="mt-5 border-2 border-[#03256c]/20 bg-[#eafaff] p-4">
+        <div className="flex items-center gap-2 text-sm font-black uppercase">
+          <CheckCircle2 size={17} strokeWidth={2.2} />
           Passwordless by default
         </div>
         <p className="mt-3 text-sm leading-6 text-[#1768ac]">
@@ -261,45 +261,45 @@ export function LinkedInConnectionPanel() {
   const actionLabel = getLinkedInActionLabel(status);
 
   return (
-    <section className="w-full rounded-lg border border-[#1768ac]/25 bg-white p-4">
+    <section className="panel w-full bg-white p-4">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-2">
-          <Link2 size={19} strokeWidth={1.9} />
-          <h3 className="text-base font-semibold">LinkedIn connection</h3>
+          <Link2 size={19} strokeWidth={2.2} />
+          <h3 className="text-base font-black uppercase">LinkedIn connection</h3>
         </div>
         <button
-          className="inline-flex size-9 items-center justify-center rounded-md border border-[#1768ac]/25 text-[#03256c] hover:border-[#06bee1] hover:bg-[#06bee1]/10"
+          className="inline-flex size-9 items-center justify-center border-2 border-[#03256c]/25 text-[#03256c] hover:border-[#06bee1] hover:bg-[#06bee1]/10"
           onClick={refreshStatus}
           type="button"
           title="Refresh LinkedIn status"
         >
-          <RefreshCcw size={16} strokeWidth={1.9} />
+          <RefreshCcw size={16} strokeWidth={2.2} />
         </button>
       </div>
 
       <div
-        className={`mt-4 rounded-lg border p-4 ${
+        className={`mt-4 border-2 p-4 ${
           connected
-            ? "border-[#1768ac]/25 bg-[#f4fbff]"
+            ? "border-[#03256c]/25 bg-[#eafaff]"
             : attention
-              ? "border-[#2541b2]/30 bg-[#2541b2]/8"
-              : "border-[#1768ac]/20 bg-[#f4fbff]"
+              ? "border-[#d94841] bg-[#fff3ef]"
+              : "border-[#03256c]/20 bg-[#eafaff]"
         }`}
       >
         <div className="flex items-start gap-3">
           <span
-            className={`mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-md ${
+            className={`mt-0.5 flex size-9 shrink-0 items-center justify-center border-2 ${
               connected
-                ? "bg-[#06bee1]/20 text-[#03256c]"
+                ? "border-[#03256c] bg-[#06bee1]/20 text-[#03256c]"
                 : attention
-                  ? "bg-[#2541b2]/12 text-[#2541b2]"
-                  : "bg-white text-[#03256c]"
+                  ? "border-[#d94841] bg-[#d94841]/12 text-[#d94841]"
+                  : "border-[#03256c]/25 bg-white text-[#03256c]"
             }`}
           >
             <LinkedInStateIcon state={panelState} />
           </span>
           <div className="min-w-0">
-            <p className="text-sm font-semibold text-[#03256c]">{statusLabel}</p>
+            <p className="text-sm font-black uppercase text-[#03256c]">{statusLabel}</p>
             <p className="mt-2 text-sm leading-6 text-[#1768ac]">
               {status?.message ?? "Inspecting LinkedIn connection."}
             </p>
@@ -307,7 +307,7 @@ export function LinkedInConnectionPanel() {
         </div>
       </div>
 
-      {notice ? <p className="mt-3 text-sm font-semibold text-[#2541b2]">{notice}</p> : null}
+      {notice ? <p className="mt-3 text-sm font-bold text-[#d94841]">{notice}</p> : null}
 
       <div className="mt-4 grid gap-2 text-sm">
         <ConnectionDetail
@@ -325,8 +325,8 @@ export function LinkedInConnectionPanel() {
       </div>
 
       {status?.scope.missing.length ? (
-        <div className="mt-4 rounded-lg border border-[#2541b2]/25 bg-[#2541b2]/8 p-3">
-          <p className="text-sm font-semibold text-[#03256c]">Missing scope</p>
+        <div className="mt-4 border-2 border-[#d94841] bg-[#fff3ef] p-3">
+          <p className="text-sm font-black uppercase text-[#03256c]">Missing scope</p>
           <p className="mt-2 break-words text-sm leading-6 text-[#1768ac]">
             {status.scope.missing.join(", ")}
           </p>
@@ -334,11 +334,11 @@ export function LinkedInConnectionPanel() {
       ) : null}
 
       {setupRequired && status?.missingEnv.length ? (
-        <details className="mt-4 rounded-lg border border-[#1768ac]/20 bg-[#f4fbff] p-3">
-          <summary className="cursor-pointer text-sm font-semibold text-[#03256c]">
+        <details className="mt-4 border-2 border-[#03256c]/20 bg-[#eafaff] p-3">
+          <summary className="cursor-pointer text-sm font-black uppercase text-[#03256c]">
             {status.missingEnv.length} labelled slots needed
           </summary>
-          <p className="mt-2 break-words text-xs leading-5 text-[#1768ac]">
+          <p className="rail-label mt-2 break-words text-xs leading-5 text-[#1768ac]">
             {status.missingEnv.join(", ")}
           </p>
         </details>
@@ -347,18 +347,18 @@ export function LinkedInConnectionPanel() {
       <div className="mt-4">
         {status?.canConnect ? (
           <a
-            className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-[#03256c] px-4 text-sm font-semibold text-white hover:bg-[#2541b2]"
+            className="panel panel-tap inline-flex h-11 w-full items-center justify-center gap-2 bg-[#03256c] px-4 text-sm font-black uppercase text-white"
             href="/api/auth/linkedin/start"
           >
-            <Link2 size={17} strokeWidth={1.9} />
+            <Link2 size={17} strokeWidth={2.2} />
             {actionLabel}
           </a>
         ) : (
           <span
             aria-disabled="true"
-            className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-md border border-[#1768ac]/25 bg-[#f4fbff] px-4 text-sm font-semibold text-[#1768ac]"
+            className="inline-flex h-11 w-full items-center justify-center gap-2 border-2 border-[#03256c]/25 bg-[#eafaff] px-4 text-sm font-black uppercase text-[#1768ac]"
           >
-            <Link2 size={17} strokeWidth={1.9} />
+            <Link2 size={17} strokeWidth={2.2} />
             {actionLabel}
           </span>
         )}
@@ -468,34 +468,34 @@ export function ProfileCopyBoard({
   const pendingItems = tracker.items.filter((item) => !item.synced);
 
   return (
-    <section id="profile-copy" className="bg-[#f4fbff]">
-      <div className="mx-auto w-full max-w-[1500px] px-5 py-10 lg:px-8">
+    <section id="profile-copy" className="bg-[#eafaff]">
+      <div className="mx-auto w-full max-w-[1500px] px-5 py-12 lg:px-8">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase text-[#1768ac]">
+            <p className="rail-label text-xs font-black uppercase tracking-[0.14em] text-[#1768ac]">
               {previewMode ? "Read-only product preview" : "Profile setup assistant"}
             </p>
-            <h2 className="mt-2 text-3xl font-semibold text-[#03256c] md:text-5xl">
+            <h2 className="mt-2 text-3xl font-black uppercase leading-[1.05] text-[#03256c] md:text-5xl">
               Canonical profile copy stays tidy here.
             </h2>
           </div>
           <a
-            className="inline-flex h-11 w-fit items-center justify-center gap-2 rounded-md border border-[#1768ac]/35 px-4 text-sm font-semibold text-[#03256c] hover:border-[#06bee1] hover:bg-[#06bee1]/10"
+            className="panel panel-tap inline-flex h-11 w-fit items-center justify-center gap-2 bg-white px-4 text-sm font-black uppercase text-[#03256c]"
             href="https://www.linkedin.com/in/me/"
             target="_blank"
             rel="noreferrer"
           >
             Open LinkedIn profile
-            <ExternalLink size={16} strokeWidth={1.9} />
+            <ExternalLink size={16} strokeWidth={2.2} />
           </a>
         </div>
 
         {previewMode ? (
-          <div className="mt-5 rounded-lg border border-[#1768ac]/25 bg-white px-4 py-3 text-sm font-medium text-[#1768ac]">
+          <div className="mt-5 border-2 border-[#03256c]/25 bg-white px-4 py-3 text-sm font-bold text-[#1768ac]">
             Public preview only. Editing stays behind the owner lock.
           </div>
         ) : tracker.database.status !== "ok" ? (
-          <div className="mt-5 rounded-lg border border-[#2541b2]/25 bg-white px-4 py-3 text-sm leading-6 text-[#2541b2]">
+          <div className="mt-5 border-2 border-[#d94841] bg-white px-4 py-3 text-sm leading-6 text-[#d94841]">
             {tracker.database.status === "not_configured"
               ? "Database slot empty: set DATABASE_URL and run migrations to save profile copy versions. Seed copy is shown for now."
               : `Database needs inspection: ${
@@ -506,10 +506,10 @@ export function ProfileCopyBoard({
 
         {notice ? (
           <div
-            className={`mt-5 rounded-lg border px-4 py-3 text-sm font-semibold ${
+            className={`mt-5 border-2 px-4 py-3 text-sm font-bold ${
               notice.tone === "ok"
-                ? "border-[#1768ac]/25 bg-white text-[#1768ac]"
-                : "border-[#2541b2]/25 bg-white text-[#2541b2]"
+                ? "border-[#03256c]/25 bg-white text-[#1768ac]"
+                : "border-[#d94841] bg-white text-[#d94841]"
             }`}
           >
             {notice.text}
@@ -527,28 +527,28 @@ export function ProfileCopyBoard({
               return (
                 <article
                   key={section.label}
-                  className={`flex w-full flex-col justify-between rounded-lg border border-[#1768ac]/25 bg-white p-4 ${previewMode ? "min-h-64" : "min-h-[420px]"}`}
+                  className={`panel flex w-full flex-col justify-between bg-white p-4 ${previewMode ? "min-h-64" : "min-h-[420px]"}`}
                 >
                   <div>
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="text-sm font-semibold text-[#03256c]">
+                        <p className="text-sm font-black uppercase text-[#03256c]">
                           {section.label}
                         </p>
-                        <p className="mt-1 text-xs font-semibold uppercase text-[#1768ac]">
+                        <p className="rail-label mt-1 text-xs font-black uppercase text-[#1768ac]">
                           v{section.version} - {section.statusLabel}
                         </p>
                       </div>
-                      <ClipboardCopy size={18} strokeWidth={1.9} />
+                      <ClipboardCopy size={18} strokeWidth={2.2} />
                     </div>
                     {previewMode ? (
-                      <p className="mt-4 line-clamp-4 rounded-md border border-[#1768ac]/20 bg-[#f4fbff] p-3 text-sm leading-6 text-[#03256c]">
+                      <p className="mt-4 line-clamp-4 border-2 border-[#03256c]/20 bg-[#eafaff] p-3 text-sm leading-6 text-[#03256c]">
                         {section.content}
                       </p>
                     ) : (
                       <>
                         <textarea
-                          className="mt-4 min-h-48 w-full resize-y rounded-md border border-[#1768ac]/25 bg-[#f4fbff] p-3 text-sm leading-6 text-[#03256c] outline-none focus:border-[#06bee1] focus:ring-2 focus:ring-[#06bee1]/25"
+                          className="mt-4 min-h-48 w-full resize-y border-2 border-[#03256c]/25 bg-[#eafaff] p-3 text-sm leading-6 text-[#03256c] outline-none focus:border-[#06bee1] focus:ring-2 focus:ring-[#06bee1]/25"
                           value={drafts[section.field] ?? section.content}
                           onChange={(event) =>
                             setDrafts((current) => ({
@@ -557,11 +557,11 @@ export function ProfileCopyBoard({
                             }))
                           }
                         />
-                        <label className="mt-3 block text-xs font-semibold uppercase text-[#1768ac]">
+                        <label className="rail-label mt-3 block text-xs font-black uppercase text-[#1768ac]">
                           Change note
                         </label>
                         <input
-                          className="mt-2 h-10 w-full rounded-md border border-[#1768ac]/25 bg-white px-3 text-sm text-[#03256c] outline-none focus:border-[#06bee1] focus:ring-2 focus:ring-[#06bee1]/25"
+                          className="mt-2 h-10 w-full border-2 border-[#03256c]/25 bg-white px-3 text-sm text-[#03256c] outline-none focus:border-[#06bee1] focus:ring-2 focus:ring-[#06bee1]/25"
                           value={changeNotes[section.field] ?? ""}
                           onChange={(event) =>
                             setChangeNotes((current) => ({
@@ -576,7 +576,7 @@ export function ProfileCopyBoard({
                   </div>
                   <div className="mt-5 grid gap-2">
                     <button
-                      className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-md bg-[#03256c] px-3 text-sm font-semibold text-white hover:bg-[#2541b2]"
+                      className="panel panel-tap inline-flex h-10 w-full items-center justify-center gap-2 bg-[#03256c] px-3 text-sm font-black uppercase text-white"
                       onClick={() =>
                         copyProfileSection(
                           section.label,
@@ -586,30 +586,30 @@ export function ProfileCopyBoard({
                       type="button"
                     >
                       {copiedSection === section.label ? (
-                        <CheckCircle2 size={16} strokeWidth={1.9} />
+                        <CheckCircle2 size={16} strokeWidth={2.2} />
                       ) : (
-                        <Copy size={16} strokeWidth={1.9} />
+                        <Copy size={16} strokeWidth={2.2} />
                       )}
                       {copiedSection === section.label ? "Copied" : "Copy"}
                     </button>
                     {!previewMode ? (
                       <>
                         <button
-                          className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-md border border-[#1768ac]/35 px-3 text-sm font-semibold text-[#03256c] hover:border-[#06bee1] hover:bg-[#06bee1]/10 disabled:cursor-not-allowed disabled:border-[#1768ac]/20 disabled:text-[#1768ac]/50"
+                          className="inline-flex h-10 w-full items-center justify-center gap-2 border-2 border-[#03256c]/35 px-3 text-sm font-black uppercase text-[#03256c] hover:border-[#06bee1] hover:bg-[#06bee1]/10 disabled:cursor-not-allowed disabled:border-[#03256c]/20 disabled:text-[#1768ac]/50"
                           disabled={!hasChanged || isSaving}
                           onClick={() => saveProfileSection(section)}
                           type="button"
                         >
-                          <Save size={16} strokeWidth={1.9} />
+                          <Save size={16} strokeWidth={2.2} />
                           {isSaving ? "Saving" : "Save new version"}
                         </button>
                         <button
-                          className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-md border border-[#1768ac]/35 px-3 text-sm font-semibold text-[#03256c] hover:border-[#06bee1] hover:bg-[#06bee1]/10 disabled:cursor-not-allowed disabled:border-[#1768ac]/20 disabled:text-[#1768ac]/50"
+                          className="inline-flex h-10 w-full items-center justify-center gap-2 border-2 border-[#03256c]/35 px-3 text-sm font-black uppercase text-[#03256c] hover:border-[#06bee1] hover:bg-[#06bee1]/10 disabled:cursor-not-allowed disabled:border-[#03256c]/20 disabled:text-[#1768ac]/50"
                           disabled={section.synced || isSyncing}
                           onClick={() => markProfileSectionSynced(section)}
                           type="button"
                         >
-                          <CheckCircle2 size={16} strokeWidth={1.9} />
+                          <CheckCircle2 size={16} strokeWidth={2.2} />
                           {section.synced ? "Pasted" : isSyncing ? "Marking" : "Mark pasted"}
                         </button>
                       </>
@@ -620,13 +620,13 @@ export function ProfileCopyBoard({
             })}
           </div>
 
-          <aside className="w-full rounded-lg border border-[#1768ac]/25 bg-white p-4">
-            <p className="text-sm font-semibold text-[#03256c]">Paste checklist</p>
+          <aside className="panel w-full bg-white p-4">
+            <p className="text-sm font-black uppercase text-[#03256c]">Paste checklist</p>
             <div className="mt-4 grid gap-3">
               {pendingItems.length ? (
                 pendingItems.map((item, index) => (
                   <div key={item.field} className="flex items-start gap-3">
-                    <div className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md bg-[#06bee1]/18 text-xs font-semibold text-[#03256c]">
+                    <div className="mt-0.5 flex size-6 shrink-0 items-center justify-center border-2 border-[#03256c] bg-[#ffd84d] text-xs font-black text-[#03256c]">
                       {index + 1}
                     </div>
                     <p className="text-sm leading-6 text-[#1768ac]">
@@ -636,8 +636,8 @@ export function ProfileCopyBoard({
                 ))
               ) : (
                 <div className="flex items-start gap-3">
-                  <div className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-md bg-[#06bee1]/18 text-xs font-semibold text-[#03256c]">
-                    <CheckCircle2 size={14} strokeWidth={1.9} />
+                  <div className="mt-0.5 flex size-6 shrink-0 items-center justify-center border-2 border-[#03256c] bg-[#7adf8b] text-xs font-black text-[#03256c]">
+                    <CheckCircle2 size={14} strokeWidth={2.2} />
                   </div>
                   <p className="text-sm leading-6 text-[#1768ac]">
                     All visible profile copy is marked pasted.
@@ -645,7 +645,7 @@ export function ProfileCopyBoard({
                 </div>
               )}
             </div>
-            <div className="mt-5 rounded-lg bg-[#f4fbff] p-3 text-sm leading-6 text-[#1768ac]">
+            <div className="mt-5 border-2 border-[#03256c]/20 bg-[#eafaff] p-3 text-sm leading-6 text-[#1768ac]">
               Prepare and version here. Paste into LinkedIn manually.
             </div>
           </aside>
@@ -689,9 +689,9 @@ function getPasteTask(item: ProfileCopyRecord) {
 
 function ConnectionDetail({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-3 rounded-md bg-[#f4fbff] px-3 py-2">
-      <span className="font-medium text-[#1768ac]">{label}</span>
-      <span className="text-right font-semibold text-[#03256c]">{value}</span>
+    <div className="flex items-center justify-between gap-3 border-2 border-[#03256c]/15 bg-[#eafaff] px-3 py-2">
+      <span className="font-bold text-[#1768ac]">{label}</span>
+      <span className="rail-label text-right text-xs font-black text-[#03256c]">{value}</span>
     </div>
   );
 }

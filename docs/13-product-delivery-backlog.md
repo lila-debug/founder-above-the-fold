@@ -37,13 +37,14 @@ Already in place:
 - 2026-07-13 security headers, a repeatable 13-check launch-smoke panel, and desktop/mobile browser evidence were fitted.
 - 2026-07-13 the Toy Box Explorer gained Mission Control, live evidence lights, a no-write voice/queue sandbox, beta-test mode, classified feedback with confidence, local persistence, and a finished-build gauge.
 - 2026-07-13 launch-control and LinkedIn launch-kit manuals were added for a truthful private-beta announcement.
+- 2026-07-14 the private owner workbench was rebuilt as one mobile-first founder operating shell with nine complete screens: Mission Control, Set-up, Profile OS, Content Studio, Queue, Tasks, Export, MCP Rail, and Build Manual. Each screen includes a matching assembly panel; real profile/draft rails remain connected and unfinished queue/publish machinery remains labelled planned.
 
 Known setup gaps:
 
 - `NEXT_PUBLIC_COOKIEBOT_ID` is not configured yet.
-- LinkedIn Developer App products/scopes, redirect URLs, and OAuth env vars are not verified/configured yet.
+- LinkedIn OAuth callback is aligned in LinkedIn and Vercel to `https://www.founderaccount.com/api/auth/linkedin/callback`; products/scopes and end-to-end owner authorization still require verification.
 - Database connection is not configured yet.
-- Purchased domains are not yet connected to a deployed project.
+- Purchased `.com`, `.app`, and `.dev` domains are connected to the Vercel project. `.com` is the selected primary product cabinet; secondary-domain redirects still need a deliberate routing pass.
 - Profile-copy read/write UI exists, but database-backed writes need `DATABASE_URL`.
 - Draft read/write rails and dashboard UI exist, but database-backed create/edit/delete need `DATABASE_URL`.
 - Queue, voice-check, publish, analytics, and template flows are not yet backed by real UI/API state.
@@ -189,7 +190,7 @@ Tickets:
     - Health endpoint reports database `ok`.
 
 - DISPATCH-2004 - Domain and deployment routing.
-  - Status: Blocked by Vercel project/domain configuration.
+  - Status: Vercel project linked locally; Git source corrected to `lila-debug/dispatch-linkedin-mcp-app`; broken double-root build instruction removed; production verification in progress.
   - Tasks:
     - Choose primary domain.
     - Connect `founderaccount.app`, `founderaccount.com`, and `founderaccount.dev` to the Vercel project.
@@ -209,7 +210,7 @@ Story: As the owner, I need to connect LinkedIn through official OAuth, never by
 Tickets:
 
 - DISPATCH-3001 - LinkedIn developer setup.
-  - Status: Reported started by owner; waiting on product/scope/redirect/env verification.
+  - Status: Client slots exist in Vercel Production and exact `.com` callback is aligned in LinkedIn and Vercel; waiting on product/scope and live owner OAuth verification.
   - Tasks:
     - Create LinkedIn Developer App. Reported by owner on 2026-07-12; verify in portal.
     - Create or connect the LinkedIn business/company shell. Reported by owner on 2026-07-12; verify association if LinkedIn requires it.
@@ -426,6 +427,27 @@ Tickets:
     - Founder Above the Fold proves a real weekly workflow.
 
 ## Next Logical Work Order
+
+### Epic 9 - Commercial Web + Native iOS Cabinet
+
+- DISPATCH-9001 - Fourteen-screen responsive product showroom.
+  - Status: Done in code; browser and accessibility sweep pending.
+- DISPATCH-9002 - Native SwiftUI cabinet with speech and local-AI fallback.
+  - Status: Compiles, installs, and launches in iPhone Simulator; StoreKit configuration and device permission tests pending.
+- DISPATCH-9003 - One-time commercial licence.
+  - Status: Research and price-test jig complete; live checkout, receipt validation, tax/refund copy, and legal review pending.
+- DISPATCH-9004 - SaaS privacy and owner controls.
+  - Status: Expanded privacy, cookies, draft terms, export/delete screens complete as product surfaces; verified providers, retention schedule, deletion backend, Cookiebot live-domain scan, and App Store privacy answers pending.
+
+Revised commercial work order:
+
+1. Test the CA$129 founding / CA$199 standard price jig with 50 qualified visitors.
+2. Fit real magic-link authentication, owner-scoped storage, export and verified deletion.
+3. Configure a StoreKit non-consumable and local `.storekit` test cabinet.
+4. Fit checkout-specific terms, tax, refund, legal-entity and support-contact panels.
+5. Complete device voice/camera permission and accessibility checks.
+6. Configure Cookiebot for the live web domains; do not place Cookiebot inside native iOS unless a cookie-bearing webview actually needs it.
+7. Keep LinkedIn publishing intentionally locked until the official integration passes its own approval and evidence gate.
 
 1. Keep current landing, privacy, cookies, and health links green.
 2. Connect purchased domains to the Vercel project.
