@@ -42,7 +42,7 @@ Already in place:
 Known setup gaps:
 
 - `NEXT_PUBLIC_COOKIEBOT_ID` is not configured yet.
-- LinkedIn OAuth callback is aligned in LinkedIn and Vercel to `https://www.founderaccount.com/api/auth/linkedin/callback`; products/scopes and end-to-end owner authorization still require verification.
+- LinkedIn keeps two labelled OAuth return sockets: `https://www.founderaccount.com/api/auth/linkedin/callback` for the web app and `https://www.glaze.app/api/oauth/callback` for the founder-owned Glaze desktop app. Both pass LinkedIn's redirect registration check; owner authorization remains a human approval step.
 - LinkedIn OAuth now opens the owner cabinet and stores the LinkedIn connection in one pass; the verified LinkedIn email must match `DISPATCH_OWNER_EMAIL`.
 - Production database connection passes its health check. The earlier Founder Account tables are isolated intact behind `legacy_founder_v1_*` labels before the Dispatch schema is assembled.
 - Purchased `.com`, `.app`, and `.dev` domains are connected to the Vercel project. `.com` is the selected primary product cabinet; secondary-domain redirects still need a deliberate routing pass.
