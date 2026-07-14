@@ -85,6 +85,7 @@ Avoid:
 - [Evidence] Payment, restore, export, deletion and links remain preview surfaces until their external rails pass end-to-end tests.
 - [OAuth] The one canonical LinkedIn return rail is `https://www.founderaccount.com/api/auth/linkedin/callback`; LinkedIn and Vercel must match character-for-character.
 - [Credential] Any client secret shown in a screenshot is compromised and must be rotated before launch.
+- [Database] If the live parts bin contains the earlier Founder Account table shapes, move them intact behind `legacy_founder_v1_*` labels before inserting the Dispatch tables. Do not discard the old parts.
 
 ### Finished-Build Test
 - [x] Fourteen web screens exist and are navigable.

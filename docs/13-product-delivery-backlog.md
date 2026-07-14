@@ -43,7 +43,7 @@ Known setup gaps:
 
 - `NEXT_PUBLIC_COOKIEBOT_ID` is not configured yet.
 - LinkedIn OAuth callback is aligned in LinkedIn and Vercel to `https://www.founderaccount.com/api/auth/linkedin/callback`; products/scopes and end-to-end owner authorization still require verification.
-- Database connection is not configured yet.
+- Production database connection passes its health check. The earlier Founder Account tables are isolated intact behind `legacy_founder_v1_*` labels before the Dispatch schema is assembled.
 - Purchased `.com`, `.app`, and `.dev` domains are connected to the Vercel project. `.com` is the selected primary product cabinet; secondary-domain redirects still need a deliberate routing pass.
 - Profile-copy read/write UI exists, but database-backed writes need `DATABASE_URL`.
 - Draft read/write rails and dashboard UI exist, but database-backed create/edit/delete need `DATABASE_URL`.
