@@ -1,21 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getOwnerSessionFromRequest } from "@/lib/auth/session";
+import { NextResponse } from "next/server";
 import {
   getLinkedInAuthorizationUrl,
   getLinkedInSetupMissingEnv,
 } from "@/lib/server/linkedin";
 
-export async function GET(request: NextRequest) {
-  const session = getOwnerSessionFromRequest(request);
-
-  if (!session) {
-    const signInUrl = new URL("/", request.nextUrl.origin);
-    signInUrl.searchParams.set("auth", "sign-in-required");
-    signInUrl.searchParams.set("next", "/dashboard");
-
-    return NextResponse.redirect(signInUrl);
-  }
-
+export async function GET() {
   const missingEnv = getLinkedInSetupMissingEnv();
 
   if (missingEnv.length > 0) {

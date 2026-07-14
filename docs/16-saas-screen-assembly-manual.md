@@ -84,6 +84,7 @@ Avoid:
 - [IP] The supplied visual references guide colour, geometry and feeling; the product uses a newly drawn chrome-dog symbol rather than embedding an unlicensed source image.
 - [Evidence] Payment, restore, export, deletion and links remain preview surfaces until their external rails pass end-to-end tests.
 - [OAuth] The one canonical LinkedIn return rail is `https://www.founderaccount.com/api/auth/linkedin/callback`; LinkedIn and Vercel must match character-for-character.
+- [Owner lock] LinkedIn sign-in and connection use one rail. Accept the returned identity only when LinkedIn marks the email verified and it matches the labelled owner email slot.
 - [Credential] Any client secret shown in a screenshot is compromised and must be rotated before launch.
 - [Database] If the live parts bin contains the earlier Founder Account table shapes, move them intact behind `legacy_founder_v1_*` labels before inserting the Dispatch tables. Do not discard the old parts.
 

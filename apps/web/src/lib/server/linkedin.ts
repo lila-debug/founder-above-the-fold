@@ -28,6 +28,8 @@ type LinkedInUserInfoResponse = {
   name?: unknown;
   given_name?: unknown;
   family_name?: unknown;
+  email?: unknown;
+  email_verified?: unknown;
 };
 
 type LinkedInTokenSet = {
@@ -41,6 +43,7 @@ type LinkedInTokenSet = {
 type LinkedInProfile = {
   memberUrn: string;
   name: string | null;
+  email: string;
 };
 
 type StoredConnection = {
@@ -191,6 +194,7 @@ export async function fetchLinkedInOwnerProfile(accessToken: string) {
 
   const result = (await response.json()) as LinkedInUserInfoResponse;
   const subject = readString(result.sub);
+  const email = readString(result.email)?.toLowerCase();
 
   if (!subject) {
     throw new LinkedInOAuthError(
@@ -199,9 +203,17 @@ export async function fetchLinkedInOwnerProfile(accessToken: string) {
     );
   }
 
+  if (!email || result.email_verified !== true) {
+    throw new LinkedInOAuthError(
+      "LinkedIn did not return a verified owner email.",
+      "missing_verified_email",
+    );
+  }
+
   return {
     memberUrn: `urn:li:person:${subject}`,
     name: getProfileName(result),
+    email,
   } satisfies LinkedInProfile;
 }
 
