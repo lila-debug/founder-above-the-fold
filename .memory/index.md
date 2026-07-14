@@ -1,0 +1,1 @@
+- [[dispatch-operating-rules]] — standing rules for Founder Above the Fold, PRD-first, and IKEA/manual-first delivery

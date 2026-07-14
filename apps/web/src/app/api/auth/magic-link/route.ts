@@ -18,8 +18,23 @@ export async function POST(request: NextRequest) {
 
   if (ownerEmail && email !== ownerEmail) {
     return NextResponse.json(
-      { error: "This Dispatch workspace is owner-only." },
+      { error: "This Founder Above the Fold workspace is owner-only." },
       { status: 403 },
+    );
+  }
+
+  const productionSetupMissing =
+    process.env.NODE_ENV === "production" &&
+    ((process.env.AUTH_PROVIDER ?? "dev") !== "resend" ||
+      !process.env.MAGIC_LINK_SECRET?.trim() ||
+      !process.env.RESEND_API_KEY?.trim() ||
+      !process.env.MAGIC_LINK_FROM?.trim() ||
+      !ownerEmail);
+
+  if (productionSetupMissing) {
+    return NextResponse.json(
+      { error: "Production magic-link setup is incomplete." },
+      { status: 503 },
     );
   }
 
@@ -30,10 +45,10 @@ export async function POST(request: NextRequest) {
     const result = await sendMagicLinkEmail({ email, magicLink });
 
     return NextResponse.json(result);
-  } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Magic link request failed.";
-
-    return NextResponse.json({ error: message }, { status: 503 });
+  } catch {
+    return NextResponse.json(
+      { error: "Magic link delivery failed. Inspect the provider log." },
+      { status: 503 },
+    );
   }
 }

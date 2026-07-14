@@ -2,7 +2,7 @@
 
 ## System Summary
 
-Dispatch has three major parts:
+Founder Above the Fold has three major parts:
 
 - Web app: private owner dashboard for setup and management.
 - Backend API: state, LinkedIn OAuth, publishing, scheduler routes, analytics, and audit logging.
@@ -16,10 +16,10 @@ The MCP server is intentionally not the system of record. The database and backe
 AI Client
   | MCP stdio or Streamable HTTP
   v
-Dispatch MCP Server
+Founder Above the Fold MCP Server
   | internal API key
   v
-Dispatch Backend API
+Founder Above the Fold Backend API
   | server-side token access
   v
 LinkedIn API
@@ -27,7 +27,7 @@ LinkedIn API
 Owner Browser
   | authenticated private dashboard
   v
-Dispatch Web App
+Founder Above the Fold Web App
   | server actions/API routes
   v
 Postgres
@@ -84,7 +84,7 @@ If speed matters more than package hygiene, start with a single Next.js app and 
 
 ### MCP Server
 
-- Expose only safe Dispatch workflows to AI clients.
+- Expose only safe Founder Above the Fold workflows to AI clients.
 - Validate input with schemas.
 - Call backend API with `MCP_API_KEY`.
 - Return structured results and audit IDs.
@@ -99,11 +99,11 @@ If speed matters more than package hygiene, start with a single Next.js app and 
 
 ## Auth Model
 
-Dispatch is single-owner.
+Founder Above the Fold is single-owner.
 
 - The web app can use a simple owner allowlist by email.
 - LinkedIn OAuth is for the owner's LinkedIn account only.
-- MCP calls authenticate to Dispatch using an internal API key.
+- MCP calls authenticate to Founder Above the Fold using an internal API key.
 - Cron routes authenticate with `CRON_SECRET`.
 
 No multi-tenant role system is needed for v1.

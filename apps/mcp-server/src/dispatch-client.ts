@@ -1,8 +1,16 @@
-export type DispatchHealth = {
+export type FounderHealth = {
   name: string;
   status: string;
   linkedin: string;
   auth: string;
+  capabilities: {
+    draftCrud: string;
+    voiceGate: string;
+    queueScheduling: string;
+    officialApiPublishing: string;
+    analytics: string;
+    templateLibrary: string;
+  };
   safety: {
     scraping: boolean;
     browserAutomation: boolean;
@@ -11,7 +19,7 @@ export type DispatchHealth = {
   };
 };
 
-export class DispatchClient {
+export class FounderClient {
   private readonly baseUrl: string;
   private readonly apiKey?: string;
 
@@ -20,37 +28,56 @@ export class DispatchClient {
     this.apiKey = process.env.MCP_API_KEY;
   }
 
-  async health(): Promise<DispatchHealth> {
+  async health(): Promise<FounderHealth> {
     const response = await fetch(`${this.baseUrl}/api/mcp/health`, {
       headers: this.headers(),
     });
 
     if (!response.ok) {
-      throw new Error(`Dispatch health check failed: ${response.status}`);
+      throw new Error(`Founder Above the Fold health check failed: ${response.status}`);
     }
 
-    return response.json() as Promise<DispatchHealth>;
+    return response.json() as Promise<FounderHealth>;
   }
 
-  async createDraft(input: { body: string; pillar?: string; notes?: string }) {
-    return {
-      post_id: crypto.randomUUID(),
-      status: "draft",
-      voice_status: "unchecked",
-      ...input,
-    };
+  async createDraft(input: {
+    body: string;
+    pillar?: string;
+    archetype?: string;
+    notes?: string;
+  }) {
+    const response = await fetch(`${this.baseUrl}/api/posts`, {
+      method: "POST",
+      headers: this.headers({ json: true }),
+      body: JSON.stringify(input),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Founder Above the Fold draft create failed: ${response.status}`);
+    }
+
+    return response.json();
   }
 
   async runVoiceCheck(postId: string) {
-    return {
-      post_id: postId,
-      voice_status: "pending_backend",
-      message: "Voice runner will attach here when the backend endpoint is implemented.",
-    };
+    const response = await fetch(`${this.baseUrl}/api/posts/${postId}/voice-check`, {
+      method: "POST",
+      headers: this.headers(),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Founder Above the Fold voice check failed: ${response.status}`);
+    }
+
+    return response.json();
   }
 
-  private headers() {
+  private headers({ json = false }: { json?: boolean } = {}) {
     const headers = new Headers({ Accept: "application/json" });
+
+    if (json) {
+      headers.set("Content-Type", "application/json");
+    }
 
     if (this.apiKey) {
       headers.set("Authorization", `Bearer ${this.apiKey}`);

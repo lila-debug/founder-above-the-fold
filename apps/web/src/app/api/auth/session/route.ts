@@ -1,24 +1,16 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { verifySessionToken } from "@/lib/auth/magic-link";
+import { getOwnerSession } from "@/lib/auth/session";
 
 export async function GET() {
-  const token = (await cookies()).get("dispatch_session")?.value;
+  const session = await getOwnerSession();
 
-  if (!token) {
+  if (!session) {
     return NextResponse.json({ authenticated: false });
   }
 
-  try {
-    const session = verifySessionToken(token);
-
-    return NextResponse.json({
-      authenticated: true,
-      email: session.email,
-      expiresAt: session.exp,
-    });
-  } catch {
-    return NextResponse.json({ authenticated: false });
-  }
+  return NextResponse.json({
+    authenticated: true,
+    email: session.email,
+    expiresAt: session.expiresAt,
+  });
 }
-

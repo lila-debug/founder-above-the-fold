@@ -3,6 +3,7 @@ import {
   createSessionToken,
   verifyMagicLinkToken,
 } from "@/lib/auth/magic-link";
+import { SESSION_COOKIE_NAME } from "@/lib/auth/session";
 
 export async function GET(request: NextRequest) {
   const token = request.nextUrl.searchParams.get("token");
@@ -22,7 +23,7 @@ export async function GET(request: NextRequest) {
     const sessionToken = createSessionToken(payload.email);
     const response = redirectWithAuthState(request, "signed-in");
 
-    response.cookies.set("dispatch_session", sessionToken, {
+    response.cookies.set(SESSION_COOKIE_NAME, sessionToken, {
       httpOnly: true,
       maxAge: 30 * 24 * 60 * 60,
       path: "/",
@@ -42,4 +43,3 @@ function redirectWithAuthState(request: NextRequest, state: string) {
 
   return NextResponse.redirect(url);
 }
-

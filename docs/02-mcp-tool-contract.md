@@ -2,15 +2,17 @@
 
 ## Design Principle
 
-The MCP server should make Dispatch easy for AI assistants to operate, while making unsafe LinkedIn automation impossible.
+The MCP server should make Founder Above the Fold easy for AI assistants to operate, while making unsafe LinkedIn automation impossible.
 
-The server exposes Dispatch workflows, not raw LinkedIn primitives. There is no generic `linkedin_request` tool.
+The server exposes Founder Above the Fold workflows, not raw LinkedIn primitives. There is no generic `linkedin_request` tool.
+
+Internal note: the public product name is Founder Above the Fold. The MCP tool namespace remains `dispatch.*` until a deliberate technical rename/refactor pass.
 
 ## Tools
 
 ### `dispatch.health`
 
-Purpose: confirm the MCP server can reach the Dispatch backend.
+Purpose: confirm the MCP server can reach the Founder Above the Fold backend.
 
 Input:
 
@@ -159,7 +161,7 @@ Output:
 
 ### `dispatch.refresh_analytics`
 
-Purpose: pull analytics for Dispatch-published posts.
+Purpose: pull analytics for Founder Above the Fold-published posts.
 
 Input:
 
@@ -189,7 +191,7 @@ Output:
 
 ### `dispatch.upsert_profile_copy`
 
-Purpose: update canonical profile copy in Dispatch.
+Purpose: update canonical profile copy in Founder Above the Fold.
 
 Input:
 
@@ -343,4 +345,3 @@ Never add these tools:
 - any generic browser or HTTP tool pointed at LinkedIn
 
 Those names are useful because they are obviously tempting. They are also where the account risk lives.
-

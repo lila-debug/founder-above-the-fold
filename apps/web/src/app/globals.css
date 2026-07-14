@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f5ef;
-  --foreground: #191712;
+  --imperial-blue: #03256c;
+  --persian-blue: #2541b2;
+  --ocean-deep: #1768ac;
+  --sky-surge: #06bee1;
+  --white: #ffffff;
+  --background: var(--white);
+  --foreground: var(--imperial-blue);
 }
 
 @theme inline {
@@ -18,12 +23,26 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
+::selection {
+  background: var(--sky-surge);
+  color: var(--imperial-blue);
+}
+
 button,
 a,
-input {
+input,
+textarea {
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
     color 160ms ease,
     box-shadow 160ms ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--sky-surge);
+  outline-offset: 3px;
 }

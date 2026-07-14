@@ -13,21 +13,21 @@ Official sources:
 - MCP TypeScript SDK: https://ts.sdk.modelcontextprotocol.io/
 - MCP transport specification: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports
 
-The linked community MCP listing claims capabilities such as profile search, profile retrieval, job search, messaging, and network stats. Treat that as a catalogue claim, not as a safe product requirement. Dispatch v1 should not copy those capabilities unless LinkedIn grants explicit, documented access for the owner's use case.
+The linked community MCP listing claims capabilities such as profile search, profile retrieval, job search, messaging, and network stats. Treat that as a catalogue claim, not as a safe product requirement. Founder Above the Fold v1 should not copy those capabilities unless LinkedIn grants explicit, documented access for the owner's use case.
 
 ## Green Zone
 
-Allowed for Dispatch v1:
+Allowed for Founder Above the Fold v1:
 
 - Owner OAuth through LinkedIn.
 - Store owner profile identity returned by permitted auth/profile scopes.
-- Create drafts in Dispatch.
+- Create drafts in Founder Above the Fold.
 - Voice-check drafts locally.
-- Queue drafts in Dispatch.
+- Queue drafts in Founder Above the Fold.
 - Publish owner posts through official LinkedIn post/share APIs.
 - Upload approved images when supported by the official API.
-- Pull analytics for posts published by Dispatch when available.
-- Store canonical profile copy in Dispatch.
+- Pull analytics for posts published by Founder Above the Fold when available.
+- Store canonical profile copy in Founder Above the Fold.
 - Remind owner to manually update profile fields.
 - Render outreach templates for manual copy-paste.
 
@@ -36,7 +36,7 @@ Allowed for Dispatch v1:
 Allowed only with explicit review:
 
 - Commenting on the owner's own posts through official APIs.
-- Deleting Dispatch-published posts through official APIs.
+- Deleting Founder Above the Fold-published posts through official APIs.
 - Remote MCP via Streamable HTTP.
 - Any new LinkedIn product or partner endpoint.
 - Analytics beyond the basic metrics already validated.
@@ -90,8 +90,8 @@ Keep:
 
 - Draft and published post text.
 - Voice-check output.
-- LinkedIn post IDs for Dispatch-published posts.
-- Analytics snapshots for Dispatch-published posts.
+- LinkedIn post IDs for Founder Above the Fold-published posts.
+- Analytics snapshots for Founder Above the Fold-published posts.
 - Canonical profile copy versions.
 - Audit events.
 
@@ -105,7 +105,6 @@ Do not store:
 
 ## External MCP Servers
 
-The MCP marketplace page provided by the user is useful for understanding desired shape, but its advertised capabilities go beyond this PRD's safe scope. Do not install or depend on it for Dispatch unless a later review proves each capability uses official LinkedIn access that the owner actually has.
+The MCP marketplace page provided by the user is useful for understanding desired shape, but its advertised capabilities go beyond this PRD's safe scope. Do not install or depend on it for Founder Above the Fold unless a later review proves each capability uses official LinkedIn access that the owner actually has.
 
-Dispatch should be safer and narrower: an MCP server for the owner's content operation, not a general LinkedIn control plane.
-
+Founder Above the Fold should be safer and narrower: an MCP server for the owner's content operation, not a general LinkedIn control plane.

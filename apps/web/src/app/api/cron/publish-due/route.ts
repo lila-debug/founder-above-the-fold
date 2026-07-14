@@ -8,11 +8,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized cron request." }, { status: 401 });
   }
 
-  return NextResponse.json({
-    status: "ready",
-    published: 0,
-    retried: 0,
-    failed: 0,
-  });
+  return NextResponse.json(
+    {
+      status: "not_implemented",
+      message:
+        "The scheduling and publishing motor is not implemented in this private-beta build.",
+    },
+    { status: 501 },
+  );
 }
-

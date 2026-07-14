@@ -1,0 +1,281 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e5]:
+      - navigation [ref=e6]:
+        - link "Founder Above the Fold home" [ref=e7] [cursor=pointer]:
+          - /url: "#command-centre"
+          - generic [ref=e12]:
+            - generic [ref=e13]: Founder Above the Fold
+            - generic [ref=e14]: LinkedIn Profile MCP
+        - generic [ref=e15]:
+          - link "Profile copy" [ref=e16] [cursor=pointer]:
+            - /url: "#profile-copy"
+          - generic "Set LINKEDIN_CLIENT_ID and LINKEDIN_REDIRECT_URI to enable LinkedIn OAuth." [ref=e17]: LinkedIn env needed
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - paragraph [ref=e23]: Private command centre
+          - heading "Founder Above the Fold" [level=1] [ref=e24]
+          - paragraph [ref=e25]: "LinkedIn presence, run like a product system: draft with AI, voice-check every post, queue compliant publishing, and keep profile copy current without unsafe automation."
+          - generic [ref=e26]:
+            - link "Open private workbench" [ref=e27] [cursor=pointer]:
+              - /url: /dashboard
+            - link "View public preview" [ref=e30] [cursor=pointer]:
+              - /url: "#command-centre"
+            - link "MCP health" [ref=e33] [cursor=pointer]:
+              - /url: /api/mcp/health
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - paragraph: Live workspace
+                  - paragraph: This week on LinkedIn
+                - generic: Voice locked
+              - generic:
+                - generic:
+                  - paragraph: Draft
+                  - paragraph: "18"
+                - generic:
+                  - paragraph: Voice
+                  - paragraph: "14"
+                - generic:
+                  - paragraph: Queue
+                  - paragraph: "12"
+              - generic:
+                - generic:
+                  - generic: A sign your roadmap is lying to you
+                  - generic: Tue 09:30
+                - generic:
+                  - generic: Product rituals that survive a messy week
+                  - generic: Wed 11:15
+            - generic:
+              - generic: MCP call
+              - generic: dispatch.create_draft
+              - generic: dispatch.run_voice_check
+              - generic: dispatch.queue_post
+              - generic: No scraping, DMs, follows, likes, comments, or profile edits exposed.
+    - generic [ref=e37]:
+      - article [ref=e38]:
+        - paragraph [ref=e40]: Queued posts
+        - generic [ref=e45]:
+          - paragraph [ref=e46]: "12"
+          - paragraph [ref=e47]: Next publish Tue
+      - article [ref=e48]:
+        - paragraph [ref=e50]: Voice blocks
+        - generic [ref=e54]:
+          - paragraph [ref=e55]: "4"
+          - paragraph [ref=e56]: Caught before queue
+      - article [ref=e57]:
+        - paragraph [ref=e59]: Profile syncs
+        - generic [ref=e65]:
+          - paragraph [ref=e66]: "1"
+          - paragraph [ref=e67]: Manual paste pending
+      - article [ref=e68]:
+        - paragraph [ref=e70]: Unsafe tools
+        - generic [ref=e74]:
+          - paragraph [ref=e75]: "0"
+          - paragraph [ref=e76]: Blocked by design
+    - generic [ref=e78]:
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - heading "Publishing queue" [level=3] [ref=e86]
+          - generic [ref=e87]: Cron armed
+        - generic [ref=e88]:
+          - generic [ref=e89]:
+            - generic [ref=e90]:
+              - paragraph [ref=e91]: A sign your roadmap is lying to you
+              - paragraph [ref=e92]: Founder Clarity
+            - generic [ref=e93]: Tue 09:30
+            - generic [ref=e97]: Voice passed
+          - generic [ref=e100]:
+            - generic [ref=e101]:
+              - paragraph [ref=e102]: Product rituals that survive a messy week
+              - paragraph [ref=e103]: Fractional CPO OS
+            - generic [ref=e104]: Wed 11:15
+            - generic [ref=e108]: Queued
+          - generic [ref=e111]:
+            - generic [ref=e112]:
+              - paragraph [ref=e113]: What should remain human in AI product work
+              - paragraph [ref=e114]: AI-Native Product
+            - generic [ref=e115]: Fri 08:45
+            - generic [ref=e119]: Needs voice check
+      - generic [ref=e122]:
+        - generic [ref=e123]:
+          - generic [ref=e124]:
+            - heading "LinkedIn connection" [level=3] [ref=e129]
+            - button "Refresh LinkedIn status" [ref=e130]
+          - generic [ref=e141]:
+            - paragraph [ref=e142]: Inspecting
+            - paragraph [ref=e143]: Inspecting LinkedIn connection.
+          - generic [ref=e144]:
+            - generic [ref=e145]:
+              - generic [ref=e146]: Owner lock
+              - generic [ref=e147]: Closed
+            - generic [ref=e148]:
+              - generic [ref=e149]: Connected
+              - generic [ref=e150]: Not stored
+            - generic [ref=e151]:
+              - generic [ref=e152]: Connection expires
+              - generic [ref=e153]: Not stored
+          - generic [ref=e154]: Inspecting
+        - generic [ref=e159]:
+          - heading "Magic link access" [level=3] [ref=e164]
+          - generic [ref=e165]:
+            - generic [ref=e166]: Email
+            - textbox "Email" [ref=e167]:
+              - /placeholder: you@example.com
+            - button "Send magic link" [ref=e168]
+          - generic [ref=e172]:
+            - generic [ref=e173]: Passwordless by default
+            - paragraph [ref=e177]: The app keeps owner access separate from LinkedIn connection. LinkedIn OAuth starts only when the command centre needs to publish through approved APIs.
+    - generic [ref=e179]:
+      - generic [ref=e180]:
+        - generic [ref=e181]:
+          - paragraph [ref=e182]: Command surface
+          - heading "The product UI spreads out like a working desk." [level=2] [ref=e183]
+        - link "Check MCP health" [ref=e184] [cursor=pointer]:
+          - /url: /api/mcp/health
+      - generic [ref=e187]:
+        - article [ref=e188]:
+          - generic [ref=e193]:
+            - heading "Draft with MCP" [level=3] [ref=e194]
+            - paragraph [ref=e195]: Let an assistant prepare ideas, posts, and revisions without handing it raw LinkedIn access.
+        - article [ref=e196]:
+          - generic [ref=e201]:
+            - heading "Lock the voice" [level=3] [ref=e202]
+            - paragraph [ref=e203]: Drafts cannot move into the queue until the voice gate passes the current body.
+        - article [ref=e204]:
+          - generic [ref=e209]:
+            - heading "Publish through APIs" [level=3] [ref=e210]
+            - paragraph [ref=e211]: Scheduled posts go through approved LinkedIn posting routes, with retries and visible failures.
+        - article [ref=e212]:
+          - generic [ref=e219]:
+            - heading "Track profile copy" [level=3] [ref=e220]
+            - paragraph [ref=e221]: Headline, About, and Experience stay canonical here while LinkedIn edits remain manual.
+    - generic [ref=e223]:
+      - generic [ref=e224]:
+        - generic [ref=e225]:
+          - heading "MCP tools" [level=3] [ref=e230]
+          - generic [ref=e231]: Owner scoped
+        - generic [ref=e232]:
+          - article [ref=e233]:
+            - generic [ref=e234]: Ready
+            - paragraph [ref=e239]: dispatch.create_draft
+          - article [ref=e240]:
+            - generic [ref=e241]: Ready
+            - paragraph [ref=e246]: dispatch.run_voice_check
+          - article [ref=e247]:
+            - generic [ref=e248]: Guarded
+            - paragraph [ref=e254]: dispatch.queue_post
+          - article [ref=e255]:
+            - generic [ref=e256]: Confirm
+            - paragraph [ref=e261]: dispatch.publish_post_now
+          - article [ref=e262]:
+            - generic [ref=e263]: Ready
+            - paragraph [ref=e270]: dispatch.profile_sync_status
+          - article [ref=e271]:
+            - generic [ref=e272]: Ready
+            - paragraph [ref=e279]: dispatch.refresh_analytics
+      - generic [ref=e280]:
+        - heading "Profile copy" [level=3] [ref=e287]
+        - generic [ref=e288]:
+          - generic [ref=e289]:
+            - generic [ref=e290]:
+              - paragraph [ref=e291]: Headline
+              - paragraph [ref=e292]: Manual paste required
+            - generic [ref=e293]: v3
+          - generic [ref=e294]:
+            - generic [ref=e295]:
+              - paragraph [ref=e296]: About
+              - paragraph [ref=e297]: Synced
+            - generic [ref=e298]: v5
+          - generic [ref=e299]:
+            - generic [ref=e300]:
+              - paragraph [ref=e301]: Experience summary
+              - paragraph [ref=e302]: Synced
+            - generic [ref=e303]: v2
+    - generic [ref=e305]:
+      - generic [ref=e306]:
+        - generic [ref=e307]:
+          - paragraph [ref=e308]: Profile setup assistant
+          - heading "Canonical profile copy stays tidy here." [level=2] [ref=e309]
+        - link "Open LinkedIn profile" [ref=e310] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/me/
+      - generic [ref=e315]: "Database slot empty: set DATABASE_URL and run migrations to save profile copy versions. Seed copy is shown for now."
+      - generic [ref=e316]:
+        - generic [ref=e317]:
+          - article [ref=e318]:
+            - generic [ref=e319]:
+              - generic [ref=e321]:
+                - paragraph [ref=e322]: Headline
+                - paragraph [ref=e323]: v3 - Manual paste required
+              - textbox [ref=e329]: Fractional CPO for AI-native founders | Product strategy, sharper roadmaps, and operating systems that help teams ship what matters
+              - generic [ref=e330]: Change note
+              - textbox "Optional note" [ref=e331]
+            - generic [ref=e332]:
+              - button "Copy" [ref=e333]
+              - button "Save new version" [disabled] [ref=e337]
+              - button "Mark pasted" [ref=e342]
+          - article [ref=e346]:
+            - generic [ref=e347]:
+              - generic [ref=e349]:
+                - paragraph [ref=e350]: About
+                - paragraph [ref=e351]: v5 - Synced
+              - textbox [ref=e357]: I help founders turn messy product signals into clear product decisions. Through Prototype Cafe, I work as a fractional CPO for teams that need senior product judgement before they are ready for a full-time product executive.
+              - generic [ref=e358]: Change note
+              - textbox "Optional note" [ref=e359]
+            - generic [ref=e360]:
+              - button "Copy" [ref=e361]
+              - button "Save new version" [disabled] [ref=e365]
+              - button "Pasted" [disabled] [ref=e370]
+          - article [ref=e374]:
+            - generic [ref=e375]:
+              - generic [ref=e377]:
+                - paragraph [ref=e378]: Experience summary
+                - paragraph [ref=e379]: v2 - Synced
+              - textbox [ref=e385]: Fractional product leadership across strategy, discovery, roadmap design, AI-native workflows, launch planning, and product operating systems.
+              - generic [ref=e386]: Change note
+              - textbox "Optional note" [ref=e387]
+            - generic [ref=e388]:
+              - button "Copy" [ref=e389]
+              - button "Save new version" [disabled] [ref=e393]
+              - button "Pasted" [disabled] [ref=e398]
+        - complementary [ref=e402]:
+          - paragraph [ref=e403]: Paste checklist
+          - generic [ref=e405]:
+            - generic [ref=e406]: "1"
+            - paragraph [ref=e407]: Paste headline into LinkedIn intro.
+          - generic [ref=e408]: Founder Above the Fold can prepare, version, and package everything. The final profile edit stays manual because LinkedIn does not provide a safe profile-edit API.
+    - generic [ref=e410]:
+      - generic [ref=e411]:
+        - heading "Safety boundary" [level=3] [ref=e416]
+        - generic [ref=e417]:
+          - generic [ref=e418]: Official API publishing
+          - generic [ref=e421]: No browser automation
+          - generic [ref=e424]: No profile scraping
+          - generic [ref=e427]: No automated DMs
+      - generic [ref=e430]:
+        - heading "Builder status" [level=3] [ref=e435]
+        - generic [ref=e436]:
+          - generic [ref=e437]:
+            - generic [ref=e438]: Web dashboard
+            - generic [ref=e439]: Landing shell
+          - generic [ref=e440]:
+            - generic [ref=e441]: Magic link
+            - generic [ref=e442]: Passwordless ready
+          - generic [ref=e443]:
+            - generic [ref=e444]: LinkedIn OAuth
+            - generic [ref=e445]: Env needed
+          - generic [ref=e446]:
+            - generic [ref=e447]: MCP server
+            - generic [ref=e448]: Local stdio
+    - generic [ref=e450]:
+      - paragraph [ref=e451]: Founder Above the Fold LinkedIn Profile MCP
+      - navigation [ref=e452]:
+        - link "Privacy" [ref=e453] [cursor=pointer]:
+          - /url: /privacy
+        - link "Cookies" [ref=e454] [cursor=pointer]:
+          - /url: /cookies
+        - link "Health" [ref=e455] [cursor=pointer]:
+          - /url: /api/mcp/health
+  - button "Open Next.js Dev Tools" [ref=e461] [cursor=pointer]

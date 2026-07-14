@@ -1,6 +1,6 @@
-# Dispatch(TM) (working title) - Product Requirements Document
+# Founder Above the Fold(TM) - Product Requirements Document
 
-**PC-DISPATCH-PRD-001 - v0.1 - 5 July 2026**  
+**PC-FATF-PRD-001 - v0.1 - 5 July 2026**  
 **Copyright (c) 2026 Lila Olufemi Abegunrin. All Rights Reserved.**  
 **PROPRIETARY AND CONFIDENTIAL - Prototype Cafe(TM)**
 
@@ -64,7 +64,7 @@ Stores the fractional CPO outreach messages already drafted, tagged by scenario 
 
 ### 6.5 Own-Post Analytics
 
-Simple dashboard of impressions/engagement for posts sent through Dispatch, pulled from the same API. No comparison to industry benchmarks or competitor accounts - that data isn't available and won't be fabricated.
+Simple dashboard of impressions/engagement for posts sent through Founder Above the Fold, pulled from the same API. No comparison to industry benchmarks or competitor accounts - that data isn't available and won't be fabricated.
 
 ## 7. Technical Architecture
 
@@ -105,10 +105,9 @@ Both require LinkedIn's own review before going live - this is LinkedIn's proces
 
 ## 12. Open Items Requiring a Decision
 
-- **Name:** "Dispatch" is a placeholder - not cleared against existing marks.
+- **Name:** Founder Above the Fold is the selected customer-facing product name. Internal MCP tool names may continue to use the `dispatch.*` namespace until a deliberate rename/refactor pass.
 - **Hosting:** assumed Vercel + Supabase, matching the rest of the stack - confirm before scaffolding.
 
 ---
 
 Prototype Cafe(TM) - Revolutionising Life Since 1982(TM)
-

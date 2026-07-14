@@ -86,7 +86,7 @@ Flow:
 3. Backend stores snapshot rows.
 4. Dashboard and MCP return stored stats.
 
-Automation level: full for Dispatch-published posts only.
+Automation level: full for Founder Above the Fold-published posts only.
 
 Boundary:
 
@@ -96,12 +96,12 @@ Boundary:
 
 ## 6. Profile Copy Drift
 
-Trigger: profile copy edited in Dispatch.
+Trigger: profile copy edited in Founder Above the Fold.
 
 Flow:
 
 1. Owner or AI updates canonical copy.
-2. Dispatch creates a new version.
+2. Founder Above the Fold creates a new version.
 3. Field is marked `synced = false`.
 4. Dashboard shows persistent manual paste required.
 5. Reminder cron can notify owner if unsynced after 24 hours.
@@ -112,8 +112,8 @@ Automation level: assisted.
 
 Boundary:
 
-- Dispatch never edits LinkedIn profile fields.
-- Dispatch never scrapes live LinkedIn profile fields to compare.
+- Founder Above the Fold never edits LinkedIn profile fields.
+- Founder Above the Fold never scrapes live LinkedIn profile fields to compare.
 
 ## 7. Outreach Templates
 
@@ -123,7 +123,7 @@ Flow:
 
 1. MCP lists or renders template.
 2. AI adapts text to the current profile positioning.
-3. Dispatch returns copy for manual use.
+3. Founder Above the Fold returns copy for manual use.
 4. Owner sends manually in LinkedIn.
 
 Automation level: assisted.

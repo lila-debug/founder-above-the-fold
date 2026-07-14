@@ -1,31 +1,35 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { getOwnerSessionFromRequest } from "@/lib/auth/session";
+import {
+  getLinkedInAuthorizationUrl,
+  getLinkedInSetupMissingEnv,
+} from "@/lib/server/linkedin";
 
-export async function GET() {
-  const clientId = process.env.LINKEDIN_CLIENT_ID;
-  const redirectUri =
-    process.env.LINKEDIN_REDIRECT_URI ??
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/linkedin/callback`;
-  const scopes =
-    process.env.LINKEDIN_SCOPES ?? "openid profile email w_member_social";
+export async function GET(request: NextRequest) {
+  const session = getOwnerSessionFromRequest(request);
 
-  if (!clientId || !redirectUri) {
+  if (!session) {
+    const signInUrl = new URL("/", request.nextUrl.origin);
+    signInUrl.searchParams.set("auth", "sign-in-required");
+    signInUrl.searchParams.set("next", "/dashboard");
+
+    return NextResponse.redirect(signInUrl);
+  }
+
+  const missingEnv = getLinkedInSetupMissingEnv();
+
+  if (missingEnv.length > 0) {
     return NextResponse.json(
       {
-        error: "LinkedIn OAuth env vars are not configured yet.",
-        required: ["LINKEDIN_CLIENT_ID", "LINKEDIN_REDIRECT_URI"],
+        error: "LinkedIn OAuth setup is not configured yet.",
+        missing: missingEnv,
       },
       { status: 503 },
     );
   }
 
   const state = crypto.randomUUID();
-  const authorizationUrl = new URL("https://www.linkedin.com/oauth/v2/authorization");
-
-  authorizationUrl.searchParams.set("response_type", "code");
-  authorizationUrl.searchParams.set("client_id", clientId);
-  authorizationUrl.searchParams.set("redirect_uri", redirectUri);
-  authorizationUrl.searchParams.set("state", state);
-  authorizationUrl.searchParams.set("scope", scopes);
+  const authorizationUrl = getLinkedInAuthorizationUrl(state);
 
   const response = NextResponse.redirect(authorizationUrl);
   response.cookies.set("linkedin_oauth_state", state, {
@@ -38,4 +42,3 @@ export async function GET() {
 
   return response;
 }
-

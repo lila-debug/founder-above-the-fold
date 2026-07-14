@@ -2,7 +2,7 @@
 
 ## Positioning Aim
 
-Dispatch exists to make the owner's LinkedIn presence impossible to confuse with generic AI content.
+Founder Above the Fold exists to make the owner's LinkedIn presence impossible to confuse with generic AI content.
 
 The above-the-fold target:
 
@@ -170,7 +170,7 @@ Avoid over-automation at launch. The aim is consistency and signal, not volume.
 
 ## Profile Copy Tracker Fields
 
-Track these in Dispatch:
+Track these in Founder Above the Fold:
 
 - Headline.
 - About.
@@ -197,6 +197,5 @@ Template categories:
 Every rendered outreach message must include a reminder:
 
 ```text
-Manual send only. Dispatch does not send LinkedIn messages.
+Manual send only. Founder Above the Fold does not send LinkedIn messages.
 ```
-

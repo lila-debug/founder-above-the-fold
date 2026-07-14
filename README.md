@@ -1,8 +1,10 @@
-# Dispatch LinkedIn MCP Server
+# Founder Above the Fold LinkedIn MCP App
 
-Dispatch is a single-owner, API-compliant LinkedIn automation system for building a consistent fractional CPO presence. It combines a private web app, scheduled publishing, canonical profile-copy tracking, voice checks, and an MCP server that lets AI assistants create and manage approved workflows.
+Founder Above the Fold is a single-owner, API-compliant LinkedIn presence system for building and maintaining a founder's above-the-fold positioning. It combines a private web app, scheduled publishing, canonical profile-copy tracking, voice checks, and an MCP server that lets AI assistants create and manage approved workflows.
 
-The important boundary: Dispatch automates only what can be done through permitted LinkedIn APIs or the owner's own app data. It does not scrape LinkedIn, automate browsing, send DMs, search profiles, auto-connect, auto-like, or auto-comment on other people's content.
+The important boundary: Founder Above the Fold automates only what can be done through permitted LinkedIn APIs or the owner's own app data. It does not scrape LinkedIn, automate browsing, send DMs, search profiles, auto-connect, auto-like, or auto-comment on other people's content.
+
+Internal note: the MCP tool namespace currently remains `dispatch.*` while the customer-facing product name is Founder Above the Fold.
 
 ## What This Repo Contains
 
@@ -19,18 +21,30 @@ The important boundary: Dispatch automates only what can be done through permitt
 - [MCP client setup](docs/09-mcp-client-setup.md)
 - [Launch checklist](docs/10-launch-checklist.md)
 - [App and launch video plan](docs/11-app-and-launch-video-plan.md)
+- [iOS app plan](docs/11-ios-app-plan.md)
+- [Android app plan](docs/12-android-app-plan.md)
+- [Product delivery backlog](docs/13-product-delivery-backlog.md)
+- [Domain and deployment manual](docs/14-domain-and-deployment-manual.md)
+- [Owner access guard manual](docs/15-owner-access-manual.md)
+- [Interactive tutorial manual](docs/18-interactive-tutorial-manual.md)
+- [Four-hour launch control manual](docs/19-four-hour-launch-control-manual.md)
+- [LinkedIn launch kit](docs/20-linkedin-launch-kit.md)
 - [Environment template](.env.example)
 
-Auth note: this app uses real passwordless magic links. `AUTH_PROVIDER=dev` generates local test links without sending email; `AUTH_PROVIDER=resend` sends production links through Resend. No password storage or password login flow is part of Dispatch.
+Auth note: this app uses real passwordless magic links. `AUTH_PROVIDER=dev` generates local test links without sending email; `AUTH_PROVIDER=resend` sends production links through Resend. No password storage or password login flow is part of Founder Above the Fold.
 
 ## Product Shape
 
-Dispatch has two surfaces:
+Founder Above the Fold has two surfaces:
 
 1. Web app: owner dashboard for OAuth, drafts, queue, profile copy, templates, analytics, and manual sync flags.
 2. MCP server: AI-facing tools, resources, and prompts for drafting, scheduling, checking voice, reading approved profile copy, and inspecting post analytics.
 
-The MCP server should call the Dispatch backend. It should not hold LinkedIn tokens directly and should never expose scraping or browser automation capabilities.
+The private workbench includes an interactive IKEA-style assembly tutorial. The MCP
+server exposes the matching `dispatch://assembly-manual` resource so ChatGPT and the
+web app operate from the same safety instructions.
+
+The MCP server should call the Founder Above the Fold backend. It should not hold LinkedIn tokens directly and should never expose scraping or browser automation capabilities.
 
 ## Passwordless Login
 
@@ -47,14 +61,18 @@ Production email delivery:
 ```bash
 AUTH_PROVIDER=resend
 MAGIC_LINK_SECRET=<long-random-secret>
-MAGIC_LINK_FROM="Dispatch <login@yourdomain.com>"
+MAGIC_LINK_FROM="Founder Above the Fold <login@yourdomain.com>"
 RESEND_API_KEY=<resend-api-key>
 AUTH_CALLBACK_URL=https://YOUR_DOMAIN/auth/callback
 ```
 
 The magic link expires after 15 minutes. Successful sign-in sets an httpOnly `dispatch_session` cookie.
+The private owner workbench lives at `/dashboard`; unauthenticated visitors are routed back to the public page for sign-in.
 
-## Automation Definition
+## Target Automation Contract
+
+The following is the intended finished assembly, not the current launch claim. Use
+`/api/mcp/health` and the launch control manual for the evidence-backed state.
 
 Fully automated in this product means:
 
@@ -62,7 +80,7 @@ Fully automated in this product means:
 - Drafts cannot be queued until they pass the British English voice gate.
 - Queued posts publish on schedule through the LinkedIn Posts API.
 - Failed publishes retry once and then require manual attention.
-- Post analytics sync on a schedule for posts published by Dispatch.
+- Post analytics sync on a schedule for posts published by Founder Above the Fold.
 - Canonical profile copy is versioned and reminders persist until the owner manually pastes updates into LinkedIn.
 
 Manual forever:

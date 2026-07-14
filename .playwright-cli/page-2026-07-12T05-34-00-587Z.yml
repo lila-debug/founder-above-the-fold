@@ -1,0 +1,134 @@
+- generic [active] [ref=f2e1]:
+  - main [ref=f2e2]:
+    - generic [ref=f2e4]:
+      - generic [ref=f2e5]:
+        - link "Founder Above the Fold" [ref=f2e6] [cursor=pointer]:
+          - /url: /
+        - heading "Private owner workbench" [level=1] [ref=f2e7]
+      - generic [ref=f2e8]:
+        - generic [ref=f2e9]:
+          - paragraph [ref=f2e10]: Signed in
+          - paragraph [ref=f2e11]: owner@example.com
+        - generic [ref=f2e12]:
+          - paragraph [ref=f2e13]: Session until
+          - paragraph [ref=f2e14]: Aug 11, 2026
+    - generic [ref=f2e15]:
+      - generic [ref=f2e16]:
+        - generic [ref=f2e17]:
+          - heading "Draft workbench" [level=2] [ref=f2e22]
+          - generic [ref=f2e23]:
+            - button "Refresh" [ref=f2e24]
+            - button "New draft" [ref=f2e30]
+        - paragraph [ref=f2e35]: "Database slot empty: seed drafts are shown, but create/edit/delete needs DATABASE_URL and migrations."
+        - generic [ref=f2e36]:
+          - generic [ref=f2e37]:
+            - button "A roadmap is not a promise. It is a pressure gauge. When every item is marked urgent, the product system is no longer deciding - it is absorbing. Founder Clarity / unchecked 28w" [ref=f2e38]:
+              - generic [ref=f2e39]:
+                - generic [ref=f2e40]:
+                  - paragraph [ref=f2e41]: A roadmap is not a promise. It is a pressure gauge. When every item is marked urgent, the product system is no longer deciding - it is absorbing.
+                  - paragraph [ref=f2e42]: Founder Clarity / unchecked
+                - generic [ref=f2e43]: 28w
+            - button "The product ritual that matters is the one your team still uses during a messy week. Everything else is theatre with a calendar invite. Fractional CPO OS / unchecked 24w" [ref=f2e44]:
+              - generic [ref=f2e45]:
+                - generic [ref=f2e46]:
+                  - paragraph [ref=f2e47]: The product ritual that matters is the one your team still uses during a messy week. Everything else is theatre with a calendar invite.
+                  - paragraph [ref=f2e48]: Fractional CPO OS / unchecked
+                - generic [ref=f2e49]: 24w
+            - button "AI can accelerate the product loop, but it cannot own judgement. The founder still has to decide what trade-off the company is willing to live with. AI-Native Product / unchecked 26w" [ref=f2e50]:
+              - generic [ref=f2e51]:
+                - generic [ref=f2e52]:
+                  - paragraph [ref=f2e53]: AI can accelerate the product loop, but it cannot own judgement. The founder still has to decide what trade-off the company is willing to live with.
+                  - paragraph [ref=f2e54]: AI-Native Product / unchecked
+                - generic [ref=f2e55]: 26w
+          - generic [ref=f2e56]:
+            - generic [ref=f2e57]:
+              - generic [ref=f2e58]:
+                - paragraph [ref=f2e59]: Edit selected draft
+                - paragraph [ref=f2e60]: Body hash resets voice status when text changes
+              - generic [ref=f2e61]: 145 chars
+            - generic [ref=f2e62]: Draft body
+            - textbox "Draft body" [ref=f2e63]:
+              - /placeholder: Write the LinkedIn draft here.
+              - text: A roadmap is not a promise. It is a pressure gauge. When every item is marked urgent, the product system is no longer deciding - it is absorbing.
+            - generic [ref=f2e64]:
+              - generic [ref=f2e65]:
+                - text: Pillar
+                - textbox "Pillar" [ref=f2e66]:
+                  - /placeholder: Founder Clarity
+                  - text: Founder Clarity
+              - generic [ref=f2e67]:
+                - text: Archetype
+                - textbox "Archetype" [ref=f2e68]:
+                  - /placeholder: Diagnostic
+                  - text: Diagnostic
+            - generic [ref=f2e69]:
+              - text: Private notes
+              - textbox "Private notes" [ref=f2e70]:
+                - /placeholder: Why this post exists, what to verify, or what to avoid.
+                - text: Seed draft for the first content queue panel.
+            - generic [ref=f2e71]:
+              - button "Save changes" [disabled] [ref=f2e72]
+              - button "Voice check" [disabled] [ref=f2e77]
+              - button "Delete draft" [disabled] [ref=f2e81]
+            - paragraph [ref=f2e89]: Controls are visible now; save, delete, and voice-check unlock when the database parts bin is connected.
+      - generic [ref=f2e90]:
+        - heading "Setup control board" [level=2] [ref=f2e94]
+        - generic [ref=f2e95]:
+          - generic [ref=f2e96]:
+            - generic [ref=f2e97]: Owner session
+            - generic [ref=f2e98]: Locked
+          - generic [ref=f2e99]:
+            - generic [ref=f2e100]: Database
+            - generic [ref=f2e101]: Needs DATABASE_URL
+          - generic [ref=f2e102]:
+            - generic [ref=f2e103]: LinkedIn OAuth
+            - generic [ref=f2e104]: Env needed
+          - generic [ref=f2e105]:
+            - generic [ref=f2e106]: Cookiebot
+            - generic [ref=f2e107]: Domain ID needed
+          - generic [ref=f2e108]:
+            - generic [ref=f2e109]: Voice gate
+            - generic [ref=f2e110]: Command needed
+        - generic [ref=f2e111]:
+          - link "Health" [ref=f2e112] [cursor=pointer]:
+            - /url: /api/mcp/health
+          - generic [ref=f2e115]: LinkedIn env needed
+    - generic [ref=f2e119]:
+      - generic [ref=f2e120]:
+        - heading "MCP adapter rail" [level=2] [ref=f2e125]
+        - generic [ref=f2e126]:
+          - article [ref=f2e127]:
+            - generic [ref=f2e128]: Ready
+            - paragraph [ref=f2e133]: dispatch.create_draft
+          - article [ref=f2e134]:
+            - generic [ref=f2e135]: Ready
+            - paragraph [ref=f2e140]: dispatch.run_voice_check
+          - article [ref=f2e141]:
+            - generic [ref=f2e142]: Guarded
+            - paragraph [ref=f2e148]: dispatch.queue_post
+          - article [ref=f2e149]:
+            - generic [ref=f2e150]: Confirm
+            - paragraph [ref=f2e155]: dispatch.publish_post_now
+      - generic [ref=f2e156]:
+        - heading "Profile copy tracker" [level=2] [ref=f2e163]
+        - generic [ref=f2e164]:
+          - article [ref=f2e165]:
+            - paragraph [ref=f2e166]: Headline
+            - paragraph [ref=f2e167]: Manual paste required
+          - article [ref=f2e168]:
+            - paragraph [ref=f2e169]: About
+            - paragraph [ref=f2e170]: Synced
+          - article [ref=f2e171]:
+            - paragraph [ref=f2e172]: Experience
+            - paragraph [ref=f2e173]: Synced
+        - generic [ref=f2e174]: LinkedIn profile edits stay manual. This cabinet stores the approved copy, versions it, and tells the owner what still needs pasting.
+    - generic [ref=f2e175]:
+      - generic [ref=f2e176]:
+        - link "Privacy" [ref=f2e177] [cursor=pointer]:
+          - /url: /privacy
+        - link "Cookies" [ref=f2e178] [cursor=pointer]:
+          - /url: /cookies
+        - link "Public page" [ref=f2e179] [cursor=pointer]:
+          - /url: /
+      - button "Sign out" [ref=f2e181]
+  - button "Open Next.js Dev Tools" [ref=f2e190] [cursor=pointer]

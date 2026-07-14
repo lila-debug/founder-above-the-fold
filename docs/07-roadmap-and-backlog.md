@@ -86,7 +86,7 @@ Acceptance:
 
 Acceptance:
 
-- First live text-only post publishes from Dispatch.
+- First live text-only post publishes from Founder Above the Fold.
 - Cron publishes due posts automatically.
 - Failed publish does not fail silently.
 - Images are published only after upload success.
@@ -129,7 +129,7 @@ Acceptance:
 
 Acceptance:
 
-- Stats sync only for Dispatch-published posts.
+- Stats sync only for Founder Above the Fold-published posts.
 - Missing/unavailable metrics show as unavailable, not zero.
 - Last sync time is visible.
 
@@ -150,7 +150,7 @@ Acceptance:
 Acceptance:
 
 - MCP client can list tools/resources.
-- Tools call Dispatch backend, not LinkedIn directly.
+- Tools call Founder Above the Fold backend, not LinkedIn directly.
 - Unsafe LinkedIn tools do not exist.
 - Public-side-effect tools return audit IDs.
 
@@ -168,7 +168,7 @@ Acceptance:
 Acceptance:
 
 - Two weeks of posts can be planned from MCP.
-- At least one post has gone live through Dispatch.
+- At least one post has gone live through Founder Above the Fold.
 - Weekly operating rhythm is documented and repeatable.
 
 ## Nice-to-Have After MVP

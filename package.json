@@ -7,10 +7,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev -w apps/web",
+    "dev": "npm --prefix apps/web run dev",
     "build": "npm run build -w apps/web && npm run build -w apps/mcp-server",
     "lint": "npm run lint -w apps/web",
     "typecheck": "npm run typecheck --workspaces --if-present",
+    "test:launch": "node scripts/launch-smoke.mjs",
+    "db:migrate": "node scripts/migrate.mjs",
     "mcp:dev": "npm run dev -w apps/mcp-server",
     "mcp:build": "npm run build -w apps/mcp-server"
   }

@@ -2,9 +2,11 @@
 
 ## Purpose
 
-This file defines how AI clients should connect to Dispatch once the MCP server exists.
+This file defines how AI clients should connect to Founder Above the Fold once the MCP server exists.
 
-The server should expose Dispatch tools and resources only. It should not expose raw LinkedIn credentials, generic HTTP tools, shell access, browser automation, or arbitrary LinkedIn API calls.
+The server should expose Founder Above the Fold tools and resources only. It should not expose raw LinkedIn credentials, generic HTTP tools, shell access, browser automation, or arbitrary LinkedIn API calls.
+
+Internal note: the public product name is Founder Above the Fold. The MCP tool namespace remains `dispatch.*` until a deliberate technical rename/refactor pass.
 
 ## Local Stdio Mode
 
@@ -114,4 +116,3 @@ Once implemented, add package scripts similar to:
 ```
 
 Use the inspector before connecting production clients.
-

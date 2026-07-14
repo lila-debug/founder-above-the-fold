@@ -1,8 +1,22 @@
 # Launch Checklist
 
+## Current Gate - 13 July 2026
+
+- [x] Local working preview can be packaged for a truthful private-beta/build-in-public announcement.
+- [x] Public preview labels planned features as preview, setup-required, or planned.
+- [x] Interactive Toy Box Explorer and matching manual are fitted.
+- [x] Repeatable route/security/truth smoke panel exists.
+- [ ] Final video and final conveyor evidence are attached.
+- [ ] Founder approves a manual LinkedIn post.
+- [ ] Live domain, consent, production access, LinkedIn OAuth, queue, and publishing remain no-go.
+
+The private-beta announcement gate and the full-product gate are different assemblies.
+Use [Launch Control](19-four-hour-launch-control-manual.md) for the evidence board.
+
 ## Stage 1 - Before Coding
 
-- [ ] Confirm final product name or continue with Dispatch internally.
+- [x] Lock customer-facing product name as Founder Above the Fold.
+- [ ] Keep `dispatch.*` as the internal MCP namespace until a deliberate rename/refactor ticket is approved.
 - [ ] Create LinkedIn Developer App.
 - [ ] Add required LinkedIn products.
 - [ ] Add local redirect URL.
@@ -22,7 +36,7 @@
 
 - [ ] Next.js app runs locally.
 - [ ] Database migrations run cleanly.
-- [ ] Owner-only access works.
+- [ ] Owner-only access works locally.
 - [ ] LinkedIn connect button starts OAuth.
 - [ ] OAuth callback stores encrypted token.
 - [ ] Dashboard shows LinkedIn connected.
@@ -73,10 +87,12 @@
 
 ## Go/No-Go Gate
 
+This gate applies to the full product, not the private-beta preview announcement.
+
 Go when:
 
 - OAuth is stable.
-- One text post has published through Dispatch.
+- One text post has published through Founder Above the Fold.
 - Voice gate blocks bad drafts.
 - Cron authentication is working.
 - Failure states are visible.

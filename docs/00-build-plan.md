@@ -1,10 +1,10 @@
-# Dispatch Build Plan
+# Founder Above the Fold Build Plan
 
 ## Product Objective
 
-Build a private LinkedIn command centre that lets the owner maintain a consistent above-the-fold positioning engine: generate posts, enforce voice, queue content, publish on schedule, track profile-copy drift, and expose the workflow to AI assistants through MCP.
+Build Founder Above the Fold as a private LinkedIn command centre that lets the owner maintain a consistent above-the-fold positioning engine: generate posts, enforce voice, queue content, publish on schedule, track profile-copy drift, and expose the workflow to AI assistants through MCP.
 
-The product is successful when the owner can ask an AI assistant to prepare and schedule a week of LinkedIn content, and Dispatch can publish it without opening LinkedIn again, while refusing any action that would scrape, browse, DM, auto-connect, or manipulate engagement.
+The product is successful when the owner can ask an AI assistant to prepare and schedule a week of LinkedIn content, and Founder Above the Fold can publish it without opening LinkedIn again, while refusing any action that would scrape, browse, DM, auto-connect, or manipulate engagement.
 
 ## Definition of Fully Automated
 
@@ -14,15 +14,15 @@ Fully automated:
 - Voice gate before queueing.
 - Scheduled publication through the official LinkedIn API.
 - Retry and failure handling.
-- Analytics refresh for Dispatch-published posts.
+- Analytics refresh for Founder Above the Fold-published posts.
 - Profile-copy drift reminders.
 - MCP tools for AI clients to operate all of the above.
 
 Assisted, not automated:
 
-- Profile headline/About/Experience changes. Dispatch tracks and reminds; the owner manually pastes.
-- Outreach. Dispatch stores and renders templates; the owner manually sends.
-- LinkedIn app review. Dispatch cannot accelerate or bypass LinkedIn approval.
+- Profile headline/About/Experience changes. Founder Above the Fold tracks and reminds; the owner manually pastes.
+- Outreach. Founder Above the Fold stores and renders templates; the owner manually sends.
+- LinkedIn app review. Founder Above the Fold cannot accelerate or bypass LinkedIn approval.
 
 Permanently prohibited:
 
@@ -35,7 +35,7 @@ Permanently prohibited:
 
 Build the backend and scheduler first, then put MCP on top.
 
-Reason: the MCP server should be a controlled interface to a stable Dispatch API, not a parallel implementation with its own LinkedIn credentials and business logic.
+Reason: the MCP server should be a controlled interface to a stable Founder Above the Fold API, not a parallel implementation with its own LinkedIn credentials and business logic.
 
 ## Phase 0 - Access and Foundations
 
@@ -48,9 +48,9 @@ Tasks:
 - Add "Share on LinkedIn".
 - Configure redirect URLs for local and production.
 - Confirm `openid profile email w_member_social` scopes are available.
-- Choose the auth/database provider behind the Dispatch adapter.
+- Choose the auth/database provider behind the Founder Above the Fold adapter.
 - Create Vercel project.
-- Decide final product name or keep Dispatch as internal working name.
+- Use Founder Above the Fold as the customer-facing name; keep `dispatch.*` as the internal MCP namespace until a deliberate rename/refactor ticket is approved.
 
 Acceptance criteria:
 
@@ -113,7 +113,7 @@ Tasks:
 - Implement image upload and image post publishing.
 - Implement `/api/cron/publish-due`.
 - Implement one retry, then failed status.
-- Implement daily analytics sync for Dispatch-published posts.
+- Implement daily analytics sync for Founder Above the Fold-published posts.
 
 Acceptance criteria:
 
@@ -124,7 +124,7 @@ Acceptance criteria:
 
 ## Phase 4 - MCP Server
 
-Goal: let AI assistants operate Dispatch through a safe, explicit tool surface.
+Goal: let AI assistants operate Founder Above the Fold through a safe, explicit tool surface.
 
 Tasks:
 
@@ -139,7 +139,7 @@ Acceptance criteria:
 
 - Claude/Cursor-compatible local MCP config can list and call tools.
 - MCP server never exposes LinkedIn access tokens.
-- MCP server cannot call LinkedIn directly; it calls Dispatch internal API.
+- MCP server cannot call LinkedIn directly; it calls the Founder Above the Fold internal API.
 - Public side-effect tools require explicit intent fields and return audit IDs.
 
 ## Phase 5 - Launch, Measurement, and Iteration
@@ -151,16 +151,16 @@ Tasks:
 - Seed 20 draft ideas across content pillars.
 - Seed outreach templates.
 - Queue two weeks of content.
-- Publish a first live post through Dispatch.
+- Publish a first live post through Founder Above the Fold.
 - Track analytics for 30 days.
 - Review profile copy weekly until positioning stabilises.
 
 Acceptance criteria:
 
-- At least 10 posts published through Dispatch.
+- At least 10 posts published through Founder Above the Fold.
 - Zero posts bypass voice lock.
 - Owner does not manually publish scheduled content.
-- Analytics dashboard shows every Dispatch-published post.
+- Analytics dashboard shows every Founder Above the Fold-published post.
 
 ## First Build Sprint
 

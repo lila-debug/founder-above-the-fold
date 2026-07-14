@@ -153,7 +153,7 @@ Columns:
 
 ### `post_stats`
 
-Analytics snapshots for Dispatch-published posts.
+Analytics snapshots for Founder Above the Fold-published posts.
 
 Columns:
 
@@ -210,6 +210,20 @@ Actors:
 - `POST /api/auth/linkedin/disconnect`
 - `GET /api/linkedin/status`
 
+`GET /api/linkedin/status` returns only setup and connection state:
+
+- `state`: `setup_required`, `not_connected`, `connected`, or `attention_required`
+- `configured`: boolean
+- `ownerAuthenticated`: boolean
+- `canConnect`: boolean
+- `missingEnv`: names of missing labelled slots only
+- `connectedAt`: timestamp or null
+- `expiresAt`: timestamp or null
+- `scope`: required, granted, and missing scope names
+- `attentionReasons`: non-secret reason codes
+
+It must never return access tokens, refresh tokens, ciphertext, client secrets, owner email, or raw LinkedIn payloads.
+
 ### Posts
 
 - `GET /api/posts`
@@ -221,6 +235,96 @@ Actors:
 - `POST /api/posts/:id/publish-now`
 - `POST /api/posts/:id/cancel`
 
+Current draft CRUD contract:
+
+`GET /api/posts?status=draft` requires the owner session cookie or
+`Authorization: Bearer ${MCP_API_KEY}`. It returns:
+
+```json
+{
+  "items": [
+    {
+      "id": "uuid",
+      "body": "Draft text",
+      "bodyHash": "sha256",
+      "pillar": "Founder Clarity",
+      "archetype": "Diagnostic",
+      "notes": "Private note",
+      "status": "draft",
+      "voiceStatus": "unchecked",
+      "voiceCheckedHash": null,
+      "scheduledAt": null,
+      "publishedAt": null,
+      "linkedinPostId": null,
+      "retryCount": 0,
+      "lastErrorCode": null,
+      "lastErrorMessage": null,
+      "createdAt": "2026-07-06T00:00:00.000Z",
+      "updatedAt": "2026-07-06T00:00:00.000Z",
+      "characterCount": 42,
+      "wordCount": 7,
+      "canEdit": true,
+      "canDelete": true,
+      "canQueue": false
+    }
+  ],
+  "counts": {
+    "draft": 1,
+    "queued": 0,
+    "publishing": 0,
+    "published": 0,
+    "failed": 0,
+    "cancelled": 0
+  },
+  "source": "database",
+  "database": {
+    "configured": true,
+    "status": "ok"
+  }
+}
+```
+
+When `DATABASE_URL` is missing, signed-in reads return seed fallback drafts with
+`source: "seed_fallback"` and `database.status: "not_configured"` so the
+workbench can render without pretending persistence exists.
+
+`POST /api/posts` creates a draft:
+
+```json
+{
+  "body": "Draft post text",
+  "pillar": "Founder Clarity",
+  "archetype": "Diagnostic",
+  "notes": "Private owner notes"
+}
+```
+
+`PATCH /api/posts/:id` edits draft fields while `status = draft`. If the body
+changes, the route recalculates `body_hash`, resets `voice_status` to
+`unchecked`, and clears `voice_checked_hash`.
+
+`DELETE /api/posts/:id` removes only draft posts. Queued, publishing, published,
+failed, or cancelled posts are not editable or deletable through the draft CRUD
+drawer.
+
+Create, edit, and delete write audit events. Writes return `503` with a setup
+message when `DATABASE_URL` is missing.
+
+`POST /api/posts/:id/voice-check` runs the configured British English voice
+gate for a draft. It requires owner session or MCP bearer access, `DATABASE_URL`,
+and `VOICE_CHECK_COMMAND`. The command reads the post body on stdin and must use:
+
+- exit `0` for pass
+- exit `1` for voice/British-English failure
+- exit `2` for checker setup failure
+
+A successful route call persists a `voice_checks` row, stores stdout/stderr,
+updates the post `voice_status`, and sets `voice_checked_hash` to the exact
+current `body_hash`.
+
+The repository includes `scripts/british_qa.py` as the default command wrapper.
+It refuses to pass unless Hunspell and the `en_GB` dictionary are installed.
+
 ### Assets
 
 - `POST /api/posts/:id/assets`
@@ -231,6 +335,54 @@ Actors:
 - `GET /api/profile-copy`
 - `POST /api/profile-copy`
 - `POST /api/profile-copy/:field/mark-synced`
+
+`GET /api/profile-copy` returns the latest version for each tracked field:
+
+```json
+{
+  "items": [
+    {
+      "id": "uuid",
+      "field": "headline",
+      "label": "Headline",
+      "content": "Canonical copy",
+      "version": 3,
+      "synced": false,
+      "statusLabel": "Manual paste required",
+      "changeNote": "Seeded from the landing page fractional CPO headline.",
+      "lastEditedAt": "2026-07-06T00:00:00.000Z",
+      "markedSyncedAt": null
+    }
+  ],
+  "manualPasteCount": 1,
+  "source": "database",
+  "database": {
+    "configured": true,
+    "status": "ok"
+  }
+}
+```
+
+When `DATABASE_URL` is missing or the table is unavailable, the route returns the
+seeded fractional CPO copy with a setup status so the workbench still renders.
+
+`POST /api/profile-copy` creates a new unsynced version:
+
+```json
+{
+  "field": "headline",
+  "content": "New canonical headline",
+  "changeNote": "Sharper offer wording"
+}
+```
+
+Write access requires either the owner session cookie or `Authorization: Bearer
+${MCP_API_KEY}`. A successful write creates a new `profile_copy_versions` row,
+sets `synced` to `false`, and writes an audit event.
+
+`POST /api/profile-copy/:field/mark-synced` marks the latest version for that
+field as pasted into LinkedIn. It does not call LinkedIn and does not edit the
+profile.
 
 ### Templates
 
@@ -264,4 +416,5 @@ The MCP server can use the same routes with an `Authorization: Bearer ${MCP_API_
 - Every queued or published post must have a voice check for the current `body_hash`.
 - LinkedIn errors are stored as safe summaries, not raw responses if they include secrets.
 - Analytics only attaches to posts with `linkedin_post_id`.
-
+- Profile copy edits always create a new unsynced version; the sync flag only
+  clears when the owner marks the latest field version pasted.

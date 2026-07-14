@@ -1,12 +1,20 @@
 # App and Launch Video Plan
 
+## 13 July 2026 Launch Note
+
+The current master must present a working private-beta preview, not a completed
+publishing product. Real product UI and the Toy Box Explorer may be shown. Queue,
+analytics, templates, and official publishing must be labelled planned or gated until
+the database, consent, LinkedIn approval, implementation, and one real post test pass.
+The approved posting package lives in `docs/20-linkedin-launch-kit.md`.
+
 ## Assumption
 
 "abs launch video" is treated as "app's launch video." If the intent is paid ads, use the same master story below and cut it down into 15s and 30s variants after the main launch cut is approved.
 
 ## Product Position
 
-Dispatch is a private LinkedIn command centre for a single owner. It helps maintain a consistent professional presence by drafting posts, enforcing voice rules, scheduling compliant posts through LinkedIn's official APIs, tracking canonical profile copy, and exposing the safe workflow to AI assistants through MCP.
+Founder Above the Fold is a private LinkedIn command centre for a single owner. It helps maintain a consistent professional presence by drafting posts, enforcing voice rules, scheduling compliant posts through LinkedIn's official APIs, tracking canonical profile copy, and exposing the safe workflow to AI assistants through MCP.
 
 The product should not be positioned as a general LinkedIn automation bot. The strongest claim is narrower and safer: "prepare, voice-check, queue, and publish your own LinkedIn content without giving an AI raw access to LinkedIn."
 
@@ -101,18 +109,18 @@ Build:
 - `/api/cron/publish-due` implementation.
 - One retry, then failed status with safe error summary.
 - `publish-now` endpoint guarded by explicit confirmation.
-- Daily analytics sync for Dispatch-published posts only.
+- Daily analytics sync for Founder Above the Fold-published posts only.
 
 Done when:
 
-- A text-only post publishes through Dispatch.
+- A text-only post publishes through Founder Above the Fold.
 - Cron authentication works in local or preview.
 - Published records store LinkedIn post IDs and timestamps.
 - Failed publishes are visible and recoverable.
 
 ### Phase 5 - Complete the MCP Surface
 
-Goal: let AI clients operate Dispatch without raw LinkedIn access.
+Goal: let AI clients operate Founder Above the Fold without raw LinkedIn access.
 
 Build:
 
@@ -129,7 +137,7 @@ Done when:
 
 ### Phase 6 - First Operating Week
 
-Goal: prove Dispatch is useful as a weekly habit.
+Goal: prove Founder Above the Fold is useful as a weekly habit.
 
 Build or seed:
 
@@ -142,9 +150,9 @@ Build or seed:
 
 Done when:
 
-- At least one live post has published through Dispatch.
+- At least one live post has published through Founder Above the Fold.
 - At least one full week is queued and voice-checked.
-- Analytics refresh runs for Dispatch-published posts.
+- Analytics refresh runs for Founder Above the Fold-published posts.
 - Profile-copy tracker shows synced and unsynced fields correctly.
 
 ## Priority Order
@@ -192,10 +200,10 @@ Visual source: real dashboard captures once MVP loop exists
 2. Problem: "AI can help, but raw LinkedIn automation is the wrong bargain."
    Visual: unsafe actions fade out: scrape, auto-DM, auto-connect, auto-like.
 
-3. Product Intro: "Meet Dispatch: a private MCP command centre for your own LinkedIn content."
+3. Product Intro: "Meet Founder Above the Fold: a private MCP command centre for your own LinkedIn content."
    Visual: dashboard lockup, queue, voice lock, profile copy, MCP tools.
 
-4. Workflow: "Ask your assistant for a week of posts. Dispatch creates drafts, checks the voice, and blocks anything that fails."
+4. Workflow: "Ask your assistant for a week of posts. Founder Above the Fold creates drafts, checks the voice, and blocks anything that fails."
    Visual: MCP tool calls become draft cards; one draft fails voice, one passes.
 
 5. Queue: "Approved posts move into the calendar and publish through LinkedIn's official API."
@@ -207,7 +215,7 @@ Visual source: real dashboard captures once MVP loop exists
 7. Safety Proof: "No scraping. No browser automation. No automated messages. No generic LinkedIn control plane."
    Visual: safety checklist with unsafe tools locked out.
 
-8. CTA: "Dispatch. LinkedIn presence, run like a product system."
+8. CTA: "Founder Above the Fold. LinkedIn presence, run like a product system."
    Visual: logo/wordmark, URL or private beta CTA.
 
 ### Voiceover Draft
@@ -216,9 +224,9 @@ Your LinkedIn presence should not depend on remembering to post at 11pm.
 
 And AI should not need raw access to your LinkedIn account to be useful.
 
-Meet Dispatch: a private MCP command centre for your own content operation.
+Meet Founder Above the Fold: a private MCP command centre for your own content operation.
 
-Ask for a week of posts. Dispatch drafts them, checks them against your voice, and blocks anything that fails.
+Ask for a week of posts. Founder Above the Fold drafts them, checks them against your voice, and blocks anything that fails.
 
 Approved posts move into the queue and publish through LinkedIn's official API.
 
@@ -226,12 +234,11 @@ Your headline, About, and Experience stay canonical too, with reminders for the 
 
 No scraping. No browser automation. No automated messages. No generic LinkedIn control plane.
 
-Dispatch. LinkedIn presence, run like a product system.
+Founder Above the Fold. LinkedIn presence, run like a product system.
 
 ### Required Assets
 
-- Product name decision: keep Dispatch or rename before public launch.
-- Logo or simple wordmark.
+- Founder Above the Fold wordmark or simple logo.
 - Dashboard captures from the MVP workflow.
 - Example draft that fails voice check and then passes.
 - Queue calendar with at least four scheduled posts.
@@ -251,15 +258,14 @@ Dispatch. LinkedIn presence, run like a product system.
 ## 30s Cutdown
 
 1. Hook: "AI can help with LinkedIn. It should not control LinkedIn."
-2. Product: "Dispatch turns your own content workflow into a private MCP command centre."
+2. Product: "Founder Above the Fold turns your own content workflow into a private MCP command centre."
 3. Demo: "Draft, voice-check, queue, publish."
 4. Safety: "Official API publishing only. No scraping, messages, or engagement automation."
-5. CTA: "Dispatch. LinkedIn presence, run like a product system."
+5. CTA: "Founder Above the Fold. LinkedIn presence, run like a product system."
 
 ## Open Decisions
 
-- Final name: keep Dispatch or choose a more distinctive public name.
 - Launch route: internal tool demo, private beta, or public SaaS-style promo.
 - Video CTA: waitlist, founder intro call, GitHub/demo, or private operating-system reveal.
-- Brand direction: Prototype Cafe house style or standalone Dispatch identity.
+- Brand direction: Prototype Cafe house style or standalone Founder Above the Fold identity.
 - Video aspect ratio: 16:9 master only, or include 9:16 social cut from the start.
