@@ -338,6 +338,12 @@ function Hero({ linkedinConnectReady }: { linkedinConnectReady: boolean }) {
           </a>
           <div className="hidden items-center gap-2 md:flex">
             <a
+              href="/no-circles"
+              className="inline-flex h-10 items-center px-3 text-sm font-bold text-[#1768ac] hover:bg-[#fffdf4] hover:text-[#03256c]"
+            >
+              Free No Circle skill
+            </a>
+            <a
               href="#profile-copy"
               className="inline-flex h-10 items-center px-3 text-sm font-bold text-[#1768ac] hover:bg-[#fffdf4] hover:text-[#03256c]"
             >
@@ -385,6 +391,13 @@ function Hero({ linkedinConnectReady }: { linkedinConnectReady: boolean }) {
               >
                 Join the private beta
                 <ArrowRight size={17} strokeWidth={2.2} />
+              </a>
+              <a
+                href="/no-circles"
+                className="panel panel-tap inline-flex h-12 items-center justify-center gap-2 bg-[#ffd84d] px-5 text-sm font-black uppercase text-[#03256c]"
+              >
+                Get the free accessibility skill
+                <ShieldCheck size={17} strokeWidth={2.2} />
               </a>
               <a
                 href="/product"
