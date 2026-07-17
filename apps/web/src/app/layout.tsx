@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { BrandFooter } from "./components/brand-footer";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Founder Above the Fold - LinkedIn Profile MCP App",
@@ -27,10 +17,7 @@ export default function RootLayout({
   const cookiebotId = process.env.NEXT_PUBLIC_COOKIEBOT_ID?.trim();
 
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         {cookiebotId ? (
           <Script
@@ -42,6 +29,7 @@ export default function RootLayout({
           />
         ) : null}
         {children}
+        <BrandFooter />
       </body>
     </html>
   );

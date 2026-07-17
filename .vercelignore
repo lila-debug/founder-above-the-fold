@@ -1,0 +1,20 @@
+# Vercel serves the web workbench only. Keep native builds and delivery media local.
+apps/ios/
+output/
+outputs/
+.derived-ios/
+
+# Documentation and local QA evidence are not runtime inputs.
+docs/
+tasks/
+scripts/__pycache__/
+
+# Local build and dependency caches.
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+dist/
+build/
+coverage/
+*.log

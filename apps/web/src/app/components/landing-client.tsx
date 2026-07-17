@@ -13,6 +13,7 @@ import {
   Mail,
   RefreshCcw,
   Save,
+  Unplug,
 } from "lucide-react";
 import { FormEvent, useEffect, useState } from "react";
 import type {
@@ -51,6 +52,10 @@ type LinkedInStatusResponse = {
     required: string[];
     granted: string[];
     missing: string[];
+  };
+  refresh: {
+    available: boolean;
+    expiresAt: string | null;
   };
   attentionReasons: string[];
 };
@@ -207,6 +212,7 @@ export function LinkedInConnectionPanel() {
   const [status, setStatus] = useState<LinkedInStatusResponse | null>(null);
   const [state, setState] = useState<LinkedInState>("loading");
   const [notice, setNotice] = useState("");
+  const [disconnecting, setDisconnecting] = useState(false);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -251,6 +257,20 @@ export function LinkedInConnectionPanel() {
       setState("error");
       setNotice("LinkedIn status could not be inspected.");
     }
+  }
+
+  async function disconnect() {
+    if (!window.confirm("Disconnect LinkedIn and remove the stored OAuth token? Queued posts will remain locked.")) return;
+    setDisconnecting(true);
+    const response = await fetch("/api/auth/linkedin/disconnect", { method: "POST" });
+    const result = (await response.json()) as { error?: string };
+    if (!response.ok) {
+      setNotice(result.error ?? "LinkedIn could not be disconnected.");
+    } else {
+      setNotice("LinkedIn token removed. Publishing and analytics are locked.");
+      await refreshStatus();
+    }
+    setDisconnecting(false);
   }
 
   const panelState = status?.state ?? state;
@@ -322,6 +342,16 @@ export function LinkedInConnectionPanel() {
           label="Connection expires"
           value={formatDateTime(status?.expiresAt)}
         />
+        <ConnectionDetail
+          label="Programmatic refresh"
+          value={status?.refresh.available ? "Available" : "Reconnect when expired"}
+        />
+        {status?.refresh.available ? (
+          <ConnectionDetail
+            label="Refresh expires"
+            value={formatDateTime(status.refresh.expiresAt)}
+          />
+        ) : null}
       </div>
 
       {status?.scope.missing.length ? (
@@ -362,6 +392,17 @@ export function LinkedInConnectionPanel() {
             {actionLabel}
           </span>
         )}
+        {status?.ownerAuthenticated && (connected || panelState === "attention_required") ? (
+          <button
+            className="panel panel-tap mt-2 inline-flex h-11 w-full items-center justify-center gap-2 bg-white px-4 text-sm font-black uppercase text-[#d94841]"
+            disabled={disconnecting}
+            onClick={disconnect}
+            type="button"
+          >
+            <Unplug size={17} strokeWidth={2.2} />
+            {disconnecting ? "Removing token" : "Disconnect LinkedIn"}
+          </button>
+        ) : null}
       </div>
     </section>
   );
@@ -548,6 +589,7 @@ export function ProfileCopyBoard({
                     ) : (
                       <>
                         <textarea
+                          aria-label={`${section.label} canonical copy`}
                           className="mt-4 min-h-48 w-full resize-y border-2 border-[#03256c]/25 bg-[#eafaff] p-3 text-sm leading-6 text-[#03256c] outline-none focus:border-[#06bee1] focus:ring-2 focus:ring-[#06bee1]/25"
                           value={drafts[section.field] ?? section.content}
                           onChange={(event) =>
@@ -561,6 +603,7 @@ export function ProfileCopyBoard({
                           Change note
                         </label>
                         <input
+                          aria-label={`${section.label} change note`}
                           className="mt-2 h-10 w-full border-2 border-[#03256c]/25 bg-white px-3 text-sm text-[#03256c] outline-none focus:border-[#06bee1] focus:ring-2 focus:ring-[#06bee1]/25"
                           value={changeNotes[section.field] ?? ""}
                           onChange={(event) =>

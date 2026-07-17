@@ -112,3 +112,13 @@ Avoid:
 - [x] `/api/auth/linkedin/start` redirects to sign-in without a session. Verified locally on 2026-07-12.
 - [x] `/api/auth/linkedin/start` does not proceed to LinkedIn until required env slots exist. Verified locally on 2026-07-12.
 - [x] `/api/auth/sign-out` removes the session cookie. Verified locally on 2026-07-12.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

@@ -1,0 +1,43 @@
+<template>
+  <style>
+    #root{position:relative;width:1920px;height:1080px;overflow:hidden;container-type:size;font-family:"Arial Black",Arial,sans-serif;color:#111111}#root *{box-sizing:border-box}
+    .f04-ground{position:absolute;inset:0;background:#F69777}.f04-grid{position:absolute;inset:0;opacity:.14;background-image:radial-gradient(#111111 2px,transparent 2px);background-size:32px 32px}
+    .f04-stage{position:absolute;inset:0;padding:60px 72px 180px}.f04-pill{display:inline-block;padding:13px 20px;border:4px solid #111111;box-shadow:7px 7px 0 #111111;background:#FFFEF8;font:900 23px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+    .f04-key{position:absolute;left:80px;top:265px;width:580px;height:265px;border:5px solid #111111;box-shadow:12px 12px 0 #111111;background:#27C7EF;padding:48px 55px;display:flex;flex-direction:column;justify-content:center;transform-origin:center center}
+    .f04-key:after{content:"";position:absolute;right:-130px;top:88px;width:130px;height:80px;background:#27C7EF;border:5px solid #111111;border-left:0}
+    .f04-key strong{font-size:72px;line-height:.9;text-transform:uppercase;letter-spacing:-.04em}.f04-key span{margin-top:20px;font:900 21px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+    .f04-arrow{position:absolute;left:690px;top:385px;width:170px;height:14px;background:#111111;transform-origin:left center}.f04-arrow:after{content:"";position:absolute;right:-1px;top:-18px;border-left:36px solid #111111;border-top:25px solid transparent;border-bottom:25px solid transparent}
+    .f04-cabinet{position:absolute;left:900px;top:210px;width:910px;height:590px;border:6px solid #111111;background:#FAFAFA;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:26px}
+    .f04-card{border:4px solid #111111;box-shadow:8px 8px 0 #111111;background:#FFFEF8;padding:32px;display:flex;flex-direction:column;justify-content:space-between}
+    .f04-card b{font-size:42px;line-height:1;text-transform:uppercase}.f04-card small{font:900 18px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}.f04-icon{width:66px;height:66px;border:4px solid #111111;background:#97E4F7;display:grid;place-items:center;font-size:34px}.f04-card:nth-child(2) .f04-icon{background:#FBD1C3}.f04-card:nth-child(3) .f04-icon{background:#F05A28}.f04-card:nth-child(4) .f04-icon{background:#27C7EF}
+    .f04-rail{position:absolute;left:440px;top:845px;width:1370px;height:105px;border:5px solid #111111;box-shadow:10px 10px 0 #111111;background:#F05A28;display:flex;align-items:center;justify-content:center;gap:38px;font-size:43px;text-transform:uppercase}.f04-tick{width:54px;height:54px;border:5px solid #111111;background:#FFFEF8;display:grid;place-items:center;font-size:36px}
+  </style>
+  <div data-hf-id="hf-kxsc" id="root" data-composition-id="04-profile-parts" data-start="0" data-duration="7.5" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-0z03" id="f04-ground" class="clip f04-ground" data-start="0" data-duration="7" data-track-index="0"></div><div data-hf-id="hf-g1pi" id="f04-grid" class="clip f04-grid" data-start="0" data-duration="7" data-track-index="1"></div>
+    <div data-hf-id="hf-o8ul" id="f04-stage" class="clip f04-stage" data-start="0" data-duration="7" data-track-index="2">
+      <div data-hf-id="hf-4qud" class="f04-pill">Part 04 · Profile cabinet</div>
+      <div data-hf-id="hf-af8g" class="f04-key"><strong data-hf-id="hf-745h">Magic<br data-hf-id="hf-x5px">Link</strong><span data-hf-id="hf-vuci">No product password</span></div><div data-hf-id="hf-vh6m" class="f04-arrow"></div>
+      <div data-hf-id="hf-p5jh" class="f04-cabinet">
+        <div data-hf-id="hf-icix" class="f04-card"><div data-hf-id="hf-bxhr" class="f04-icon">A</div><b data-hf-id="hf-ycsp">Headline</b><small data-hf-id="hf-pp7d">Top rail</small></div>
+        <div data-hf-id="hf-d8t9" class="f04-card"><div data-hf-id="hf-bj6q" class="f04-icon">B</div><b data-hf-id="hf-cif2">About</b><small data-hf-id="hf-uaa1">Core panel</small></div>
+        <div data-hf-id="hf-efqc" class="f04-card"><div data-hf-id="hf-b4vp" class="f04-icon">C</div><b data-hf-id="hf-1zqh">Experience</b><small data-hf-id="hf-vxfa">Proof stack</small></div>
+        <div data-hf-id="hf-e1fb" class="f04-card"><div data-hf-id="hf-dx0w" class="f04-icon">D</div><b data-hf-id="hf-fqeq">Featured links</b><small data-hf-id="hf-066c">Signal shelf</small></div>
+      </div>
+      <div data-hf-id="hf-prvq" class="f04-rail"><div data-hf-id="hf-d6kx" class="f04-tick">✓</div>Manual paste checklist</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines=window.__timelines||{};const tl=gsap.timeline({paused:true});
+      tl.from(".f04-pill",{x:-70,opacity:0,duration:.45,ease:"power3.out"},0)
+        .from(".f04-key",{x:-700,opacity:0,duration:.7,ease:"expo.out"},.2)
+        .to(".f04-key",{rotation:4,duration:.18,ease:"power2.inOut"},.85).to(".f04-key",{rotation:0,duration:.28,ease:"back.out(2)"},1.03)
+        .from(".f04-arrow",{scaleX:0,duration:.5,ease:"power3.out"},1.15)
+        .from(".f04-cabinet",{scale:.88,opacity:0,duration:.45,ease:"power3.out"},1.25)
+        .from(".f04-card",{scale:.45,opacity:0,stagger:.62,duration:.5,ease:"back.out(1.5)"},1.55)
+        .from(".f04-card b",{y:25,opacity:0,stagger:.62,duration:.3,ease:"power3.out"},1.75)
+        .from(".f04-rail",{y:120,opacity:0,duration:.55,ease:"back.out(1.4)"},5.35)
+        .from(".f04-tick",{scale:0,rotation:-15,duration:.4,ease:"back.out(2)"},5.8);
+      window.__timelines["04-profile-parts"]=tl;
+    </script>
+  </div>
+</template>

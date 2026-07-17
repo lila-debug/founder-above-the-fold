@@ -98,3 +98,13 @@ Avoid:
 - [x] Dashboard shows the draft workbench and database setup sticker. Verified locally on 2026-07-12.
 - [x] Lint, typecheck, build, and browser smoke checks pass. Verified locally on 2026-07-12.
 - [ ] With a real database, create/edit/delete persists and reloads.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

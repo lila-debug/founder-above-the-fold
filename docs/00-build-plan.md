@@ -174,3 +174,13 @@ Do these in order:
 6. MCP tools for create/check/queue/list.
 
 That gets the useful loop alive quickly without pretending that the riskier LinkedIn capabilities exist.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

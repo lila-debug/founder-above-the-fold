@@ -193,3 +193,13 @@ Avoid:
 - [x] `dispatch://assembly-manual` exists.
 - [ ] Verify the manual resource in a real MCP client.
 - [ ] Fit and prove every external live light before a full-product launch.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

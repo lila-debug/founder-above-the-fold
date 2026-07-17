@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "duration": 45,
+  "samples": [
+    2.5,
+    7.5,
+    12.5,
+    17.5,
+    22.5,
+    27.5,
+    32.5,
+    37.5,
+    42.5
+  ],
+  "tolerance": 2,
+  "strict": false,
+  "collapseStatic": true,
+  "ok": true,
+  "errorCount": 0,
+  "warningCount": 0,
+  "infoCount": 1,
+  "issueCount": 1,
+  "totalIssueCount": 1,
+  "truncated": false,
+  "issues": [
+    {
+      "code": "canvas_overflow",
+      "severity": "info",
+      "time": 17.5,
+      "selector": "#el-03-name-machine > div:nth-of-type(1)",
+      "containerSelector": "#root",
+      "text": "Introducing · Parts A–D Magic linkProfile OSVoice lockMCP rail Founder AboveThe FoldPasswordless LinkedIn operating system ┌┐└┘",
+      "message": "Text extends outside the composition canvas.",
+      "rect": {
+        "left": -1920,
+        "top": 0,
+        "right": 0,
+        "bottom": 1080,
+        "width": 1920,
+        "height": 1080
+      },
+      "containerRect": {
+        "left": 0,
+        "top": 0,
+        "right": 1920,
+        "bottom": 1080,
+        "width": 1920,
+        "height": 1080
+      },
+      "overflow": {
+        "left": 1920
+      },
+      "fixHint": "Move the text inward, reduce its size, or mark intentional off-canvas animation with data-layout-allow-overflow.",
+      "firstSeen": 17.5,
+      "lastSeen": 17.5,
+      "occurrences": 1
+    }
+  ],
+  "_meta": {
+    "version": "0.7.57",
+    "latestVersion": "0.7.57",
+    "updateAvailable": false,
+    "deprecated": true
+  }
+}

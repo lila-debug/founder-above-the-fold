@@ -269,3 +269,13 @@ Founder Above the Fold. LinkedIn presence, run like a product system.
 - Video CTA: waitlist, founder intro call, GitHub/demo, or private operating-system reveal.
 - Brand direction: Prototype Cafe house style or standalone Founder Above the Fold identity.
 - Video aspect ratio: 16:9 master only, or include 9:16 social cut from the start.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

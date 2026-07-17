@@ -23,7 +23,6 @@ import {
   OwnerAccessPanel,
   ProfileCopyBoard,
 } from "./components/landing-client";
-import { BrandFooter } from "./components/brand-footer";
 
 export const dynamic = "force-dynamic";
 
@@ -317,7 +316,6 @@ export default async function Home() {
         </div>
       </section>
 
-      <Footer />
     </main>
   );
 }
@@ -382,10 +380,10 @@ function Hero({ linkedinConnectReady }: { linkedinConnectReady: boolean }) {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
-                href="/dashboard"
+                href="/waitlist"
                 className="panel panel-tap inline-flex h-12 items-center justify-center gap-2 bg-[#03256c] px-5 text-sm font-black uppercase text-white"
               >
-                Open private workbench
+                Join the private beta
                 <ArrowRight size={17} strokeWidth={2.2} />
               </a>
               <a
@@ -403,6 +401,9 @@ function Hero({ linkedinConnectReady }: { linkedinConnectReady: boolean }) {
                 <Activity size={17} strokeWidth={2.2} />
               </a>
             </div>
+            <a className="mt-4 inline-flex text-sm font-bold text-[#1768ac] underline" href="/dashboard">
+              Owner access: open the private workbench
+            </a>
             <div className="mt-8 block lg:hidden">
               <DashboardScene />
             </div>
@@ -567,8 +568,4 @@ function StatusRow({ label, state }: { label: string; state: string }) {
       <span className="rail-label text-xs font-black">{state}</span>
     </div>
   );
-}
-
-function Footer() {
-  return <BrandFooter />;
 }

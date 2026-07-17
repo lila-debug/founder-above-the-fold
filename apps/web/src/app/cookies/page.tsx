@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { CookiebotDeclaration } from "../components/cookiebot-declaration";
-import { BrandFooter } from "../components/brand-footer";
 
 export default function CookiesPage() {
   const cookiebotId = process.env.NEXT_PUBLIC_COOKIEBOT_ID?.trim();
@@ -24,7 +23,6 @@ export default function CookiesPage() {
           <CookiebotDeclaration cookiebotId={cookiebotId} />
         </div>
       </section>
-      <BrandFooter />
     </main>
   );
 }

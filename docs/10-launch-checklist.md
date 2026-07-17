@@ -1,17 +1,24 @@
 # Launch Checklist
 
-## Current Gate - 13 July 2026
+## Current Gate - 16 July 2026
 
 - [x] Local working preview can be packaged for a truthful private-beta/build-in-public announcement.
 - [x] Public preview labels planned features as preview, setup-required, or planned.
 - [x] Interactive Toy Box Explorer and matching manual are fitted.
 - [x] Repeatable route/security/truth smoke panel exists.
-- [ ] Final video and final conveyor evidence are attached.
+- [x] Final video and final local conveyor evidence are attached.
+- [x] Public `/try` mechanism and `/waitlist` intake routes are fitted with honest setup states.
+- [x] Product Hunt name, 59-character tagline, description, maker comment, bounded offer, five-panel real-UI gallery, thumbnail, and launch-day response board are assembled.
+- [x] Product Hunt browser jig passes the fail/pass/queue mechanism, Waitlister socket, desktop/mobile overflow and console checks.
+- [x] `/try` and `/waitlist` are deployed on the primary production domain; `/try` passes the full live browser mechanism and `/waitlist` fails closed until its provider key is fitted.
+- [x] Bare and `www` `.com`, `.app`, and `.dev` routes preserve their path and resolve to the primary `.com` cabinet.
 - [ ] Founder approves a manual LinkedIn post.
-- [ ] Live domain, consent, production access, LinkedIn OAuth, queue, and publishing remain no-go.
+- [ ] Production Waitlister key, domain allow-list, double opt-in, unsubscribe, export and deletion are proved.
+- [ ] Production sign-in, live Cookiebot consent, owner-approved LinkedIn OAuth/text-post proof, and immediate full-product access remain no-go.
 
 The private-beta announcement gate and the full-product gate are different assemblies.
 Use [Launch Control](19-four-hour-launch-control-manual.md) for the evidence board.
+Use the [Product Hunt launch kit](24-product-hunt-launch-kit.md) and [response board](25-product-hunt-response-plan.md) for the Product Hunt rail.
 
 ## Stage 1 - Before Coding
 
@@ -105,3 +112,13 @@ No-go when:
 - Queueing can bypass voice checks.
 - Cron route is unauthenticated.
 - MCP exposes generic LinkedIn/browser/HTTP tools.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

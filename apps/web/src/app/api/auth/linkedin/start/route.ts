@@ -1,10 +1,21 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { getOwnerSessionFromRequest } from "@/lib/auth/session";
 import {
   getLinkedInAuthorizationUrl,
   getLinkedInSetupMissingEnv,
 } from "@/lib/server/linkedin";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const session = getOwnerSessionFromRequest(request);
+
+  if (!session) {
+    const signInUrl = new URL("/", request.nextUrl.origin);
+    signInUrl.searchParams.set("linkedin", "owner-sign-in-required");
+    signInUrl.hash = "command-centre";
+
+    return NextResponse.redirect(signInUrl);
+  }
+
   const missingEnv = getLinkedInSetupMissingEnv();
 
   if (missingEnv.length > 0) {
@@ -18,7 +29,19 @@ export async function GET() {
   }
 
   const state = crypto.randomUUID();
-  const authorizationUrl = getLinkedInAuthorizationUrl(state);
+  let authorizationUrl: URL;
+
+  try {
+    authorizationUrl = getLinkedInAuthorizationUrl(state);
+  } catch {
+    return NextResponse.json(
+      {
+        error: "LinkedIn OAuth redirect configuration is invalid.",
+        expectedPath: "/api/auth/linkedin/callback",
+      },
+      { status: 503 },
+    );
+  }
 
   const response = NextResponse.redirect(authorizationUrl);
   response.cookies.set("linkedin_oauth_state", state, {

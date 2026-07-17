@@ -1,0 +1,756 @@
+{
+  "bgm": {
+    "path": "assets/bgm/track.mp3",
+    "volume": 0.12,
+    "query": "minimal warm electronic pulse, restrained mechanical rhythm, no vocals",
+    "duration_s": 31
+  },
+  "voices": [
+    {
+      "frame": 1,
+      "path": "assets/voice/01.wav",
+      "duration_s": 2.027,
+      "words": [
+        {
+          "id": "w0",
+          "text": "LinkedIn",
+          "start": 0.04,
+          "end": 0.476
+        },
+        {
+          "id": "w1",
+          "text": "should",
+          "start": 0.476,
+          "end": 0.802
+        },
+        {
+          "id": "w2",
+          "text": "not",
+          "start": 0.802,
+          "end": 0.966
+        },
+        {
+          "id": "w3",
+          "text": "feel",
+          "start": 0.966,
+          "end": 1.183
+        },
+        {
+          "id": "w4",
+          "text": "like",
+          "start": 1.183,
+          "end": 1.401
+        },
+        {
+          "id": "w5",
+          "text": "a",
+          "start": 1.401,
+          "end": 1.51
+        },
+        {
+          "id": "w6",
+          "text": "second",
+          "start": 1.51,
+          "end": 1.837
+        },
+        {
+          "id": "w7",
+          "text": "job.",
+          "start": 1.837,
+          "end": 2
+        }
+      ]
+    },
+    {
+      "frame": 2,
+      "path": "assets/voice/02.wav",
+      "duration_s": 5.568,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Not",
+          "start": 0.03,
+          "end": 0.208
+        },
+        {
+          "id": "w1",
+          "text": "another",
+          "start": 0.208,
+          "end": 0.622
+        },
+        {
+          "id": "w2",
+          "text": "scheduler.",
+          "start": 0.622,
+          "end": 1.156
+        },
+        {
+          "id": "w3",
+          "text": "Not",
+          "start": 1.156,
+          "end": 1.333
+        },
+        {
+          "id": "w4",
+          "text": "another",
+          "start": 1.333,
+          "end": 1.748
+        },
+        {
+          "id": "w5",
+          "text": "engagement",
+          "start": 1.748,
+          "end": 2.341
+        },
+        {
+          "id": "w6",
+          "text": "bot.",
+          "start": 2.341,
+          "end": 2.518
+        },
+        {
+          "id": "w7",
+          "text": "The",
+          "start": 2.518,
+          "end": 2.696
+        },
+        {
+          "id": "w8",
+          "text": "work",
+          "start": 2.696,
+          "end": 2.933
+        },
+        {
+          "id": "w9",
+          "text": "is",
+          "start": 2.933,
+          "end": 3.052
+        },
+        {
+          "id": "w10",
+          "text": "credibility—and",
+          "start": 3.052,
+          "end": 3.881
+        },
+        {
+          "id": "w11",
+          "text": "the",
+          "start": 3.881,
+          "end": 4.059
+        },
+        {
+          "id": "w12",
+          "text": "admin",
+          "start": 4.059,
+          "end": 4.355
+        },
+        {
+          "id": "w13",
+          "text": "keeps",
+          "start": 4.355,
+          "end": 4.651
+        },
+        {
+          "id": "w14",
+          "text": "getting",
+          "start": 4.651,
+          "end": 5.066
+        },
+        {
+          "id": "w15",
+          "text": "in",
+          "start": 5.066,
+          "end": 5.185
+        },
+        {
+          "id": "w16",
+          "text": "the",
+          "start": 5.185,
+          "end": 5.362
+        },
+        {
+          "id": "w17",
+          "text": "way.",
+          "start": 5.362,
+          "end": 5.54
+        }
+      ]
+    },
+    {
+      "frame": 3,
+      "path": "assets/voice/03.wav",
+      "duration_s": 5.184,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Founder",
+          "start": 0.07,
+          "end": 0.461
+        },
+        {
+          "id": "w1",
+          "text": "Above",
+          "start": 0.461,
+          "end": 0.741
+        },
+        {
+          "id": "w2",
+          "text": "the",
+          "start": 0.741,
+          "end": 0.908
+        },
+        {
+          "id": "w3",
+          "text": "Fold",
+          "start": 0.908,
+          "end": 1.132
+        },
+        {
+          "id": "w4",
+          "text": "is",
+          "start": 1.132,
+          "end": 1.244
+        },
+        {
+          "id": "w5",
+          "text": "the",
+          "start": 1.244,
+          "end": 1.411
+        },
+        {
+          "id": "w6",
+          "text": "passwordless",
+          "start": 1.411,
+          "end": 2.082
+        },
+        {
+          "id": "w7",
+          "text": "LinkedIn",
+          "start": 2.082,
+          "end": 2.529
+        },
+        {
+          "id": "w8",
+          "text": "operating",
+          "start": 2.529,
+          "end": 3.032
+        },
+        {
+          "id": "w9",
+          "text": "system",
+          "start": 3.032,
+          "end": 3.367
+        },
+        {
+          "id": "w10",
+          "text": "for",
+          "start": 3.367,
+          "end": 3.535
+        },
+        {
+          "id": "w11",
+          "text": "founders",
+          "start": 3.535,
+          "end": 3.982
+        },
+        {
+          "id": "w12",
+          "text": "who",
+          "start": 3.982,
+          "end": 4.15
+        },
+        {
+          "id": "w13",
+          "text": "hate",
+          "start": 4.15,
+          "end": 4.373
+        },
+        {
+          "id": "w14",
+          "text": "doing",
+          "start": 4.373,
+          "end": 4.653
+        },
+        {
+          "id": "w15",
+          "text": "LinkedIn.",
+          "start": 4.653,
+          "end": 5.1
+        }
+      ]
+    },
+    {
+      "frame": 4,
+      "path": "assets/voice/04.wav",
+      "duration_s": 6.72,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Enter",
+          "start": 0.02,
+          "end": 0.323
+        },
+        {
+          "id": "w1",
+          "text": "with",
+          "start": 0.323,
+          "end": 0.565
+        },
+        {
+          "id": "w2",
+          "text": "a",
+          "start": 0.565,
+          "end": 0.686
+        },
+        {
+          "id": "w3",
+          "text": "magic",
+          "start": 0.686,
+          "end": 0.989
+        },
+        {
+          "id": "w4",
+          "text": "link.",
+          "start": 0.989,
+          "end": 1.231
+        },
+        {
+          "id": "w5",
+          "text": "In",
+          "start": 1.231,
+          "end": 1.352
+        },
+        {
+          "id": "w6",
+          "text": "ten",
+          "start": 1.352,
+          "end": 1.534
+        },
+        {
+          "id": "w7",
+          "text": "minutes,",
+          "start": 1.534,
+          "end": 1.957
+        },
+        {
+          "id": "w8",
+          "text": "prepare",
+          "start": 1.957,
+          "end": 2.381
+        },
+        {
+          "id": "w9",
+          "text": "your",
+          "start": 2.381,
+          "end": 2.623
+        },
+        {
+          "id": "w10",
+          "text": "headline,",
+          "start": 2.623,
+          "end": 3.108
+        },
+        {
+          "id": "w11",
+          "text": "About,",
+          "start": 3.108,
+          "end": 3.411
+        },
+        {
+          "id": "w12",
+          "text": "experience,",
+          "start": 3.411,
+          "end": 4.016
+        },
+        {
+          "id": "w13",
+          "text": "featured",
+          "start": 4.016,
+          "end": 4.5
+        },
+        {
+          "id": "w14",
+          "text": "links,",
+          "start": 4.5,
+          "end": 4.803
+        },
+        {
+          "id": "w15",
+          "text": "and",
+          "start": 4.803,
+          "end": 4.985
+        },
+        {
+          "id": "w16",
+          "text": "the",
+          "start": 4.985,
+          "end": 5.166
+        },
+        {
+          "id": "w17",
+          "text": "exact",
+          "start": 5.166,
+          "end": 5.469
+        },
+        {
+          "id": "w18",
+          "text": "manual",
+          "start": 5.469,
+          "end": 5.832
+        },
+        {
+          "id": "w19",
+          "text": "paste",
+          "start": 5.832,
+          "end": 6.135
+        },
+        {
+          "id": "w20",
+          "text": "checklist.",
+          "start": 6.135,
+          "end": 6.68
+        }
+      ]
+    },
+    {
+      "frame": 5,
+      "path": "assets/voice/05.wav",
+      "duration_s": 6.165,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Then",
+          "start": 0.04,
+          "end": 0.293
+        },
+        {
+          "id": "w1",
+          "text": "say,",
+          "start": 0.293,
+          "end": 0.483
+        },
+        {
+          "id": "w2",
+          "text": "make",
+          "start": 0.483,
+          "end": 0.736
+        },
+        {
+          "id": "w3",
+          "text": "me",
+          "start": 0.736,
+          "end": 0.862
+        },
+        {
+          "id": "w4",
+          "text": "visible",
+          "start": 0.862,
+          "end": 1.305
+        },
+        {
+          "id": "w5",
+          "text": "this",
+          "start": 1.305,
+          "end": 1.558
+        },
+        {
+          "id": "w6",
+          "text": "week.",
+          "start": 1.558,
+          "end": 1.811
+        },
+        {
+          "id": "w7",
+          "text": "Get",
+          "start": 1.811,
+          "end": 2
+        },
+        {
+          "id": "w8",
+          "text": "voice-checked",
+          "start": 2,
+          "end": 2.759
+        },
+        {
+          "id": "w9",
+          "text": "drafts,",
+          "start": 2.759,
+          "end": 3.138
+        },
+        {
+          "id": "w10",
+          "text": "a",
+          "start": 3.138,
+          "end": 3.265
+        },
+        {
+          "id": "w11",
+          "text": "two-week",
+          "start": 3.265,
+          "end": 3.707
+        },
+        {
+          "id": "w12",
+          "text": "queue,",
+          "start": 3.707,
+          "end": 4.024
+        },
+        {
+          "id": "w13",
+          "text": "reminders,",
+          "start": 4.024,
+          "end": 4.593
+        },
+        {
+          "id": "w14",
+          "text": "and",
+          "start": 4.593,
+          "end": 4.782
+        },
+        {
+          "id": "w15",
+          "text": "every",
+          "start": 4.782,
+          "end": 5.099
+        },
+        {
+          "id": "w16",
+          "text": "manual",
+          "start": 5.099,
+          "end": 5.478
+        },
+        {
+          "id": "w17",
+          "text": "task",
+          "start": 5.478,
+          "end": 5.731
+        },
+        {
+          "id": "w18",
+          "text": "still",
+          "start": 5.731,
+          "end": 6.047
+        },
+        {
+          "id": "w19",
+          "text": "left.",
+          "start": 6.047,
+          "end": 6.3
+        }
+      ]
+    },
+    {
+      "frame": 6,
+      "path": "assets/voice/06.wav",
+      "duration_s": 5.653,
+      "words": [
+        {
+          "id": "w0",
+          "text": "Official",
+          "start": 0.11,
+          "end": 0.638
+        },
+        {
+          "id": "w1",
+          "text": "publishing",
+          "start": 0.638,
+          "end": 1.298
+        },
+        {
+          "id": "w2",
+          "text": "only.",
+          "start": 1.298,
+          "end": 1.561
+        },
+        {
+          "id": "w3",
+          "text": "No",
+          "start": 1.561,
+          "end": 1.693
+        },
+        {
+          "id": "w4",
+          "text": "scraping.",
+          "start": 1.693,
+          "end": 2.221
+        },
+        {
+          "id": "w5",
+          "text": "No",
+          "start": 2.221,
+          "end": 2.353
+        },
+        {
+          "id": "w6",
+          "text": "fake",
+          "start": 2.353,
+          "end": 2.617
+        },
+        {
+          "id": "w7",
+          "text": "engagement.",
+          "start": 2.617,
+          "end": 3.277
+        },
+        {
+          "id": "w8",
+          "text": "No",
+          "start": 3.277,
+          "end": 3.409
+        },
+        {
+          "id": "w9",
+          "text": "risky",
+          "start": 3.409,
+          "end": 3.739
+        },
+        {
+          "id": "w10",
+          "text": "outreach",
+          "start": 3.739,
+          "end": 4.266
+        },
+        {
+          "id": "w11",
+          "text": "or",
+          "start": 4.266,
+          "end": 4.398
+        },
+        {
+          "id": "w12",
+          "text": "profile",
+          "start": 4.398,
+          "end": 4.86
+        },
+        {
+          "id": "w13",
+          "text": "automation.",
+          "start": 4.86,
+          "end": 5.52
+        }
+      ]
+    },
+    {
+      "frame": 7,
+      "path": "assets/voice/07.wav",
+      "duration_s": 6.272,
+      "words": [
+        {
+          "id": "w0",
+          "text": "From",
+          "start": 0.07,
+          "end": 0.341
+        },
+        {
+          "id": "w1",
+          "text": "neglected",
+          "start": 0.341,
+          "end": 0.951
+        },
+        {
+          "id": "w2",
+          "text": "to",
+          "start": 0.951,
+          "end": 1.087
+        },
+        {
+          "id": "w3",
+          "text": "credible",
+          "start": 1.087,
+          "end": 1.629
+        },
+        {
+          "id": "w4",
+          "text": "above",
+          "start": 1.629,
+          "end": 1.968
+        },
+        {
+          "id": "w5",
+          "text": "the",
+          "start": 1.968,
+          "end": 2.172
+        },
+        {
+          "id": "w6",
+          "text": "fold",
+          "start": 2.172,
+          "end": 2.443
+        },
+        {
+          "id": "w7",
+          "text": "in",
+          "start": 2.443,
+          "end": 2.579
+        },
+        {
+          "id": "w8",
+          "text": "48",
+          "start": 2.579,
+          "end": 2.714
+        },
+        {
+          "id": "w9",
+          "text": "hours.",
+          "start": 2.714,
+          "end": 3.053
+        },
+        {
+          "id": "w10",
+          "text": "Founder",
+          "start": 3.053,
+          "end": 3.528
+        },
+        {
+          "id": "w11",
+          "text": "Above",
+          "start": 3.528,
+          "end": 3.867
+        },
+        {
+          "id": "w12",
+          "text": "the",
+          "start": 3.867,
+          "end": 4.07
+        },
+        {
+          "id": "w13",
+          "text": "Fold.",
+          "start": 4.07,
+          "end": 4.342
+        },
+        {
+          "id": "w14",
+          "text": "Private",
+          "start": 4.342,
+          "end": 4.816
+        },
+        {
+          "id": "w15",
+          "text": "beta.",
+          "start": 4.816,
+          "end": 5.087
+        },
+        {
+          "id": "w16",
+          "text": "Five",
+          "start": 5.087,
+          "end": 5.359
+        },
+        {
+          "id": "w17",
+          "text": "founder",
+          "start": 5.359,
+          "end": 5.833
+        },
+        {
+          "id": "w18",
+          "text": "builds.",
+          "start": 5.833,
+          "end": 6.24
+        }
+      ]
+    }
+  ],
+  "sfx": []
+}

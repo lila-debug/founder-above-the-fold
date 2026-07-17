@@ -11,6 +11,10 @@ import {
 import { writeAuditEvent, type AuditActor } from "./audit";
 import { dbQuery, hasDatabaseUrl } from "./db";
 import {
+  LinkedInPublishingError,
+  publishLinkedInText,
+} from "./publishing";
+import {
   runVoiceCommand,
   VoiceCommandSetupError,
   type VoiceCommandResult,
@@ -64,6 +68,15 @@ export class DraftPostError extends Error {
 }
 
 export class VoiceCheckError extends Error {
+  constructor(
+    message: string,
+    readonly statusCode: number,
+  ) {
+    super(message);
+  }
+}
+
+export class PostWorkflowError extends Error {
   constructor(
     message: string,
     readonly statusCode: number,
@@ -407,6 +420,354 @@ export async function runVoiceCheckForPost({
   });
 
   return { item, voiceCheck: check };
+}
+
+export async function queuePost({
+  actor,
+  id,
+  scheduledAt,
+}: {
+  actor: AuditActor;
+  id: string;
+  scheduledAt: unknown;
+}) {
+  const current = await getExistingPostRow(id);
+
+  if (!current) {
+    return null;
+  }
+
+  if (current.status !== "draft") {
+    throw new PostWorkflowError("Only draft posts can be queued.", 409);
+  }
+
+  if (
+    current.voice_status !== "passed" ||
+    current.voice_checked_hash !== current.body_hash
+  ) {
+    throw new PostWorkflowError(
+      "Run a passing voice check on the current draft before queueing it.",
+      409,
+    );
+  }
+
+  if (typeof scheduledAt !== "string") {
+    throw new PostWorkflowError("Choose a valid future publishing time.", 400);
+  }
+
+  const publishAt = new Date(scheduledAt);
+
+  if (!Number.isFinite(publishAt.getTime()) || publishAt.getTime() <= Date.now()) {
+    throw new PostWorkflowError("Choose a valid future publishing time.", 400);
+  }
+
+  const result = await dbQuery<PostRow>(
+    `
+      update posts
+      set status = 'queued',
+          scheduled_at = $2,
+          last_error_code = null,
+          last_error_message = null
+      where id = $1
+      returning *
+    `,
+    [id, publishAt],
+  );
+  const row = result.rows[0];
+
+  await writeAuditEvent({
+    actor,
+    action: "post.queued",
+    entityType: "post",
+    entityId: id,
+    metadata: { scheduledAt: publishAt.toISOString() },
+  });
+
+  return toPostRecord(row);
+}
+
+export async function cancelQueuedPost({
+  actor,
+  id,
+  reason,
+}: {
+  actor: AuditActor;
+  id: string;
+  reason?: unknown;
+}) {
+  const current = await getExistingPostRow(id);
+
+  if (!current) {
+    return null;
+  }
+
+  if (current.status !== "queued") {
+    throw new PostWorkflowError("Only queued posts can be cancelled.", 409);
+  }
+
+  const safeReason =
+    typeof reason === "string" && reason.trim() ? reason.trim().slice(0, 500) : null;
+  const result = await dbQuery<PostRow>(
+    `
+      update posts
+      set status = 'cancelled',
+          last_error_code = null,
+          last_error_message = $2
+      where id = $1
+      returning *
+    `,
+    [id, safeReason],
+  );
+
+  await writeAuditEvent({
+    actor,
+    action: "post.cancelled",
+    entityType: "post",
+    entityId: id,
+    metadata: { reason: safeReason },
+  });
+
+  return toPostRecord(result.rows[0]);
+}
+
+export async function publishPostNow({
+  actor,
+  id,
+  confirmPublication,
+}: {
+  actor: AuditActor;
+  id: string;
+  confirmPublication: unknown;
+}) {
+  if (confirmPublication !== true) {
+    throw new PostWorkflowError(
+      "Explicit publication confirmation is required.",
+      400,
+    );
+  }
+
+  return publishPost({ actor, id, retryOnFailure: false, dueOnly: false });
+}
+
+export async function publishDuePosts({ limit = 10 }: { limit?: number } = {}) {
+  const safeLimit = clampLimit(limit);
+  const due = await dbQuery<{ id: string }>(
+    `
+      select id
+      from posts
+      where status = 'queued'
+        and scheduled_at <= now()
+      order by scheduled_at asc
+      limit $1
+    `,
+    [safeLimit],
+  );
+  const results: Array<{
+    postId: string;
+    status: "published" | "retry_scheduled" | "failed" | "skipped";
+    linkedinPostId?: string;
+    reason?: string;
+  }> = [];
+
+  for (const row of due.rows) {
+    try {
+      const result = await publishPost({
+        actor: "cron",
+        id: row.id,
+        retryOnFailure: true,
+        dueOnly: true,
+      });
+      results.push(result);
+    } catch (error) {
+      results.push({
+        postId: row.id,
+        status: "skipped",
+        reason:
+          error instanceof Error ? error.message : "Post could not be inspected.",
+      });
+    }
+  }
+
+  return {
+    inspected: due.rowCount ?? due.rows.length,
+    published: results.filter((item) => item.status === "published").length,
+    retryScheduled: results.filter((item) => item.status === "retry_scheduled")
+      .length,
+    failed: results.filter((item) => item.status === "failed").length,
+    skipped: results.filter((item) => item.status === "skipped").length,
+    results,
+  };
+}
+
+async function publishPost({
+  actor,
+  id,
+  retryOnFailure,
+  dueOnly,
+}: {
+  actor: AuditActor;
+  id: string;
+  retryOnFailure: boolean;
+  dueOnly: boolean;
+}) {
+  const current = await getExistingPostRow(id);
+
+  if (!current) {
+    throw new PostWorkflowError("Post not found.", 404);
+  }
+
+  if (!(["draft", "queued"] as PostStatus[]).includes(current.status)) {
+    throw new PostWorkflowError(
+      "Only a draft or queued post can enter the publishing conveyor.",
+      409,
+    );
+  }
+
+  if (dueOnly && current.status !== "queued") {
+    throw new PostWorkflowError("Only queued posts can publish on the timer.", 409);
+  }
+
+  if (
+    current.voice_status !== "passed" ||
+    current.voice_checked_hash !== current.body_hash
+  ) {
+    throw new PostWorkflowError(
+      "The current draft revision must pass the voice gate before publishing.",
+      409,
+    );
+  }
+
+  const claimed = await dbQuery<PostRow>(
+    `
+      update posts
+      set status = 'publishing',
+          last_error_code = null,
+          last_error_message = null
+      where id = $1
+        and status = $2
+        and voice_status = 'passed'
+        and voice_checked_hash = body_hash
+        and ($3::boolean = false or scheduled_at <= now())
+      returning *
+    `,
+    [id, current.status, dueOnly],
+  );
+  const post = claimed.rows[0];
+
+  if (!post) {
+    throw new PostWorkflowError(
+      "The post moved before it could be locked for publishing.",
+      409,
+    );
+  }
+
+  await writeAuditEvent({
+    actor,
+    action: "post.publish_started",
+    entityType: "post",
+    entityId: id,
+    metadata: {
+      scheduledAt: toIso(post.scheduled_at),
+      retryCount: post.retry_count,
+    },
+  });
+
+  try {
+    const published = await publishLinkedInText(post.body);
+    const result = await dbQuery<PostRow>(
+      `
+        update posts
+        set status = 'published',
+            published_at = now(),
+            linkedin_post_id = $2,
+            last_error_code = null,
+            last_error_message = null
+        where id = $1
+          and status = 'publishing'
+        returning *
+      `,
+      [id, published.postId],
+    );
+
+    await writeAuditEvent({
+      actor,
+      action: "post.published",
+      entityType: "post",
+      entityId: id,
+      metadata: { linkedinPostId: published.postId },
+    });
+
+    return {
+      postId: id,
+      status: "published" as const,
+      linkedinPostId: published.postId,
+      item: toPostRecord(result.rows[0]),
+    };
+  } catch (error) {
+    const failure = normalizePublishingFailure(error);
+    const canRetry =
+      retryOnFailure && post.retry_count < 1 && isSafeToRetry(failure.code);
+    const result = await dbQuery<PostRow>(
+      `
+        update posts
+        set status = $2,
+            retry_count = retry_count + case when $3 then 1 else 0 end,
+            scheduled_at = case when $3 then now() + interval '15 minutes' else scheduled_at end,
+            last_error_code = $4,
+            last_error_message = $5
+        where id = $1
+          and status = 'publishing'
+        returning *
+      `,
+      [id, canRetry ? "queued" : "failed", canRetry, failure.code, failure.message],
+    );
+
+    await writeAuditEvent({
+      actor,
+      action: canRetry ? "post.publish_retry_scheduled" : "post.publish_failed",
+      entityType: "post",
+      entityId: id,
+      metadata: {
+        reason: failure.code,
+        retryCount: result.rows[0]?.retry_count ?? post.retry_count,
+      },
+    });
+
+    if (!retryOnFailure) {
+      throw new PostWorkflowError(failure.message, failure.statusCode);
+    }
+
+    return {
+      postId: id,
+      status: canRetry ? ("retry_scheduled" as const) : ("failed" as const),
+      reason: failure.message,
+      item: result.rows[0] ? toPostRecord(result.rows[0]) : undefined,
+    };
+  }
+}
+
+function normalizePublishingFailure(error: unknown) {
+  if (error instanceof LinkedInPublishingError) {
+    return {
+      code: error.code,
+      message: error.message.slice(0, 500),
+      statusCode: error.statusCode,
+    };
+  }
+
+  return {
+    code: "publishing_internal_error",
+    message: "The publishing conveyor stopped unexpectedly.",
+    statusCode: 500,
+  };
+}
+
+export function isSafeToRetry(code: string) {
+  return code === "linkedin_http_429" || /^linkedin_http_5\d\d$/.test(code);
+}
+
+function toIso(value: Date | string | null) {
+  return value ? new Date(value).toISOString() : null;
 }
 
 export function hashPostBody(body: string) {

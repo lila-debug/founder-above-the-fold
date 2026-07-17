@@ -103,12 +103,15 @@ Do not use browser automation as a temporary substitute.
 - Member identity is stored.
 - Disconnect removes stored token.
 - Missing scope is shown as a setup issue.
+- Expired access token refreshes through the official token endpoint when the approved app receives a programmatic refresh token.
+- Expired, missing, unreadable or rejected refresh tokens set a visible reconnect state.
 
 ## Current Local Smoke - 2026-07-12
 
 - [x] `/api/linkedin/status` reports `setup_required` without exposing tokens when LinkedIn env slots are missing.
 - [x] Unsigned visitors are redirected before `/api/auth/linkedin/start` can issue a state cookie.
 - [x] Signed owner requests to `/api/auth/linkedin/start` stop at the missing labelled slots instead of pretending OAuth is ready.
+- [x] Local Postgres proves encrypted automatic refresh, refresh-token rotation, one refresh across concurrent callers, secret-free audit metadata and reconnect attention after refresh expiry.
 - [ ] Live redirect to LinkedIn is still waiting on verified Products, redirect URLs, `DATABASE_URL`, and OAuth environment values.
 
 ## OAuth Connection Loop Manual Panel
@@ -125,6 +128,8 @@ Do not use browser automation as a temporary substitute.
 | D | Encryption clamp | Wraps access and refresh keys before storage | `apps/web/src/lib/server/token-encryption.ts` | App |
 | E | Parts bin | Stores encrypted OAuth rows and owner connection state | `oauth_tokens`, `owner_settings` | Database |
 | F | Status light | Shows setup, connected, or attention-required without secrets | `/api/linkedin/status` and web UI panel | App |
+| G | Refresh gearbox | Uses a valid programmatic refresh token shortly before access expiry | `apps/web/src/lib/server/linkedin-access.ts` | Server |
+| H | Concurrency ratchet | Locks the one owner token row so simultaneous publishing and analytics calls mint only one new access token | Postgres transaction | Database |
 
 ### Mission Control Board
 ```text
@@ -137,7 +142,7 @@ Do not use browser automation as a temporary substitute.
 [Encrypted server-side storage + owner state]
   |
   v
-[UI status light: connected or attention required]
+[UI status light: connected, refresh available, or attention required]
   |
   v
 [Safe publishing can be assembled next]
@@ -195,20 +200,47 @@ Check:
 Avoid:
 - Returning access keys, refresh keys, ciphertext, client secrets, or raw LinkedIn payloads.
 
+#### Step 4 - Turn the refresh gearbox
+Diagram:
+```text
+[access key near expiry] ---> [lock token row] ---> [official refresh grant]
+                                                        |
+                                                        v
+[encrypted replacement keys] <--- [validate scope + TTL + response shape]
+```
+Do:
+1. Refresh only when the access key is expired or within five minutes of expiry.
+2. Send `grant_type=refresh_token`, the encrypted-at-rest refresh key, client credentials and the registered redirect URI to LinkedIn's official token endpoint.
+3. Validate the new access key, TTL and required scope before replacing stored ciphertext.
+4. Preserve the original refresh expiry when LinkedIn does not return a replacement TTL.
+5. Mark the owner connection for reauthorisation when the refresh key is missing, expired, unreadable or rejected.
+
+Check:
+- Concurrent publishing and analytics callers produce one provider refresh request.
+- Audit metadata contains purpose, expiries, scope count and rotation state—never token values.
+- A transient provider/network failure changes no stored token and does not falsely claim reauthorisation is required.
+
+Avoid:
+- Assuming every LinkedIn app receives programmatic refresh tokens. LinkedIn limits them to approved Marketing Developer Platform partners.
+- Extending the refresh-token lifetime locally; LinkedIn's returned remaining TTL is authoritative.
+
 ### Safety Stickers
 - [Security] `TOKEN_ENCRYPTION_KEY` must be at least 32 characters and must not be committed.
 - [Privacy] Frontend status must not expose owner email, member URN, tokens, or ciphertext.
 - [Cost] OAuth has no app spend, but LinkedIn product review can delay launch.
 - [IP] Use only LinkedIn official OAuth and API endpoints.
 - [Evidence] A live end-to-end OAuth test still requires configured LinkedIn app credentials, database, and redirect URL.
+- [Availability] Automatic refresh works only when LinkedIn has granted the app programmatic refresh tokens; otherwise the status light deliberately asks the owner to reconnect.
 
 ### Finished-Build Test
 - [x] Owner signs in with magic link. Verified locally on 2026-07-12.
-- [ ] `/api/linkedin/status` reports `not_connected` with no tokens.
-- [ ] `/api/auth/linkedin/start` redirects to LinkedIn with a state cookie.
-- [ ] Callback with bad state returns to the UI as `invalid-state`.
-- [ ] Callback with a valid code stores encrypted tokens and owner state.
+- [x] `/api/linkedin/status` reports `not_connected` with no tokens. Verified against local Postgres on 2026-07-17.
+- [x] `/api/auth/linkedin/start` redirects to LinkedIn with a state cookie. Verified with a signed test owner session on 2026-07-17.
+- [x] Callback with bad state returns to the UI as `invalid-state` without provider traffic. Verified on 2026-07-17.
+- [x] Callback with a valid code stores encrypted access/refresh tokens and owner state. Verified with captured official endpoint contracts on 2026-07-17.
 - [ ] UI panel shows `Connected` or `Attention required`.
+- [x] Expired access token refreshes once, remains encrypted and permits the waiting publish action. Verified against local Postgres on 2026-07-17.
+- [x] Concurrent token consumers share one locked refresh and an expired refresh token sets reconnect attention without provider traffic.
 - [x] Lint, typecheck, build, and local route smoke checks pass. Verified locally on 2026-07-12.
 
 ## Production Checklist
@@ -224,7 +256,19 @@ Avoid:
 
 ## LinkedIn API Notes
 
-- Access tokens have finite lifetimes. Build reconnection and refresh/re-authorisation UX from the start.
+- Access tokens have finite lifetimes. Programmatic refresh tokens are available only to approved Marketing Developer Platform partners and retain their original fixed expiry when used.
 - Requesting different scopes can invalidate previous tokens.
 - Store token strings with room for future length increases.
 - Treat 401, 403, and 429 responses as product states, not just developer errors.
+- Official refresh contract checked 17 July 2026: https://learn.microsoft.com/en-us/linkedin/shared/authentication/programmatic-refresh-tokens
+- Current Community Management integration requirements checked 17 July 2026: https://learn.microsoft.com/en-us/linkedin/marketing/community-management/integration-requirements-community-management
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

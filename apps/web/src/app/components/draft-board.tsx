@@ -2,6 +2,7 @@
 
 import {
   AlertTriangle,
+  CalendarClock,
   CheckCircle2,
   FileText,
   Loader2,
@@ -40,16 +41,21 @@ const EMPTY_FORM: DraftForm = {
 };
 
 export function DraftBoard({ initialTracker }: { initialTracker: PostTracker }) {
-  const [tracker, setTracker] = useState(initialTracker);
-  const [selectedId, setSelectedId] = useState(initialTracker.items[0]?.id ?? "new");
+  const initialDrafts = initialTracker.items.filter((item) => item.status === "draft");
+  const [tracker, setTracker] = useState(() => ({ ...initialTracker, items: initialDrafts }));
+  const [selectedId, setSelectedId] = useState(initialDrafts[0]?.id ?? "new");
   const [form, setForm] = useState<DraftForm>(() =>
-    initialTracker.items[0] ? postToForm(initialTracker.items[0]) : EMPTY_FORM,
+    initialDrafts[0] ? postToForm(initialDrafts[0]) : EMPTY_FORM,
   );
   const [notice, setNotice] = useState<Notice | null>(null);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [voiceChecking, setVoiceChecking] = useState(false);
+  const [queueing, setQueueing] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [scheduledAt, setScheduledAt] = useState(() =>
+    toLocalDateTimeInput(new Date(Date.now() + 24 * 60 * 60 * 1000)),
+  );
 
   const selectedPost = useMemo(
     () => tracker.items.find((item) => item.id === selectedId) ?? null,
@@ -163,6 +169,37 @@ export function DraftBoard({ initialTracker }: { initialTracker: PostTracker }) 
         : "Voice check failed. Inspect the saved output before queueing.",
     );
     setVoiceChecking(false);
+  }
+
+  async function queueDraft() {
+    if (isNew || !selectedPost || !scheduledAt) {
+      return;
+    }
+
+    const date = new Date(scheduledAt);
+
+    if (!Number.isFinite(date.getTime()) || date.getTime() <= Date.now()) {
+      setNotice({ tone: "error", text: "Choose a future publishing time." });
+      return;
+    }
+
+    setQueueing(true);
+    setNotice(null);
+    const response = await fetch(`/api/posts/${selectedPost.id}/queue`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ scheduledAt: date.toISOString() }),
+    });
+    const result = (await response.json()) as DraftWriteResponse;
+
+    if (!response.ok || !result.item) {
+      setQueueing(false);
+      setNotice({ tone: "error", text: result.error ?? "Post could not be queued." });
+      return;
+    }
+
+    await refreshDrafts("new", "Post locked into the publishing queue.");
+    setQueueing(false);
   }
 
   async function refreshDrafts(nextSelectedId = selectedId, successMessage?: string) {
@@ -372,6 +409,35 @@ export function DraftBoard({ initialTracker }: { initialTracker: PostTracker }) 
             </button>
           </div>
 
+          <div className="grid gap-2 border-2 border-[#03256c]/20 bg-white p-3 md:grid-cols-[1fr_auto] md:items-end">
+            <label className="rail-label grid gap-2 text-xs font-black uppercase text-[#1768ac]" htmlFor="draft-scheduled-at">
+              Future publishing slot
+              <input
+                className="h-11 w-full border-2 border-[#03256c]/25 bg-white px-3 text-sm font-normal normal-case text-[#03256c] outline-none focus:border-[#06bee1]"
+                id="draft-scheduled-at"
+                min={toLocalDateTimeInput(new Date(Date.now() + 60_000))}
+                onChange={(event) => setScheduledAt(event.target.value)}
+                type="datetime-local"
+                value={scheduledAt}
+              />
+            </label>
+            <button
+              className="panel panel-tap inline-flex h-11 items-center justify-center gap-2 bg-[#f4d13d] px-4 text-sm font-black uppercase disabled:cursor-not-allowed disabled:opacity-45"
+              disabled={
+                !databaseReady ||
+                isNew ||
+                !selectedPost?.canQueue ||
+                hasChanged ||
+                queueing
+              }
+              onClick={queueDraft}
+              type="button"
+            >
+              {queueing ? <Loader2 size={16} /> : <CalendarClock size={16} />}
+              {queueing ? "Queueing" : "Queue post"}
+            </button>
+          </div>
+
           {!databaseReady ? (
             <div className="flex items-start gap-3 border-2 border-[#03256c]/15 bg-white p-3 text-sm leading-6 text-[#1768ac]">
               <CheckCircle2 className="mt-0.5 shrink-0" size={17} strokeWidth={2.2} />
@@ -421,4 +487,9 @@ function postToForm(post: PostRecord): DraftForm {
     archetype: post.archetype ?? "",
     notes: post.notes ?? "",
   };
+}
+
+function toLocalDateTimeInput(date: Date) {
+  const offset = date.getTimezoneOffset() * 60_000;
+  return new Date(date.getTime() - offset).toISOString().slice(0, 16);
 }

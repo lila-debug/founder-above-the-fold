@@ -111,3 +111,13 @@ Both require LinkedIn's own review before going live - this is LinkedIn's proces
 ---
 
 Prototype Cafe(TM) - Revolutionising Life Since 1982(TM)
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

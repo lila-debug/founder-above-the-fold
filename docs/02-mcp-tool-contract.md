@@ -2,346 +2,71 @@
 
 ## Design Principle
 
-The MCP server should make Founder Above the Fold easy for AI assistants to operate, while making unsafe LinkedIn automation impossible.
-
-The server exposes Founder Above the Fold workflows, not raw LinkedIn primitives. There is no generic `linkedin_request` tool.
-
-Internal note: the public product name is Founder Above the Fold. The MCP tool namespace remains `dispatch.*` until a deliberate technical rename/refactor pass.
-
-## Tools
-
-### `dispatch.health`
-
-Purpose: confirm the MCP server can reach the Founder Above the Fold backend.
-
-Input:
-
-- none
-
-Output:
-
-- backend status
-- database status
-- LinkedIn connection status
-- current server version
-
-### `dispatch.create_draft`
-
-Purpose: create a draft post.
-
-Input:
-
-- `body`: post text
-- `pillar`: optional content pillar
-- `archetype`: optional post archetype
-- `notes`: optional private notes
-- `source`: optional origin such as `weekly_plan`, `manual`, `profile_refresh`
-
-Output:
-
-- `post_id`
-- `status = draft`
-- `voice_status = unchecked`
-
-### `dispatch.update_draft`
-
-Purpose: update an unpublished draft.
-
-Input:
-
-- `post_id`
-- `body`
-- optional `pillar`, `archetype`, `notes`
-
-Output:
-
-- updated post
-- `voice_status = unchecked` for the new revision
-
-### `dispatch.run_voice_check`
-
-Purpose: run the British English and voice gate for a draft.
-
-Input:
-
-- `post_id`
-
-Output:
-
-- `voice_status`: `passed` or `failed`
-- command output
-- checked revision hash
-
-### `dispatch.queue_post`
-
-Purpose: schedule a voice-approved post.
-
-Input:
-
-- `post_id`
-- `scheduled_at`
-
-Rules:
-
-- The post must be a draft.
-- The latest revision must have `voice_status = passed`.
-- `scheduled_at` must be in the future.
-
-Output:
-
-- `status = queued`
-- scheduled time
-- audit ID
-
-### `dispatch.publish_post_now`
-
-Purpose: publish a voice-approved post immediately.
-
-Input:
-
-- `post_id`
-- `confirm_publication`: must be true
-
-Rules:
-
-- Intended for launch tests and intentional immediate posts.
-- The latest revision must have `voice_status = passed`.
-- Creates an audit event before the LinkedIn API call.
-
-Output:
-
-- `status = published` or `failed`
-- LinkedIn post ID if published
-- audit ID
-
-### `dispatch.list_posts`
-
-Purpose: inspect drafts, queue, published posts, or failures.
-
-Input:
-
-- optional `status`
-- optional `from`
-- optional `to`
-- optional `limit`
-
-Output:
-
-- list of post summaries
-
-### `dispatch.get_post`
-
-Purpose: retrieve one post with voice checks, assets, stats, and audit history.
-
-Input:
-
-- `post_id`
-
-Output:
-
-- full post record
-
-### `dispatch.cancel_post`
-
-Purpose: cancel a queued post before publishing.
-
-Input:
-
-- `post_id`
-- `reason`
-
-Rules:
-
-- Only queued posts can be cancelled.
-
-Output:
-
-- `status = cancelled`
-- audit ID
-
-### `dispatch.refresh_analytics`
-
-Purpose: pull analytics for Founder Above the Fold-published posts.
-
-Input:
-
-- optional `post_id`
-- optional `since`
-
-Output:
-
-- stats rows updated
-- failures, if any
-
-### `dispatch.get_post_stats`
-
-Purpose: read stored analytics.
-
-Input:
-
-- optional `post_id`
-- optional date range
-
-Output:
-
-- impressions
-- likes
-- comments
-- engagement rate if computable from available fields
-
-### `dispatch.upsert_profile_copy`
-
-Purpose: update canonical profile copy in Founder Above the Fold.
-
-Input:
-
-- `field`: `headline`, `about`, `experience`, or `featured`
-- `content`
-- optional `change_note`
-
-Rules:
-
-- Marks the field as not synced.
-- Does not attempt to edit LinkedIn.
-
-Output:
-
-- profile copy version
-- `synced = false`
-- manual paste reminder
-
-### `dispatch.get_profile_sync_status`
-
-Purpose: show which profile fields need manual update on LinkedIn.
-
-Input:
-
-- none
-
-Output:
-
-- current canonical versions
-- synced flags
-- last edited time
-- last marked synced time
-
-### `dispatch.mark_profile_copy_synced`
-
-Purpose: mark a canonical profile field as manually pasted into LinkedIn.
-
-Input:
-
-- `field`
-- `linkedin_updated_at`: optional timestamp supplied by owner
-
-Output:
-
-- `synced = true`
-- version
-- audit ID
-
-### `dispatch.list_templates`
-
-Purpose: list outreach and post templates.
-
-Input:
-
-- optional `scenario_tag`
-- optional `type`: `outreach` or `post`
-
-Output:
-
-- template summaries
-
-### `dispatch.upsert_template`
-
-Purpose: create or update a reusable template.
-
-Input:
-
-- `type`: `outreach` or `post`
-- `scenario_tag`
-- `body`
-- optional `notes`
-
-Output:
-
-- template ID
-- version
-
-### `dispatch.render_template`
-
-Purpose: render a template with provided variables for manual use.
-
-Input:
-
-- `template_id`
-- `variables`
-
-Output:
-
-- rendered text
-- missing variables
-- reminder that LinkedIn outreach is manual
-
-## Resources
-
-### `dispatch://voice-guide`
-
-Read-only voice system, British English rules, hard bans, preferred phrasing, and examples.
-
-### `dispatch://profile-copy/current`
-
-Current canonical headline, About, Experience, and featured/profile positioning copy.
-
-### `dispatch://content-pillars`
-
-Approved positioning pillars and examples.
-
-### `dispatch://queue`
-
-Current scheduled queue.
-
-### `dispatch://templates/{scenario_tag}`
-
-Templates for specific scenarios.
-
-## Prompts
-
-### `dispatch.weekly_content_plan`
-
-Creates a week of post briefs from the content pillars, recent published posts, and profile positioning.
-
-### `dispatch.write_fractional_cpo_post`
-
-Turns one brief into a draft post in the approved voice.
-
-### `dispatch.rewrite_in_voice`
-
-Rewrites a draft to satisfy the voice guide and British English rules.
-
-### `dispatch.profile_refresh`
-
-Reviews canonical profile copy and proposes updated headline/About/Experience text for manual paste.
-
-### `dispatch.outreach_reply`
-
-Renders a manual outreach reply from a scenario template and the current positioning.
+The MCP server exposes guarded Founder Above the Fold workflows, never raw LinkedIn primitives. The customer-facing name is Founder Above the Fold; the technical namespace remains `dispatch.*` for this version.
+
+Every mutation calls the Founder Above the Fold backend with `MCP_API_KEY`, so the same database, voice, queue, audit and publication locks apply to the web UI and MCP client.
+
+## Implemented Tools
+
+| Tool | Input | Job and hard stop |
+|---|---|---|
+| `dispatch.health` | none | Reads backend, setup, connection, capability and safety state without secrets. |
+| `dispatch.create_draft` | `body`; optional `pillar`, `archetype`, `notes` | Creates a draft; never publishes. |
+| `dispatch.list_posts` | optional `status`, `limit` | Lists owner workflow state. |
+| `dispatch.get_post` | `post_id` | Reads one post and its current state. |
+| `dispatch.update_draft` | `post_id`; optional changed fields | Updates an unpublished draft; a text change invalidates the earlier voice lock. |
+| `dispatch.run_voice_check` | `post_id` | Stores a British-English result for the exact body hash. |
+| `dispatch.queue_post` | `post_id`, ISO `scheduled_at` | Requires a future time and a passing check for the current revision. |
+| `dispatch.cancel_post` | `post_id`; optional `reason` | Cancels a queued post and audits the reason. |
+| `dispatch.publish_post_now` | `post_id`, literal `confirm_publication: true` | Public side effect; requires explicit owner confirmation and the same voice/connection locks. |
+| `dispatch.get_profile_copy` | none | Reads canonical manual-paste profile copy. |
+| `dispatch.upsert_profile_copy` | `field`, `content`; optional `change_note` | Adds a version; never edits LinkedIn. Fields are `headline`, `about`, or `experience`. |
+| `dispatch.list_templates` | optional `type` | Lists versioned outreach or post jigs. |
+| `dispatch.create_template` | `type`, `scenario_tag`, `body`; optional `notes` | Creates manual-only copy. |
+| `dispatch.update_template` | `template_id`; optional changed fields | Advances the template version. |
+| `dispatch.render_template` | `template_id`, `variables` | Fits variables, reports missing labels, and never sends outreach. |
+| `dispatch.list_analytics` | none | Reads stored official own-post snapshots and permission readiness. |
+| `dispatch.refresh_analytics` | optional `post_id` | Pulls official metrics only when the separate LinkedIn analytics grant exists. |
+
+## Implemented Resources
+
+| URI | Contents |
+|---|---|
+| `dispatch://voice-guide` | British-English and Prototype Cafe voice rules. |
+| `dispatch://profile-copy/current` | Current canonical manual-paste profile copy. |
+| `dispatch://templates/current` | Versioned outreach copy and post-idea jigs. |
+| `dispatch://assembly-manual` | Shared operating order and LinkedIn safety locks. |
+
+No MCP prompts are registered in v0.1. Clients may compose workflows from tools and resources, but the server does not claim prompt endpoints it does not expose.
+
+## Protocol Finished-Build Test
+
+Run:
+
+```bash
+MCP_API_BASE_URL=http://localhost:3100 \
+MCP_API_KEY=<local-key> \
+npm run test:smoke -w apps/mcp-server
+```
+
+The test starts the compiled stdio server, negotiates the MCP protocol, checks the tool/resource lists, calls health and templates, then completes:
+
+```text
+[draft] ---> [voice-passed] ---> [queued] ---> [cancelled]
+```
+
+Expected report: 17 tools, 4 resources, `publicSideEffect: false`.
 
 ## Explicitly Not Exposed
 
-Never add these tools:
+Never add raw tools for profile search/read, messaging, connections, follows, likes, comments, reposts, scraping, LinkedIn browser control or arbitrary LinkedIn HTTP requests. Profile editing and outreach sending remain manual; public posting uses only the owner-authorised official Posts API rail.
 
-- `linkedin.search_profiles`
-- `linkedin.get_profile`
-- `linkedin.search_jobs`
-- `linkedin.send_message`
-- `linkedin.connect`
-- `linkedin.follow`
-- `linkedin.like`
-- `linkedin.comment`
-- `linkedin.scrape`
-- `browser.open_linkedin`
-- any generic browser or HTTP tool pointed at LinkedIn
+---
 
-Those names are useful because they are obviously tempting. They are also where the account risk lives.
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

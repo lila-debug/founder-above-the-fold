@@ -1,0 +1,128 @@
+[
+  {
+    "id": "w0",
+    "text": "Enter",
+    "start": 0.02,
+    "end": 0.323
+  },
+  {
+    "id": "w1",
+    "text": "with",
+    "start": 0.323,
+    "end": 0.565
+  },
+  {
+    "id": "w2",
+    "text": "a",
+    "start": 0.565,
+    "end": 0.686
+  },
+  {
+    "id": "w3",
+    "text": "magic",
+    "start": 0.686,
+    "end": 0.989
+  },
+  {
+    "id": "w4",
+    "text": "link.",
+    "start": 0.989,
+    "end": 1.231
+  },
+  {
+    "id": "w5",
+    "text": "In",
+    "start": 1.231,
+    "end": 1.352
+  },
+  {
+    "id": "w6",
+    "text": "ten",
+    "start": 1.352,
+    "end": 1.534
+  },
+  {
+    "id": "w7",
+    "text": "minutes,",
+    "start": 1.534,
+    "end": 1.957
+  },
+  {
+    "id": "w8",
+    "text": "prepare",
+    "start": 1.957,
+    "end": 2.381
+  },
+  {
+    "id": "w9",
+    "text": "your",
+    "start": 2.381,
+    "end": 2.623
+  },
+  {
+    "id": "w10",
+    "text": "headline,",
+    "start": 2.623,
+    "end": 3.108
+  },
+  {
+    "id": "w11",
+    "text": "About,",
+    "start": 3.108,
+    "end": 3.411
+  },
+  {
+    "id": "w12",
+    "text": "experience,",
+    "start": 3.411,
+    "end": 4.016
+  },
+  {
+    "id": "w13",
+    "text": "featured",
+    "start": 4.016,
+    "end": 4.5
+  },
+  {
+    "id": "w14",
+    "text": "links,",
+    "start": 4.5,
+    "end": 4.803
+  },
+  {
+    "id": "w15",
+    "text": "and",
+    "start": 4.803,
+    "end": 4.985
+  },
+  {
+    "id": "w16",
+    "text": "the",
+    "start": 4.985,
+    "end": 5.166
+  },
+  {
+    "id": "w17",
+    "text": "exact",
+    "start": 5.166,
+    "end": 5.469
+  },
+  {
+    "id": "w18",
+    "text": "manual",
+    "start": 5.469,
+    "end": 5.832
+  },
+  {
+    "id": "w19",
+    "text": "paste",
+    "start": 5.832,
+    "end": 6.135
+  },
+  {
+    "id": "w20",
+    "text": "checklist.",
+    "start": 6.135,
+    "end": 6.68
+  }
+]

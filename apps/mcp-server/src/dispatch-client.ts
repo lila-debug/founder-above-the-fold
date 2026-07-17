@@ -59,17 +59,132 @@ export class FounderClient {
     return response.json();
   }
 
-  async runVoiceCheck(postId: string) {
-    const response = await fetch(`${this.baseUrl}/api/posts/${postId}/voice-check`, {
-      method: "POST",
-      headers: this.headers(),
-    });
+  async listPosts(status?: string, limit = 50) {
+    const query = new URLSearchParams({ limit: String(limit) });
 
-    if (!response.ok) {
-      throw new Error(`Founder Above the Fold voice check failed: ${response.status}`);
+    if (status) {
+      query.set("status", status);
     }
 
-    return response.json();
+    return this.request(`/api/posts?${query.toString()}`);
+  }
+
+  async getPost(postId: string) {
+    return this.request(`/api/posts/${encodeURIComponent(postId)}`);
+  }
+
+  async updateDraft(
+    postId: string,
+    input: { body?: string; pillar?: string; archetype?: string; notes?: string },
+  ) {
+    return this.request(`/api/posts/${encodeURIComponent(postId)}`, {
+      method: "PATCH",
+      json: input,
+    });
+  }
+
+  async runVoiceCheck(postId: string) {
+    return this.request(`/api/posts/${encodeURIComponent(postId)}/voice-check`, {
+      method: "POST",
+    });
+  }
+
+  async queuePost(postId: string, scheduledAt: string) {
+    return this.request(`/api/posts/${encodeURIComponent(postId)}/queue`, {
+      method: "POST",
+      json: { scheduledAt },
+    });
+  }
+
+  async cancelPost(postId: string, reason?: string) {
+    return this.request(`/api/posts/${encodeURIComponent(postId)}/cancel`, {
+      method: "POST",
+      json: { reason },
+    });
+  }
+
+  async publishPostNow(postId: string, confirmPublication: true) {
+    return this.request(`/api/posts/${encodeURIComponent(postId)}/publish-now`, {
+      method: "POST",
+      json: { confirmPublication },
+    });
+  }
+
+  async getProfileCopy() {
+    return this.request("/api/profile-copy");
+  }
+
+  async upsertProfileCopy(input: {
+    field: string;
+    content: string;
+    changeNote?: string;
+  }) {
+    return this.request("/api/profile-copy", { method: "POST", json: input });
+  }
+
+  async listTemplates(type?: "outreach" | "post") {
+    const query = type ? `?type=${encodeURIComponent(type)}` : "";
+    return this.request(`/api/templates${query}`);
+  }
+
+  async createTemplate(input: {
+    type: "outreach" | "post";
+    scenarioTag: string;
+    body: string;
+    notes?: string;
+  }) {
+    return this.request("/api/templates", { method: "POST", json: input });
+  }
+
+  async updateTemplate(
+    templateId: string,
+    input: { scenarioTag?: string; body?: string; notes?: string },
+  ) {
+    return this.request(`/api/templates/${encodeURIComponent(templateId)}`, {
+      method: "PATCH",
+      json: input,
+    });
+  }
+
+  async renderTemplate(templateId: string, variables: Record<string, string>) {
+    return this.request(`/api/templates/${encodeURIComponent(templateId)}/render`, {
+      method: "POST",
+      json: { variables },
+    });
+  }
+
+  async listAnalytics() {
+    return this.request("/api/analytics/posts");
+  }
+
+  async refreshAnalytics(postId?: string) {
+    return this.request("/api/analytics/refresh", {
+      method: "POST",
+      json: postId ? { postId } : {},
+    });
+  }
+
+  private async request(
+    path: string,
+    options: { method?: string; json?: unknown } = {},
+  ) {
+    const response = await fetch(`${this.baseUrl}${path}`, {
+      method: options.method ?? "GET",
+      headers: this.headers({ json: options.json !== undefined }),
+      body: options.json === undefined ? undefined : JSON.stringify(options.json),
+    });
+
+    const payload = (await response.json().catch(() => null)) as unknown;
+
+    if (!response.ok) {
+      const detail =
+        payload && typeof payload === "object" && "error" in payload
+          ? String((payload as { error: unknown }).error)
+          : `HTTP ${response.status}`;
+      throw new Error(`Founder Above the Fold request failed: ${detail}`);
+    }
+
+    return payload;
   }
 
   private headers({ json = false }: { json?: boolean } = {}) {

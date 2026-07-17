@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation";
 import { getOwnerSession } from "@/lib/auth/session";
+import { getAnalyticsReadiness, listPostAnalytics } from "@/lib/server/analytics";
 import { checkDatabase } from "@/lib/server/db";
 import { getEnvReport } from "@/lib/server/env";
+import { getLinkedInConnectionStatus } from "@/lib/server/linkedin";
 import { getPostTracker } from "@/lib/server/posts";
 import { getProfileCopyTracker } from "@/lib/server/profile-copy";
 import { FounderWorkbench } from "../components/founder-workbench";
@@ -13,13 +15,16 @@ export default async function DashboardPage() {
     redirect("/?auth=sign-in-required&next=/dashboard");
   }
 
-  const [database, env, postTracker, profileTracker] = await Promise.all([
+  const [database, env, postTracker, profileTracker, linkedinConnection, analyticsTracker, analyticsReadiness] = await Promise.all([
     checkDatabase(),
     getEnvReport(),
-    getPostTracker({ status: "draft" }),
+    getPostTracker(),
     getProfileCopyTracker(),
+    getLinkedInConnectionStatus({ ownerAuthenticated: true }),
+    listPostAnalytics(),
+    getAnalyticsReadiness(),
   ]);
-  const linkedinReady = Object.values(env.linkedin).every((state) => state === "configured");
+  const linkedinReady = linkedinConnection.state === "connected";
   const expiresAt = new Date(session.expiresAt * 1000).toLocaleDateString("en-CA", {
     month: "short",
     day: "numeric",
@@ -33,15 +38,17 @@ export default async function DashboardPage() {
         database: database.ok,
         linkedin: linkedinReady,
         consent: env.consent.NEXT_PUBLIC_COOKIEBOT_ID === "configured",
-        voice: env.voice.VOICE_CHECK_COMMAND === "configured",
+        voice: database.ok,
         mcp: env.required.MCP_API_KEY === "configured",
-        queue: false,
-        publishing: false,
+        queue: database.ok,
+        publishing: database.ok && linkedinReady,
+        analytics: analyticsReadiness.state === "available",
       }}
       email={session.email}
       expiresAt={expiresAt}
       postTracker={postTracker}
       profileTracker={profileTracker}
+      analyticsTracker={analyticsTracker}
     />
   );
 }

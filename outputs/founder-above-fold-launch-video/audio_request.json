@@ -1,0 +1,40 @@
+{
+  "provider": "auto",
+  "speed": 1.2,
+  "lines": [
+    {
+      "id": "01",
+      "text": "LinkedIn should not feel like a second job."
+    },
+    {
+      "id": "02",
+      "text": "Not another scheduler. Not another engagement bot. The work is credibility—and the admin keeps getting in the way."
+    },
+    {
+      "id": "03",
+      "text": "Founder Above the Fold is the passwordless LinkedIn operating system for founders who hate doing LinkedIn."
+    },
+    {
+      "id": "04",
+      "text": "Enter with a magic link. In ten minutes, prepare your headline, About, experience, featured links, and the exact manual paste checklist."
+    },
+    {
+      "id": "05",
+      "text": "Then say, make me visible this week. Get voice-checked drafts, a two-week queue, reminders, and every manual task still left."
+    },
+    {
+      "id": "06",
+      "text": "Official publishing only. No scraping. No fake engagement. No risky outreach or profile automation."
+    },
+    {
+      "id": "07",
+      "text": "From neglected to credible above the fold in 48 hours. Founder Above the Fold. Private beta. Five founder builds."
+    }
+  ],
+  "bgm": {
+    "mode": "retrieve",
+    "query": "minimal warm electronic pulse, restrained mechanical rhythm, no vocals",
+    "blob": "The passwordless LinkedIn operating system for founders who hate doing LinkedIn",
+    "arc": "PAS with feature-benefit progression"
+  }
+}

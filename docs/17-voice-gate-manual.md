@@ -80,3 +80,13 @@ Avoid:
 - [ ] With `DATABASE_URL`, `VOICE_CHECK_COMMAND`, Hunspell, and `en_GB`, a passing draft stores a `voice_checks` row and updates `posts.voice_status`.
 - [ ] A failing draft stores the failure output and blocks queueing.
 - [ ] Editing a passed draft resets the stale voice check.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

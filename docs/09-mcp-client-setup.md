@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This file defines how AI clients should connect to Founder Above the Fold once the MCP server exists.
+This file defines how AI clients connect to the implemented Founder Above the Fold stdio MCP server.
 
 The server should expose Founder Above the Fold tools and resources only. It should not expose raw LinkedIn credentials, generic HTTP tools, shell access, browser automation, or arbitrary LinkedIn API calls.
 
@@ -12,7 +12,7 @@ Internal note: the public product name is Founder Above the Fold. The MCP tool n
 
 Use this first.
 
-Expected command after implementation:
+Command after `npm run build -w apps/mcp-server`:
 
 ```bash
 node /absolute/path/to/apps/mcp-server/dist/index.js
@@ -71,7 +71,19 @@ After connecting the MCP server, the AI client should be able to:
 3. Read `dispatch://voice-guide`.
 4. Create a draft.
 5. Run a voice check.
-6. Queue a post only after voice check passes.
+6. Queue a post only after the current revision passes.
+7. Cancel that local test post so no public action occurs.
+8. Read all four registered resources.
+
+The repeatable client proof is:
+
+```bash
+MCP_API_BASE_URL=http://localhost:3100 \
+MCP_API_KEY=<local-key> \
+npm run test:smoke -w apps/mcp-server
+```
+
+It must report 17 tools, 4 resources and `publicSideEffect: false`.
 
 ## Tool Permission Posture
 
@@ -90,7 +102,7 @@ Extra-care tools:
 
 - `dispatch.publish_post_now`
 - `dispatch.cancel_post`
-- `dispatch.mark_profile_copy_synced`
+- `dispatch.refresh_analytics`
 
 Never allow:
 
@@ -101,18 +113,16 @@ Never allow:
 - Auto-like/comment/follow/repost.
 - Raw HTTP requests to LinkedIn.
 
-## MCP Inspector
+## Remote Transport Stop
 
-Once implemented, add package scripts similar to:
+The shipped adapter is local stdio. Do not describe it as a hosted ChatGPT connector until a remote Streamable HTTP transport, origin validation, authentication, redacted logging and an approved deployment have passed their own finished-build test.
 
-```json
-{
-  "scripts": {
-    "mcp:dev": "tsx src/index.ts",
-    "mcp:build": "tsc -p tsconfig.json",
-    "mcp:inspect": "npx @modelcontextprotocol/inspector node dist/index.js"
-  }
-}
-```
+---
 
-Use the inspector before connecting production clients.
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

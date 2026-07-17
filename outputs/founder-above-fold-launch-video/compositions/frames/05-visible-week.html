@@ -1,0 +1,40 @@
+<template>
+  <style>
+    #root{position:relative;width:1920px;height:1080px;overflow:hidden;container-type:size;font-family:"Arial Black",Arial,sans-serif;color:#111111}#root *{box-sizing:border-box}
+    .f05-ground{position:absolute;inset:0;background:#F05A28}.f05-grid{position:absolute;inset:0;opacity:.13;background-image:linear-gradient(#111111 2px,transparent 2px),linear-gradient(90deg,#111111 2px,transparent 2px);background-size:64px 64px}
+    .f05-stage{position:absolute;inset:0;padding:55px 65px 180px}.f05-pill{display:inline-block;padding:13px 20px;border:4px solid #111111;box-shadow:7px 7px 0 #111111;background:#FFFEF8;font:900 23px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+    .f05-command{position:absolute;left:70px;top:175px;width:1780px;height:160px;border:5px solid #111111;box-shadow:11px 11px 0 #111111;background:#FFFEF8;display:flex;align-items:center;padding:26px 34px;gap:28px}.f05-prompt{font:900 35px Arial,sans-serif}.f05-command strong{font-size:59px;line-height:1;text-transform:uppercase;letter-spacing:-.035em}.f05-build{margin-left:auto;padding:20px 28px;border:4px solid #111111;background:#27C7EF;font:900 25px Arial,sans-serif;text-transform:uppercase;box-shadow:6px 6px 0 #111111}
+    .f05-flow{position:absolute;left:70px;top:420px;width:1780px;display:grid;grid-template-columns:1fr 150px 1fr 150px 1.35fr;align-items:center}.f05-node{height:245px;border:5px solid #111111;box-shadow:10px 10px 0 #111111;background:#FFFEF8;padding:28px;display:flex;flex-direction:column;justify-content:space-between}.f05-node b{font-size:46px;text-transform:uppercase}.f05-node small{font:900 19px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}.f05-node-draft{background:#FBD1C3}.f05-node-voice{background:#97E4F7}.f05-node-queue{background:#FFFEF8}.f05-arrow{height:14px;background:#111111;position:relative;transform-origin:left center}.f05-arrow:after{content:"";position:absolute;right:-1px;top:-17px;border-left:34px solid #111111;border-top:23px solid transparent;border-bottom:23px solid transparent}
+    .f05-pass{align-self:flex-start;padding:10px 15px;border:4px solid #111111;background:#27C7EF;font:900 20px Arial,sans-serif;letter-spacing:.1em}.f05-weeks{display:grid;grid-template-columns:1fr 1fr;gap:14px}.f05-week{border:4px solid #111111;padding:14px;background:#FAFAFA;font:900 20px Arial,sans-serif;text-transform:uppercase}.f05-week i{display:block;height:18px;margin-top:10px;background:#111111}
+    .f05-bottom{position:absolute;left:70px;top:745px;width:1780px;display:grid;grid-template-columns:1fr 1fr;gap:34px}.f05-mini{height:125px;border:4px solid #111111;box-shadow:7px 7px 0 #111111;background:#FFFEF8;display:flex;align-items:center;justify-content:space-between;padding:26px 34px;font-size:34px;text-transform:uppercase}.f05-left{padding:12px 18px;background:#F69777;border:4px solid #111111;font:900 25px Arial,sans-serif}.f05-cursor{position:absolute;left:1530px;top:270px;width:50px;height:68px;background:#111111;clip-path:polygon(0 0,0 100%,30% 72%,48% 100%,63% 90%,45% 63%,82% 63%)}.f05-ripple{position:absolute;left:1508px;top:248px;width:96px;height:96px;border:5px solid #111111}
+  </style>
+  <div data-hf-id="hf-5t4n" id="root" data-composition-id="05-visible-week" data-start="0" data-duration="7.4" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-ntf7" id="f05-ground" class="clip f05-ground" data-start="0" data-duration="7" data-track-index="0"></div><div data-hf-id="hf-8rim" id="f05-grid" class="clip f05-grid" data-start="0" data-duration="7" data-track-index="1"></div>
+    <div data-hf-id="hf-6m4n" id="f05-stage" class="clip f05-stage" data-start="0" data-duration="7" data-track-index="2">
+      <div data-hf-id="hf-wqha" class="f05-pill">Part 05 · Command centre</div>
+      <div data-hf-id="hf-5sun" class="f05-command"><span data-hf-id="hf-fc7f" class="f05-prompt">›</span><strong data-hf-id="hf-0llg">Make me visible this week</strong><span data-hf-id="hf-5g9n" class="f05-build">Build week</span></div><div data-hf-id="hf-f2ky" class="f05-ripple"></div><div data-hf-id="hf-8noa" class="f05-cursor"></div>
+      <div data-hf-id="hf-gerg" class="f05-flow"><div data-hf-id="hf-sc5a" class="f05-node f05-node-draft"><small data-hf-id="hf-pkmr">01 · Output</small><b data-hf-id="hf-ht9p">Drafts</b></div><div data-hf-id="hf-qexr" class="f05-arrow"></div><div data-hf-id="hf-ddwp" class="f05-node f05-node-voice"><small data-hf-id="hf-hpvx">02 · Jig</small><b data-hf-id="hf-d4kt">Voice check</b><span data-hf-id="hf-gj70" class="f05-pass">✓ PASS</span></div><div data-hf-id="hf-x8kf" class="f05-arrow"></div><div data-hf-id="hf-z0xu" class="f05-node f05-node-queue"><small data-hf-id="hf-5vfh">03 · Conveyor</small><b data-hf-id="hf-xctr">Two-week queue</b><div data-hf-id="hf-bh9f" class="f05-weeks"><div data-hf-id="hf-j96n" class="f05-week">Week 1<i data-hf-id="hf-wt6k"></i></div><div data-hf-id="hf-iuvm" class="f05-week">Week 2<i data-hf-id="hf-zeb8"></i></div></div></div></div>
+      <div data-hf-id="hf-0ir1" class="f05-bottom"><div data-hf-id="hf-oqxk" class="f05-mini">Reminders <span data-hf-id="hf-q0nk">03</span></div><div data-hf-id="hf-d866" class="f05-mini">Manual tasks left <span data-hf-id="hf-ypz9" class="f05-left">2 left</span></div></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines=window.__timelines||{};const tl=gsap.timeline({paused:true});
+      tl.from(".f05-pill",{x:-70,opacity:0,duration:.4,ease:"power3.out"},0)
+        .from(".f05-command",{scaleX:.08,opacity:0,duration:.55,ease:"expo.out"},.2)
+        .from(".f05-command strong",{width:0,opacity:0,duration:.65,ease:"steps(8)"},.65)
+        .from(".f05-cursor",{x:260,y:-130,opacity:0,duration:.55,ease:"power3.out"},.45)
+        .from(".f05-ripple",{scale:.15,opacity:0,duration:.3,ease:"power2.out"},1.15).to(".f05-ripple",{scale:1.55,opacity:0,duration:.35,ease:"power2.out"},1.45)
+        .to(".f05-build",{scale:.91,duration:.12,ease:"power2.in"},1.55).to(".f05-build",{scale:1,duration:.24,ease:"back.out(2)"},1.67)
+        .from(".f05-node-draft",{y:80,opacity:0,duration:.5,ease:"back.out(1.4)"},1.9)
+        .from(".f05-arrow",{scaleX:0,stagger:1.15,duration:.45,ease:"power3.out"},2.35)
+        .from(".f05-node-voice",{y:80,opacity:0,duration:.5,ease:"back.out(1.4)"},2.65)
+        .from(".f05-pass",{scale:0,rotation:-8,duration:.35,ease:"back.out(2)"},3.25)
+        .from(".f05-node-queue",{y:80,opacity:0,duration:.5,ease:"back.out(1.4)"},3.75)
+        .from(".f05-week",{scaleY:0,stagger:.15,duration:.35,ease:"power3.out",transformOrigin:"top center"},4.2)
+        .from(".f05-mini",{y:80,opacity:0,stagger:.25,duration:.5,ease:"back.out(1.4)"},4.75)
+        .from(".f05-left",{scale:0,duration:.35,ease:"back.out(2)"},5.35)
+        .to(".f05-cursor",{x:180,y:520,duration:.55,ease:"power3.inOut"},5.75);
+      window.__timelines["05-visible-week"]=tl;
+    </script>
+  </div>
+</template>

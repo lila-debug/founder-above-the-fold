@@ -8,6 +8,8 @@
   --white: #ffffff;
   --background: var(--white);
   --foreground: var(--imperial-blue);
+  --font-geist-sans: Arial, Helvetica, sans-serif;
+  --font-geist-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
   /* Assembly-manual system: ink does line-work, paper is the canvas,
      yellow is the one accent reserved for primary/active state. */
@@ -105,6 +107,8 @@ textarea:focus-visible {
   display: flex;
   width: min(86vw, 310px);
   transform: translateX(-105%);
+  visibility: hidden;
+  pointer-events: none;
   flex-direction: column;
   border-right: 2px solid var(--founder-ink);
   background: #fffef8;
@@ -112,7 +116,7 @@ textarea:focus-visible {
   transition: transform 180ms ease;
 }
 
-.founder-rail.is-open { transform: translateX(0); }
+.founder-rail.is-open { transform: translateX(0); visibility: visible; pointer-events: auto; }
 .founder-stage { min-width: 0; }
 .founder-canvas { padding-bottom: 7.5rem; }
 
@@ -308,7 +312,7 @@ textarea:focus-visible {
 }
 
 @media (min-width: 1024px) {
-  .founder-rail { transform: translateX(0); width: 260px; box-shadow: none; }
+  .founder-rail { transform: translateX(0); visibility: visible; pointer-events: auto; width: 260px; box-shadow: none; }
   .founder-stage { margin-left: 260px; }
   .founder-rail .icon-key,
   .founder-topbar > .icon-key { display: none; }
@@ -327,27 +331,31 @@ textarea:focus-visible {
   html { scroll-behavior: auto; }
 }
 
-/* Commercial product showroom: the same labelled parts on web and in the native app. */
+/* Commercial product showroom: compact first-viewport assembly shared by web and native. */
 .saas-shell { min-height: 100vh; background: #f7f1df; color: #111; }
-.saas-header { position: sticky; top: 0; z-index: 40; display: flex; min-height: 72px; align-items: center; gap: 1rem; border-bottom: 2px solid #111; background: rgba(255,254,248,.96); padding: .8rem 1rem; backdrop-filter: blur(12px); }
+.saas-header { position: sticky; top: 0; z-index: 40; display: flex; min-height: 64px; align-items: center; gap: clamp(.65rem, 1.8vw, 1.25rem); border-bottom: 2px solid #111; background: rgba(255,254,248,.96); padding: .55rem clamp(.75rem, 2vw, 1.5rem); backdrop-filter: blur(12px); }
 .saas-progress { height: 10px; max-width: 520px; flex: 1; overflow: hidden; border: 2px solid #111; background: white; }
 .saas-progress span { display: block; height: 100%; background: #f05a28; transition: width 220ms ease; }
-.saas-index { position: fixed; inset: 0 0 0 auto; z-index: 60; display: flex; width: min(90vw, 360px); transform: translateX(105%); flex-direction: column; border-left: 2px solid #111; background: #fffef8; box-shadow: -8px 0 0 rgba(17,17,17,.15); transition: transform 180ms ease; }
-.saas-index.is-open { transform: translateX(0); }
-.saas-stage { margin: 0 auto; width: min(100%, 1320px); padding: 1rem 1rem 5rem; }
-.saas-stage-label { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; text-transform: uppercase; }
-.saas-stage-label > span { display: grid; height: 52px; min-width: 58px; place-items: center; border: 2px solid #111; background: #f4d13d; box-shadow: 3px 3px 0 #111; font: 900 .78rem/1 var(--font-geist-mono), monospace; }
+.saas-index { position: fixed; inset: 0 0 0 auto; z-index: 60; display: flex; width: min(90vw, 360px); transform: translateX(105%); visibility: hidden; pointer-events: none; flex-direction: column; border-left: 2px solid #111; background: #fffef8; box-shadow: -8px 0 0 rgba(17,17,17,.15); transition: transform 180ms ease; }
+.saas-index.is-open { transform: translateX(0); visibility: visible; pointer-events: auto; }
+.saas-stage { margin: 0 auto; width: min(100%, 1400px); padding: .45rem 1rem 4rem; }
+.saas-stage-label { display: flex; align-items: center; gap: .85rem; padding: .65rem 0 .75rem; text-transform: uppercase; }
+.saas-stage-label > span { display: grid; height: 44px; min-width: 50px; place-items: center; border: 2px solid #111; background: #f4d13d; box-shadow: 3px 3px 0 #111; font: 900 .75rem/1 var(--font-geist-mono), monospace; }
 .saas-stage-label p { font: 900 .63rem/1.2 var(--font-geist-mono), monospace; letter-spacing: .08em; }
-.saas-stage-label h1 { margin-top: .25rem; font-size: 1.15rem; font-weight: 900; }
+.saas-stage-label h1 { margin-top: .2rem; font-size: 1.05rem; font-weight: 900; line-height: 1; }
+.saas-screen-frame { animation: saas-panel-place 320ms cubic-bezier(.22,.7,.18,1) both; }
+@keyframes saas-panel-place { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .saas-stepper { display: flex; align-items: center; justify-content: space-between; gap: .8rem; padding-top: 1.5rem; }
 .saas-stepper p { font: 900 .7rem/1 var(--font-geist-mono), monospace; }
 .saas-stepper button:disabled { cursor: not-allowed; opacity: .38; }
 
-.saas-poster { position: relative; min-height: 620px; overflow: hidden; border: 2px solid #111; background: #49a894; padding: clamp(1.5rem, 6vw, 5rem); box-shadow: 7px 7px 0 #111; }
+.saas-poster { position: relative; min-height: clamp(500px, 61vh, 590px); overflow: hidden; border: 2px solid #111; background: #49a894; padding: clamp(1.5rem, 4.2vw, 3.75rem); box-shadow: 7px 7px 0 #111; }
 .saas-poster.is-blue { background: #27c7ef; }
-.saas-poster h2 { margin-top: 2rem; max-width: 920px; white-space: nowrap; font: 900 clamp(3.1rem, 11vw, 9.2rem)/.77 Arial Black, Arial, sans-serif; letter-spacing: -.09em; }
-.saas-poster p { margin-top: 1.8rem; max-width: 630px; font-size: clamp(1rem, 2.2vw, 1.3rem); font-weight: 750; line-height: 1.55; }
-.chrome-dog { position: absolute; right: -1rem; bottom: -1.5rem; width: min(48vw, 460px); filter: drop-shadow(11px 12px 0 rgba(17,17,17,.2)); transform: rotate(-4deg); }
+.saas-poster-copy { max-width: 1040px; }
+.saas-poster.has-art .saas-poster-copy { max-width: min(72%, 960px); }
+.saas-poster h2 { margin-top: clamp(1.2rem, 3vh, 1.8rem); max-width: 100%; text-wrap: balance; font: 900 clamp(3rem, 6.9vw, 6.05rem)/.82 Arial Black, Arial, sans-serif; letter-spacing: -.075em; }
+.saas-poster p { margin-top: clamp(1rem, 2.4vh, 1.5rem); max-width: 660px; font-size: clamp(1rem, 1.6vw, 1.25rem); font-weight: 750; line-height: 1.48; }
+.chrome-dog { position: absolute; right: -1rem; bottom: -1.5rem; width: min(40vw, 420px); filter: drop-shadow(11px 12px 0 rgba(17,17,17,.2)); transform: rotate(-4deg); }
 
 .saas-form-wrap { display: grid; min-height: 650px; border: 2px solid #111; background: white; box-shadow: 7px 7px 0 #111; }
 .saas-form-poster { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(1.5rem, 5vw, 4rem); white-space: pre-line; }
@@ -369,6 +377,39 @@ textarea:focus-visible {
 .licence-card li svg { padding: 2px; border: 2px solid #111; background: #f4d13d; }
 .text-button { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem; font-size: .75rem; font-weight: 900; text-decoration: underline; text-transform: uppercase; }
 .saas-panel { min-height: 650px; border: 2px solid #111; background: #fffef8; padding: clamp(1rem, 4vw, 3rem); box-shadow: 7px 7px 0 #111; }
+
+/* Direct commerce cabinet: real controls remain physically locked until every server fastener is green. */
+.commerce-shell, .receipt-shell { min-height: 100vh; background: #f7f1df; color: #111; }
+.commerce-header { display: flex; min-height: 64px; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 2px solid #111; background: #fffef8; padding: .8rem clamp(1rem, 3vw, 2.5rem); font-size: .72rem; font-weight: 900; text-transform: uppercase; }
+.commerce-header a { font-size: .9rem; }
+.commerce-grid { display: grid; width: min(100% - 2rem, 1240px); gap: 1.5rem; margin: 0 auto; padding: 1.5rem 0 5rem; }
+.commerce-licence-card { min-height: 0; }
+.commerce-licence-card h1 { margin-top: 2rem; font: 900 clamp(4rem, 12vw, 8rem)/.82 Arial Black, Arial, sans-serif; letter-spacing: -.09em; }
+.commerce-status-strip { display: grid; grid-template-columns: auto 1fr; gap: .2rem .65rem; margin-top: auto; border: 2px solid #111; background: #f4d13d; padding: .8rem; box-shadow: 3px 3px 0 #111; }
+.commerce-status-strip[data-ready="true"] { background: #9ed59f; }
+.commerce-status-strip svg { grid-row: span 2; }
+.commerce-status-strip span { font-size: .72rem; font-weight: 750; line-height: 1.4; }
+.commerce-control-stack { display: grid; align-content: start; gap: 1.5rem; }
+.commerce-form, .commerce-manual-panel, .receipt-card { display: grid; gap: 1rem; border: 2px solid #111; background: #fffef8; padding: clamp(1.25rem, 4vw, 2.5rem); box-shadow: 7px 7px 0 #111; }
+.commerce-form h2, .commerce-manual-panel h2, .receipt-card h1 { font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 900; line-height: .92; text-transform: uppercase; }
+.commerce-form > p, .commerce-manual-panel p, .receipt-card > p { font-weight: 650; line-height: 1.6; }
+.commerce-form > label { display: grid; gap: .5rem; font-size: .72rem; font-weight: 900; text-transform: uppercase; }
+.commerce-form input:not([type="checkbox"]) { width: 100%; border: 2px solid #111; background: white; padding: .9rem; font-size: 1rem; font-weight: 700; text-transform: none; box-shadow: 3px 3px 0 #111; }
+.commerce-form button:disabled { cursor: not-allowed; opacity: .42; }
+.commerce-notice { border: 2px solid #111; background: #f4d13d; padding: .75rem; font-size: .8rem; font-weight: 800 !important; }
+.commerce-notice.is-error { background: #ffd4cf; }
+.commerce-manual-panel > div { display: grid; grid-template-columns: 70px 1fr; gap: .75rem; border-top: 1px solid #111; padding-top: .8rem; }
+.commerce-manual-panel > div strong { text-transform: uppercase; }
+.receipt-shell { display: grid; place-items: center; padding: 2rem 1rem 5rem; }
+.receipt-card { width: min(100%, 720px); background: white; }
+.receipt-card[data-state="active"] { background: #c9efc8; }
+.receipt-card[data-state="processing"] { background: #fff4bd; }
+.receipt-card[data-state="cancelled"], .receipt-card[data-state="failed"], .receipt-card[data-state="refunded"], .receipt-card[data-state="disputed"], .receipt-card[data-state="revoked"], .receipt-card[data-state="not_found"] { background: #ffd4cf; }
+.receipt-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.3rem; }
+
+@media (min-width: 900px) {
+  .commerce-grid { grid-template-columns: 1.05fr .95fr; padding-top: 2.5rem; }
+}
 
 .file-grid, .perk-grid { display: grid; gap: 1rem; }
 .file-card, .file-add { display: grid; min-height: 210px; align-content: start; gap: .65rem; border: 2px solid #111; background: white; padding: 1rem; text-align: left; box-shadow: 4px 4px 0 #111; }
@@ -407,7 +448,7 @@ textarea:focus-visible {
 .settings-list { display: grid; gap: .8rem; }.settings-list a { display: grid; grid-template-columns: 52px minmax(0,1fr) auto; align-items: center; gap: .8rem; border: 2px solid #111; background: white; padding: .7rem; box-shadow: 3px 3px 0 #111; }.settings-list a > span { display:grid; width:46px;height:46px;place-items:center;border:2px solid #111;background:#49a894 }.settings-list a.is-danger > span { background:#cf3f4d;color:white }.settings-list p { margin-top:.2rem;color:rgba(17,17,17,.65);font-size:.75rem;line-height:1.4 }
 
 @media (min-width: 700px) {
-  .saas-stage { padding: 1.5rem 1.5rem 6rem; }
+  .saas-stage { padding: .65rem 1.5rem 5rem; }
   .file-grid, .perk-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .photo-grid, .ai-grid { grid-template-columns: 1.15fr .85fr; }
 }
@@ -420,8 +461,25 @@ textarea:focus-visible {
   .file-grid, .perk-grid { grid-template-columns: repeat(4,minmax(0,1fr)); }
 }
 @media (max-width: 699px) {
-  .saas-poster { min-height: 690px; }
-  .saas-poster h2 { white-space: normal; }
-  .chrome-dog { width: 270px; opacity: .78; }
+  .saas-header { min-height: 58px; }
+  .saas-stage { padding-top: .25rem; }
+  .saas-stage-label { padding-block: .5rem .65rem; }
+  .saas-stage-label > span { height: 40px; min-width: 46px; }
+  .saas-stage-label p { max-width: 19rem; font-size: .57rem; }
+  .saas-stage-label h1 { font-size: .95rem; }
+  .saas-poster { min-height: 610px; padding: 1.5rem; }
+  .saas-poster.has-art .saas-poster-copy { max-width: 100%; }
+  .saas-poster h2 { max-width: 100%; font-size: clamp(3rem, 15.5vw, 4.25rem); }
+  .saas-poster p { max-width: 33rem; }
+  .chrome-dog { width: 255px; opacity: .68; }
   .saas-stepper .hard-button { padding-inline: .55rem; font-size: .65rem; }
+}
+
+@media (min-width: 1500px) {
+  .saas-poster h2 { font-size: 6.05rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saas-screen-frame { animation: none; }
+  .saas-progress span { transition: none; }
 }

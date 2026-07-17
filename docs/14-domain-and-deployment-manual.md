@@ -171,3 +171,13 @@ Avoid:
 - [ ] `https://founderaccount.app/api/mcp/health` returns 200.
 - [ ] LinkedIn OAuth redirect URL exactly matches the primary production URL.
 - [ ] Cookiebot scan is complete and unclassified cookies are reviewed.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

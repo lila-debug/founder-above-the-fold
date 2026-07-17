@@ -1,0 +1,86 @@
+[
+  {
+    "id": "w0",
+    "text": "Official",
+    "start": 0.11,
+    "end": 0.638
+  },
+  {
+    "id": "w1",
+    "text": "publishing",
+    "start": 0.638,
+    "end": 1.298
+  },
+  {
+    "id": "w2",
+    "text": "only.",
+    "start": 1.298,
+    "end": 1.561
+  },
+  {
+    "id": "w3",
+    "text": "No",
+    "start": 1.561,
+    "end": 1.693
+  },
+  {
+    "id": "w4",
+    "text": "scraping.",
+    "start": 1.693,
+    "end": 2.221
+  },
+  {
+    "id": "w5",
+    "text": "No",
+    "start": 2.221,
+    "end": 2.353
+  },
+  {
+    "id": "w6",
+    "text": "fake",
+    "start": 2.353,
+    "end": 2.617
+  },
+  {
+    "id": "w7",
+    "text": "engagement.",
+    "start": 2.617,
+    "end": 3.277
+  },
+  {
+    "id": "w8",
+    "text": "No",
+    "start": 3.277,
+    "end": 3.409
+  },
+  {
+    "id": "w9",
+    "text": "risky",
+    "start": 3.409,
+    "end": 3.739
+  },
+  {
+    "id": "w10",
+    "text": "outreach",
+    "start": 3.739,
+    "end": 4.266
+  },
+  {
+    "id": "w11",
+    "text": "or",
+    "start": 4.266,
+    "end": 4.398
+  },
+  {
+    "id": "w12",
+    "text": "profile",
+    "start": 4.398,
+    "end": 4.86
+  },
+  {
+    "id": "w13",
+    "text": "automation.",
+    "start": 4.86,
+    "end": 5.52
+  }
+]

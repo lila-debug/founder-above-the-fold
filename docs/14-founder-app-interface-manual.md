@@ -97,3 +97,13 @@ Avoid:
 - [ ] Profile and draft rails keep their existing real data/setup behaviour.
 - [ ] Every screen shows its matching manual panel.
 - [ ] Lint, typecheck, build, and browser checks pass.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

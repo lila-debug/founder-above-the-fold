@@ -4,6 +4,7 @@ import {
   verifyMagicLinkToken,
 } from "@/lib/auth/magic-link";
 import { SESSION_COOKIE_NAME } from "@/lib/auth/session";
+import { writeAuditEvent } from "@/lib/server/audit";
 
 export async function GET(request: NextRequest) {
   const token = request.nextUrl.searchParams.get("token");
@@ -30,6 +31,18 @@ export async function GET(request: NextRequest) {
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
     });
+
+    try {
+      await writeAuditEvent({
+        actor: "owner",
+        action: "auth.owner_signed_in",
+        entityType: "owner_session",
+        metadata: { method: "magic_link" },
+      });
+    } catch {
+      // Session creation remains available if the audit parts bin is temporarily offline.
+      // The public launch proof stays unverified until a later successful audited sign-in.
+    }
 
     return response;
   } catch {

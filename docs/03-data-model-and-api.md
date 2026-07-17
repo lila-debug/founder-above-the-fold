@@ -418,3 +418,13 @@ The MCP server can use the same routes with an `Authorization: Bearer ${MCP_API_
 - Analytics only attaches to posts with `linkedin_post_id`.
 - Profile copy edits always create a new unsynced version; the sync flag only
   clears when the owner marks the latest field version pasted.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

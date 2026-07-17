@@ -11,5 +11,7 @@ coverage/
 *.tsbuildinfo
 .DS_Store
 .derived-ios/
+apps/macos/.build/
+output/macos/
 .vercel
 .env*

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { BrandFooter } from "../components/brand-footer";
 
 const dataRows = [
   {
@@ -15,11 +14,12 @@ const dataRows = [
   {
     label: "System records",
     detail:
-      "Purchase receipt state, device capability, setup health, consent choices, and safe error summaries needed to operate the app.",
+      "Direct licence receipt state, device capability, setup health, consent choices, safe error summaries, and daily cloud-voice request and byte totals needed to operate the product and protect its credit.",
   },
   {
-    label: "Audio and local AI",
-    detail: "Microphone access begins only after an owner action. The proposed default is to retain the transcript—not the recording. Compatible-device AI work stays on device; any future cloud processing requires a separate, named choice.",
+    label: "Audio and cloud transcription",
+    detail:
+      "Microphone access begins only after an owner action. Press to Speak sends a temporary recording through the Founder Above the Fold server to Deepgram for transcription. The app removes its temporary audio file after the request and retains the transcript only after the owner taps Keep.",
   },
 ];
 
@@ -53,8 +53,13 @@ export default function PrivacyPage() {
         </div>
 
         <section className="mt-8 grid gap-4 md:grid-cols-2">
-          <article className="rounded-lg border border-[#1768ac]/25 bg-[#f4fbff] p-4"><h2 className="text-lg font-semibold">Owner choices</h2><p className="mt-2 text-sm leading-6 text-[#1768ac]">Access, correct, export, or request deletion of owner content. Optional collection and future cloud AI must remain off until chosen. Consent can be withdrawn, subject to legal retention duties.</p></article>
-          <article className="rounded-lg border border-[#1768ac]/25 bg-[#f4fbff] p-4"><h2 className="text-lg font-semibold">Before public launch</h2><p className="mt-2 text-sm leading-6 text-[#1768ac]">Fit the verified legal entity, privacy contact, service providers, storage regions, retention periods, deletion route, breach process, Quebec assessment, and App Store privacy answers.</p></article>
+          <article className="rounded-lg border border-[#1768ac]/25 bg-[#f4fbff] p-4"><h2 className="text-lg font-semibold">Owner choices</h2><p className="mt-2 text-sm leading-6 text-[#1768ac]">The private web workbench can export owner settings, posts, profile copy, templates, analytics, voice checks, and audit history without OAuth tokens or server secrets. Its verified deletion control removes those personal bins, clears the session, and retains only a non-personal deletion receipt. LinkedIn can also be disconnected without deleting the rest of the cabinet.</p></article>
+          <article className="rounded-lg border border-[#1768ac]/25 bg-[#f4fbff] p-4"><h2 className="text-lg font-semibold">Retention fitted in code</h2><p className="mt-2 text-sm leading-6 text-[#1768ac]">Web owner content remains until the owner deletes it. LinkedIn tokens remain until disconnect, expiry, or workspace deletion. A web session expires after 30 days. The voice relay does not write audio to product storage, and the native app removes its temporary recording after each request. Daily voice request and byte totals are pruned after 31 days. Kept native transcripts, drafts, and labels remain on the device until the owner removes the local cabinet or deletes the app. Deepgram processing and retention follow the selected Deepgram account terms and settings. Stripe sandbox receipt records contain the normalized purchaser email, Stripe customer/session/payment references, licence state, version, device allowance and timestamps. Private recovery-link hashes expire after 15 minutes. Device activation stores a keyed hash and owner-visible device label, never the raw device identifier; signed offline receipts expire after 30 days. The final receipt/device retention and deletion boundary still requires legal review before sale.</p></article>
+        </section>
+
+        <section className="mt-8 rounded-lg border border-[#1768ac]/25 bg-[#fff7df] p-4">
+          <h2 className="text-lg font-semibold">Launch identity still required</h2>
+          <p className="mt-2 text-sm leading-6 text-[#1768ac]">Before public sale, insert the verified legal entity, privacy/support contact, named service providers, storage and backup regions, backup deletion limits, breach process, Quebec assessment, and final App Store privacy answers. Deepgram must be named with its selected processing region and account retention settings. Until those labels are fitted and reviewed, this page is an engineering disclosure rather than final legal advice.</p>
         </section>
 
         <section className="mt-8 rounded-lg border border-[#1768ac]/25 p-4">
@@ -72,7 +77,6 @@ export default function PrivacyPage() {
           </Link>
         </section>
       </section>
-      <BrandFooter />
     </main>
   );
 }

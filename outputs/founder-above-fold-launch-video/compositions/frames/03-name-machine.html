@@ -1,0 +1,39 @@
+<template>
+  <style>
+    #root{position:relative;width:1920px;height:1080px;overflow:hidden;container-type:size;font-family:"Arial Black",Arial,sans-serif;color:#111111}#root *{box-sizing:border-box}
+    .f03-ground{position:absolute;inset:0;background:#97E4F7}.f03-grid{position:absolute;inset:0;opacity:.12;background-image:linear-gradient(#111111 2px,transparent 2px),linear-gradient(90deg,#111111 2px,transparent 2px);background-size:80px 80px}
+    .f03-stage{position:absolute;inset:0;padding:60px 72px 180px}.f03-pill{display:inline-block;padding:13px 20px;border:4px solid #111111;box-shadow:7px 7px 0 #111111;background:#FFFEF8;font:900 23px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+    .f03-ring{position:absolute;left:660px;top:215px;width:600px;height:600px;border:5px solid #111111}.f03-ring:after{content:"";position:absolute;left:70px;top:70px;width:450px;height:450px;border:3px dashed #111111}
+    .f03-part{position:absolute;width:300px;height:120px;border:4px solid #111111;box-shadow:7px 7px 0 #111111;background:#FFFEF8;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;font-size:28px;line-height:1.05;text-transform:uppercase}
+    .f03-a{left:280px;top:275px;background:#FBD1C3}.f03-b{right:280px;top:275px;background:#F69777}.f03-c{left:280px;top:650px;background:#F05A28}.f03-d{right:280px;top:650px;background:#27C7EF}
+    .f03-seed{position:absolute;width:28px;height:28px;background:#111111}.f03-s1{left:700px;top:255px}.f03-s2{right:700px;top:255px}.f03-s3{left:700px;top:755px}.f03-s4{right:700px;top:755px}
+    .f03-lock{position:absolute;left:310px;top:315px;width:1300px;height:400px;border:6px solid #111111;box-shadow:14px 14px 0 #111111;background:#FFFEF8;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:45px}
+    .f03-lock h1{font-size:92px;line-height:.9;letter-spacing:-.055em;text-transform:uppercase}.f03-rail{margin-top:32px;padding:14px 22px;background:#111111;color:#FFFEF8;font:900 22px Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase}
+    .f03-mark{position:absolute;font:900 28px Arial,sans-serif}.f03-m1{left:265px;top:260px}.f03-m2{right:260px;top:260px}.f03-m3{left:265px;top:745px}.f03-m4{right:260px;top:745px}
+  </style>
+  <div data-hf-id="hf-0u9v" id="root" data-composition-id="03-name-machine" data-start="0" data-duration="6.5" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-ikri" id="f03-ground" class="clip f03-ground" data-start="0" data-duration="6" data-track-index="0"></div><div data-hf-id="hf-z0k3" id="f03-grid" class="clip f03-grid" data-start="0" data-duration="6" data-track-index="1"></div>
+    <div data-hf-id="hf-1gk3" id="f03-stage" class="clip f03-stage" data-start="0" data-duration="6" data-track-index="2" data-layout-allow-overflow="">
+      <div data-hf-id="hf-599c" class="f03-pill">Introducing · Parts A–D</div><div data-hf-id="hf-ylak" class="f03-ring"></div>
+      <div data-hf-id="hf-qzod" class="f03-seed f03-s1"></div><div data-hf-id="hf-x5e6" class="f03-seed f03-s2"></div><div data-hf-id="hf-13i7" class="f03-seed f03-s3"></div><div data-hf-id="hf-51m8" class="f03-seed f03-s4"></div>
+      <div data-hf-id="hf-tsq3" class="f03-part f03-a">Magic link</div><div data-hf-id="hf-jvq4" class="f03-part f03-b">Profile OS</div><div data-hf-id="hf-mwjp" class="f03-part f03-c">Voice lock</div><div data-hf-id="hf-sgor" class="f03-part f03-d">MCP rail</div>
+      <div data-hf-id="hf-9y77" class="f03-lock"><h1 data-hf-id="hf-8b86">Founder Above<br data-hf-id="hf-x5px">The Fold</h1><div data-hf-id="hf-81ys" class="f03-rail">Passwordless LinkedIn operating system</div></div>
+      <div data-hf-id="hf-7us9" class="f03-mark f03-m1">┌</div><div data-hf-id="hf-cbzw" class="f03-mark f03-m2">┐</div><div data-hf-id="hf-sy3f" class="f03-mark f03-m3">└</div><div data-hf-id="hf-csdi" class="f03-mark f03-m4">┘</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines=window.__timelines||{};const tl=gsap.timeline({paused:true});
+      tl.from(".f03-pill",{x:-70,opacity:0,duration:.45,ease:"power3.out"},0)
+        .from(".f03-ring",{scale:0,rotation:-12,opacity:0,duration:.75,ease:"expo.out"},.15)
+        .from(".f03-seed",{scale:0,stagger:.1,duration:.35,ease:"back.out(2)"},.65)
+        .from(".f03-part",{scale:.08,opacity:0,stagger:.28,duration:.55,ease:"back.out(1.5)"},1.15)
+        .to(".f03-part",{x:function(i){return i%2===0?320:-320},y:function(i){return i<2?170:-205},scale:.45,opacity:0,duration:.6,stagger:.08,ease:"power3.in"},3.05)
+        .to(".f03-ring",{scale:.2,opacity:0,duration:.5,ease:"power3.in"},3.25)
+        .from(".f03-lock",{scaleX:.05,opacity:0,duration:.65,ease:"expo.out"},3.5)
+        .from(".f03-lock h1",{y:55,opacity:0,duration:.5,ease:"power3.out"},3.85)
+        .from(".f03-rail",{scaleX:0,duration:.45,ease:"power3.out",transformOrigin:"left center"},4.25)
+        .from(".f03-mark",{scale:0,stagger:.08,duration:.3,ease:"back.out(2)"},4.55);
+      window.__timelines["03-name-machine"]=tl;
+    </script>
+  </div>
+</template>

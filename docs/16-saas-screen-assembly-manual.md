@@ -35,6 +35,8 @@ Do:
 
 Check:
 - Mobile and desktop layouts preserve every label without horizontal overflow.
+- The active panel begins inside the first judge viewport beneath the compact header and stage rails.
+- Poster headlines wrap into intentional lines instead of clipping at the right edge.
 
 Avoid:
 - Treating preview payment controls as a live checkout.
@@ -82,7 +84,7 @@ Avoid:
 - [Privacy] Camera and microphone access use just-in-time prompts.
 - [Cost] Local AI and manual fallback keep cloud-model cost optional.
 - [IP] The supplied visual references guide colour, geometry and feeling; the product uses a newly drawn chrome-dog symbol rather than embedding an unlicensed source image.
-- [Evidence] Payment, restore, export, deletion and links remain preview surfaces until their external rails pass end-to-end tests.
+- [Evidence] Native payment and restore use StoreKit verification; native local export/removal and web owner export/deletion are fitted. App Store Connect, live payment, production auth and legal review remain external evidence gates.
 - [OAuth] Keep both labelled LinkedIn return rails: `https://www.founderaccount.com/api/auth/linkedin/callback` for the web cabinet and `https://www.glaze.app/api/oauth/callback` for the founder-owned Glaze desktop cabinet. Do not replace one with the other; each must match its app character-for-character.
 - [Owner lock] LinkedIn sign-in and connection use one rail. Accept the returned identity only when LinkedIn marks the email verified and it matches the labelled owner email slot.
 - [Credential] Any client secret shown in a screenshot is compromised and must be rotated before launch.
@@ -90,12 +92,26 @@ Avoid:
 
 ### Finished-Build Test
 - [x] Fourteen web screens exist and are navigable.
+- [x] Forty-two automated showroom checks pass across desktop, mobile and wide judge viewports.
 - [x] Fourteen native iOS screens exist and are navigable.
 - [x] Every screen has a matching manual panel or manual instruction.
 - [x] Voice-to-text code uses Apple Speech and AVFoundation permission gates.
 - [x] Local AI uses Foundation Models only when available and exposes a fallback.
 - [x] The iOS target compiles and installs in Simulator.
-- [ ] StoreKit product is configured and tested with a `.storekit` cabinet.
-- [ ] Real authentication, storage, export and deletion rails are connected.
+- [x] StoreKit non-consumable, verified-entitlement controller and shared `.storekit` scheme are fitted and compile.
+- [x] Native state starts empty, persists locally, exports through the share sheet and clears only after confirmation.
+- [x] Web owner storage, OAuth disconnect, safe export and verified deletion rails pass local database tests.
+- [ ] Complete every StoreKit purchase state in an Xcode StoreKit session and fit the App Store Connect product.
+- [ ] Production magic-link delivery is connected with the approved mail provider.
 - [ ] Cookiebot domain scan and live declaration are verified.
 - [ ] Legal entity, support contact and final Canadian terms are fitted.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

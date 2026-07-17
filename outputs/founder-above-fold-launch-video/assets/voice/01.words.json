@@ -1,0 +1,50 @@
+[
+  {
+    "id": "w0",
+    "text": "LinkedIn",
+    "start": 0.04,
+    "end": 0.476
+  },
+  {
+    "id": "w1",
+    "text": "should",
+    "start": 0.476,
+    "end": 0.802
+  },
+  {
+    "id": "w2",
+    "text": "not",
+    "start": 0.802,
+    "end": 0.966
+  },
+  {
+    "id": "w3",
+    "text": "feel",
+    "start": 0.966,
+    "end": 1.183
+  },
+  {
+    "id": "w4",
+    "text": "like",
+    "start": 1.183,
+    "end": 1.401
+  },
+  {
+    "id": "w5",
+    "text": "a",
+    "start": 1.401,
+    "end": 1.51
+  },
+  {
+    "id": "w6",
+    "text": "second",
+    "start": 1.51,
+    "end": 1.837
+  },
+  {
+    "id": "w7",
+    "text": "job.",
+    "start": 1.837,
+    "end": 2
+  }
+]

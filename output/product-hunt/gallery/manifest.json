@@ -1,0 +1,37 @@
+{
+  "product": "Founder Above the Fold",
+  "size": {
+    "width": 1270,
+    "height": 760
+  },
+  "thumbnail": "thumbnail-240.png",
+  "gallery": [
+    {
+      "file": "01-build-the-week.png",
+      "title": "Build the week. Keep LinkedIn human.",
+      "source": "output/competition-polish/desktop-dashboard.png"
+    },
+    {
+      "file": "02-speak-in-your-voice.png",
+      "title": "Speak the first draft. Keep your voice.",
+      "source": "output/competition-polish/desktop-voice-to-text.png"
+    },
+    {
+      "file": "03-profile-source-of-truth.png",
+      "title": "One source of truth for the profile.",
+      "source": "output/competition-polish/desktop-profile-editor.png"
+    },
+    {
+      "file": "04-official-api-human-control.png",
+      "title": "Official API rail. Human control.",
+      "source": "output/competition-polish/desktop-privacy-&-settings.png"
+    },
+    {
+      "file": "05-manual-ships-with-machine.png",
+      "title": "The manual ships with the machine.",
+      "source": "output/competition-polish/desktop-build-complete.png"
+    }
+  ],
+  "video": "outputs/founder-above-fold-launch-video/renders/founder-above-fold-launch-final.mp4",
+  "videoUploadState": "local_master_ready_youtube_upload_requires_owner_approval"
+}

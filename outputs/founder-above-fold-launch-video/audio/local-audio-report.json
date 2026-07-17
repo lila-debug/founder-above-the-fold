@@ -1,0 +1,70 @@
+{
+  "provider": "kokoro",
+  "voice": "bf_emma",
+  "initialSpeed": 1.2,
+  "scenes": [
+    {
+      "frame": 1,
+      "slot_s": 5,
+      "voice_s": 2.027,
+      "tail_hold_s": 2.973,
+      "speed": 1.2,
+      "words": 8,
+      "asr_words": 8
+    },
+    {
+      "frame": 2,
+      "slot_s": 6,
+      "voice_s": 5.568,
+      "tail_hold_s": 0.432,
+      "speed": 1.2,
+      "words": 18,
+      "asr_words": 19
+    },
+    {
+      "frame": 3,
+      "slot_s": 6,
+      "voice_s": 5.184,
+      "tail_hold_s": 0.816,
+      "speed": 1.2,
+      "words": 16,
+      "asr_words": 17
+    },
+    {
+      "frame": 4,
+      "slot_s": 7,
+      "voice_s": 6.72,
+      "tail_hold_s": 0.28,
+      "speed": 1.2,
+      "words": 21,
+      "asr_words": 21
+    },
+    {
+      "frame": 5,
+      "slot_s": 7,
+      "voice_s": 6.165,
+      "tail_hold_s": 0.835,
+      "speed": 1.2,
+      "words": 20,
+      "asr_words": 22
+    },
+    {
+      "frame": 6,
+      "slot_s": 7,
+      "voice_s": 5.653,
+      "tail_hold_s": 1.347,
+      "speed": 1.2,
+      "words": 14,
+      "asr_words": 14
+    },
+    {
+      "frame": 7,
+      "slot_s": 7,
+      "voice_s": 6.272,
+      "tail_hold_s": 0.728,
+      "speed": 1.2,
+      "words": 19,
+      "asr_words": 19
+    }
+  ]
+}

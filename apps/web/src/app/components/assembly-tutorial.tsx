@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
-type BuildState = {
+export type AssemblyBuildState = {
   owner: boolean;
   database: boolean;
   linkedin: boolean;
@@ -38,7 +38,7 @@ type Step = {
   check: string;
   avoid: string;
   href?: string;
-  live?: keyof BuildState;
+  live?: keyof AssemblyBuildState;
 };
 
 type FeedbackEntry = {
@@ -139,7 +139,7 @@ const failureKinds = [
   "Access / permission",
 ];
 
-const liveLights: Array<{ key: keyof BuildState; label: string }> = [
+const liveLights: Array<{ key: keyof AssemblyBuildState; label: string }> = [
   { key: "owner", label: "Owner lock" },
   { key: "database", label: "Parts bin" },
   { key: "linkedin", label: "LinkedIn socket" },
@@ -150,7 +150,7 @@ const liveLights: Array<{ key: keyof BuildState; label: string }> = [
   { key: "publishing", label: "Motor" },
 ];
 
-export function AssemblyTutorial({ build }: { build: BuildState }) {
+export function AssemblyTutorial({ build }: { build: AssemblyBuildState }) {
   const [activeId, setActiveId] = useState(steps[0].id);
   const [checked, setChecked] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<FeedbackEntry[]>([]);

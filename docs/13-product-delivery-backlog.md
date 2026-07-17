@@ -1,6 +1,6 @@
 # Product Delivery Backlog
 
-Checked: 2026-07-12
+Checked: 2026-07-17
 
 This document is the working delivery map for Founder Above the Fold, the LinkedIn Profile MCP app.
 It turns the product into epics, stories, tickets, and tasks so work can move in a calm
@@ -32,24 +32,107 @@ Already in place:
 - Purchased Vercel domains for this product: `founderaccount.app`, `founderaccount.com`, and `founderaccount.dev`.
 - Owner reports LinkedIn business/company account and LinkedIn app shell are created; products, scopes, redirect URLs, and environment values are not yet verified.
 - 2026-07-12 Playwright desktop/mobile smoke confirmed the landing hero cards sit left/right on desktop and stack cleanly on mobile after the hero preview was moved into a real right-hand grid column.
-- 2026-07-13 public preview labels now separate illustrative/planned machinery from live evidence; the health route reports queue, publishing, analytics, and templates as not implemented.
+- 2026-07-13 public preview labels separated illustrative machinery from live evidence; this was superseded on 2026-07-14 when queue, publishing, analytics and templates were fitted and their health states became evidence-based.
 - 2026-07-13 production development-link mode fails closed unless `AUTH_PROVIDER=resend` is configured.
 - 2026-07-13 security headers, a repeatable 13-check launch-smoke panel, and desktop/mobile browser evidence were fitted.
 - 2026-07-13 the Toy Box Explorer gained Mission Control, live evidence lights, a no-write voice/queue sandbox, beta-test mode, classified feedback with confidence, local persistence, and a finished-build gauge.
 - 2026-07-13 launch-control and LinkedIn launch-kit manuals were added for a truthful private-beta announcement.
-- 2026-07-14 the private owner workbench was rebuilt as one mobile-first founder operating shell with nine complete screens: Mission Control, Set-up, Profile OS, Content Studio, Queue, Tasks, Export, MCP Rail, and Build Manual. Each screen includes a matching assembly panel; real profile/draft rails remain connected and unfinished queue/publish machinery remains labelled planned.
+- 2026-07-14 the private owner workbench was rebuilt as one mobile-first founder operating shell with nine complete screens: Mission Control, Set-up, Profile OS, Content Studio, Queue, Tasks, Export, MCP Rail, and Build Manual. Each screen includes a matching assembly panel and real server state.
+- 2026-07-14 local Postgres migrations and eleven core integration checks proved draft, exact-revision voice lock, queue/cancel, official Posts API contract, bounded retry, template versioning, analytics storage, disconnect, safe export and verified deletion.
+- 2026-07-14 the private browser workbench completed draft -> voice pass -> queue -> cancel, template rendering, analytics permission gating, responsive navigation and accessibility checks without console errors.
+- 2026-07-14 the MCP stdio adapter completed a real client handshake with 17 tools and 4 resources, then ran draft -> voice pass -> queue -> cancel without a public side effect.
+- 2026-07-14 native StoreKit 2 purchase, restore, current-entitlement and transaction-update rails were fitted with a Canadian non-consumable test product and shared Xcode scheme. Swift 6 builds and simulator launch pass.
+- 2026-07-14 owner-created native state now starts empty and persists locally; seeded demo counts and the unsupported shared web-entitlement promise were removed.
+- 2026-07-14 host rules were fitted so bare and `www` `.app`/`.dev` paths preserve their path while redirecting to the primary `.com` cabinet after deployment.
+- 2026-07-14 the public fourteen-screen showroom was tightened above the fold: compact header and stage rails, bounded poster type, a balanced ChromeDog dashboard composition, semantic progress/navigation states, and reduced-motion handling. A repeatable Playwright jig passes all 42 screen/viewport combinations without horizontal overflow, clipped titles, hidden first panels, or console errors.
+- 2026-07-14 a presenter-ready copy of the thirteen-slide competition pitch deck was fitted with thirteen native click-advance PowerPoint transitions, validated against the untouched source and independently rendered as a 13-page 16:9 PDF. The launch-film drawer now contains the finished seven-scene narrated cut: 1,350 H.264 frames, stereo AAC, verbatim captions, six scene transitions, no detected black gaps, delivery-normalised sound and a repeatable final-file audit.
+- 2026-07-14 the six-page Founder Above the Fold submission PDF was converted into a verified sixty-second build-a-thon film: five product pages, three real product captures, local English narration, an H.264/AAC upload master, and a matching assembly manual. The PDF's sixth-page Pitch advertisement is deliberately excluded.
+- 2026-07-14 Cloud Press to Speak was fitted as an authenticated Founder server relay to Deepgram Nova-3. The Deepgram key remains server-only; the iOS app records a temporary M4A, stores only a separate voice-access key in Keychain, and removes the recording after the request.
+- 2026-07-16 a public `/try` mechanism and `/waitlist` intake were fitted for Product Hunt preparation. The demo runs entirely in-browser, proves fail/pass/queue locking without an external write, and the waitlist uses Waitlister's public form-action socket with qualification, consent, source metadata, referral forwarding and a fail-closed missing-key state.
+- 2026-07-16 the Product Hunt crate gained a verified 59-character tagline, description, maker comment, bounded founding offer, five 1270×760 panels built from real UI, a 240×240 thumbnail, an audited video handoff, a manual response board and a repeatable desktop/mobile browser jig. Lint, typecheck, production builds, eleven local database checks, 29 launch-smoke assemblies and the Product Hunt browser jig pass.
+- 2026-07-16 a secret-free production preflight and public proof lights were added. Environment configuration no longer counts as completion: the board separately requires an audited production owner sign-in, a connected LinkedIn OAuth state, and at least one published post with both `published_at` and a stored `linkedin_post_id`.
+- 2026-07-17 the owner-supplied trademark plate was centralized in the root web layout and shared brand module, fitted to HTML/plain-text sign-in email, appended to all repository Markdown documents, and guarded by `npm run check:brand-footer`. The portfolio marks and exact fitting rules live in `docs/26-brand-and-trademark-plate.md`.
+- 2026-07-17 the owner rejected Apple commerce for every product. The StoreKit experiment is quarantined and must not become a public purchase rail. The selected commercial path is a founder-owned direct checkout for a separately distributed, Developer ID-signed and notarized macOS app; provider selection, receipt verification, licensing and signed updates remain unproved.
+- 2026-07-17 the quarantined iPhone target stopped compiling or presenting its historical StoreKit manager, StoreKit launch configuration, purchase, price and restore controls. It remains interface evidence only.
+- 2026-07-17 a native macOS SwiftUI target, CS Claire display face, direct-web recovery gate, Keychain device/receipt storage, online/offline verification and local workbench were assembled into an ad-hoc signed `.app`; Developer ID, notarization, signed updates and clean-Mac proof remain external.
+- 2026-07-17 a separate Ed25519 update-key rail, signed-manifest tamper test, feed-stamping jig and native explicit check/download/SHA-256 controls were fitted. Publishing remains blocked until a Developer ID-signed, notarized and stapled archive plus owner approval exist.
+- 2026-07-17 a Stripe sandbox product named `Founder Above the Fold` was created with one active one-time CA$199 test price. The non-secret price identifier is fitted locally, live keys are rejected by preflight, and checkout remains disabled while signed receipt, refund/dispute and licence-recovery rails are built.
+- 2026-07-17 the exposed Stripe sandbox standard key was rotated immediately, the exposed unused restricted key was expired, the replacement key was stored only in the ignored owner-readable local environment panel, and preflight authenticated the account plus CA$199 price without exposing credentials.
+- 2026-07-17 the decorative purchase preview was replaced at `/pricing` by a fail-closed checkout/recovery panel. `/purchase/success` now waits for the database receipt created by the signed event, unknown redirects cannot unlock, and private 15-minute recovery links return the same browser message for present and absent emails.
+- 2026-07-17 migration `0005` and a dedicated local Postgres jig proved exactly-one licence creation, duplicate suppression, expired/cancelled and asynchronous-failed sessions, active/disputed/won/lost/refunded states and recovery-token inspection; 20 desktop/mobile browser checks prove the locked control, cancellation notice, recovery response, unknown return state, overflow and console behavior.
+- 2026-07-17 migration `0006` and the signed-receipt rail were fitted. Raw device identifiers never enter the database; one hashed device is bound transactionally to the licence, Ed25519 receipts refresh after seven days and stop offline use after thirty, the same device can recover, a second device is refused at the one-device allowance, tampering fails, and a refund makes the next online verification inactive. A local key generator fitted the ignored development keypair without printing it.
+- 2026-07-17 the Stripe rail was split into labelled sandbox and live cabinets. A live key cannot fit the sandbox slot or vice versa; live checkout additionally refuses to open without explicit owner approval, HTTPS, automatic-tax approval, a matching live price and a confirmed legal account country. No live key or charge was enabled.
+- 2026-07-17 the native licence gate's doubled assembly copy was removed by rebuilding the panel as one opaque layer with fixed-height manual rows. The supplied CS Claire Mono regular file matched the bundled font byte-for-byte; a fresh release build and 2496×1696 window capture show clean Place/Check/Avoid rows without collision.
+- 2026-07-17 an approval-gated Stripe production fitting jig was added. Its default dry run proves the current deployed webhook socket is still 404 and that the test account contains zero matching enabled endpoints. It cannot create an endpoint or fit Vercel secrets unless both the deployment-approval and apply flags are present; a separate flag controls test-checkout enablement.
+- 2026-07-17 the corrected native release `.app` was assembled and audited again: bundle identity, server URL, activation scheme, public receipt key, CS Claire/Neue Montreal fonts and secret exclusions pass. The development Mac currently has zero valid code-signing identities, so Developer ID signing and notarization remain a real external certificate gate.
+- 2026-07-17 the missing PRD token-refresh lifecycle was fitted. Expiring LinkedIn access tokens now use the official programmatic refresh grant when LinkedIn supplies one; replacement keys remain encrypted, concurrent callers share one database-locked refresh, required scopes are revalidated and expired/rejected refresh keys set a reconnect light without exposing provider payloads.
+- 2026-07-17 a public interactive build-manual route was assembled for buildathon judges and beta users. It reuses the real Toy Box Explorer with a parts drawer, assembly lane, truthful live lights, no-write trigger sequence, tester mode, breakpoint classification, local feedback memory and a finished-build gauge; `/try` now routes directly to it. Deployment remains owner-approved work.
 
 Known setup gaps:
 
 - `NEXT_PUBLIC_COOKIEBOT_ID` is not configured yet.
+- `NEXT_PUBLIC_WAITLISTER_KEY` is not configured in production. The live and local domains must be allow-listed in Waitlister, double opt-in enabled, and confirmation/unsubscribe/export/deletion proved before email collection is called ready.
 - LinkedIn keeps two labelled OAuth return sockets: `https://www.founderaccount.com/api/auth/linkedin/callback` for the web app and `https://www.glaze.app/api/oauth/callback` for the founder-owned Glaze desktop app. Both pass LinkedIn's redirect registration check; owner authorization remains a human approval step.
 - LinkedIn OAuth now opens the owner cabinet and stores the LinkedIn connection in one pass; the verified LinkedIn email must match `DISPATCH_OWNER_EMAIL`.
 - Production database connection passes its health check. The earlier Founder Account tables are isolated intact behind `legacy_founder_v1_*` labels before the Dispatch schema is assembled.
-- Purchased `.com`, `.app`, and `.dev` domains are connected to the Vercel project. `.com` is the selected primary product cabinet; secondary-domain redirects still need a deliberate routing pass.
-- Profile-copy read/write UI exists, but database-backed writes need `DATABASE_URL`.
-- Draft read/write rails and dashboard UI exist, but database-backed create/edit/delete need `DATABASE_URL`.
-- Queue, voice-check, publish, analytics, and template flows are not yet backed by real UI/API state.
-- The public preview/private-beta announcement package is distinct from a full-product launch; the latter remains blocked by the external setup gaps and unimplemented queue/publish rails above.
+- Purchased `.com`, `.app`, and `.dev` domains are connected to the Vercel project. `.com` is the selected primary product cabinet; secondary-domain redirect rules are prepared and need deployment approval plus live verification.
+- Production `DATABASE_URL` is configured and reports healthy; local disposable database tests cover all current migrations and workflow writes.
+- Profile copy, drafts, exact-revision voice checks, queue/cancel, official publish, analytics, templates, OAuth disconnect, export and verified deletion are backed by server state and private UI.
+- Production owner sign-in remains locked because `AUTH_PROVIDER`, `AUTH_CALLBACK_URL`, `RESEND_API_KEY`, and `MAGIC_LINK_FROM` are not fitted.
+- Live publishing still needs one owner-approved OAuth and text-post proof; analytics additionally needs LinkedIn's separate `r_member_postAnalytics` grant.
+- Cookiebot still needs its live Domain ID, scans, cookie classification and withdrawal test.
+- App Store Connect product setup, purchase-state testing, tax/banking agreements, reviewed legal identity/contact/refund copy, device permission/accessibility tests and App Review remain external native-launch gates.
+- The prepared `.app` and `.dev` redirects are not live until the owner approves a production deployment.
+- `DEEPGRAM_API_KEY` and `IOS_VOICE_API_KEY` are not fitted in production, so Cloud Press to Speak remains locked until the owner configures both values, approves deployment, and completes a physical-device proof.
+
+### Product Hunt Live Audit - 16 July 2026
+
+Read-only inspection of `https://www.founderaccount.com` found:
+
+- `/`, `/privacy`, `/cookies`, `/api/mcp/health`, and `/api/linkedin/status` return 200.
+- `/try` and `/waitlist` return 404 because the Product Hunt preparation build has not been deployed.
+- Production database health is green.
+- LinkedIn client ID, secret and redirect slots are configured; the owner connection state is `not_connected`, so publishing and analytics remain locked.
+- Production auth reports `AUTH_PROVIDER=dev` and `authReady=false`; owner email delivery is not ready.
+- Cookiebot reports `NEXT_PUBLIC_COOKIEBOT_ID=missing`; the cookie page is still the explicit setup placeholder.
+- The live content-security policy predates the Waitlister form-action allowance; the prepared build adds only `https://waitlister.me` to that socket.
+
+Required next physical actions, each behind owner/provider approval:
+
+1. Create or open the Waitlister cabinet, obtain the public waitlist key, whitelist `founderaccount.com`, `www.founderaccount.com`, and `localhost`, enable double opt-in, and verify confirmation/unsubscribe/export/deletion. A paid Waitlister tier may be required; do not spend without approval.
+2. Fit the production Resend sender, callback and key slots without pasting secrets into chat; prove one owner magic link.
+3. Fit Cookiebot's Domain ID, scan every live domain, classify cookies, and prove withdrawal plus the populated declaration.
+4. Approve deployment of this prepared build, then rerun launch smoke and `test:product-hunt` against the primary domain.
+5. Sign in as the owner, complete LinkedIn OAuth, approve one text-only public proof post, and inspect the stored LinkedIn post ID and audit record. This is a public side effect and remains manual/approval-gated.
+6. Upload the audited launch film to YouTube and create the Product Hunt draft only after explicit approval; do not schedule while any live light above is red.
+
+### Product Hunt Production Deployment - 16 July 2026
+
+Owner explicitly approved deploying the complete current worktree, including existing
+uncommitted product changes. Vercel production deployment
+`dpl_96UUtKgFEMuQKHbULNTSx5S26oLi` completed successfully.
+
+Verified after deployment:
+
+- `https://www.founderaccount.com/try` returns 200 and completes the fail → locked,
+  pass → unlocked, and local queue mechanism in a real desktop/mobile browser.
+- `https://www.founderaccount.com/waitlist` returns 200 and displays the intentional
+  locked setup panel because no production Waitlister key is fitted.
+- Bare and `www` `.com`, `.app`, and `.dev` variants preserve `/try` and resolve to the
+  primary `https://www.founderaccount.com/try` route.
+- The live Content Security Policy permits form submission only to self and
+  `https://waitlister.me`; framing remains denied and content-type/referrer headers pass.
+- The production database remains healthy.
+- The live Product Hunt browser jig passes in `waitlist=locked` mode without horizontal
+  overflow or console errors.
+
+Remaining red proof lights after deployment:
+
+- Production auth still reports `AUTH_PROVIDER=dev` and `authReady=false`.
+- Cookiebot Domain ID and live consent proof remain missing.
+- Waitlister public key, double opt-in and subscriber lifecycle proof remain missing.
+- LinkedIn is configured but not connected by the owner.
+- No official text post with a stored LinkedIn post ID has been proved.
 
 ## Definition Of Done For Every Ticket
 
@@ -191,7 +274,7 @@ Tickets:
     - Health endpoint reports database `ok`.
 
 - DISPATCH-2004 - Domain and deployment routing.
-  - Status: Vercel project linked locally; Git source corrected to `lila-debug/dispatch-linkedin-mcp-app`; broken double-root build instruction removed; production verification in progress.
+  - Status: All three domains resolve on Vercel. `.com` is primary; host-based `.app`/`.dev` path-preserving redirect rules pass locally and wait on deployment approval.
   - Tasks:
     - Choose primary domain.
     - Connect `founderaccount.app`, `founderaccount.com`, and `founderaccount.dev` to the Vercel project.
@@ -225,25 +308,28 @@ Tickets:
     - OAuth redirects to LinkedIn.
 
 - DISPATCH-3002 - Token exchange and storage.
-  - Status: Done in code, waiting on configured LinkedIn app credentials, database, and live OAuth test.
+  - Status: Done in code, redirect configuration and local Postgres lifecycle proof; waiting on the owner-approved live OAuth and provider-issued programmatic refresh-token proof.
   - Tasks:
     - Validate OAuth state. Done.
     - Exchange auth code for token. Done.
     - Encrypt tokens at rest. Done.
     - Store member identity. Done.
     - Write audit event. Done.
+    - Refresh expiring access tokens automatically when LinkedIn supplies an approved programmatic refresh token. Done with a five-minute threshold, transactional single-flight, encrypted rotation and reconnect fallback.
   - Acceptance:
     - Owner can connect locally once LinkedIn env vars and database are configured.
     - No token appears in frontend, logs, or MCP.
   - Current smoke:
     - 2026-07-12: `/api/linkedin/status` returned `setup_required` with no token-shaped fields while env slots are missing.
     - 2026-07-12: signed owner `/api/auth/linkedin/start` returned a clear missing setup list instead of redirecting prematurely.
+    - 2026-07-17: a signed local owner start produced the official authorization URL and state cookie; bad callback state caused no provider traffic; a captured official token/UserInfo contract stored encrypted access/refresh keys and the verified owner identity.
+    - 2026-07-17: local Postgres proved expired-token refresh, encrypted rotation, exact-one refresh across concurrent callers, subsequent official publish contract, secret-free audit metadata and reconnect attention after refresh expiry.
 
 - DISPATCH-3003 - LinkedIn disconnect and status.
-  - Status: Partially done; status endpoint and UI states exist, disconnect still pending.
+  - Status: Done in code and local database test.
   - Tasks:
     - Add status endpoint. Done.
-    - Add disconnect endpoint.
+    - Add disconnect endpoint. Done; removes encrypted OAuth rows, clears member connection fields, and writes an audit event.
     - Add UI state for connected, missing env, expired, attention required. Done.
   - Acceptance:
     - Owner can disconnect safely.
@@ -255,7 +341,7 @@ Story: As the owner, I need posts to move from draft to voice-checked to queued 
 Tickets:
 
 - DISPATCH-4001 - Draft CRUD.
-  - Status: Done in code; waiting on database-backed smoke once `DATABASE_URL` is configured.
+  - Status: Done in code, local database and private browser workflows.
   - Tasks:
     - Add post API routes. Done: `/api/posts` and `/api/posts/[id]`.
     - Add dashboard draft list. Done in private workbench.
@@ -269,10 +355,10 @@ Tickets:
     - 2026-07-12: signed owner `GET /api/posts?status=draft` returned three seed drafts with SHA-256 body hashes and `source: "seed_fallback"` while DB is missing.
     - 2026-07-12: signed owner `POST`, `PATCH`, and `DELETE` returned clear `503` setup stops because `DATABASE_URL` is not configured.
     - 2026-07-12: signed `/dashboard` returned `200`, and Playwright desktop/mobile checks showed the draft workbench without obvious overlap.
-    - Pending: database-backed persistence still requires `DATABASE_URL`.
+    - 2026-07-14: local Postgres create, update, reload and audited workflow tests passed; production database health is green.
 
 - DISPATCH-4002 - Voice gate.
-  - Status: Done in code; waiting on `DATABASE_URL`, `VOICE_CHECK_COMMAND`, Hunspell, and `en_GB` live smoke.
+  - Status: Done with a built-in British-English gate and optional external command; exact-revision locking passes local database and browser tests.
   - Tasks:
     - Locate or add British English QA command. Done: repo-local wrapper added at `scripts/british_qa.py`; no pre-existing script was found.
     - Persist voice check results. Done in code through `voice_checks`; DB smoke pending.
@@ -286,13 +372,14 @@ Tickets:
     - 2026-07-12: signed owner `POST /api/posts/seed-draft-roadmap/voice-check` returned clear `503` because `DATABASE_URL` is not configured.
     - 2026-07-12: `python3 -m py_compile scripts/british_qa.py` passed.
     - 2026-07-12: Playwright desktop/mobile checks showed the voice-check button and setup board row without obvious overlap.
-    - Pending: live pass/fail persistence still requires database plus Hunspell `en_GB`.
+    - 2026-07-14: both failing and passing copy persist results; failed and stale hashes cannot queue. The optional Hunspell wrapper remains available but is no longer a launch dependency.
 
 - DISPATCH-4003 - Queue scheduling.
+  - Status: Done in API, UI, MCP and local database tests.
   - Tasks:
-    - Add schedule picker.
-    - Validate future time.
-    - Add cancel queued post flow.
+    - Add schedule picker. Done.
+    - Validate future time. Done server-side.
+    - Add cancel queued post flow. Done with reason and audit trail.
   - Acceptance:
     - Only current voice-passed drafts can be queued.
 
@@ -303,29 +390,32 @@ Story: As the owner, I need queued content to publish through official LinkedIn 
 Tickets:
 
 - DISPATCH-5001 - Text-only publish.
+  - Status: Done in code and tested against a captured official API contract; one owner-approved live post remains the external proof.
   - Tasks:
-    - Resolve member author URN.
-    - Publish text post through LinkedIn API.
-    - Store LinkedIn post ID and timestamp.
-    - Write audit event.
+    - Resolve member author URN. Done from the verified OAuth connection.
+    - Publish text post through LinkedIn API. Done through `/rest/posts` with the version and Rest.li headers.
+    - Store LinkedIn post ID and timestamp. Done; a missing response ID fails visibly.
+    - Write audit event. Done for start, success, retry and failure states.
   - Acceptance:
     - A text-only post can publish from Founder Above the Fold.
 
 - DISPATCH-5002 - Publish cron.
+  - Status: Done in code, `vercel.json`, local database tests and launch smoke.
   - Tasks:
-    - Protect cron route with `CRON_SECRET`.
-    - Find due queued posts.
-    - Retry once on failure.
-    - Store safe error summaries.
+    - Protect cron route with `CRON_SECRET`. Done.
+    - Find due queued posts. Done every 15 minutes.
+    - Retry once on failure. Done only for explicit `429`/`5xx`; ambiguous network outcomes never retry blindly.
+    - Store safe error summaries. Done without tokens or post bodies.
   - Acceptance:
     - Due posts publish automatically.
     - Failed posts surface clearly.
 
 - DISPATCH-5003 - Analytics refresh.
+  - Status: Done in code and local official-response simulation; live use waits on LinkedIn's separate analytics grant.
   - Tasks:
-    - Sync stats only for Founder Above the Fold-published posts.
-    - Store snapshots.
-    - Display unavailable metrics as unavailable, not zero.
+    - Sync stats only for Founder Above the Fold-published posts. Done.
+    - Store snapshots. Done with pulled time.
+    - Display unavailable metrics as unavailable, not zero. Done in API and dashboard.
   - Acceptance:
     - Dashboard shows last sync time and per-post trends.
 
@@ -336,8 +426,7 @@ Story: As the owner, I need a trusted source of truth for profile copy and outre
 Tickets:
 
 - DISPATCH-6001 - Profile copy tracker.
-  - Status: Done in code; database-backed route needs live database smoke once
-    `DATABASE_URL` is configured.
+  - Status: Done in code, local database and browser workflow.
   - Tasks:
     - Add profile-copy API routes. Done.
     - Add edit and version UI. Done.
@@ -353,11 +442,12 @@ Tickets:
     - 2026-07-12: unauthenticated write returned `401`; authenticated write and mark-synced returned setup-clear `503` because `DATABASE_URL` is not configured.
 
 - DISPATCH-6002 - Template library.
+  - Status: Done in migration, API, private UI and MCP.
   - Tasks:
-    - Add template API routes.
-    - Add list/edit/render UI.
-    - Tag templates by scenario.
-    - Keep outreach copy manual-only.
+    - Add template API routes. Done.
+    - Add list/edit/render UI. Done with missing-variable inspection.
+    - Tag templates by scenario. Done.
+    - Keep outreach copy manual-only. Done; no send control exists.
   - Acceptance:
     - Templates render for copy-paste only.
 
@@ -368,6 +458,7 @@ Story: As an AI-assisted owner, I need safe MCP tools that operate Founder Above
 Tickets:
 
 - DISPATCH-7001 - MCP backend client.
+  - Status: Done and exercised by a real stdio client.
   - Tasks:
     - Call Founder Above the Fold backend routes with `MCP_API_KEY`.
     - Validate structured responses.
@@ -376,6 +467,7 @@ Tickets:
     - MCP tools call Founder Above the Fold, not LinkedIn directly.
 
 - DISPATCH-7002 - Draft and queue tools.
+  - Status: Done; protocol smoke completes draft -> voice pass -> queue -> cancel.
   - Tasks:
     - Implement create/list/get/update draft tools.
     - Implement voice-check tool.
@@ -384,6 +476,7 @@ Tickets:
     - MCP can prepare and queue a week of posts within the same safety rules as UI.
 
 - DISPATCH-7003 - Profile, template, and analytics resources.
+  - Status: Done for current profile, templates and analytics tools/resources. Queue state is exposed through list/get post tools rather than a duplicate static resource.
   - Tasks:
     - Add current profile-copy resource.
     - Add templates resource.
@@ -393,11 +486,11 @@ Tickets:
     - MCP client can inspect the operating system without unsafe LinkedIn powers.
 
 - DISPATCH-7004 - Shared interactive tutorial and ChatGPT manual.
-  - Status: Expanded web tutorial and MCP manual resource done in code; real MCP client proof, Apps SDK UI, and remote MCP transport remain pending.
+  - Status: Expanded web tutorial, MCP manual resource and real stdio client proof are done; Apps SDK UI and remote MCP transport remain optional future surfaces.
   - Tasks:
     - Add Mission Control, parts drawer, assembly lane, live status lights, no-write sandbox, beta mode, failure capture, feedback drawer, and finished-build test. Done.
     - Mirror the operating instructions at `dispatch://assembly-manual`. Done.
-    - Verify the resource in an MCP inspector and a real ChatGPT connection. Pending.
+    - Verify the resource with a real MCP client. Done locally on 2026-07-14; a hosted ChatGPT connection waits on a deliberately chosen remote transport and deployment approval.
     - Add an Apps SDK component after the backend tools and remote transport are stable. Pending.
   - Acceptance:
     - The owner can follow the manual inside the product.
@@ -410,6 +503,7 @@ Story: As the owner, I need a repeatable weekly operating rhythm before launch.
 Tickets:
 
 - DISPATCH-8001 - Seed operating content.
+  - Status: Done with three manual outreach templates, twenty post-idea jigs and the voice guide.
   - Tasks:
     - Add content pillars.
     - Add voice guide.
@@ -419,6 +513,7 @@ Tickets:
     - A full week can be drafted without starting from a blank page.
 
 - DISPATCH-8002 - First operating week.
+  - Status: External operating proof; requires owner-approved public posts and seven elapsed days of live analytics.
   - Tasks:
     - Create two weeks of drafts.
     - Voice-check all queued posts.
@@ -432,35 +527,38 @@ Tickets:
 ### Epic 9 - Commercial Web + Native iOS Cabinet
 
 - DISPATCH-9001 - Fourteen-screen responsive product showroom.
-  - Status: Done in code; browser and accessibility sweep pending.
-- DISPATCH-9002 - Native SwiftUI cabinet with speech and local-AI fallback.
-  - Status: Compiles, installs, and launches in iPhone Simulator; StoreKit configuration and device permission tests pending.
+  - Status: Done in code; desktop/mobile browser and accessibility sweep passed with four medium defects fixed and rechecked.
+- DISPATCH-9002 - Archived iPhone interface experiment.
+  - Status: The interface previously built, installed and launched in iPhone Simulator. Apple commerce is removed from the runnable target and no iPhone product is offered. A fresh compile is currently blocked by the missing Xcode iOS 26.5 platform component; physical-device checks are not a launch gate for the direct Mac product.
 - DISPATCH-9003 - One-time commercial licence.
-  - Status: Research and price-test jig complete; live checkout, receipt validation, tax/refund copy, and legal review pending.
+  - Status: Direct macOS commerce with Stripe Checkout is selected and the sandbox one-time CA$199 product exists. The rotated replacement test key plus a matched local Ed25519 receipt keypair are fitted locally; the webhook secret is not. Mode-separated Checkout, raw-body signature verification, idempotent event storage, exactly-one receipt creation, return-page inspection, private email recovery, hashed-device activation, 30-day offline receipt signing, full-refund revocation and dispute-state handling compile and pass unit, local database and responsive browser checks behind disabled sandbox/live fuses. The native Mac client now builds, accepts recovery handles, keeps its device/receipt in Keychain, verifies receipts online and offline, and passes an app-bundle audit without StoreKit or embedded private commerce keys. A separate signed-update protocol, feed-stamping jig and explicit native download/checksum controls pass locally. Live mode additionally requires explicit owner approval, HTTPS, automatic tax, a matching live price and confirmed account country. Genuine Stripe-signed delivery, the real sandbox lifecycle, Developer ID signing, notarization, clean-Mac proof and publication of the signed update feed remain to be proved. Checkout stays disabled.
 - DISPATCH-9004 - SaaS privacy and owner controls.
-  - Status: Expanded privacy, cookies, draft terms, export/delete screens complete as product surfaces; verified providers, retention schedule, deletion backend, Cookiebot live-domain scan, and App Store privacy answers pending.
+  - Status: Privacy, cookies and draft terms are public; web disconnect, secret-free export and verified deletion pass database tests; native export and confirmed local removal are fitted. Verified legal identity/contact, provider/region/backup schedule, Cookiebot live-domain scan and App Store privacy answers remain.
+- DISPATCH-9005 - Cloud Press to Speak with Deepgram.
+  - Status: Server relay, authenticated voice socket, database-backed daily credit fuse, Nova-3 British-English request, iOS recording rail, Keychain setup panel and temporary-file removal are fitted in code. Production secrets, migration, approved deployment and a physical-iPhone Deepgram proof remain external.
+  - Tasks:
+    - Keep `DEEPGRAM_API_KEY` exclusively in the server environment.
+    - Protect the voice socket with a separate random `IOS_VOICE_API_KEY` stored in iOS Keychain.
+    - Record M4A only after owner action, cap each recording at two minutes and 20 MB, and remove the temporary file after the request.
+    - Return only the transcript and safe metadata; do not persist audio or expose upstream errors or keys.
+    - Stop further requests after either the daily request or byte ceiling; retain only aggregate counters for 31 days.
+    - Review and publish the selected Deepgram processing region, retention setting and provider disclosure before public sale.
+  - Acceptance:
+    - Wrong or missing voice credentials fail closed.
+    - A physical iPhone can press, record, stop, receive, edit and explicitly keep a real Deepgram transcript.
+    - Neither the app bundle, response nor logs contain the Deepgram key.
 
 Revised commercial work order:
 
-1. Test the CA$129 founding / CA$199 standard price jig with 50 qualified visitors.
-2. Fit real magic-link authentication, owner-scoped storage, export and verified deletion.
-3. Configure a StoreKit non-consumable and local `.storekit` test cabinet.
-4. Fit checkout-specific terms, tax, refund, legal-entity and support-contact panels.
-5. Complete device voice/camera permission and accessibility checks.
-6. Configure Cookiebot for the live web domains; do not place Cookiebot inside native iOS unless a cookie-bearing webview actually needs it.
-7. Keep LinkedIn publishing intentionally locked until the official integration passes its own approval and evidence gate.
-
-1. Keep current landing, privacy, cookies, and health links green.
-2. Connect purchased domains to the Vercel project.
-3. Configure Cookiebot account and Domain ID for the production domains.
-4. Configure local database and run migrations.
-5. Add owner session guard to private app surfaces.
-6. Finish LinkedIn OAuth token exchange and encrypted storage.
-7. Build draft CRUD.
-8. Add voice gate.
-9. Add queue scheduling.
-10. Add text-only publish.
-11. Expand MCP tools after the backend flow is stable.
+1. Fit production Resend values and prove owner sign-in.
+2. Complete one owner-approved LinkedIn OAuth connection and text-only public post; then obtain and prove the separate analytics grant.
+3. Configure Cookiebot for all live domains and inspect the populated declaration and consent withdrawal control.
+4. Insert the verified legal entity, support/privacy contact, provider/region/backup schedule, Canadian consumer wording and App Store privacy answers; obtain legal review.
+5. Fit the Stripe sandbox webhook without exposing it, prove payment, cancellation, refund, chargeback, recovery and device activation, then confirm the legal account country, tax registrations, final price and live-mode approval before fitting live credentials.
+6. Fit the server-only Deepgram key and a separate voice-access key, confirm Deepgram region/retention settings, and approve deployment of the cloud voice socket.
+7. Complete physical-device camera, Press to Speak, Dynamic Type and VoiceOver checks.
+8. Approve the remaining production deployment, then verify `.app` and `.dev` redirect to `.com` while preserving paths.
+9. Run the first operating week and inspect seven-day official analytics before calling the whole product launch-ready.
 
 ## Can Cookiebot Be Set Up From Codex Mobile?
 
@@ -472,3 +570,13 @@ Recommended split:
 - You can create/login to Cookiebot on mobile, add the domain, and copy the Domain ID.
 - Adding production environment variables is possible on mobile if your hosting dashboard is usable there, but desktop is usually less stressful for secret setup.
 - Do not paste passwords or private account credentials into Codex. Paste only the Cookiebot Domain ID when you are ready.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

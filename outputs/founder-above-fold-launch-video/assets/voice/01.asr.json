@@ -1,0 +1,42 @@
+[
+  {
+    "text": "LinkedIn",
+    "start": 0.04,
+    "end": 0.45
+  },
+  {
+    "text": "should",
+    "start": 0.45,
+    "end": 0.75
+  },
+  {
+    "text": "not",
+    "start": 0.9,
+    "end": 0.96
+  },
+  {
+    "text": "feel",
+    "start": 0.96,
+    "end": 1.14
+  },
+  {
+    "text": "like",
+    "start": 1.19,
+    "end": 1.4
+  },
+  {
+    "text": "a",
+    "start": 1.4,
+    "end": 1.41
+  },
+  {
+    "text": "second",
+    "start": 1.46,
+    "end": 1.79
+  },
+  {
+    "text": "job.",
+    "start": 1.79,
+    "end": 2
+  }
+]

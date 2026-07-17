@@ -1,0 +1,4 @@
+{"id":"image_001","type":"image","path":"assets/product/build-complete.png","source":"existing","description":"build complete","width":2048,"height":1152,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_002","type":"image","path":"assets/product/dashboard.png","source":"existing","description":"dashboard","width":2048,"height":1216,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_003","type":"image","path":"assets/product/local-ai.png","source":"existing","description":"local ai","width":2048,"height":1182,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_004","type":"image","path":"assets/product/voice-to-text.png","source":"existing","description":"voice to text","width":2048,"height":1216,"provenance":{"provider":"local","adopted":true}}

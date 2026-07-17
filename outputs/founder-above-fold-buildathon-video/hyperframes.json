@@ -1,0 +1,18 @@
+{
+  "$schema": "https://hyperframes.heygen.com/schema/hyperframes.json",
+  "registry": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "paths": {
+    "blocks": "compositions",
+    "components": "compositions/components",
+    "assets": "assets"
+  },
+  "brief": {
+    "angle": "A product invented and assembled in 21 straight hours: the passwordless LinkedIn operating system for founders who hate doing LinkedIn",
+    "length_seconds": 60,
+    "aspect_ratio": "16:9",
+    "language": "en-GB",
+    "distribution": "build-a-thon submission",
+    "vo_mode": "restructure",
+    "source": "Founder Above The Fold Revolutionising life since 1982.pdf"
+  }
+}

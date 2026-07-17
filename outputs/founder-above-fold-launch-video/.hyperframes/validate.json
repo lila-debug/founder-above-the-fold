@@ -1,0 +1,374 @@
+{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "contrast": [
+    {
+      "time": 4.5,
+      "selector": "div.f01-pill",
+      "text": "Part 01 · The chore",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 4.5,
+      "selector": "div.f01-number",
+      "text": "01 / 07",
+      "ratio": 9.44,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(39,199,239)"
+    },
+    {
+      "time": 4.5,
+      "selector": "span.f01-line.f01-line-a",
+      "text": "LinkedIn",
+      "ratio": 9.44,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(39,199,239)"
+    },
+    {
+      "time": 4.5,
+      "selector": "span.f01-line.f01-line-b",
+      "text": "should not feel like",
+      "ratio": 9.44,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(39,199,239)"
+    },
+    {
+      "time": 4.5,
+      "selector": "span.f01-line.f01-line-c",
+      "text": "a second job",
+      "ratio": 5.57,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(240,90,40)"
+    },
+    {
+      "time": 4.5,
+      "selector": "div.f01-tag.f01-tag-a",
+      "text": "A · recurring",
+      "ratio": 13.27,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(151,228,247)"
+    },
+    {
+      "time": 4.5,
+      "selector": "div.f01-tag.f01-tag-b",
+      "text": "B · unwanted",
+      "ratio": 13.5,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(251,209,195)"
+    },
+    {
+      "time": 4.5,
+      "selector": "div.f01-check",
+      "text": "☒ FAIL",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 13.5,
+      "selector": "div.f03-pill",
+      "text": "Introducing · Parts A–D",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 13.5,
+      "selector": "div.f03-part.f03-a",
+      "text": "Magic link",
+      "ratio": 13.5,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(251,209,195)"
+    },
+    {
+      "time": 13.5,
+      "selector": "div.f03-part.f03-b",
+      "text": "Profile OS",
+      "ratio": 8.64,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(246,151,119)"
+    },
+    {
+      "time": 13.5,
+      "selector": "div.f03-part.f03-c",
+      "text": "Voice lock",
+      "ratio": 5.57,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(240,90,40)"
+    },
+    {
+      "time": 13.5,
+      "selector": "div.f03-part.f03-d",
+      "text": "MCP rail",
+      "ratio": 9.44,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(39,199,239)"
+    },
+    {
+      "time": 22.5,
+      "selector": "div.f04-pill",
+      "text": "Part 04 · Profile cabinet",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 22.5,
+      "selector": "strong",
+      "text": "MagicLink",
+      "ratio": 9.44,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(39,199,239)"
+    },
+    {
+      "time": 22.5,
+      "selector": "span",
+      "text": "No product password",
+      "ratio": 9.44,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(39,199,239)"
+    },
+    {
+      "time": 22.5,
+      "selector": "div.f04-icon",
+      "text": "A",
+      "ratio": 13.27,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(151,228,247)"
+    },
+    {
+      "time": 22.5,
+      "selector": "b",
+      "text": "Headline",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 22.5,
+      "selector": "small",
+      "text": "Top rail",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": false,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 22.5,
+      "selector": "div.f04-icon",
+      "text": "B",
+      "ratio": 13.5,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(251,209,195)"
+    },
+    {
+      "time": 22.5,
+      "selector": "b",
+      "text": "About",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 22.5,
+      "selector": "small",
+      "text": "Core panel",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": false,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 22.5,
+      "selector": "div.f04-icon",
+      "text": "C",
+      "ratio": 5.57,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(240,90,40)"
+    },
+    {
+      "time": 22.5,
+      "selector": "b",
+      "text": "Experience",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 22.5,
+      "selector": "small",
+      "text": "Proof stack",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": false,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 22.5,
+      "selector": "div.f04-icon",
+      "text": "D",
+      "ratio": 9.44,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(39,199,239)"
+    },
+    {
+      "time": 22.5,
+      "selector": "b",
+      "text": "Featured links",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 22.5,
+      "selector": "small",
+      "text": "Signal shelf",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": false,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(255,254,248)"
+    },
+    {
+      "time": 22.5,
+      "selector": "div.f04-rail",
+      "text": "✓Manual paste checklist",
+      "ratio": 5.98,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(241,101,54)"
+    },
+    {
+      "time": 31.5,
+      "selector": "div.f06-pill",
+      "text": "Part 06 · Safety rail",
+      "ratio": 5.57,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(240,90,40)"
+    },
+    {
+      "time": 40.5,
+      "selector": "div.f07-pill",
+      "text": "Finished build · Inspection 07",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(255,254,248)",
+      "bg": "rgb(17,17,17)"
+    },
+    {
+      "time": 40.5,
+      "selector": "div.f07-stamp",
+      "text": "Credible in48 hours",
+      "ratio": 5.57,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(17,17,17)",
+      "bg": "rgb(240,90,40)"
+    },
+    {
+      "time": 40.5,
+      "selector": "div.f07-tick.f07-t1",
+      "text": "⌜",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(255,254,248)",
+      "bg": "rgb(17,17,17)"
+    },
+    {
+      "time": 40.5,
+      "selector": "div.f07-tick.f07-t2",
+      "text": "⌝",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(255,254,248)",
+      "bg": "rgb(17,17,17)"
+    },
+    {
+      "time": 40.5,
+      "selector": "div.f07-tick.f07-t3",
+      "text": "⌞",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(255,254,248)",
+      "bg": "rgb(17,17,17)"
+    },
+    {
+      "time": 40.5,
+      "selector": "div.f07-tick.f07-t4",
+      "text": "⌟",
+      "ratio": 18.69,
+      "wcagAA": true,
+      "large": true,
+      "fg": "rgb(255,254,248)",
+      "bg": "rgb(17,17,17)"
+    }
+  ],
+  "contrastFailures": 0,
+  "_meta": {
+    "version": "0.7.57",
+    "latestVersion": "0.7.57",
+    "updateAvailable": false,
+    "deprecated": true
+  }
+}

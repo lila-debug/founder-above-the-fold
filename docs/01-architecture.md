@@ -142,3 +142,13 @@ The only v1 public side effect is publishing the owner's own post.
 - Rate limited: keep queued, back off, store retry-after if LinkedIn returns it.
 - Partial image upload failure: do not publish post; fail before public side effect.
 - MCP tool failure: return structured error with recovery action.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

@@ -1,0 +1,11 @@
+{
+  "provider": "auto",
+  "speed": 1,
+  "lines": [],
+  "bgm": {
+    "mode": "retrieve",
+    "query": "none",
+    "blob": "Founder Above the Fold is a working, account-safe LinkedIn operating system assembled in 21 straight hours",
+    "arc": "invention → pain → mechanism → product proof → business → beta"
+  }
+}

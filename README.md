@@ -29,16 +29,27 @@ Internal note: the MCP tool namespace currently remains `dispatch.*` while the c
 - [Interactive tutorial manual](docs/18-interactive-tutorial-manual.md)
 - [Four-hour launch control manual](docs/19-four-hour-launch-control-manual.md)
 - [LinkedIn launch kit](docs/20-linkedin-launch-kit.md)
+- [Finished web and MCP conveyor manual](docs/21-web-mcp-finished-build-manual.md)
+- [Archived StoreKit experiment manual](docs/22-storekit-local-cabinet-manual.md)
+- [Cloud Press to Speak manual](docs/23-cloud-press-to-speak-manual.md)
+- [Product Hunt launch kit](docs/24-product-hunt-launch-kit.md)
+- [Product Hunt response plan](docs/25-product-hunt-response-plan.md)
+- [Brand and trademark plate](docs/26-brand-and-trademark-plate.md)
+- [Direct commerce and macOS distribution manual](docs/27-direct-commerce-macos-manual.md)
+- [Stripe sandbox licence manual](docs/28-stripe-sandbox-licence-manual.md)
+- [Direct macOS cabinet manual](docs/29-direct-macos-cabinet-manual.md)
 - [Environment template](.env.example)
 
 Auth note: this app uses real passwordless magic links. `AUTH_PROVIDER=dev` generates local test links without sending email; `AUTH_PROVIDER=resend` sends production links through Resend. No password storage or password login flow is part of Founder Above the Fold.
 
 ## Product Shape
 
-Founder Above the Fold has two surfaces:
+Founder Above the Fold has three product surfaces and one quarantined experiment:
 
 1. Web app: owner dashboard for OAuth, drafts, queue, profile copy, templates, analytics, and manual sync flags.
 2. MCP server: AI-facing tools, resources, and prompts for drafting, scheduling, checking voice, reading approved profile copy, and inspecting post analytics.
+3. Direct macOS product: a native SwiftUI workbench with a separately distributed one-time Stripe licence, private recovery, one-device activation and signed offline receipts. The local app bundle and server receipt cabinet are implemented; a genuine Stripe webhook, Developer ID signing, notarization and signed updates remain locked.
+4. Quarantined iOS experiment: the SwiftUI interface remains historical build evidence only. Its Apple purchase code and StoreKit configuration are excluded from the runnable target; Apple commerce is not a launch rail.
 
 The private workbench includes an interactive IKEA-style assembly tutorial. The MCP
 server exposes the matching `dispatch://assembly-manual` resource so ChatGPT and the
@@ -69,10 +80,11 @@ AUTH_CALLBACK_URL=https://YOUR_DOMAIN/auth/callback
 The magic link expires after 15 minutes. Successful sign-in sets an httpOnly `dispatch_session` cookie.
 The private owner workbench lives at `/dashboard`; unauthenticated visitors are routed back to the public page for sign-in.
 
-## Target Automation Contract
+## Automation Contract
 
-The following is the intended finished assembly, not the current launch claim. Use
-`/api/mcp/health` and the launch control manual for the evidence-backed state.
+The backend assembly below is implemented. Use `/api/mcp/health` for the current
+environment and connection state; missing external grants remain locked rather than
+being presented as successful.
 
 Fully automated in this product means:
 
@@ -102,12 +114,52 @@ Checked on 2026-07-06:
 - MCP TypeScript SDK: https://ts.sdk.modelcontextprotocol.io/
 - MCP transports: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports
 
-## Recommended First Implementation Move
+## Current Finished-Build Evidence
 
-Start with the app foundation, not the MCP server:
+- Fourteen local database workflow checks cover OAuth, voice locks, queue/cancel, publishing, retry safety, templates, analytics, token refresh, disconnect, export and deletion.
+- LinkedIn token lifecycle checks prove encrypted programmatic refresh, rotated refresh-key storage, concurrency locking, required-scope validation and visible reauthorisation after refresh expiry.
+- Private desktop/mobile browser QA completes draft -> voice pass -> queue -> cancel and template rendering without console errors.
+- MCP stdio smoke proves 17 tools, 4 resources and the guarded workflow through a real protocol client.
+- The archived iPhone interface previously passed Swift 6 simulator build/install/launch; its StoreKit purchase code is now excluded from the runnable target. A fresh build is blocked locally until Xcode's iOS 26.5 platform component is installed.
+- Public `/try` and `/waitlist` launch routes pass a repeatable desktop/mobile Product Hunt browser jig: the demo fails and passes the voice clamp correctly, the queue stays locked until pass, the Waitlister form uses a validated public socket, no horizontal overflow appears, and no console errors occur.
+- Five 1270×760 Product Hunt gallery panels and a 240×240 thumbnail build from real product captures with `npm run build:product-hunt-gallery`.
+- Stripe commerce unit tests, a dedicated local Postgres lifecycle jig and 20 responsive browser checks prove separated sandbox/live configuration, exactly-one receipt creation, duplicate suppression, cancelled/failed sessions, recovery non-enumeration, hashed-device allowance, Ed25519 offline receipts, refund/dispute states and an unknown return link that cannot unlock.
+- A native macOS SwiftUI target builds and assembles an ad-hoc signed `.app`; its supplied CS Claire headline, activation URL, public verification key and font resources are fitted, and the bundle audit rejects embedded Stripe keys, the private signing key and StoreKit markers.
+- A separate Ed25519 update-key rail signs versioned feed envelopes; the native Mac app checks only on request, refuses tampering and HTTP, verifies archive size/SHA-256, and leaves installation as an explicit owner action.
 
-1. Create the LinkedIn Developer App and request the required products.
-2. Pick the magic-link provider behind the adapter.
-3. Implement OAuth and encrypted token storage.
-4. Implement drafts, voice checks, queue, and publish-due cron.
-5. Add the MCP server after the backend contract is stable.
+## Product Hunt Conveyor
+
+```bash
+npm run build:product-hunt-gallery
+PRODUCT_HUNT_BASE_URL=http://127.0.0.1:3100 npm run test:product-hunt
+PRODUCT_HUNT_BASE_URL=https://www.founderaccount.com PRODUCT_HUNT_WAITLIST_MODE=locked npm run test:product-hunt
+ALLOW_INCOMPLETE=true npm run check:production-launch
+npm run check:stripe-webhook-live
+```
+
+The public mechanism is available at `/try`; the consented private-beta intake is at
+`/waitlist`. Product Hunt submission remains a no-go until the live routes, production
+owner sign-in, Cookiebot withdrawal/declaration, one owner-approved LinkedIn OAuth and
+text-post proof, and a real purchase/access route are verified.
+
+## External Launch Fasteners
+
+1. Fit production Resend values and prove owner sign-in.
+2. Complete one owner-approved LinkedIn OAuth connection and public text-post proof; obtain the separate analytics grant.
+3. Configure and verify Cookiebot on every live domain.
+4. Fit Stripe's sandbox webhook signing secret and prove the complete genuine sandbox payment/refund/dispute/recovery lifecycle. Confirm the Stripe legal account country and tax registrations before creating matching live product/key/webhook parts.
+5. Build, Developer ID-sign, notarize and clean-Mac test the direct macOS cabinet; fit its signed update feed and connect the already-proved device activation API.
+6. Obtain owner approval before deploying any further production or domain-routing changes.
+7. Fit the server-only Deepgram and voice-access keys, review Deepgram region/retention settings, deploy with approval, and prove Press to Speak on a physical device.
+8. Fit `NEXT_PUBLIC_WAITLISTER_KEY`, whitelist the live and local domains, enable double opt-in, and prove confirmation, unsubscribe, export and deletion.
+9. Upload the audited launch film to YouTube and create the Product Hunt draft only after explicit owner approval.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

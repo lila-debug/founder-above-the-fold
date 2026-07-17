@@ -1,0 +1,18 @@
+{
+  "$schema": "https://hyperframes.heygen.com/schema/hyperframes.json",
+  "registry": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "paths": {
+    "blocks": "compositions",
+    "components": "compositions/components",
+    "assets": "assets"
+  },
+  "brief": {
+    "angle": "The passwordless LinkedIn operating system for founders who hate doing LinkedIn",
+    "length_seconds": 45,
+    "aspect_ratio": "16:9",
+    "language": "en-GB",
+    "distribution": "LinkedIn and product landing page",
+    "vo_mode": "restructure",
+    "audio": "narrated_launch_cut"
+  }
+}

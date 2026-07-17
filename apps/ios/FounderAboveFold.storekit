@@ -1,0 +1,38 @@
+{
+  "identifier" : "8D47A5C6-37D4-4AF4-A0D7-BC155095CCB4",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "199",
+      "familyShareable" : false,
+      "internalID" : "FA599B64-438C-4A08-B1B7-C82228F93F98",
+      "localizations" : [
+        {
+          "description" : "A one-time licence for the Founder Above the Fold private founder workbench.",
+          "displayName" : "Founder Above the Fold Licence",
+          "locale" : "en_CA"
+        }
+      ],
+      "productID" : "com.founderabovethefold.license.v1",
+      "referenceName" : "Founder Above the Fold v1 Licence",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_CA",
+    "_storefront" : "CAN",
+    "_storeKitErrors" : [
+
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

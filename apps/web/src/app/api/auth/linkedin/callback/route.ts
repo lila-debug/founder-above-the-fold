@@ -80,6 +80,7 @@ export async function GET(request: NextRequest) {
 function redirectWithLinkedInState(request: NextRequest, state: string) {
   const redirectUrl = new URL("/", request.nextUrl.origin);
   redirectUrl.searchParams.set("linkedin", state);
+  redirectUrl.hash = "command-centre";
 
   const response = NextResponse.redirect(redirectUrl);
 

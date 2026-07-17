@@ -1,0 +1,133 @@
+{
+  "generated_at": "2026-07-14T11:31:02.575Z",
+  "file": "renders/founder-above-fold-launch-final.mp4",
+  "sha256": "472acd8e8a825a73e404d7b4816121d2630534cda48a2253959ec51824f53820",
+  "format": {
+    "duration": "45.100000",
+    "size": "9505340"
+  },
+  "video": {
+    "index": 0,
+    "codec_name": "h264",
+    "codec_type": "video",
+    "width": 1920,
+    "height": 1080,
+    "r_frame_rate": "30/1",
+    "duration": "45.000000",
+    "nb_read_frames": "1350"
+  },
+  "audio": {
+    "index": 1,
+    "codec_name": "aac",
+    "codec_type": "audio",
+    "sample_rate": "48000",
+    "channels": 2,
+    "r_frame_rate": "0/0",
+    "duration": "45.100000",
+    "nb_read_frames": "2111"
+  },
+  "loudness": {
+    "integrated_lufs": -16.05,
+    "true_peak_dbtp": -0.99,
+    "loudness_range_lu": 3.5
+  },
+  "transcript": {
+    "engine": "whisper tiny.en",
+    "expected_words": 122,
+    "heard_words": 122,
+    "edit_distance": 3,
+    "word_error_rate_percent": 2.46
+  },
+  "checks": [
+    {
+      "label": "picture rail",
+      "passed": true,
+      "details": "{\"index\":0,\"codec_name\":\"h264\",\"codec_type\":\"video\",\"width\":1920,\"height\":1080,\"r_frame_rate\":\"30/1\",\"duration\":\"45.000000\",\"nb_read_frames\":\"1350\"}"
+    },
+    {
+      "label": "frame size",
+      "passed": true,
+      "details": "1920x1080"
+    },
+    {
+      "label": "frame rate",
+      "passed": true,
+      "details": "30/1"
+    },
+    {
+      "label": "frame count",
+      "passed": true,
+      "details": "1350"
+    },
+    {
+      "label": "picture duration",
+      "passed": true,
+      "details": "45.000000s"
+    },
+    {
+      "label": "sound rail",
+      "passed": true,
+      "details": "{\"index\":1,\"codec_name\":\"aac\",\"codec_type\":\"audio\",\"sample_rate\":\"48000\",\"channels\":2,\"r_frame_rate\":\"0/0\",\"duration\":\"45.100000\",\"nb_read_frames\":\"2111\"}"
+    },
+    {
+      "label": "sound sample rate",
+      "passed": true,
+      "details": "48000Hz"
+    },
+    {
+      "label": "full decode",
+      "passed": true,
+      "details": "all encoded frames and audio packets decoded"
+    },
+    {
+      "label": "black-gap scan",
+      "passed": true,
+      "details": "no black interval >= 100ms"
+    },
+    {
+      "label": "delivery loudness",
+      "passed": true,
+      "details": "-16.05 LUFS"
+    },
+    {
+      "label": "true-peak ceiling",
+      "passed": true,
+      "details": "-0.99 dBTP"
+    },
+    {
+      "label": "narration slots",
+      "passed": true,
+      "details": "1:2.027/5s, 2:5.568/6s, 3:5.184/6s, 4:6.72/7s, 5:6.165/7s, 6:5.653/7s, 7:6.272/7s"
+    },
+    {
+      "label": "verbatim caption rail",
+      "passed": true,
+      "details": "55 groups / 116 source tokens"
+    },
+    {
+      "label": "speech transcript",
+      "passed": true,
+      "details": "2.46% WER with tiny.en"
+    },
+    {
+      "label": "visual inspection plate",
+      "passed": true,
+      "details": "final-contact-00-15.jpg"
+    },
+    {
+      "label": "visual inspection plate",
+      "passed": true,
+      "details": "final-contact-15-30.jpg"
+    },
+    {
+      "label": "visual inspection plate",
+      "passed": true,
+      "details": "final-contact-30-45.jpg"
+    },
+    {
+      "label": "visual inspection plate",
+      "passed": true,
+      "details": "final-frame.png"
+    }
+  ]
+}

@@ -11,6 +11,16 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname, "../.."),
   },
+  async redirects() {
+    return ["founderaccount.app", "www.founderaccount.app", "founderaccount.dev", "www.founderaccount.dev"].map(
+      (host) => ({
+        source: "/:path*",
+        has: [{ type: "host" as const, value: host }],
+        destination: "https://www.founderaccount.com/:path*",
+        permanent: true,
+      }),
+    );
+  },
   async headers() {
     return [
       {
@@ -28,7 +38,7 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self'",
               "base-uri 'self'",
-              "form-action 'self'",
+              "form-action 'self' https://waitlister.me",
               "frame-ancestors 'none'",
               "object-src 'none'",
               `script-src 'self' 'unsafe-inline'${developmentScriptPolicy} https://consent.cookiebot.com https://consentcdn.cookiebot.com`,

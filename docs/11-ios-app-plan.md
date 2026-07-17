@@ -405,3 +405,13 @@ The iOS MVP is done when:
 - Failed publish and reconnect states are visible.
 - iOS stores no LinkedIn OAuth tokens.
 - No red-zone automation exists in the native UI.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

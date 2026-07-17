@@ -4,6 +4,7 @@ import {
   Activity,
   AlertTriangle,
   ArrowRight,
+  BarChart3,
   BookOpen,
   CalendarClock,
   Check,
@@ -27,12 +28,16 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { PostTracker } from "@/lib/posts";
 import type { ProfileCopyTracker } from "@/lib/profile-copy";
+import type { AnalyticsTracker } from "@/lib/server/analytics";
+import { AnalyticsBoard } from "./analytics-board";
 import { AssemblyTutorial } from "./assembly-tutorial";
 import { DraftBoard } from "./draft-board";
-import { ProfileCopyBoard } from "./landing-client";
+import { LinkedInConnectionPanel, ProfileCopyBoard } from "./landing-client";
+import { OwnerDataControls } from "./owner-data-controls";
+import { TemplateLibrary } from "./template-library";
 
 type ScreenId =
   | "overview"
@@ -40,6 +45,7 @@ type ScreenId =
   | "profile"
   | "content"
   | "queue"
+  | "analytics"
   | "tasks"
   | "export"
   | "mcp"
@@ -54,6 +60,7 @@ type BuildState = {
   mcp: boolean;
   queue: boolean;
   publishing: boolean;
+  analytics: boolean;
 };
 
 type FounderWorkbenchProps = {
@@ -62,6 +69,7 @@ type FounderWorkbenchProps = {
   expiresAt: string;
   postTracker: PostTracker;
   profileTracker: ProfileCopyTracker;
+  analyticsTracker: AnalyticsTracker;
 };
 
 const NAV_ITEMS: Array<{ id: ScreenId; label: string; shortLabel: string; icon: LucideIcon }> = [
@@ -70,6 +78,7 @@ const NAV_ITEMS: Array<{ id: ScreenId; label: string; shortLabel: string; icon: 
   { id: "profile", label: "Profile OS", shortLabel: "Profile", icon: UserRound },
   { id: "content", label: "Content studio", shortLabel: "Content", icon: PenLine },
   { id: "queue", label: "Queue", shortLabel: "Queue", icon: CalendarClock },
+  { id: "analytics", label: "Analytics", shortLabel: "Metrics", icon: BarChart3 },
   { id: "tasks", label: "Tasks", shortLabel: "Tasks", icon: ListChecks },
   { id: "export", label: "Export", shortLabel: "Export", icon: ClipboardCopy },
   { id: "mcp", label: "MCP rail", shortLabel: "MCP", icon: PlugZap },
@@ -107,6 +116,12 @@ const MANUALS: Record<ScreenId, { part: string; route: string; check: string; av
     check: "Every scheduled card shows a real or clearly labelled planned state.",
     avoid: "Do not imply publishing works until the queue and LinkedIn rails are fitted.",
   },
+  analytics: {
+    part: "F · Owner-post gauges",
+    route: "Grant the official read scope, pull one published-post snapshot, then inspect its timestamp.",
+    check: "Every number has a LinkedIn post URN and a stored pull time; unknown values show a dash.",
+    avoid: "Never convert a missing response or missing permission into zero.",
+  },
   tasks: {
     part: "F · Repair tray",
     route: "Clear red stops first, then amber set-up work, then optional polish.",
@@ -115,8 +130,8 @@ const MANUALS: Record<ScreenId, { part: string; route: string; check: string; av
   },
   export: {
     part: "G · Packing bench",
-    route: "Inspect the label, copy one panel, and carry it to its named destination.",
-    check: "Profile copy remains manual; outreach remains copy-only.",
+    route: "Select a template, fit its labelled variables, inspect the assembled text, then copy it.",
+    check: "Missing labels remain visible; profile and outreach actions remain manual.",
     avoid: "No automatic DMs, connection requests, comments, likes, or profile changes.",
   },
   mcp: {
@@ -139,6 +154,7 @@ export function FounderWorkbench({
   expiresAt,
   postTracker,
   profileTracker,
+  analyticsTracker,
 }: FounderWorkbenchProps) {
   const [screen, setScreen] = useState<ScreenId>("overview");
   const [railOpen, setRailOpen] = useState(false);
@@ -152,7 +168,12 @@ export function FounderWorkbench({
 
   return (
     <main className="founder-shell min-h-screen text-[#111111]">
-      <aside className={`founder-rail ${railOpen ? "is-open" : ""}`} aria-label="Founder app screens">
+      <aside
+        aria-label="Founder app screens"
+        aria-modal={railOpen ? true : undefined}
+        className={`founder-rail ${railOpen ? "is-open" : ""}`}
+        role={railOpen ? "dialog" : undefined}
+      >
         <div className="flex items-center justify-between gap-3 border-b-2 border-black p-4 lg:p-5">
           <button className="founder-wordmark text-left" onClick={() => openScreen("overview")} type="button">
             <span>ABOVE</span>
@@ -196,9 +217,9 @@ export function FounderWorkbench({
         </div>
       </aside>
 
-      {railOpen ? <button className="rail-scrim" aria-label="Close menu" onClick={() => setRailOpen(false)} type="button" /> : null}
+      {railOpen ? <button className="rail-scrim" aria-hidden="true" onClick={() => setRailOpen(false)} tabIndex={-1} type="button" /> : null}
 
-      <div className="founder-stage">
+      <div aria-hidden={railOpen || undefined} className="founder-stage" inert={railOpen || undefined}>
         <header className="founder-topbar">
           <button className="icon-key lg:hidden" onClick={() => setRailOpen(true)} type="button" aria-label="Open menu">
             <Menu size={21} strokeWidth={2.6} />
@@ -220,6 +241,7 @@ export function FounderWorkbench({
           {screen === "profile" ? <ProfileCopyBoard initialTracker={profileTracker} /> : null}
           {screen === "content" ? <div className="screen-pad"><DraftBoard initialTracker={postTracker} /></div> : null}
           {screen === "queue" ? <QueueScreen build={build} postTracker={postTracker} /> : null}
+          {screen === "analytics" ? <AnalyticsBoard initialTracker={analyticsTracker} /> : null}
           {screen === "tasks" ? <TasksScreen build={build} /> : null}
           {screen === "export" ? <ExportScreen profileTracker={profileTracker} postTracker={postTracker} /> : null}
           {screen === "mcp" ? <McpScreen build={build} /> : null}
@@ -228,7 +250,7 @@ export function FounderWorkbench({
         </div>
       </div>
 
-      <nav className="mobile-dock" aria-label="Mobile app screens">
+      <nav aria-hidden={railOpen || undefined} className="mobile-dock" aria-label="Mobile app screens" inert={railOpen || undefined}>
         {NAV_ITEMS.slice(0, 5).map((item) => {
           const Icon = item.icon;
           return (
@@ -288,7 +310,7 @@ function OverviewScreen({
 
       <section className="stat-grid">
         <StatCard label="Drafts" value={postTracker.counts.draft} note={postTracker.source === "database" ? "Live parts bin" : "Seed preview"} tone="yellow" icon={FileText} />
-        <StatCard label="Ready rails" value={`${ready}/8`} note={`${pending} fitment stops`} tone="teal" icon={Gauge} />
+        <StatCard label="Ready rails" value={`${ready}/9`} note={`${pending} fitment stops`} tone="teal" icon={Gauge} />
         <StatCard label="Queued" value={postTracker.counts.queued} note={build.queue ? "Conveyor ready" : "Rail planned"} tone="orange" icon={CalendarClock} />
         <StatCard label="Manual pastes" value="3" note="Profile stays human" tone="paper" icon={ClipboardCopy} />
       </section>
@@ -303,6 +325,7 @@ function OverviewScreen({
             <EvidenceRow label="Voice gauge" ready={build.voice} readyText="Fitted" stopText="Command + en_GB needed" />
             <EvidenceRow label="Consent shield" ready={build.consent} readyText="Fitted" stopText="Cookiebot ID needed" />
             <EvidenceRow label="MCP key" ready={build.mcp} readyText="Fitted" stopText="MCP_API_KEY needed" />
+            <EvidenceRow label="Analytics scope" ready={build.analytics} readyText="Fitted" stopText="LinkedIn grant needed" />
           </div>
         </section>
 
@@ -312,7 +335,7 @@ function OverviewScreen({
             Fit the missing<br />parts before<br /><span className="bg-[#f4d13d] px-1">publishing.</span>
           </h3>
           <div className="mt-6 border-t-2 border-black pt-4 text-sm font-bold leading-6">
-            Queue, publishing, analytics, and templates remain labelled as planned until their real rails pass a browser test.
+            Queue, official publishing, and templates are fitted. Analytics stays locked until LinkedIn grants its separate read scope.
           </div>
         </section>
       </div>
@@ -354,15 +377,75 @@ function SetupScreen({ build }: { build: BuildState }) {
           <EvidenceRow label="Voice command" ready={build.voice} readyText="Fitted" stopText="Needed" />
         </div>
       </section>
+      <LinkedInConnectionPanel />
     </div>
   );
 }
 
 function QueueScreen({ build, postTracker }: { build: BuildState; postTracker: PostTracker }) {
-  const cards = postTracker.items.slice(0, 3);
+  const [tracker, setTracker] = useState(postTracker);
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+  const cards = tracker.items.filter((post) => post.status === "queued");
+
+  useEffect(() => {
+    let active = true;
+
+    fetch("/api/posts?limit=100", { cache: "no-store" })
+      .then((response) => response.json())
+      .then((next: PostTracker) => {
+        if (active) setTracker(next);
+      })
+      .catch(() => {
+        if (active) setNotice("Queue could not be refreshed.");
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  async function movePost(postId: string, action: "cancel" | "publish-now") {
+    if (
+      action === "publish-now" &&
+      !window.confirm("Publish this post publicly on LinkedIn now?")
+    ) {
+      return;
+    }
+
+    setBusyId(postId);
+    setNotice(null);
+    const response = await fetch(`/api/posts/${postId}/${action}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(
+        action === "publish-now"
+          ? { confirmPublication: true }
+          : { reason: "Cancelled from the owner workbench." },
+      ),
+    });
+    const result = (await response.json()) as { error?: string };
+
+    if (!response.ok) {
+      setNotice(result.error ?? "Queue action failed.");
+      setBusyId(null);
+      return;
+    }
+
+    const next = await fetch("/api/posts?limit=100", { cache: "no-store" });
+    setTracker((await next.json()) as PostTracker);
+    setNotice(
+      action === "publish-now"
+        ? "LinkedIn confirmed the post as published."
+        : "Post removed from the publishing queue.",
+    );
+    setBusyId(null);
+  }
+
   return (
     <div className="screen-pad space-y-5">
-      <ScreenIntro eyebrow="Part E · conveyor belt" title="A queue that refuses to bluff." body="Drafts appear as parts ready for inspection. Scheduling and publishing stay visibly locked until their real rails are installed." />
+      <ScreenIntro eyebrow="Part E · conveyor belt" title="A queue that refuses to bluff." body="Only the current voice-passed revision can enter this conveyor. Due posts use LinkedIn’s official API; immediate publishing keeps a separate owner confirmation lock." />
+      {notice ? <div className="warning-strip"><Activity size={18} /> {notice}</div> : null}
       <section className="queue-lane">
         <div className="queue-track" aria-hidden="true" />
         {cards.length ? cards.map((post, index) => (
@@ -374,12 +457,30 @@ function QueueScreen({ build, postTracker }: { build: BuildState; postTracker: P
             <p className="mt-4 line-clamp-4 text-base font-bold leading-6">{post.body}</p>
             <div className="mt-5 grid grid-cols-2 gap-2 text-xs font-black uppercase">
               <span className="field-slat">{post.pillar ?? "No pillar"}</span>
-              <span className="field-slat">{post.wordCount} words</span>
+              <span className="field-slat">{post.scheduledAt ? new Date(post.scheduledAt).toLocaleString() : "No slot"}</span>
+            </div>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              <button
+                className="hard-button bg-white"
+                disabled={busyId === post.id}
+                onClick={() => movePost(post.id, "cancel")}
+                type="button"
+              >
+                Cancel
+              </button>
+              <button
+                className="hard-button bg-[#f4d13d] disabled:opacity-45"
+                disabled={!build.publishing || busyId === post.id}
+                onClick={() => movePost(post.id, "publish-now")}
+                type="button"
+              >
+                Publish now
+              </button>
             </div>
           </article>
         )) : <EmptyBuild title="Queue is empty" body="Insert a draft from Content, fit a current voice pass, then choose a future slot." />}
       </section>
-      <div className="warning-strip"><AlertTriangle size={18} /> {build.queue ? "Queue rail fitted." : "Queue scheduling is a designed surface, not an implemented publishing claim."}</div>
+      <div className="warning-strip"><AlertTriangle size={18} /> {build.publishing ? "Queue and official publishing rails fitted. Immediate posts still require confirmation." : build.queue ? "Queue fitted. Connect LinkedIn to unlock the publishing motor." : "Database parts bin needed before scheduling."}</div>
     </div>
   );
 }
@@ -422,6 +523,8 @@ function ExportScreen({ profileTracker, postTracker }: { profileTracker: Profile
         <ExportBlock label="LinkedIn profile" content={profileText} />
         <ExportBlock label="LinkedIn posts" content={postText || "# LinkedIn Posts\n\nNo drafts in the parts bin."} />
       </div>
+      <TemplateLibrary />
+      <OwnerDataControls />
       <div className="warning-strip"><ShieldCheck size={18} /> Copy-only route: no messages are sent and no LinkedIn profile field is changed.</div>
     </div>
   );
@@ -435,7 +538,9 @@ function McpScreen({ build }: { build: BuildState }) {
     ["dispatch.queue_post", "Awaiting approval"],
     ["dispatch.cancel_queued_post", "Awaiting approval"],
     ["dispatch.profile_copy", build.database ? "Ready" : "Seed fallback"],
-    ["dispatch.analytics", "Planned"],
+    ["dispatch.list_analytics", build.analytics ? "Ready" : "Scope needed"],
+    ["dispatch.refresh_analytics", build.analytics ? "Ready" : "Scope needed"],
+    ["dispatch.list_templates", "Ready"],
     ["dispatch://assembly-manual", "Readable"],
   ];
   return (

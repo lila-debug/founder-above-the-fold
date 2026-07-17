@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #111111; }
+      body { font-family: Arial, sans-serif; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #111111; }
+      .scene { position: absolute; inset: 0; overflow: hidden; background: #f7f1df; transform-origin: center center; }
+      .scene img { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .scene.product img { object-fit: contain; background: #f7f1df; }
+      .badge { position: absolute; top: 42px; left: 48px; padding: 14px 22px; color: #111111; background: #f4d13d; border: 4px solid #111111; box-shadow: 7px 7px 0 #111111; font: 900 24px "Arial Black", Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+      .badge.right { left: auto; right: 48px; }
+      .story-chip { position: absolute; left: 160px; right: 160px; bottom: 54px; min-height: 110px; display: flex; align-items: center; justify-content: center; padding: 22px 36px; background: rgba(17,17,17,.92); color: #fffef8; border: 4px solid #fffef8; box-shadow: 10px 10px 0 #f05a28; font: 900 42px/1 "Arial Black", Arial, sans-serif; letter-spacing: -.025em; text-align: center; text-transform: uppercase; }
+      .proof-rail { position: absolute; left: 52px; bottom: 44px; padding: 14px 20px; background: #111111; color: #fffef8; border: 4px solid #fffef8; font: 900 22px Arial, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+      .final-rail { position: absolute; right: 72px; bottom: 70px; padding: 20px 28px; background: #f05a28; color: #111111; border: 5px solid #111111; box-shadow: 10px 10px 0 #111111; font: 900 32px "Arial Black", Arial, sans-serif; text-transform: uppercase; }
+      .registration { position: absolute; right: 46px; top: 48px; color: #111111; font: 900 25px Arial, sans-serif; letter-spacing: .12em; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="60" data-width="1920" data-height="1080">
+      <div id="scene-01-invention" class="clip scene" data-start="0" data-duration="6" data-track-index="0">
+        <img src="source-pages/page-1.png" alt="Founder Above the Fold title page" />
+        <div class="badge">Build-a-thon submission</div>
+        <div class="story-chip">Built in 21 straight hours · One working product</div>
+      </div>
+
+      <div id="scene-02-problem" class="clip scene" data-start="5.5" data-duration="10" data-track-index="1">
+        <img src="source-pages/page-2.png" alt="The problem" />
+        <div class="registration">02 / 08</div>
+      </div>
+
+      <div id="scene-03-kit" class="clip scene" data-start="15" data-duration="14" data-track-index="2">
+        <img src="source-pages/page-3.png" alt="Founder Above the Fold product kit" />
+        <div class="registration">03 / 08</div>
+      </div>
+
+      <div id="scene-04-dashboard" class="clip scene product" data-start="28.5" data-duration="10" data-track-index="3">
+        <img src="assets/product/dashboard.png" alt="Working owner dashboard" />
+        <div class="badge">Working product · Dashboard</div>
+        <div class="proof-rail">Real owner workbench · Automated posts intentionally locked</div>
+      </div>
+
+      <div id="scene-05-voice" class="clip scene product" data-start="38" data-duration="7" data-track-index="4">
+        <img src="assets/product/voice-to-text.png" alt="Voice-to-text product screen" />
+        <div class="badge">Working product · Voice to text</div>
+      </div>
+
+      <div id="scene-06-local-ai" class="clip scene product" data-start="44.5" data-duration="5" data-track-index="5">
+        <img src="assets/product/local-ai.png" alt="Local AI product screen" />
+        <div class="badge">Working product · Optional local AI</div>
+      </div>
+
+      <div id="scene-07-business" class="clip scene" data-start="49" data-duration="5" data-track-index="6">
+        <img src="source-pages/page-4.png" alt="Business model" />
+        <div class="registration">07 / 08</div>
+      </div>
+
+      <div id="scene-08-close" class="clip scene" data-start="53.5" data-duration="6.5" data-track-index="7">
+        <img src="source-pages/page-5.png" alt="Neglected to credible in 48 hours" />
+        <div class="badge right">Finished build</div>
+        <div class="final-rail">Private beta · Five founder builds</div>
+      </div>
+
+      <audio id="narration" class="clip" src="audio/narration-track.m4a" data-start="0" data-duration="60" data-track-index="10"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const beats = [
+        ["#scene-01-invention", 0, 6, 1.035],
+        ["#scene-02-problem", 5.5, 10, 1.025],
+        ["#scene-03-kit", 15, 14, 1.035],
+        ["#scene-04-dashboard", 28.5, 10, 1.025],
+        ["#scene-05-voice", 38, 7, 1.03],
+        ["#scene-06-local-ai", 44.5, 5, 1.025],
+        ["#scene-07-business", 49, 5, 1.03],
+        ["#scene-08-close", 53.5, 6.5, 1.025]
+      ];
+      beats.forEach(([selector, start, duration, scale], index) => {
+        tl.set(selector, { opacity: 0, scale }, 0);
+        tl.to(selector, { opacity: 1, duration: .5, ease: "power2.out" }, start);
+        tl.to(selector, { scale: 1, duration, ease: "none" }, start);
+        if (index < beats.length - 1) {
+          tl.to(selector, { opacity: 0, duration: .5, ease: "power2.in" }, start + duration - .5);
+        }
+      });
+      tl.from("#scene-01-invention .badge", { x: -110, opacity: 0, duration: .5, ease: "power3.out" }, .25)
+        .from("#scene-01-invention .story-chip", { y: 120, opacity: 0, duration: .65, ease: "back.out(1.35)" }, 1.05)
+        .from("#scene-04-dashboard .badge", { x: -120, opacity: 0, duration: .45, ease: "power3.out" }, 29.0)
+        .from("#scene-04-dashboard .proof-rail", { y: 80, opacity: 0, duration: .45, ease: "power3.out" }, 31.0)
+        .from("#scene-05-voice .badge", { x: -120, opacity: 0, duration: .45, ease: "power3.out" }, 38.4)
+        .from("#scene-06-local-ai .badge", { x: -120, opacity: 0, duration: .4, ease: "power3.out" }, 44.9)
+        .from("#scene-08-close .badge", { x: 120, opacity: 0, duration: .45, ease: "power3.out" }, 53.9)
+        .from("#scene-08-close .final-rail", { y: 90, opacity: 0, duration: .55, ease: "back.out(1.5)" }, 55.2);
+      window.__timelines.main = tl;
+    </script>
+  </body>
+</html>

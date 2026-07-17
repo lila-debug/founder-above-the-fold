@@ -1,0 +1,842 @@
+[
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Welcome",
+    "fileName": "desktop-welcome.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 987,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Log in",
+    "fileName": "desktop-log-in.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 689,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Sign up",
+    "fileName": "desktop-sign-up.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 689,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "One-time purchase",
+    "fileName": "desktop-one-time-purchase.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 648,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Build complete",
+    "fileName": "desktop-build-complete.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 987,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Dashboard",
+    "fileName": "desktop-dashboard.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 987,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Files",
+    "fileName": "desktop-files.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1338,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Profile photo",
+    "fileName": "desktop-profile-photo.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1338,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Profile editor",
+    "fileName": "desktop-profile-editor.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1338,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Links",
+    "fileName": "desktop-links.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1338,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Perks Hub",
+    "fileName": "desktop-perks-hub.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1338,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Voice to text",
+    "fileName": "desktop-voice-to-text.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1338,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Local AI",
+    "fileName": "desktop-local-ai.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1338,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "desktop",
+      "width": 1440,
+      "height": 900
+    },
+    "screen": "Privacy & settings",
+    "fileName": "desktop-privacy-&-settings.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 1440,
+    "viewportWidth": 1440,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1338,
+    "panelRight": 1388
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Welcome",
+    "fileName": "mobile-welcome.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 348,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Log in",
+    "fileName": "mobile-log-in.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 322,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Sign up",
+    "fileName": "mobile-sign-up.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 348,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "One-time purchase",
+    "fileName": "mobile-one-time-purchase.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 278,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Build complete",
+    "fileName": "mobile-build-complete.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 348,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Dashboard",
+    "fileName": "mobile-dashboard.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 348,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Files",
+    "fileName": "mobile-files.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 356,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Profile photo",
+    "fileName": "mobile-profile-photo.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 356,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Profile editor",
+    "fileName": "mobile-profile-editor.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 356,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Links",
+    "fileName": "mobile-links.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 356,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Perks Hub",
+    "fileName": "mobile-perks-hub.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 356,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Voice to text",
+    "fileName": "mobile-voice-to-text.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 356,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Local AI",
+    "fileName": "mobile-local-ai.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 356,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "mobile",
+      "width": 390,
+      "height": 844
+    },
+    "screen": "Privacy & settings",
+    "fileName": "mobile-privacy-&-settings.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 390,
+    "viewportWidth": 390,
+    "horizontalOverflow": false,
+    "headerHeight": 62,
+    "panelTop": 124,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 390,
+    "titleClipped": false,
+    "titleRight": 356,
+    "panelRight": 374
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Welcome",
+    "fileName": "judge-wide-welcome.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1291,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Log in",
+    "fileName": "judge-wide-log-in.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 993,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Sign up",
+    "fileName": "judge-wide-sign-up.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 993,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "One-time purchase",
+    "fileName": "judge-wide-one-time-purchase.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 952,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Build complete",
+    "fileName": "judge-wide-build-complete.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1291,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Dashboard",
+    "fileName": "judge-wide-dashboard.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1291,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Files",
+    "fileName": "judge-wide-files.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1642,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Profile photo",
+    "fileName": "judge-wide-profile-photo.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1642,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Profile editor",
+    "fileName": "judge-wide-profile-editor.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1642,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Links",
+    "fileName": "judge-wide-links.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1642,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Perks Hub",
+    "fileName": "judge-wide-perks-hub.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1642,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Voice to text",
+    "fileName": "judge-wide-voice-to-text.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1642,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Local AI",
+    "fileName": "judge-wide-local-ai.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1642,
+    "panelRight": 1692
+  },
+  {
+    "viewport": {
+      "name": "judge-wide",
+      "width": 2048,
+      "height": 1152
+    },
+    "screen": "Privacy & settings",
+    "fileName": "judge-wide-privacy-&-settings.png",
+    "consoleErrors": [],
+    "bodyScrollWidth": 2048,
+    "viewportWidth": 2048,
+    "horizontalOverflow": false,
+    "headerHeight": 64,
+    "panelTop": 141,
+    "panelVisibleInFirstViewport": true,
+    "stageWidth": 1400,
+    "titleClipped": false,
+    "titleRight": 1642,
+    "panelRight": 1692
+  }
+]

@@ -1,0 +1,22 @@
+Exactly. Do not sell another LinkedIn scheduler. That market is already crowded with writing, scheduling, formatting, and analytics tools.
+
+Sell this instead:
+
+“The passwordless LinkedIn operating system for founders who hate doing LinkedIn.”
+
+The packaged outcome:
+
+- Magic-link login, with no product password.
+- A profile setup assistant for the headline, About section, experience, featured links, and a manual paste checklist.
+- A voice-locked post queue.
+- Safe publishing through LinkedIn's official route.
+- An MCP and AI command centre where the founder can say, “make me visible this week,” and receive drafts, checks, a queue, and reminders.
+- No scraping, fake engagement, or account-risky behaviour.
+
+The launch offer is not “an AI LinkedIn tool.” It is the end of a humiliating recurring admin chore. Turn a neglected LinkedIn profile into a credible founder signal in 48 hours, then keep it alive without password hell or risky automation.
+
+The sellable MVP must make these parts work perfectly: magic-link login; a ten-minute onboarding questionnaire; generated profile copy; a copy-to-LinkedIn checklist; two weeks of posts; voice checking; a queue and schedule; a manual-tasks-left tracker; and a clean export or share preview.
+
+Sell five private beta builds before overbuilding.
+
+Pitch: “I’ll turn your LinkedIn from neglected to credible above-the-fold in 48 hours, then give you the tool to keep it alive without password hell or risky automation.”

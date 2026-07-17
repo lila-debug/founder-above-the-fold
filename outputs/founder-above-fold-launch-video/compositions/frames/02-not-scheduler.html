@@ -1,0 +1,51 @@
+<template>
+  <style>
+    #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; container-type: size; font-family: "Arial Black", Arial, sans-serif; color: #111111; }
+    #root * { box-sizing: border-box; }
+    .f02-ground { position: absolute; inset: 0; background: #FBD1C3; }
+    .f02-dots { position: absolute; inset: 0; opacity: .14; background-image: radial-gradient(#111111 2px,transparent 2px); background-size: 34px 34px; }
+    .f02-stage { position: absolute; inset: 0; padding: 60px 70px 180px; }
+    .f02-pill { display: inline-block; padding: 13px 20px; border: 4px solid #111111; box-shadow: 7px 7px 0 #111111; background:#97E4F7; font: 900 23px Arial,sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+    .f02-head { position:absolute; top:145px; left:70px; font-size:74px; line-height:.95; letter-spacing:-.04em; text-transform:uppercase; }
+    .f02-tools { position:absolute; left:70px; top:285px; width:1780px; display:grid; grid-template-columns:1fr 1.2fr 1fr; gap:34px; }
+    .f02-card { height:230px; border:5px solid #111111; box-shadow:10px 10px 0 #111111; background:#FFFEF8; display:flex; align-items:center; justify-content:center; font-size:52px; text-transform:uppercase; }
+    .f02-card-mid { background:#F05A28; }
+    .f02-founder { position:absolute; left:635px; top:565px; width:650px; height:230px; border:5px solid #111111; box-shadow:12px 12px 0 #111111; background:#FFFEF8; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+    .f02-founder small { font:900 21px Arial,sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+    .f02-founder strong { margin-top:10px; padding:8px 18px; background:#27C7EF; font-size:70px; line-height:1; text-transform:uppercase; }
+    .f02-chip { position:absolute; padding:12px 17px; border:4px solid #111111; box-shadow:5px 5px 0 #111111; background:#FFFEF8; font:900 19px Arial,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+    .f02-c1{left:100px;top:560px}.f02-c2{left:80px;top:675px}.f02-c3{left:215px;top:800px}.f02-c4{right:90px;top:555px}.f02-c5{right:80px;top:675px}.f02-c6{right:235px;top:805px}
+    .f02-x { position:absolute; left:1485px; top:105px; width:170px; height:170px; border:5px solid #111111; background:#F69777; clip-path:polygon(43% 0,57% 0,57% 43%,100% 43%,100% 57%,57% 57%,57% 100%,43% 100%,43% 57%,0 57%,0 43%,43% 43%); }
+  </style>
+  <div data-hf-id="hf-0bbb" id="root" data-composition-id="02-not-scheduler" data-start="0" data-duration="6.4" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-g0ya" id="f02-ground" class="clip f02-ground" data-start="0" data-duration="6" data-track-index="0"></div>
+    <div data-hf-id="hf-8l3b" id="f02-dots" class="clip f02-dots" data-start="0" data-duration="6" data-track-index="1"></div>
+    <div data-hf-id="hf-4lu6" id="f02-stage" class="clip f02-stage" data-start="0" data-duration="6" data-track-index="2">
+      <div data-hf-id="hf-938b" class="f02-pill">Part 02 · Wrong category</div>
+      <div data-hf-id="hf-1kec" class="f02-head">Not another scheduler.</div>
+      <div data-hf-id="hf-iffq" class="f02-tools">
+        <div data-hf-id="hf-1xb6" class="f02-card">Write</div><div data-hf-id="hf-edv2" class="f02-card f02-card-mid">Schedule</div><div data-hf-id="hf-v319" class="f02-card">Analytics</div>
+      </div>
+      <div data-hf-id="hf-cxyq" class="f02-founder"><small data-hf-id="hf-mqle">The real work</small><strong data-hf-id="hf-ym3c">Credibility</strong></div>
+      <div data-hf-id="hf-53t7" class="f02-chip f02-c1">Format</div><div data-hf-id="hf-psbx" class="f02-chip f02-c2">History</div><div data-hf-id="hf-ag0d" class="f02-chip f02-c3">Auto</div>
+      <div data-hf-id="hf-nc7j" class="f02-chip f02-c4">Rewrite</div><div data-hf-id="hf-cfxn" class="f02-chip f02-c5">Remember</div><div data-hf-id="hf-5y6x" class="f02-chip f02-c6">Post</div>
+      <div data-hf-id="hf-ot2z" class="f02-x"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.from(".f02-pill",{x:-70,opacity:0,duration:.4,ease:"power3.out"},0)
+        .from(".f02-head",{y:55,opacity:0,duration:.45,ease:"power3.out"},.2)
+        .from(".f02-card",{y:95,opacity:0,stagger:.16,duration:.55,ease:"back.out(1.4)"},.7)
+        .from(".f02-x",{scale:0,rotation:45,opacity:0,duration:.45,ease:"back.out(2)"},1.35)
+        .from([".f02-c1",".f02-c4"],{x:function(i){return i===0?-120:120},opacity:0,stagger:.1,duration:.4,ease:"power3.out"},1.6)
+        .from([".f02-c2",".f02-c5"],{x:function(i){return i===0?-120:120},opacity:0,stagger:.1,duration:.4,ease:"power3.out"},1.95)
+        .from([".f02-c3",".f02-c6"],{y:90,opacity:0,stagger:.1,duration:.4,ease:"power3.out"},2.3)
+        .to(".f02-card-mid",{scaleY:.16,opacity:.2,duration:.38,ease:"power3.in",transformOrigin:"center center"},2.65)
+        .from(".f02-founder",{scale:.72,opacity:0,duration:.55,ease:"back.out(1.6)",transformOrigin:"center center"},2.9)
+        .from(".f02-founder strong",{scaleX:0,duration:.45,ease:"power3.out",transformOrigin:"left center"},3.25);
+      window.__timelines["02-not-scheduler"] = tl;
+    </script>
+  </div>
+</template>

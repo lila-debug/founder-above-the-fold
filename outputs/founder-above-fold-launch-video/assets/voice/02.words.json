@@ -1,0 +1,110 @@
+[
+  {
+    "id": "w0",
+    "text": "Not",
+    "start": 0.03,
+    "end": 0.208
+  },
+  {
+    "id": "w1",
+    "text": "another",
+    "start": 0.208,
+    "end": 0.622
+  },
+  {
+    "id": "w2",
+    "text": "scheduler.",
+    "start": 0.622,
+    "end": 1.156
+  },
+  {
+    "id": "w3",
+    "text": "Not",
+    "start": 1.156,
+    "end": 1.333
+  },
+  {
+    "id": "w4",
+    "text": "another",
+    "start": 1.333,
+    "end": 1.748
+  },
+  {
+    "id": "w5",
+    "text": "engagement",
+    "start": 1.748,
+    "end": 2.341
+  },
+  {
+    "id": "w6",
+    "text": "bot.",
+    "start": 2.341,
+    "end": 2.518
+  },
+  {
+    "id": "w7",
+    "text": "The",
+    "start": 2.518,
+    "end": 2.696
+  },
+  {
+    "id": "w8",
+    "text": "work",
+    "start": 2.696,
+    "end": 2.933
+  },
+  {
+    "id": "w9",
+    "text": "is",
+    "start": 2.933,
+    "end": 3.052
+  },
+  {
+    "id": "w10",
+    "text": "credibility—and",
+    "start": 3.052,
+    "end": 3.881
+  },
+  {
+    "id": "w11",
+    "text": "the",
+    "start": 3.881,
+    "end": 4.059
+  },
+  {
+    "id": "w12",
+    "text": "admin",
+    "start": 4.059,
+    "end": 4.355
+  },
+  {
+    "id": "w13",
+    "text": "keeps",
+    "start": 4.355,
+    "end": 4.651
+  },
+  {
+    "id": "w14",
+    "text": "getting",
+    "start": 4.651,
+    "end": 5.066
+  },
+  {
+    "id": "w15",
+    "text": "in",
+    "start": 5.066,
+    "end": 5.185
+  },
+  {
+    "id": "w16",
+    "text": "the",
+    "start": 5.185,
+    "end": 5.362
+  },
+  {
+    "id": "w17",
+    "text": "way.",
+    "start": 5.362,
+    "end": 5.54
+  }
+]

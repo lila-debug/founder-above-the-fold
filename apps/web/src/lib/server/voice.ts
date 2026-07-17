@@ -24,7 +24,7 @@ export async function runVoiceCommand(body: string): Promise<VoiceCommandResult>
   const command = getVoiceCommandSpec();
 
   if (!command) {
-    throw new VoiceCommandSetupError("VOICE_CHECK_COMMAND is not configured.");
+    return runBuiltInVoiceCheck(body);
   }
 
   return new Promise((resolve, reject) => {
@@ -92,10 +92,72 @@ export async function runVoiceCommand(body: string): Promise<VoiceCommandResult>
   });
 }
 
+const BUILT_IN_REPLACEMENTS: Record<string, string> = {
+  analyze: "analyse",
+  center: "centre",
+  color: "colour",
+  favorite: "favourite",
+  flavor: "flavour",
+  honor: "honour",
+  labor: "labour",
+  theater: "theatre",
+};
+
+const BUILT_IN_PROHIBITED = [
+  "comment below",
+  "crush it",
+  "game changer",
+  "here's the thing",
+  "hustle",
+  "like and share",
+  "link in comments",
+  "unlock your potential",
+];
+
+function runBuiltInVoiceCheck(body: string): VoiceCommandResult {
+  const text = body.trim();
+  const lowered = text.toLowerCase();
+  const failures: string[] = [];
+
+  if (!text) {
+    failures.push("Draft body is empty.");
+  }
+
+  for (const [american, british] of Object.entries(BUILT_IN_REPLACEMENTS)) {
+    if (new RegExp(`\\b${american}\\b`, "i").test(text)) {
+      failures.push(`US spelling found: ${american}. Use ${british}.`);
+    }
+  }
+
+  for (const phrase of BUILT_IN_PROHIBITED) {
+    if (lowered.includes(phrase)) {
+      failures.push(`Prohibited phrase found: ${phrase}.`);
+    }
+  }
+
+  if (/(?:^|\s)#[A-Za-z0-9_]+/.test(text)) {
+    failures.push("Hashtag found. Add hashtags only after deliberate owner review.");
+  }
+
+  if (text.includes("!!!")) {
+    failures.push("Excessive exclamation marks found.");
+  }
+
+  return {
+    status: failures.length === 0 ? "passed" : "failed",
+    command: "built-in-british-voice-gate-v1",
+    stdout:
+      failures.length === 0
+        ? "PASSED\nBritish English and Founder Above the Fold voice checks passed."
+        : `FAILED\n${failures.map((failure) => `- ${failure}`).join("\n")}`,
+    stderr: null,
+  };
+}
+
 function getVoiceCommandSpec(): CommandSpec | null {
   const raw = process.env.VOICE_CHECK_COMMAND?.trim();
 
-  if (!raw) {
+  if (!raw || raw === "builtin") {
     return null;
   }
 

@@ -108,3 +108,13 @@ Do not store:
 The MCP marketplace page provided by the user is useful for understanding desired shape, but its advertised capabilities go beyond this PRD's safe scope. Do not install or depend on it for Founder Above the Fold unless a later review proves each capability uses official LinkedIn access that the owner actually has.
 
 Founder Above the Fold should be safer and narrower: an MCP server for the owner's content operation, not a general LinkedIn control plane.
+
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)

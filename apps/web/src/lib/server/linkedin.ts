@@ -56,8 +56,10 @@ type StoredConnection = {
 type LinkedInStatusRow = {
   linkedin_connected_at: Date | null;
   linkedin_attention_required: boolean | null;
+  refresh_token_ciphertext: string | null;
   scope: string | null;
   expires_at: Date | null;
+  refresh_expires_at: Date | null;
 };
 
 export type LinkedInConnectionState =
@@ -79,16 +81,18 @@ export class LinkedInOAuthError extends Error {
 export function getLinkedInOAuthConfig(): LinkedInOAuthConfig {
   const clientId = process.env.LINKEDIN_CLIENT_ID?.trim();
   const clientSecret = process.env.LINKEDIN_CLIENT_SECRET?.trim();
-  const redirectUri =
+  const rawRedirectUri =
     process.env.LINKEDIN_REDIRECT_URI?.trim() ??
     (process.env.NEXT_PUBLIC_APP_URL
-      ? `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/linkedin/callback`
+      ? `${process.env.NEXT_PUBLIC_APP_URL.replace(/\/$/, "")}/api/auth/linkedin/callback`
       : "");
   const scopes = process.env.LINKEDIN_SCOPES?.trim() || DEFAULT_LINKEDIN_SCOPES;
 
-  if (!clientId || !clientSecret || !redirectUri) {
+  if (!clientId || !clientSecret || !rawRedirectUri) {
     throw new Error("LinkedIn OAuth environment variables are not configured.");
   }
+
+  const redirectUri = validateLinkedInRedirectUri(rawRedirectUri);
 
   return {
     clientId,
@@ -96,6 +100,34 @@ export function getLinkedInOAuthConfig(): LinkedInOAuthConfig {
     redirectUri,
     scopes,
   };
+}
+
+function validateLinkedInRedirectUri(value: string) {
+  let url: URL;
+
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error("LINKEDIN_REDIRECT_URI must be an absolute URL.");
+  }
+
+  if (url.username || url.password || url.search || url.hash) {
+    throw new Error("LINKEDIN_REDIRECT_URI cannot contain credentials, a query, or a fragment.");
+  }
+
+  if (url.pathname !== "/api/auth/linkedin/callback") {
+    throw new Error(
+      "LINKEDIN_REDIRECT_URI must end with /api/auth/linkedin/callback exactly.",
+    );
+  }
+
+  const isLocal = url.hostname === "localhost" || url.hostname === "127.0.0.1";
+
+  if (url.protocol !== "https:" && !(isLocal && url.protocol === "http:")) {
+    throw new Error("LINKEDIN_REDIRECT_URI must use HTTPS outside local development.");
+  }
+
+  return url.toString();
 }
 
 export function getLinkedInAuthorizationUrl(state: string) {
@@ -332,6 +364,45 @@ export async function markLinkedInAttentionRequired({
   }
 }
 
+export async function disconnectLinkedIn() {
+  if (!hasDatabaseUrl()) {
+    throw new Error("DATABASE_URL is not configured.");
+  }
+
+  const client = await getDbPool().connect();
+  try {
+    await client.query("begin");
+    const ownerResult = await client.query<{ id: string }>(
+      "select id from owner_settings where singleton_key = true limit 1 for update",
+    );
+    await client.query("delete from oauth_tokens where provider = 'linkedin'");
+    await client.query(
+      `
+        update owner_settings
+        set linkedin_member_urn = null,
+            linkedin_connected_at = null,
+            linkedin_attention_required = false
+        where singleton_key = true
+      `,
+    );
+    const ownerId = ownerResult.rows[0]?.id;
+    if (ownerId) {
+      await writeLinkedInAuditEvent(client, {
+        action: "linkedin.disconnected",
+        entityId: ownerId,
+        metadata: { tokenRemoved: true },
+      });
+    }
+    await client.query("commit");
+    return { disconnected: true };
+  } catch (error) {
+    await rollbackQuietly(client);
+    throw error;
+  } finally {
+    client.release();
+  }
+}
+
 export async function getLinkedInConnectionStatus({
   ownerAuthenticated,
 }: {
@@ -350,6 +421,10 @@ export async function getLinkedInConnectionStatus({
       granted: [] as string[],
       missing: [] as string[],
     },
+    refresh: {
+      available: false,
+      expiresAt: null as string | null,
+    },
     attentionReasons: [] as string[],
   };
 
@@ -366,8 +441,10 @@ export async function getLinkedInConnectionStatus({
       select
         owner_settings.linkedin_connected_at,
         owner_settings.linkedin_attention_required,
+        oauth_tokens.refresh_token_ciphertext,
         oauth_tokens.scope,
-        oauth_tokens.expires_at
+        oauth_tokens.expires_at,
+        oauth_tokens.refresh_expires_at
       from (select true as singleton_key) as owner_slot
       left join owner_settings
         on owner_settings.singleton_key = owner_slot.singleton_key
@@ -398,7 +475,15 @@ export async function getLinkedInConnectionStatus({
     attentionReasons.push("linkedin_reconnect_required");
   }
 
-  if (row.expires_at && row.expires_at.getTime() <= Date.now()) {
+  const refreshAvailable =
+    Boolean(row.refresh_token_ciphertext) &&
+    (!row.refresh_expires_at || row.refresh_expires_at.getTime() > Date.now());
+
+  if (
+    row.expires_at &&
+    row.expires_at.getTime() <= Date.now() &&
+    !refreshAvailable
+  ) {
     attentionReasons.push("token_expired");
   }
 
@@ -415,13 +500,17 @@ export async function getLinkedInConnectionStatus({
     message:
       attentionReasons.length > 0
         ? "LinkedIn needs inspection before any future publishing rail can use the stored connection."
-        : "LinkedIn connection is stored. The publishing motor is not implemented in this build.",
+        : "LinkedIn connection is stored and the official publishing rail is ready.",
     connectedAt: row.linkedin_connected_at.toISOString(),
     expiresAt: row.expires_at?.toISOString() ?? null,
     scope: {
       required: getRequiredLinkedInScopes(),
       granted: grantedScopes,
       missing: missingScopes,
+    },
+    refresh: {
+      available: refreshAvailable,
+      expiresAt: row.refresh_expires_at?.toISOString() ?? null,
     },
     attentionReasons,
   };

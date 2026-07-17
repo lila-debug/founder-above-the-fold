@@ -127,3 +127,12 @@ Avoid:
 - [ ] Founding-cohort conversion, refund, and support thresholds are tested.
 - [ ] Canadian legal and consumer-protection review is complete.
 
+---
+
+Based on true events. Sadly.
+
+Canadian Kind, Scottish Strong, Nigerian Proud.
+
+© 2024–2026 Lila Olufemi Abegunrin · REVOLUTIONISING LIFE SINCE 1982™
+
+Founder Above the Fold™ · Trademarks and Patents Pending (CIPO)
