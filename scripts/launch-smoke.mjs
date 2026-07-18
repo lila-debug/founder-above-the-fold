@@ -18,6 +18,13 @@ await expectStatus("public no-write demo", "/try", 200);
 await expectStatus("interactive build manual", "/manual", 200);
 await expectStatus("health panel", "/api/mcp/health", 200);
 await expectStatus("draft read owner lock", "/api/posts", 401);
+await expectStatus("mobile session owner lock", "/api/mobile/session", 401);
+await expectStatus("mobile LinkedIn start owner lock", "/api/mobile/linkedin/start", 401, {
+  method: "POST",
+});
+await expectStatus("mobile logout fastener validation", "/api/mobile/auth/logout", 400, {
+  method: "POST",
+});
 
 await expectStatus("dashboard owner redirect", "/dashboard", 307, {
   redirect: "manual",
@@ -66,7 +73,7 @@ await expectStatus("analytics cron lock", "/api/cron/sync-analytics", 401, {
 await expectStatus("Stripe checkout fuse", "/api/commerce/stripe/checkout", 503, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ email: "launch-smoke@example.test", termsAccepted: true }),
+  body: JSON.stringify({ email: "launch-smoke@example.test", termsAccepted: true, offerKey: "mac_licence" }),
 });
 await expectStatus("Stripe webhook signature clamp", "/api/webhooks/stripe", 400, {
   method: "POST",
@@ -86,9 +93,14 @@ await expectStatus("invalid magic-link input", "/api/auth/magic-link", 400, {
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ email: "not-an-email" }),
 });
+await expectStatus("invalid mobile magic-link input", "/api/mobile/auth/magic-link", 400, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ email: "not-an-email" }),
+});
 
 if (process.env.LAUNCH_SMOKE_EXPECT_AUTH_SETUP_LOCK === "true") {
-  await expectStatus("production development-auth lock", "/api/auth/magic-link", 503, {
+  await expectOneOfStatus("production auth setup lock", "/api/auth/magic-link", [403, 503], {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email: "owner@example.test" }),
@@ -107,6 +119,7 @@ assert.equal(
   health.capabilities.queueScheduling,
   health.database.ok ? "available" : "setup_required",
 );
+assert.ok(["available", "setup_required"].includes(health.capabilities.mobileAuth));
 assert.equal(
   health.capabilities.templateLibrary,
   health.database.ok ? "available" : "setup_required",
@@ -155,7 +168,10 @@ const linkedInResponse = await fetch(`${baseUrl}/api/linkedin/status`, {
 });
 assert.equal(linkedInResponse.status, 200);
 const linkedInStatus = await linkedInResponse.json();
-assert.equal(linkedInStatus.state, "setup_required");
+assert.ok(
+  ["setup_required", "not_connected"].includes(linkedInStatus.state),
+  `LinkedIn status should remain locked, got ${linkedInStatus.state}`,
+);
 assert.equal(linkedInStatus.ownerAuthenticated, false);
 assert.equal(linkedInStatus.canConnect, false);
 assert.equal(hasTokenShapedKey(linkedInStatus), false);
@@ -201,6 +217,19 @@ async function expectStatus(label, path, expected, options = {}) {
 
   assert.equal(response.status, expected, `${label}: expected ${expected}, got ${response.status}`);
   results.push(`${label} returned ${expected}`);
+}
+
+async function expectOneOfStatus(label, path, expectedStatuses, options = {}) {
+  const response = await fetch(`${baseUrl}${path}`, {
+    redirect: "manual",
+    ...options,
+  });
+
+  assert.ok(
+    expectedStatuses.includes(response.status),
+    `${label}: expected one of ${expectedStatuses.join(", ")}, got ${response.status}`,
+  );
+  results.push(`${label} returned ${response.status}`);
 }
 
 async function expectRedirect(label, path, expectedPath) {

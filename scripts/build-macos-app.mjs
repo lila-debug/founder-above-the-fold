@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
-import { chmod, copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { chmod, copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -7,7 +8,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const packageDir = path.join(root, "apps", "macos");
 const envFile = path.join(root, "apps", "web", ".env.local");
 const outputRoot = path.join(root, "output", "macos");
-const app = path.join(outputRoot, "Founder Above the Fold.app");
+const finalApp = path.join(outputRoot, "Founder Above the Fold.app");
+const stagingRoot = await mkdtemp(path.join(tmpdir(), "founder-above-fold-macos-"));
+const app = path.join(stagingRoot, "Founder Above the Fold.app");
 const contents = path.join(app, "Contents");
 const macOS = path.join(contents, "MacOS");
 const resources = path.join(contents, "Resources");
@@ -31,7 +34,6 @@ const binPath = execFileSync("swift", ["build", "--package-path", packageDir, "-
   encoding: "utf8",
 }).trim();
 
-await rm(app, { recursive: true, force: true });
 await mkdir(macOS, { recursive: true });
 await mkdir(resources, { recursive: true });
 await copyFile(path.join(binPath, executableName), path.join(macOS, executableName));
@@ -77,7 +79,12 @@ execFileSync("plutil", ["-lint", path.join(contents, "Info.plist")], { stdio: "i
 execFileSync("xattr", ["-cr", app], { stdio: "inherit" });
 execFileSync("codesign", ["--force", "--deep", "--sign", "-", app], { stdio: "inherit" });
 execFileSync("codesign", ["--verify", "--deep", "--strict", "--verbose=2", app], { stdio: "inherit" });
-console.log(`PASS assembled and ad-hoc signed local Mac app: ${app}`);
+await rm(finalApp, { recursive: true, force: true });
+await mkdir(outputRoot, { recursive: true });
+execFileSync("ditto", ["--noextattr", "--norsrc", app, finalApp], { stdio: "inherit" });
+execFileSync("codesign", ["--verify", "--deep", "--strict", "--verbose=2", finalApp], { stdio: "inherit" });
+await rm(stagingRoot, { recursive: true, force: true });
+console.log(`PASS assembled and ad-hoc signed local Mac app: ${finalApp}`);
 console.log("BLOCKED Developer ID signing and notarization still require the owner's approved Apple certificate workflow.");
 
 function readSlot(text, name) {

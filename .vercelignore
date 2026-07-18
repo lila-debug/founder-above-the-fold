@@ -12,6 +12,10 @@ scripts/__pycache__/
 # Local build and dependency caches.
 node_modules/
 **/node_modules/
+.git/
+.vercel/
+.playwright-cli/
+.memory/
 .next/
 **/.next/
 dist/

@@ -3,13 +3,15 @@ import { getAnalyticsReadiness } from "@/lib/server/analytics";
 import { checkDatabase, dbQuery } from "@/lib/server/db";
 import { getEnvReport } from "@/lib/server/env";
 import { getLinkedInConnectionStatus } from "@/lib/server/linkedin";
+import { checkMobileAuthSchema } from "@/lib/server/mobile-auth";
 
 export async function GET() {
-  const [database, env, linkedinConnection, analyticsReadiness] = await Promise.all([
+  const [database, env, linkedinConnection, analyticsReadiness, mobileAuth] = await Promise.all([
     checkDatabase(),
     getEnvReport(),
     getLinkedInConnectionStatus({ ownerAuthenticated: false }),
     getAnalyticsReadiness(),
+    checkMobileAuthSchema(),
   ]);
   const linkedinConfigured = Object.values(env.linkedin).every(
     (state) => state === "configured",
@@ -47,9 +49,11 @@ export async function GET() {
         env.waitlist.NEXT_PUBLIC_WAITLISTER_KEY === "configured"
           ? "available"
           : "setup_required",
+      mobileAuth,
       stripeSandbox:
         (env.stripe.mode === "sandbox" || env.stripe.mode === "live") &&
-        Object.values(env.stripe.keys).every((state) => state === "configured")
+        Object.values(env.stripe.keys).every((state) => state === "configured") &&
+        Object.values(env.stripe.offerPrices).every((state) => state === "configured")
           ? env.stripe.checkout === "enabled"
             ? env.stripe.mode === "live"
               ? env.stripe.liveApproval === "approved" && env.stripe.automaticTax === "enabled"

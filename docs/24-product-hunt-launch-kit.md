@@ -11,7 +11,7 @@ Checked against Product Hunt's official launch, scheduling and featuring guidanc
 | C | Listing copy | Fits the name, tagline, description, tags and maker story into Product Hunt | This panel | Founder |
 | D | Gallery crate | Shows real product surfaces at Product Hunt's recommended size | `output/product-hunt/gallery/` | Product |
 | E | Launch film | Shows the 45-second product story | `outputs/founder-above-fold-launch-video/renders/founder-above-fold-launch-final.mp4` | Product |
-| F | Three-rail offer label | Separates limited hands-on service from open self-serve SaaS and outright macOS ownership | Product Hunt listing + price page | Founder |
+| F | Three-rail / four-offer plate | Separates two limited hands-on services from open self-serve SaaS and outright macOS ownership | Product Hunt listing + price page | Founder |
 | G | Response board | Keeps every launch-day comment answered without canned automation | `docs/25-product-hunt-response-plan.md` | Founder |
 
 ### Mission Control Board
@@ -79,7 +79,7 @@ Founder Above the Fold takes a different route:
 
 It deliberately does not scrape profiles, automate DMs, send connections, or generate engagement theatre. Profile edits remain a visible manual paste because LinkedIn does not provide a personal-profile editing API.
 
-The product has three rails: a limited number of hands-on setup seats for founders who want me to assemble it with them, an open self-serve SaaS tool, and an outright macOS purchase for people who prefer to own their software. The service seats are limited; ordinary product ownership is not.
+The product has three rails and four offers: limited hands-on profile setup, limited monthly Visibility Ops, an open self-serve Founder Profile OS, and an outright macOS purchase for people who prefer to own their software. The two founder-delivered services are limited; ordinary product access is not.
 
 You can try the no-write draft → voice clamp → queue mechanism immediately. Pricing and availability will be fastened only after the purchase, support, privacy, update, and refund labels pass their live tests.
 
@@ -88,9 +88,9 @@ I would value specific feedback: where does your founder LinkedIn workflow actua
 #### Step 3 - Fasten the three offer rails
 Diagram:
 ```text
-                           +--> [Limited hands-on setup seats]
-[Founder chooses a rail] -+--> [Open self-serve SaaS]
-                           +--> [Outright macOS purchase]
+                           +--> [Service: setup once / Visibility Ops monthly]
+[Founder chooses a rail] -+--> [Self-serve: Founder Profile OS monthly]
+                           +--> [Ownership: macOS licence once]
 ```
 
 Do:
@@ -99,6 +99,15 @@ Do:
 3. Offer the macOS application as an outright purchase for owners who reject recurring rent.
 4. State the included update period, supported macOS versions, licence scope, and later-major-upgrade policy before accepting payment.
 5. Complete Product Hunt's promo field only when the matching checkout path accepts the exact offer.
+
+Proposed Canadian launch-price plate, still locked behind owner approval and the genuine Stripe lifecycle:
+
+```text
+[MAC LICENCE]        CA$199 once
+[PROFILE SETUP]      CA$499 once
+[FOUNDER PROFILE OS] CA$69 / month
+[VISIBILITY OPS]     CA$750 / month · five service seats
+```
 
 Check:
 - The service cap is not presented as artificial scarcity for the self-serve products.
@@ -185,6 +194,7 @@ Avoid:
 - [ ] Owner-approved LinkedIn OAuth and one text-only post proof pass without token leakage.
 - [ ] Stripe's genuine sandbox lifecycle passes; live account country, tax, price, webhook and explicit owner approval are fitted before any paid offer is advertised as available.
 - [x] Listing name, 59-character tagline, description, maker comment, and bounded offer are drafted.
+- [x] Three-rail / four-offer price plate matches the fail-closed Stripe catalogue and labels both service offers as proposed until approved.
 - [x] Five real-UI gallery panels and a square thumbnail have a repeatable build jig.
 - [ ] YouTube upload and Product Hunt draft are owner-approved and visually inspected.
 - [ ] Launch date remains unset until every required live light is green.

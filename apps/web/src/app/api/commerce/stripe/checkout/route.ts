@@ -1,17 +1,22 @@
 import { NextResponse } from "next/server";
 import { createStripeSandboxCheckout } from "@/lib/server/commerce";
+import { isCommerceOfferKey } from "@/lib/commerce-offers";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json() as { email?: unknown; termsAccepted?: unknown };
+    const body = await request.json() as { email?: unknown; termsAccepted?: unknown; offerKey?: unknown };
     if (typeof body.email !== "string") {
       return NextResponse.json({ error: "Enter the purchaser email address." }, { status: 400 });
+    }
+    if (!isCommerceOfferKey(body.offerKey)) {
+      return NextResponse.json({ error: "Choose a labelled offer before checkout." }, { status: 400 });
     }
     const checkout = await createStripeSandboxCheckout({
       email: body.email,
       termsAccepted: body.termsAccepted === true,
+      offerKey: body.offerKey,
     });
     return NextResponse.json(checkout, { status: 201, headers: { "cache-control": "no-store" } });
   } catch (cause) {
@@ -22,4 +27,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: safe }, { status: 503 });
   }
 }
-

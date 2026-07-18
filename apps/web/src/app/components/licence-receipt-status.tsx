@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, Clock3, RotateCcw, ShieldAlert } from "lucide-react";
+import { commerceOffers, type CommerceOfferKey } from "@/lib/commerce-offers";
 
 type Receipt = {
-  state: "processing" | "active" | "cancelled" | "failed" | "refunded" | "disputed" | "revoked" | "not_found";
+  state: "processing" | "active" | "past_due" | "cancelled" | "failed" | "refunded" | "disputed" | "revoked" | "not_found";
+  offerKey?: CommerceOfferKey;
   majorVersion?: number | null;
   purchasedAt?: string | null;
 };
@@ -36,14 +38,16 @@ export function LicenceReceiptStatus({ sessionId }: { sessionId: string }) {
 
   const active = receipt.state === "active";
   const processing = receipt.state === "processing";
+  const offer = commerceOffers[receipt.offerKey ?? "mac_licence"];
+  const macLicence = (receipt.offerKey ?? "mac_licence") === "mac_licence";
   return (
     <article className="receipt-card" data-state={receipt.state}>
       {active ? <CheckCircle2 size={42} /> : processing ? <Clock3 size={42} /> : <ShieldAlert size={42} />}
       <span className="section-kicker">Signed receipt inspection</span>
-      <h1>{active ? "Licence fitted" : processing ? "Payment received; fitting receipt" : "Licence needs inspection"}</h1>
-      <p>{active ? `The signed Stripe event created one active major-version ${receipt.majorVersion ?? 1} licence.` : processing ? `The return page cannot unlock the cabinet. Waiting for the signed server event${checks > 1 ? ` · check ${checks}` : ""}.` : "No active receipt was found from this return link. No second payment is required; use the recovery handle or contact support."}</p>
+      <h1>{active ? `${offer.shortName} fitted` : processing ? "Payment received; fitting record" : "Payment needs inspection"}</h1>
+      <p>{active ? macLicence ? `The signed Stripe event created one active major-version ${receipt.majorVersion ?? 1} licence.` : `The signed Stripe event fitted active access for ${offer.name}.` : processing ? `The return page cannot unlock the cabinet. Waiting for the signed server event${checks > 1 ? ` · check ${checks}` : ""}.` : "No active payment record was found from this return link. Do not pay twice; contact support or use Mac licence recovery where applicable."}</p>
       <div className="receipt-actions">
-        {active ? <Link className="hard-button bg-black text-white" href="/dashboard">Open workbench</Link> : null}
+        {active ? <Link className="hard-button bg-black text-white" href="/dashboard">{macLicence ? "Open workbench" : "Open customer cabinet"}</Link> : null}
         <Link className="text-button" href="/pricing"><RotateCcw size={15} /> Return to licence panel</Link>
       </div>
     </article>

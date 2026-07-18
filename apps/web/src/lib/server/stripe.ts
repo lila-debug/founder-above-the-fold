@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { commerceOffers, type CommerceOfferKey } from "../commerce-offers";
 import { getRequiredEnv } from "./env";
 
 let stripeClient: Stripe | undefined;
@@ -17,7 +18,7 @@ export function getStripeConfig(options: { requireCheckoutEnabled?: boolean } = 
   const mode = getConfiguredStripeMode();
   const secretKey = getRequiredEnv("STRIPE_SECRET_KEY");
   const webhookSecret = getRequiredEnv("STRIPE_WEBHOOK_SECRET");
-  const priceId = getRequiredEnv("STRIPE_PRICE_ID");
+  const priceId = getStripeOfferPriceId("mac_licence");
   const baseUrl = new URL(getRequiredEnv("NEXT_PUBLIC_APP_URL"));
 
   const sandboxKey = /^(sk|rk)_test_/.test(secretKey);
@@ -27,9 +28,6 @@ export function getStripeConfig(options: { requireCheckoutEnabled?: boolean } = 
   }
   if (!webhookSecret.startsWith("whsec_")) {
     throw new Error("Stripe webhook signing secret is invalid.");
-  }
-  if (!priceId.startsWith("price_")) {
-    throw new Error("Stripe one-time price ID is invalid.");
   }
   if (mode === "live") {
     if (process.env.STRIPE_LIVE_APPROVED !== "true") {
@@ -55,6 +53,16 @@ export function getStripeConfig(options: { requireCheckoutEnabled?: boolean } = 
     baseUrl,
     automaticTaxEnabled: process.env.STRIPE_AUTOMATIC_TAX_ENABLED === "true",
   };
+}
+
+export function getStripeOfferPriceId(offerKey: CommerceOfferKey) {
+  const offer = commerceOffers[offerKey];
+  const value = process.env[offer.priceEnv]?.trim()
+    || (offerKey === "mac_licence" ? process.env.STRIPE_PRICE_ID?.trim() : "");
+  if (!value?.startsWith("price_")) {
+    throw new Error(`Stripe price is not fitted for ${offer.shortName}.`);
+  }
+  return value;
 }
 
 export function getStripeClient() {

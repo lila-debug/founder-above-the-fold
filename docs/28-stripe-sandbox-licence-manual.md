@@ -5,7 +5,7 @@
 | Label | Part | Plain-English job | Where it lives | Owner |
 |---|---|---|---|---|
 | A | Mode-labelled key | Opens Stripe's simulated or live parts bin, never both | Encrypted local/hosting environment | Founder |
-| B | One-time price | Defines the test CAD licence amount | Stripe sandbox | Founder |
+| B | Four-offer price rack | Holds Mac ownership, profile setup, SaaS and visibility-ops prices in separate slots | Stripe sandbox + `commerce-offers.ts` | Founder |
 | C | Webhook fastener | Proves a commerce event came from Stripe | `STRIPE_WEBHOOK_SECRET` | Server |
 | D | Checkout fuse | Keeps checkout off until receipt and recovery tests pass | `STRIPE_CHECKOUT_ENABLED` | Server |
 | E | Preflight gauge | Rejects mode-mismatched keys/prices, subscriptions, inactive products, wrong currency and wrong amount | `scripts/stripe-sandbox-preflight.mjs` | Build system |
@@ -13,13 +13,14 @@
 | G | Recovery handle | Sends a short-lived private link without revealing whether an address owns a licence | `/api/commerce/licence/recover` | Customer |
 | H | Signed device receipt | Binds one hashed Mac identifier to the paid licence and signs a 30-day offline receipt with Ed25519 | `/api/commerce/licence/activate` | Server + Mac app |
 | I | Production fitting jig | Audits first, then creates one test webhook and fits encrypted Vercel slots only after two approval flags | `scripts/provision-stripe-sandbox-webhook.mjs` | Build system + Founder |
+| J | Catalogue fitting jig | Reuses exact products, blocks duplicates and creates missing sandbox products/prices only after price approval | `scripts/provision-stripe-sandbox-catalogue.mjs` | Build system + Founder |
 
 ### Mission Control Board
 ```text
 [Stripe mode-labelled key]
           |
           v
-[one-time CAD price] ---> [signed webhook] ---> [recoverable licence]
+[four labelled CAD prices] ---> [signed webhook] ---> [licence / service / subscription bin]
           |
           +-- wrong/live/missing part ---> [checkout remains locked]
 ```
@@ -29,23 +30,39 @@
 Do:
 1. Use a Stripe sandbox or test secret key only.
 2. Place secrets in `apps/web/.env.local` locally or encrypted hosting variables; never in source control or chat.
-3. Create an active one-time CAD price for the Founder Above the Fold product.
+3. Create four active CAD prices: Mac licence and profile setup as one-time parts; Founder Profile OS and Visibility Ops as monthly parts.
 4. Keep `STRIPE_MODE=sandbox`, `STRIPE_LIVE_APPROVED=false`, and `STRIPE_CHECKOUT_ENABLED=false`.
 
 Check:
 - Run `npm run check:stripe`.
-- The gauge reports the authenticated sandbox, active product, one-time price, currency and expected amount without printing any secret.
+- The gauge reports all four active products, exact CAD amounts, correct one-time/monthly shape and currency without printing any secret.
 
 Avoid:
 - Placing a live key in sandbox mode, enabling recurring billing, or granting a licence from the browser redirect.
 
+Catalogue fitting jig:
+```text
+[Read active sandbox parts]
+            |
+            v
+[Reuse exact match / block duplicate]
+            |
+            v
+[Owner approves four prices] ---> [Create missing parts] ---> [Fit non-secret price IDs]
+```
+
+Run `npm run check:stripe-catalogue` first. It changes nothing. Only after the owner
+approves all four exact prices, run with both `STRIPE_CATALOGUE_APPROVED=true` and
+`APPLY_STRIPE_SANDBOX_CATALOGUE=true`.
+
 #### Step 2 - Fit the receipt clamp
 Do:
-1. Create the server Checkout Session from the approved price ID.
+1. Create the server Checkout Session from the selected labelled offer price ID.
 2. Verify Stripe's signature against the unmodified webhook body.
 3. Make event processing idempotent.
 4. Grant access only after the payment is confirmed.
-5. Revoke or flag the licence on refund or chargeback according to the reviewed terms.
+5. Route Mac purchases to the licence bin, other one-time purchases to the service bin, and monthly purchases to the subscription bin.
+6. Revoke or flag the matching part on refund, failed renewal, cancellation or chargeback according to the reviewed terms.
 
 Check:
 - Duplicate, forged, delayed, failed, refunded and disputed test events cannot create two licences or preserve invalid access.
@@ -123,10 +140,16 @@ Check:
 
 ### Finished-Build Test
 - [x] Active `Founder Above the Fold` sandbox product and one-time CA$199 price created.
+- [x] Four-offer fail-closed catalogue fitted locally: CA$199 Mac licence, proposed CA$499 profile setup, proposed CA$69/month Founder Profile OS and proposed CA$750/month Visibility Ops.
+- [x] Subscription checkout and webhook routing cannot mint a Mac licence; real-database proof covers active and past-due SaaS access.
+- [x] Idempotent catalogue jig audits existing sandbox parts, blocks duplicates and withholds creation until the exact price approval flags are fitted.
 - [x] Compromised sandbox credentials rotated/expired; replacement test key and non-secret price ID fitted only in the ignored local cabinet.
 - [x] Mode-separated Checkout, signature verification, idempotent event and licence-state code compiles.
 - [x] Key/price mode mismatch, live approval, tax, HTTPS, checkout fuse, email and Checkout Session validation tests pass.
 - [x] Preflight authenticates the test key and confirms the active one-time CA$199 price; it correctly stops at the missing webhook secret.
+- [x] The real sandbox now contains all four approved Founder offer prices: CA$199 once, CA$499 once, CA$69/month and CA$750/month.
+- [x] The webhook fitting bench is linked and loaded: `.vercel/project.json` points at `founder-above-the-fold`, the local Stripe/licence fasteners expected by the fitting jig are present, and the old broken Replit endpoint remains untouched before approval.
+- [x] The owner-approved sandbox endpoint `we_1TuP9LGtSbDyVF5VJY9zGvwr` now exists with the complete Founder event drawer, and the encrypted Vercel production slots for Stripe mode, Stripe secret, webhook secret, offer prices and licence fasteners are fitted while checkout remains disabled.
 - [x] Commerce migration applies to the dedicated local non-production database.
 - [x] Simulated paid event creates exactly one recoverable licence in a real local database.
 - [x] Expired/cancelled and asynchronous-failed Checkout Sessions close their intent and create no licence in the local database jig.
@@ -137,9 +160,10 @@ Check:
 - [x] Dedicated local key generator fits a matched Ed25519 keypair and device-hash secret without printing them.
 - [x] Local activation fits one device, permits the same device to refresh, refuses a second device, rejects a tampered receipt and makes the receipt inactive after refund.
 - [x] Native recovery assembly copy renders once with separate Place/Check/Avoid rows; release build and visual capture pass with the bundled CS Claire Mono face.
-- [x] Dry-run production fitting jig refuses the current 404 webhook route, finds zero duplicate endpoints, and changes no Stripe or Vercel state.
+- [x] Dry-run production fitting jig reaches the deployed `https://www.founderaccount.com/api/webhooks/stripe` socket first, proves it responds `400`, finds zero matching Founder sandbox endpoints, names the still-missing LinkedIn offer price slots, and changes no Stripe or Vercel state.
 - [x] Desktop/mobile browser jig passes 20 checkout, cancellation, recovery, receipt, overflow and console checks.
-- [ ] Fit the Stripe webhook signing secret and prove Stripe's genuine signed delivery.
+- [x] Redeploy production so the fitted Stripe webhook secret enters the running build; the live health board now reports `stripeSandbox=configured_safely_disabled`, and the deployed webhook socket still answers `400`.
+- [ ] Owner approves or replaces the three proposed LinkedIn prices; matching Stripe sandbox products and price IDs are then fitted.
 - [ ] Run real sandbox payment, cancellation, failed-payment, refund, dispute and recovery lifecycle.
 - [ ] Embed only the public key in the signed macOS build and prove its recovery-token/device-activation handoff.
 - [ ] Confirm account country, Stripe Tax/product tax code, refund wording and legal identity before creating live parts.

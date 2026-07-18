@@ -72,7 +72,7 @@ Bug response:
 > Thank you—this is a real breakpoint. I have classified it as **[app/manual/expectation/context/access]**, reproduced **[what happened]**, and the safe workaround is **[workaround or “none yet”]**. I will update this thread when the fix is verified.
 
 Pricing question:
-> Founder Above the Fold has three rails: limited hands-on setup seats, open self-serve SaaS, and an outright macOS purchase. Only the founder-delivered service is seat-limited. I will publish exact prices only when each matching purchase, cancellation or update, refund, support, and privacy path passes its live test.
+> Founder Above the Fold has three rails and four proposed Canadian offers: a CA$199 outright Mac licence, CA$499 hands-on profile setup, CA$69/month self-serve Founder Profile OS, and CA$750/month Visibility Ops. Only the two founder-delivered services are capacity-limited; the initial Visibility Ops cabinet has five seats. These prices become available only after each matching payment, cancellation, refund, support, privacy, and access path passes its live test.
 
 Competitor comparison:
 > The difference is not “more automation.” It is owner control: canonical profile copy, an exact-revision voice clamp, official-API-only publishing, and a visual manual with finished-build tests. If you tell me which tool you use now, I can answer the overlap precisely.

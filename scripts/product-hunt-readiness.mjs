@@ -4,12 +4,13 @@ import path from "node:path";
 import { chromium } from "playwright";
 
 const baseUrl = (process.env.PRODUCT_HUNT_BASE_URL ?? "http://127.0.0.1:3100").replace(/\/$/, "");
-const waitlistMode = process.env.PRODUCT_HUNT_WAITLIST_MODE ?? "live";
+const requestedWaitlistMode = process.env.PRODUCT_HUNT_WAITLIST_MODE ?? "auto";
 const outputDir = path.resolve("output/product-hunt/browser");
 await mkdir(outputDir, { recursive: true });
 
 const browser = await chromium.launch({ headless: true });
 const errors = [];
+let resolvedWaitlistMode = requestedWaitlistMode;
 
 try {
   const desktop = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
@@ -18,16 +19,48 @@ try {
   });
   desktop.on("pageerror", (error) => errors.push(`desktop page: ${error.message}`));
 
+  await desktop.setViewportSize({ width: 1024, height: 1000 });
+  await desktop.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+  await assertNoOverflow(desktop, "landing tablet");
+  const hero = desktop.locator("h1").first();
+  await hero.waitFor();
+  const heroBox = await hero.boundingBox();
+  assert.ok(heroBox, "landing hero headline is missing");
+  assert.ok(heroBox.width >= 600, `landing tablet/desktop headline column is too narrow: ${heroBox.width}px`);
+  assert.ok(heroBox.x >= 0 && heroBox.x + heroBox.width <= 1024, "landing headline is clipped horizontally");
+  await desktop.setViewportSize({ width: 1440, height: 1000 });
+
   await desktop.goto(`${baseUrl}/waitlist`, { waitUntil: "networkidle" });
   await assertNoOverflow(desktop, "waitlist desktop");
-  if (waitlistMode === "locked") {
-    await desktop.getByText("Signup socket being fitted").waitFor();
+  const lockedPanel = desktop.getByText("Signup socket being fitted");
+  const hasForm = (await desktop.locator("form").count()) > 0;
+  resolvedWaitlistMode = requestedWaitlistMode === "auto"
+    ? (hasForm ? "live" : "locked")
+    : requestedWaitlistMode;
+  if (resolvedWaitlistMode === "locked") {
+    await lockedPanel.waitFor();
     assert.equal(await desktop.locator("form").count(), 0);
   } else {
+    assert.equal(hasForm, true, "waitlist live mode requires a configured Waitlister form");
     const formAction = await desktop.locator("form").getAttribute("action");
     assert.match(formAction ?? "", /^https:\/\/waitlister\.me\/s\/[a-zA-Z0-9_-]+$/);
   }
   await desktop.screenshot({ path: path.join(outputDir, "waitlist-desktop.png"), fullPage: true });
+
+  await desktop.goto(`${baseUrl}/pricing`, { waitUntil: "networkidle" });
+  for (const offer of [
+    ["Mac licence", "CA$199"],
+    ["Profile setup", "CA$499"],
+    ["Self-serve SaaS", "CA$69"],
+    ["Visibility ops", "CA$750"],
+  ]) {
+    const button = desktop.getByRole("button", { name: new RegExp(offer[0], "i") });
+    await button.waitFor();
+    assert.match(await button.innerText(), new RegExp(offer[1].replace("$", "\\$")));
+  }
+  await desktop.getByRole("button", { name: /Visibility ops/i }).click();
+  await desktop.getByText("Five launch seats only", { exact: true }).waitFor();
+  await assertNoOverflow(desktop, "pricing desktop");
 
   await desktop.goto(`${baseUrl}/try`, { waitUntil: "networkidle" });
   const queueButton = desktop.getByRole("button", { name: /Fit draft to demo queue/i });
@@ -62,7 +95,7 @@ try {
   }
 
   assert.deepEqual(errors, []);
-  console.log(`PASS Product Hunt browser jig: waitlist=${waitlistMode}, fail/pass/queue clamp, desktop/mobile layout, zero console errors`);
+  console.log(`PASS Product Hunt browser jig: waitlist=${resolvedWaitlistMode}, fail/pass/queue clamp, desktop/mobile layout, zero console errors`);
 } finally {
   await browser.close();
 }

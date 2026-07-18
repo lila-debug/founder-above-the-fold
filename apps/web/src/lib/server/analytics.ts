@@ -9,7 +9,7 @@ import {
 const LINKEDIN_ANALYTICS_URL =
   "https://api.linkedin.com/rest/memberCreatorPostAnalytics";
 const ANALYTICS_SCOPE = "r_member_postAnalytics";
-const DEFAULT_LINKEDIN_API_VERSION = "202606";
+const DEFAULT_LINKEDIN_API_VERSION = "202607";
 const LINKEDIN_REQUEST_TIMEOUT_MS = 15_000;
 const METRICS = ["IMPRESSION", "REACTION", "COMMENT", "RESHARE"] as const;
 

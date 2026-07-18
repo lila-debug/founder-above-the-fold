@@ -1,0 +1,180 @@
+openapi: 3.1.0
+info:
+  title: Founder Above the Fold Mobile API
+  version: 0.2.0
+  description: Owner-only native socket. LinkedIn OAuth tokens never cross this boundary.
+servers:
+  - url: https://www.founderaccount.com
+paths:
+  /api/mobile/auth/magic-link:
+    post:
+      summary: Send a one-use owner sign-in link
+      requestBody: {required: true, content: {application/json: {schema: {$ref: '#/components/schemas/MagicLinkRequest'}}}}
+      responses: {'200': {description: Link sent}, '403': {$ref: '#/components/responses/Stopped'}, '503': {$ref: '#/components/responses/Stopped'}}
+  /api/mobile/auth/exchange:
+    post:
+      summary: Exchange a one-use link for a rotating mobile session
+      requestBody: {required: true, content: {application/json: {schema: {$ref: '#/components/schemas/ExchangeRequest'}}}}
+      responses: {'200': {description: Session assembled, content: {application/json: {schema: {$ref: '#/components/schemas/Exchange'}}}}, '401': {$ref: '#/components/responses/Stopped'}}
+  /api/mobile/auth/refresh:
+    post:
+      summary: Rotate both mobile tokens
+      requestBody: {required: true, content: {application/json: {schema: {type: object, required: [refreshToken], properties: {refreshToken: {type: string}}}}}}
+      responses: {'200': {description: Rotated tokens, content: {application/json: {schema: {$ref: '#/components/schemas/Tokens'}}}}, '401': {$ref: '#/components/responses/Stopped'}}
+  /api/mobile/auth/logout:
+    post:
+      security: [{mobileBearer: []}]
+      summary: Revoke the matching mobile session
+      responses: {'200': {description: Session revoked}}
+  /api/mobile/session:
+    get:
+      security: [{mobileBearer: []}]
+      summary: Inspect owner session, feature lamps and safety locks
+      responses: {'200': {description: Live session}, '401': {$ref: '#/components/responses/Stopped'}}
+  /api/mobile/linkedin/start:
+    post:
+      security: [{mobileBearer: []}]
+      summary: Create a one-use LinkedIn OAuth state and official authorization URL
+      responses: {'200': {description: OAuth URL}, '503': {$ref: '#/components/responses/Stopped'}}
+  /api/posts:
+    get:
+      security: [{mobileBearer: []}]
+      summary: Read the owner post drawer
+      responses: {'200': {description: Post tracker}}
+    post:
+      security: [{mobileBearer: []}]
+      summary: Create a private draft
+      responses: {'201': {description: Draft created}}
+  /api/posts/{id}/voice-check:
+    post:
+      security: [{mobileBearer: []}]
+      summary: Clamp the exact current revision
+      parameters: [{$ref: '#/components/parameters/PostID'}]
+      responses: {'200': {description: Voice result}}
+  /api/posts/{id}/queue:
+    post:
+      security: [{mobileBearer: []}]
+      summary: Place a currently passed draft on a future rail slot
+      parameters: [{$ref: '#/components/parameters/PostID'}]
+      responses: {'200': {description: Queued}}
+  /api/posts/{id}/publish-now:
+    post:
+      security: [{mobileBearer: []}]
+      summary: Publish only with confirmPublication true
+      parameters: [{$ref: '#/components/parameters/PostID'}]
+      responses: {'200': {description: Official API result}, '409': {$ref: '#/components/responses/Stopped'}}
+  /api/posts/{id}/cancel:
+    post:
+      security: [{mobileBearer: []}]
+      summary: Return a queued post to a stopped state
+      parameters: [{$ref: '#/components/parameters/PostID'}]
+      responses: {'200': {description: Cancelled}}
+  /api/posts/{id}:
+    patch:
+      security: [{mobileBearer: []}]
+      summary: Edit the private draft and invalidate any previous voice pass
+      parameters: [{$ref: '#/components/parameters/PostID'}]
+      responses: {'200': {description: Updated draft}, '404': {$ref: '#/components/responses/Stopped'}}
+    delete:
+      security: [{mobileBearer: []}]
+      summary: Remove a private draft or stopped post
+      parameters: [{$ref: '#/components/parameters/PostID'}]
+      responses: {'200': {description: Removed}, '404': {$ref: '#/components/responses/Stopped'}}
+  /api/profile-copy:
+    get:
+      summary: Read the public preview or owner-visible manual-paste profile panels
+      description: The read socket is intentionally available to the read-only public preview; owner writes and mobile state changes still require authenticated access.
+      responses: {'200': {description: Profile tracker}}
+  /api/templates:
+    get:
+      security: [{mobileBearer: []}]
+      summary: Read the manual-only outreach and post template drawer
+      responses: {'200': {description: Template tracker, content: {application/json: {schema: {$ref: '#/components/schemas/TemplateTracker'}}}}}
+  /api/analytics/posts:
+    get:
+      security: [{mobileBearer: []}]
+      summary: Read official own-post analytics snapshots and readiness
+      responses: {'200': {description: Analytics tracker, content: {application/json: {schema: {$ref: '#/components/schemas/AnalyticsTracker'}}}}}
+  /api/analytics/refresh:
+    post:
+      security: [{mobileBearer: []}]
+      summary: Refresh official metrics for posts published through this app
+      requestBody: {required: false, content: {application/json: {schema: {type: object, properties: {postId: {type: string, format: uuid}}}}}}
+      responses: {'200': {description: Refresh requested, content: {application/json: {schema: {$ref: '#/components/schemas/AnalyticsRefresh'}}}}, '403': {$ref: '#/components/responses/Stopped'}, '409': {$ref: '#/components/responses/Stopped'}}
+  /api/profile-copy/{field}/mark-synced:
+    post:
+      security: [{mobileBearer: []}]
+      summary: Record that the owner pasted a panel by hand
+      parameters:
+        - in: path
+          name: field
+          required: true
+          schema: {type: string, enum: [headline, about, experience]}
+      responses: {'200': {description: Marked pasted}}
+components:
+  securitySchemes:
+    mobileBearer: {type: http, scheme: bearer}
+  parameters:
+    PostID: {in: path, name: id, required: true, schema: {type: string, format: uuid}}
+  responses:
+    Stopped: {description: Action stopped, content: {application/json: {schema: {$ref: '#/components/schemas/Error'}}}}
+  schemas:
+    Error: {type: object, required: [error], properties: {error: {type: string}}}
+    MagicLinkRequest: {type: object, required: [email], properties: {email: {type: string, format: email}}}
+    ExchangeRequest: {type: object, required: [token], properties: {token: {type: string}, deviceName: {type: [string, 'null'], maxLength: 120}}}
+    Session: {type: object, required: [id, email, accessExpiresAt, refreshExpiresAt], properties: {id: {type: string, format: uuid}, email: {type: string, format: email}, deviceName: {type: [string, 'null']}, accessExpiresAt: {type: string, format: date-time}, refreshExpiresAt: {type: string, format: date-time}}}
+    Tokens: {type: object, required: [accessToken, refreshToken, tokenType, expiresIn, refreshExpiresAt], properties: {accessToken: {type: string}, refreshToken: {type: string}, tokenType: {const: Bearer}, expiresIn: {type: integer, const: 900}, refreshExpiresAt: {type: string, format: date-time}}}
+    Exchange: {type: object, required: [session, tokens], properties: {session: {$ref: '#/components/schemas/Session'}, tokens: {$ref: '#/components/schemas/Tokens'}}}
+    Template:
+      type: object
+      required: [id, type, scenarioTag, body, notes, version, variables, createdAt, updatedAt]
+      properties:
+        id: {type: string, format: uuid}
+        type: {type: string, enum: [outreach, post]}
+        scenarioTag: {type: string}
+        body: {type: string}
+        notes: {type: [string, 'null']}
+        version: {type: integer}
+        variables: {type: array, items: {type: string}}
+        createdAt: {type: string, format: date-time}
+        updatedAt: {type: string, format: date-time}
+    TemplateTracker:
+      type: object
+      required: [items]
+      properties: {items: {type: array, items: {$ref: '#/components/schemas/Template'}}}
+    AnalyticsReadiness:
+      type: object
+      required: [state, message]
+      properties:
+        state: {type: string, enum: [setup_required, connection_required, permission_required, available]}
+        message: {type: string}
+    AnalyticsMetrics:
+      type: object
+      required: [impressions, reactions, comments, reshares]
+      properties:
+        impressions: {type: [integer, 'null']}
+        reactions: {type: [integer, 'null']}
+        comments: {type: [integer, 'null']}
+        reshares: {type: [integer, 'null']}
+    AnalyticsRecord:
+      type: object
+      required: [postId, linkedinPostId, body, publishedAt, metrics, pulledAt]
+      properties:
+        postId: {type: string, format: uuid}
+        linkedinPostId: {type: string}
+        body: {type: string}
+        publishedAt: {type: string, format: date-time}
+        metrics: {$ref: '#/components/schemas/AnalyticsMetrics'}
+        pulledAt: {type: [string, 'null'], format: date-time}
+    AnalyticsTracker:
+      type: object
+      required: [readiness, items]
+      properties:
+        readiness: {$ref: '#/components/schemas/AnalyticsReadiness'}
+        items: {type: array, items: {$ref: '#/components/schemas/AnalyticsRecord'}}
+    AnalyticsRefresh:
+      type: object
+      required: [refreshed, requestedPostId]
+      properties:
+        refreshed: {type: integer}
+        requestedPostId: {type: [string, 'null'], format: uuid}

@@ -8,7 +8,12 @@ const apply = process.env.APPLY_STRIPE_SANDBOX_WEBHOOK === "true";
 const deploymentApproved = process.env.PRODUCTION_DEPLOYMENT_APPROVED === "true";
 const enableCheckout = process.env.ENABLE_STRIPE_SANDBOX_CHECKOUT === "true";
 const secretKey = required("STRIPE_SECRET_KEY");
-const priceId = required("STRIPE_PRICE_ID");
+const offerPriceSlots = {
+  STRIPE_PRICE_MAC_LICENCE: process.env.STRIPE_PRICE_MAC_LICENCE?.trim() || process.env.STRIPE_PRICE_ID?.trim() || "",
+  STRIPE_PRICE_PROFILE_SETUP: process.env.STRIPE_PRICE_PROFILE_SETUP?.trim() || "",
+  STRIPE_PRICE_FOUNDER_OS: process.env.STRIPE_PRICE_FOUNDER_OS?.trim() || "",
+  STRIPE_PRICE_VISIBILITY_OPS: process.env.STRIPE_PRICE_VISIBILITY_OPS?.trim() || "",
+};
 const baseUrl = new URL(process.env.STRIPE_WEBHOOK_BASE_URL ?? "https://www.founderaccount.com");
 const endpointUrl = new URL("/api/webhooks/stripe", baseUrl).toString();
 const events = [
@@ -19,10 +24,19 @@ const events = [
   "charge.refunded",
   "charge.dispute.created",
   "charge.dispute.closed",
+  "customer.subscription.updated",
+  "customer.subscription.deleted",
+  "invoice.paid",
+  "invoice.payment_failed",
 ];
+const missingPriceSlots = Object.entries(offerPriceSlots)
+  .filter(([, value]) => !value)
+  .map(([name]) => name);
 
 assert.match(secretKey, /^(sk|rk)_test_/, "BLOCKED: provisioning accepts only a Stripe test key.");
-assert.match(priceId, /^price_/, "BLOCKED: STRIPE_PRICE_ID is invalid.");
+for (const [name, value] of Object.entries(offerPriceSlots)) {
+  if (value) assert.match(value, /^price_/, `BLOCKED: ${name} is invalid.`);
+}
 assert.equal(baseUrl.protocol, "https:", "BLOCKED: the deployed webhook socket must use HTTPS.");
 
 const routeProbe = await fetch(endpointUrl, { method: "POST" });
@@ -38,14 +52,18 @@ for (const endpoint of matches) {
 }
 
 if (!apply) {
+  if (missingPriceSlots.length) {
+    console.log(`BLOCKED webhook fitting still needs price slots: ${missingPriceSlots.join(", ")}.`);
+  }
   console.log("DRY RUN no Stripe or Vercel state changed.");
-  if (!routeReady || matches.length > 1) process.exitCode = 1;
+  if (!routeReady || matches.length > 1 || missingPriceSlots.length) process.exitCode = 1;
   process.exit();
 }
 
 assert.equal(deploymentApproved, true, "BLOCKED: set PRODUCTION_DEPLOYMENT_APPROVED=true only after explicit owner approval.");
 assert.equal(routeReady, true, "BLOCKED: deploy the webhook route before creating the Stripe endpoint.");
 assert.ok(matches.length <= 1, "BLOCKED: multiple matching endpoints require manual inspection.");
+assert.equal(missingPriceSlots.length, 0, `BLOCKED: fit the missing price slots first (${missingPriceSlots.join(", ")}).`);
 await access(path.join(root, ".vercel", "project.json"));
 
 let endpoint = matches[0];
@@ -73,7 +91,8 @@ const slots = {
   STRIPE_MODE: "sandbox",
   STRIPE_SECRET_KEY: secretKey,
   STRIPE_WEBHOOK_SECRET: webhookSecret,
-  STRIPE_PRICE_ID: priceId,
+  STRIPE_PRICE_ID: offerPriceSlots.STRIPE_PRICE_MAC_LICENCE,
+  ...offerPriceSlots,
   STRIPE_EXPECTED_UNIT_AMOUNT_CAD: process.env.STRIPE_EXPECTED_UNIT_AMOUNT_CAD ?? "19900",
   STRIPE_AUTOMATIC_TAX_ENABLED: "false",
   STRIPE_LIVE_APPROVED: "false",

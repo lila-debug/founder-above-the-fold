@@ -2,9 +2,13 @@ import assert from "node:assert/strict";
 import { createPrivateKey, createPublicKey, sign, verify } from "node:crypto";
 
 const secretKey = required("STRIPE_SECRET_KEY");
-const priceId = required("STRIPE_PRICE_ID");
+const offerSpecs = [
+  { label: "Mac licence", id: process.env.STRIPE_PRICE_MAC_LICENCE?.trim() || required("STRIPE_PRICE_ID"), amount: 19900, type: "one_time" },
+  { label: "Profile setup", id: required("STRIPE_PRICE_PROFILE_SETUP"), amount: 49900, type: "one_time" },
+  { label: "Founder Profile OS", id: required("STRIPE_PRICE_FOUNDER_OS"), amount: 6900, type: "recurring" },
+  { label: "Visibility Ops", id: required("STRIPE_PRICE_VISIBILITY_OPS"), amount: 75000, type: "recurring" },
+];
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET?.trim() ?? "";
-const expectedAmount = Number(process.env.STRIPE_EXPECTED_UNIT_AMOUNT_CAD ?? "19900");
 const deviceHashSecret = process.env.LICENCE_DEVICE_HASH_SECRET?.trim() ?? "";
 const signingPrivate = process.env.LICENCE_SIGNING_PRIVATE_KEY?.trim() ?? "";
 const signingPublic = process.env.LICENCE_SIGNING_PUBLIC_KEY?.trim() ?? "";
@@ -33,26 +37,24 @@ if (deviceHashSecret || signingPrivate || signingPublic) {
     throw new Error("BLOCKED: the Ed25519 licence signing keypair is invalid or mismatched.");
   }
 }
-assert.match(priceId, /^price_/, "BLOCKED: STRIPE_PRICE_ID must begin with price_.");
-assert.ok(Number.isSafeInteger(expectedAmount) && expectedAmount > 0, "BLOCKED: expected CAD amount is invalid.");
+for (const offer of offerSpecs) assert.match(offer.id, /^price_/, `BLOCKED: ${offer.label} price must begin with price_.`);
 
-const [account, price] = await Promise.all([
+const [account, ...prices] = await Promise.all([
   stripeGet("/v1/account"),
-  stripeGet(`/v1/prices/${encodeURIComponent(priceId)}?expand%5B%5D=product`),
+  ...offerSpecs.map((offer) => stripeGet(`/v1/prices/${encodeURIComponent(offer.id)}?expand%5B%5D=product`)),
 ]);
 
-assert.equal(price.livemode, liveMode, `BLOCKED: the configured price does not belong to ${mode} mode.`);
-assert.equal(price.active, true, "BLOCKED: the configured Stripe price is inactive.");
-assert.equal(price.type, "one_time", "BLOCKED: the Founder licence must be a one-time price.");
-assert.equal(price.currency, "cad", "BLOCKED: the Founder licence price must use CAD.");
-assert.equal(
-  price.unit_amount,
-  expectedAmount,
-  `BLOCKED: expected CAD ${(expectedAmount / 100).toFixed(2)}, received ${formatAmount(price.unit_amount)}.`,
-);
-
-const product = typeof price.product === "object" ? price.product : null;
-assert.ok(product && product.active, "BLOCKED: the Stripe product is missing or inactive.");
+for (const [index, price] of prices.entries()) {
+  const offer = offerSpecs[index];
+  assert.equal(price.livemode, liveMode, `BLOCKED: ${offer.label} belongs to the wrong Stripe mode.`);
+  assert.equal(price.active, true, `BLOCKED: ${offer.label} price is inactive.`);
+  assert.equal(price.type, offer.type, `BLOCKED: ${offer.label} has the wrong billing type.`);
+  assert.equal(price.currency, "cad", `BLOCKED: ${offer.label} must use CAD.`);
+  assert.equal(price.unit_amount, offer.amount, `BLOCKED: ${offer.label} expected CAD ${(offer.amount / 100).toFixed(2)}, received ${formatAmount(price.unit_amount)}.`);
+  if (offer.type === "recurring") assert.equal(price.recurring?.interval, "month", `BLOCKED: ${offer.label} must recur monthly.`);
+  const product = typeof price.product === "object" ? price.product : null;
+  assert.ok(product && product.active, `BLOCKED: ${offer.label} product is missing or inactive.`);
+}
 if (expectedCountry) {
   assert.equal(account.country, expectedCountry, "BLOCKED: Stripe account country does not match the approved legal cabinet.");
 }
@@ -65,8 +67,9 @@ if (liveMode) {
 
 console.log(`PASS Stripe ${mode} key authenticated without exposing it.`);
 console.log(`PASS account country: ${account.country ?? "not reported"}.`);
-console.log(`PASS one-time price: ${price.id}, CAD ${(price.unit_amount / 100).toFixed(2)}.`);
-console.log(`PASS product: ${product.name ?? product.id}.`);
+for (const [index, price] of prices.entries()) {
+  console.log(`PASS ${offerSpecs[index].label}: ${price.id}, CAD ${(price.unit_amount / 100).toFixed(2)} ${price.type === "recurring" ? "per month" : "once"}.`);
+}
 if (webhookSecret) {
   console.log("PASS webhook signing secret has the expected shape.");
 } else {

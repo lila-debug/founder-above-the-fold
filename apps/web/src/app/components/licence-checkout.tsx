@@ -3,14 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, LockKeyhole, RotateCcw, ShieldCheck } from "lucide-react";
+import { commerceOffers, type CommerceOfferKey } from "@/lib/commerce-offers";
 
 type Props = {
-  checkoutReady: boolean;
+  offerReadiness: Record<CommerceOfferKey, boolean>;
+  offerConfigured: Record<CommerceOfferKey, boolean>;
   sandboxMode: boolean;
   checkoutCancelled: boolean;
 };
 
-export function LicenceCheckout({ checkoutReady, sandboxMode, checkoutCancelled }: Props) {
+export function LicenceCheckout({ offerReadiness, offerConfigured, sandboxMode, checkoutCancelled }: Props) {
+  const [offerKey, setOfferKey] = useState<CommerceOfferKey>("mac_licence");
   const [email, setEmail] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [mode, setMode] = useState<"checkout" | "recovery">("checkout");
@@ -19,6 +22,9 @@ export function LicenceCheckout({ checkoutReady, sandboxMode, checkoutCancelled 
     checkoutCancelled ? "Checkout closed. The return link created no licence; no second payment is needed." : null,
   );
   const [error, setError] = useState<string | null>(null);
+  const offer = commerceOffers[offerKey];
+  const checkoutReady = offerReadiness[offerKey];
+  const offerConfiguredState = offerConfigured[offerKey];
 
   async function submitCheckout(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -29,7 +35,7 @@ export function LicenceCheckout({ checkoutReady, sandboxMode, checkoutCancelled 
       const response = await fetch("/api/commerce/stripe/checkout", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email, termsAccepted }),
+        body: JSON.stringify({ email, termsAccepted, offerKey }),
       });
       const result = await response.json() as { url?: string; error?: string };
       if (!response.ok || !result.url) throw new Error(result.error ?? "Checkout did not open.");
@@ -70,23 +76,41 @@ export function LicenceCheckout({ checkoutReady, sandboxMode, checkoutCancelled 
       <section className="commerce-grid">
         <article className="licence-card commerce-licence-card">
           <span className="cut-label bg-[#f4d13d]">Part 04 · direct payment clamp</span>
-          <h1>CA$199</h1>
-          <p className="text-lg font-black uppercase">One purchase. Keep this major version.</p>
+          <div className="offer-selector" aria-label="Choose a Founder Above the Fold offer">
+            {(Object.keys(commerceOffers) as CommerceOfferKey[]).map((key) => (
+              <button key={key} type="button" data-selected={offerKey === key} onClick={() => { setOfferKey(key); setError(null); setNotice(null); setMode("checkout"); }}>
+                <span>{commerceOffers[key].shortName}</span>
+                <strong>{commerceOffers[key].displayPrice} <small>{commerceOffers[key].cadence}</small></strong>
+              </button>
+            ))}
+          </div>
+          <h1>{offer.displayPrice}</h1>
+          <p className="text-lg font-black uppercase">{offer.promise}</p>
           <ul>
-            {["Private macOS workbench", "Persistent local drafts and labels", "Voice-to-text included", "Signed updates during the stated update period", "Private licence recovery by email"].map((item) => <li key={item}><Check size={18} />{item}</li>)}
+            {offer.parts.map((item) => <li key={item}><Check size={18} />{item}</li>)}
           </ul>
           <div className="commerce-status-strip" data-ready={checkoutReady}>
             <LockKeyhole size={18} />
-            <strong>{checkoutReady ? "Sandbox checkout fitted" : "Checkout safely locked"}</strong>
-            <span>{checkoutReady ? sandboxMode ? "Only Stripe test cards can be used." : "Live payment · tax and signed fulfilment fitted." : "The signed webhook, tax and database fasteners must be fitted first."}</span>
+            <strong>{checkoutReady ? `${offer.shortName} checkout fitted` : `${offer.shortName} safely locked`}</strong>
+            <span>
+              {checkoutReady
+                ? sandboxMode
+                  ? "Only Stripe test cards can be used."
+                  : "Live payment · tax and signed fulfilment fitted."
+                : offerConfiguredState
+                  ? sandboxMode
+                    ? "Stripe sandbox is fitted; checkout stays intentionally off until the genuine test lifecycle passes."
+                    : "Stripe is fitted; checkout stays off until the live approval and tax rails are complete."
+                  : "The signed webhook, tax and database fasteners must be fitted first."}
+            </span>
           </div>
         </article>
 
         <div className="commerce-control-stack">
           <form className="commerce-form" onSubmit={mode === "checkout" ? submitCheckout : submitRecovery}>
             <span className="section-kicker">{mode === "checkout" ? "01 → Inspect and open" : "02 → Recover without rebuying"}</span>
-            <h2>{mode === "checkout" ? "Fit the licence" : "Find my licence"}</h2>
-            <p>{mode === "checkout" ? "Stripe hosts the card form. This site grants nothing from a redirect; only the signed server event creates a licence." : "Enter the original purchaser address. The reply is deliberately identical whether or not a licence exists."}</p>
+            <h2>{mode === "checkout" ? `Fit ${offer.shortName}` : "Find my licence"}</h2>
+            <p>{mode === "checkout" ? `Stripe hosts the payment form for ${offer.name}. This site grants nothing from a redirect; only the signed server event fits the paid part.` : "Enter the original Mac-licence purchaser address. The reply is deliberately identical whether or not a licence exists."}</p>
             <label>
               Purchaser email
               <input type="email" required autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="founder@company.ca" />
@@ -103,16 +127,16 @@ export function LicenceCheckout({ checkoutReady, sandboxMode, checkoutCancelled 
               {busy ? "Inspecting…" : mode === "checkout" ? sandboxMode ? "Open secure test checkout" : "Open secure checkout" : "Send private recovery link"}
               <ArrowRight size={16} />
             </button>
-            <button className="text-button" type="button" onClick={() => { setMode(mode === "checkout" ? "recovery" : "checkout"); setError(null); setNotice(null); }}>
+            {offerKey === "mac_licence" ? <button className="text-button" type="button" onClick={() => { setMode(mode === "checkout" ? "recovery" : "checkout"); setError(null); setNotice(null); }}>
               <RotateCcw size={15} /> {mode === "checkout" ? "Recover an existing licence" : "Return to checkout"}
-            </button>
+            </button> : null}
           </form>
 
           <article className="commerce-manual-panel">
             <span className="section-kicker">Assembly panel</span>
-            <h2>Redirect ≠ receipt</h2>
+            <h2>Redirect ≠ payment proof</h2>
             <div><strong>Place</strong><p>Open Stripe only after the green clamp appears.</p></div>
-            <div><strong>Check</strong><p>The success panel waits for the signed webhook and exactly one database receipt.</p></div>
+            <div><strong>Check</strong><p>The success panel waits for the signed webhook and exactly one paid-access record.</p></div>
             <div><strong>Avoid</strong><p>Never pay twice because a receipt is still processing. Use recovery instead.</p></div>
             <p className="form-note"><ShieldCheck size={16} /> Sandbox and live keys fit separate labelled slots; a mismatched key is rejected.</p>
           </article>

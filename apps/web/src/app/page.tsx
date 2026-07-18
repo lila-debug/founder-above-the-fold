@@ -364,7 +364,7 @@ function Hero({ linkedinConnectReady }: { linkedinConnectReady: boolean }) {
           </div>
         </nav>
 
-        <div className="grid flex-1 content-center gap-10 py-14 lg:grid-cols-[minmax(0,0.78fr)_minmax(460px,1.22fr)] lg:items-center">
+        <div className="grid flex-1 content-center gap-10 py-14 xl:grid-cols-[minmax(0,0.78fr)_minmax(460px,1.22fr)] xl:items-center">
           <div className="max-w-3xl">
             <p className="inline-flex border-2 border-[#03256c] bg-[#ffd84d] px-3 py-1 text-xs font-black uppercase tracking-[0.1em] text-[#03256c]">
               Private beta build · public preview
@@ -404,11 +404,11 @@ function Hero({ linkedinConnectReady }: { linkedinConnectReady: boolean }) {
             <a className="mt-4 inline-flex text-sm font-bold text-[#1768ac] underline" href="/dashboard">
               Owner access: open the private workbench
             </a>
-            <div className="mt-8 block lg:hidden">
+            <div className="mt-8 block xl:hidden">
               <DashboardScene />
             </div>
           </div>
-          <div className="pointer-events-none hidden min-w-0 justify-end lg:flex">
+          <div className="pointer-events-none hidden min-w-0 justify-end xl:flex">
             <DashboardScene />
           </div>
         </div>

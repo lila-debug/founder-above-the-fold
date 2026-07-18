@@ -4,7 +4,7 @@ const baseUrl = (process.env.PRODUCTION_LAUNCH_BASE_URL ?? "https://www.foundera
 const allowIncomplete = process.env.ALLOW_INCOMPLETE === "true";
 const checks = [];
 
-const [home, demo, waitlist, cookies, thumbnail, galleryHero, stripeWebhook, healthResponse, linkedinResponse] = await Promise.all([
+const [home, demo, waitlist, cookies, thumbnail, galleryHero, stripeWebhook, healthResponse, linkedinResponse, mobileSession] = await Promise.all([
   get("/"),
   get("/try"),
   get("/waitlist"),
@@ -14,6 +14,7 @@ const [home, demo, waitlist, cookies, thumbnail, galleryHero, stripeWebhook, hea
   request("/api/webhooks/stripe", { method: "POST" }),
   get("/api/mcp/health"),
   get("/api/linkedin/status"),
+  get("/api/mobile/session"),
 ]);
 
 const health = parseJson(healthResponse, "health");
@@ -26,6 +27,8 @@ record("Product Hunt thumbnail socket", thumbnail.status === 200 && thumbnail.co
 record("Product Hunt gallery socket", galleryHero.status === 200 && galleryHero.contentType.startsWith("image/png"), `HTTP ${galleryHero.status}, ${galleryHero.contentType || "no content type"}`);
 record("Stripe webhook route", stripeWebhook.status === 400, `unsigned probe HTTP ${stripeWebhook.status}`);
 record("database", health.database?.ok === true, health.database?.status ?? "unknown");
+record("mobile auth migration", health.capabilities?.mobileAuth === "available", health.capabilities?.mobileAuth ?? "unknown");
+record("mobile session route", mobileSession.status === 401, `HTTP ${mobileSession.status}`);
 record(
   "production owner sign-in configuration",
   health.env?.authProvider === "resend" && health.env?.authReady === true,

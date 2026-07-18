@@ -4,6 +4,7 @@ import CoreText
 @main
 struct FounderAboveFoldApp: App {
     @State private var model = AppModel()
+    @State private var auth = AuthStore()
 
     init() {
         ["CSClaireMono-Regular", "NeueMontreal-Light", "NeueMontreal-Regular"].forEach { name in
@@ -16,7 +17,10 @@ struct FounderAboveFoldApp: App {
         WindowGroup {
             RootView()
                 .environment(model)
+                .environment(auth)
                 .preferredColorScheme(.light)
+                .task { await auth.restore() }
+                .onOpenURL { url in Task { await auth.handle(url: url) } }
         }
     }
 }

@@ -47,7 +47,7 @@ let recoveryToken = "";
 let signedReceipt = "";
 
 test("Stripe sandbox receipt and recovery conveyor uses real database state", async (t) => {
-  await dbQuery("truncate stripe_webhook_events, licence_recovery_requests, founder_licences, stripe_checkout_intents restart identity cascade");
+  await dbQuery("truncate stripe_webhook_events, licence_recovery_requests, founder_licences, founder_commerce_access, stripe_checkout_intents restart identity cascade");
   const intentId = "11111111-1111-4111-8111-111111111111";
   const sessionId = "cs_test_checkout_integration_123456";
   await dbQuery(
@@ -187,6 +187,39 @@ test("Stripe sandbox receipt and recovery conveyor uses real database state", as
     }
   });
 
+  await t.test("subscription checkout fits SaaS access without minting a Mac licence", async () => {
+    const subscriptionIntentId = "55555555-5555-4555-8555-555555555555";
+    const subscriptionSessionId = "cs_test_founder_os_subscription_123456";
+    await dbQuery(
+      `insert into stripe_checkout_intents
+         (id, purchaser_email, status, stripe_checkout_session_id, offer_key, checkout_mode)
+       values ($1, 'saas@example.ca', 'checkout_open', $2, 'founder_os', 'subscription')`,
+      [subscriptionIntentId, subscriptionSessionId],
+    );
+    const paid = checkoutEvent(
+      "evt_test_saas_paid",
+      subscriptionIntentId,
+      subscriptionSessionId,
+      null,
+      "sub_test_founder_os",
+      "founder_os",
+    );
+    assert.deepEqual(await applyStripeEvent(paid), { duplicate: false, applied: true });
+    const active = await getCheckoutReceiptStatus(subscriptionSessionId);
+    assert.equal(active.state, "active");
+    assert.equal(active.offerKey, "founder_os");
+
+    await applyStripeEvent(subscriptionEvent("evt_test_saas_past_due", "past_due"));
+    assert.equal((await getCheckoutReceiptStatus(subscriptionSessionId)).state, "past_due");
+    const counts = await dbQuery<{ licences: number; access: number }>(
+      `select
+         (select count(*)::int from founder_licences where stripe_checkout_session_id = $1) as licences,
+         (select count(*)::int from founder_commerce_access where stripe_checkout_session_id = $1) as access`,
+      [subscriptionSessionId],
+    );
+    assert.deepEqual(counts.rows[0], { licences: 0, access: 1 });
+  });
+
   await t.test("disputes and refunds change the same receipt instead of minting another", async () => {
     await applyStripeEvent(disputeEvent("evt_test_dispute_open", "charge.dispute.created", "needs_response"));
     assert.equal((await getCheckoutReceiptStatus(sessionId)).state, "disputed");
@@ -218,7 +251,9 @@ function checkoutEvent(
   id: string,
   intentId: string,
   sessionId: string,
-  paymentIntentId = "pi_test_founder_purchase",
+  paymentIntentId: string | null = "pi_test_founder_purchase",
+  subscriptionId: string | null = null,
+  offerKey = "mac_licence",
 ) {
   return {
     id,
@@ -230,8 +265,9 @@ function checkoutEvent(
         object: "checkout.session",
         livemode: false,
         payment_status: "paid",
-        metadata: { purchase_intent_id: intentId },
+        metadata: { purchase_intent_id: intentId, offer_key: offerKey },
         payment_intent: paymentIntentId,
+        subscription: subscriptionId,
         customer: "cus_test_founder",
       },
     },
@@ -239,6 +275,19 @@ function checkoutEvent(
     pending_webhooks: 0,
     request: null,
     type: "checkout.session.completed",
+  } as unknown as Stripe.Event;
+}
+
+function subscriptionEvent(id: string, status: string) {
+  return {
+    id,
+    object: "event",
+    created: Math.floor(Date.now() / 1000),
+    data: { object: { id: "sub_test_founder_os", object: "subscription", livemode: false, status } },
+    livemode: false,
+    pending_webhooks: 0,
+    request: null,
+    type: "customer.subscription.updated",
   } as unknown as Stripe.Event;
 }
 

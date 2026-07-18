@@ -38,18 +38,22 @@ Internal note: the MCP tool namespace currently remains `dispatch.*` while the c
 - [Direct commerce and macOS distribution manual](docs/27-direct-commerce-macos-manual.md)
 - [Stripe sandbox licence manual](docs/28-stripe-sandbox-licence-manual.md)
 - [Direct macOS cabinet manual](docs/29-direct-macos-cabinet-manual.md)
+- [iOS + Glaze public-beta assembly manual](docs/32-ios-glaze-public-beta-manual.md)
+- [Mobile API contract](packages/api-contract/founder-above-fold-mobile.openapi.yaml)
 - [Environment template](.env.example)
 
 Auth note: this app uses real passwordless magic links. `AUTH_PROVIDER=dev` generates local test links without sending email; `AUTH_PROVIDER=resend` sends production links through Resend. No password storage or password login flow is part of Founder Above the Fold.
 
 ## Product Shape
 
-Founder Above the Fold has three product surfaces and one quarantined experiment:
+Founder Above the Fold has five connected product surfaces, plus one historical StoreKit reference that is not a runnable purchase rail:
 
 1. Web app: owner dashboard for OAuth, drafts, queue, profile copy, templates, analytics, and manual sync flags.
 2. MCP server: AI-facing tools, resources, and prompts for drafting, scheduling, checking voice, reading approved profile copy, and inspecting post analytics.
 3. Direct macOS product: a native SwiftUI workbench with a separately distributed one-time Stripe licence, private recovery, one-device activation and signed offline receipts. The local app bundle and server receipt cabinet are implemented; a genuine Stripe webhook, Developer ID signing, notarization and signed updates remain locked.
-4. Quarantined iOS experiment: the SwiftUI interface remains historical build evidence only. Its Apple purchase code and StoreKit configuration are excluded from the runnable target; Apple commerce is not a launch rail.
+4. Native iOS beta cabinet: a passwordless, owner-only SwiftUI client for Today, drafts, exact-revision voice checks, queue/cancel, guarded publish-now, profile-copy manual paste, LinkedIn OAuth status, and the interactive assembly manual. It stores only opaque mobile session tokens in Keychain; LinkedIn OAuth tokens stay server-side. Apple commerce remains intentionally outside the iOS product.
+
+5. Glaze macOS customer cabinet: the installed local workbench with official LinkedIn OAuth, local encrypted settings, exact-revision voice locks, guarded queue/publish state, and a six-part interactive Assembly Manual with a no-write test jig.
 
 The private workbench includes an interactive IKEA-style assembly tutorial. The MCP
 server exposes the matching `dispatch://assembly-manual` resource so ChatGPT and the
@@ -79,6 +83,22 @@ AUTH_CALLBACK_URL=https://YOUR_DOMAIN/auth/callback
 
 The magic link expires after 15 minutes. Successful sign-in sets an httpOnly `dispatch_session` cookie.
 The private owner workbench lives at `/dashboard`; unauthenticated visitors are routed back to the public page for sign-in.
+
+Native beta setup additionally requires:
+
+```bash
+MOBILE_AUTH_CALLBACK_URL=founderabovefold://auth/exchange
+npm run db:migrate
+```
+
+The mobile migration adds one-use magic links, rotating access/refresh sessions, revocation, and one-use LinkedIn OAuth state. The iOS app is configured in `apps/ios/FounderAboveFold/Info.plist`; open `FounderAboveFold.xcodeproj` after installing the iOS platform component in Xcode.
+
+The Glaze cabinet is built from its installed source with:
+
+```bash
+cd "/Users/hella.crypto/Library/Application Support/app.glaze.macos.main/apps/above-fold-local-1rv9wgiz/.glaze-sources"
+npm run test:core && npm run type-check && npm run lint && npm run build
+```
 
 ## Automation Contract
 
@@ -120,10 +140,11 @@ Checked on 2026-07-06:
 - LinkedIn token lifecycle checks prove encrypted programmatic refresh, rotated refresh-key storage, concurrency locking, required-scope validation and visible reauthorisation after refresh expiry.
 - Private desktop/mobile browser QA completes draft -> voice pass -> queue -> cancel and template rendering without console errors.
 - MCP stdio smoke proves 17 tools, 4 resources and the guarded workflow through a real protocol client.
-- The archived iPhone interface previously passed Swift 6 simulator build/install/launch; its StoreKit purchase code is now excluded from the runnable target. A fresh build is blocked locally until Xcode's iOS 26.5 platform component is installed.
+- The iOS beta cabinet passes direct Swift 6 type-check against the installed simulator SDK. Full Xcode destination build/install remains an environment gate until the iOS platform component is installed.
+- The Glaze customer cabinet passes its focused publishing safety test, type-check, lint and production build. Its interactive Assembly Manual is wired into the shipped navigation.
 - Public `/try` and `/waitlist` launch routes pass a repeatable desktop/mobile Product Hunt browser jig: the demo fails and passes the voice clamp correctly, the queue stays locked until pass, the Waitlister form uses a validated public socket, no horizontal overflow appears, and no console errors occur.
 - Five 1270×760 Product Hunt gallery panels and a 240×240 thumbnail build from real product captures with `npm run build:product-hunt-gallery`.
-- Stripe commerce unit tests, a dedicated local Postgres lifecycle jig and 20 responsive browser checks prove separated sandbox/live configuration, exactly-one receipt creation, duplicate suppression, cancelled/failed sessions, recovery non-enumeration, hashed-device allowance, Ed25519 offline receipts, refund/dispute states and an unknown return link that cannot unlock.
+- Stripe commerce unit tests, a dedicated local Postgres lifecycle jig and 20 responsive browser checks prove separated sandbox/live configuration, exactly-one receipt creation, duplicate suppression, cancelled/failed sessions, recovery non-enumeration, hashed-device allowance, Ed25519 offline receipts, refund/dispute states and an unknown return link that cannot unlock. The current commercial rack is four-offer: direct Mac ownership, one-time profile setup, monthly Founder Profile OS, and limited monthly Visibility Ops.
 - A native macOS SwiftUI target builds and assembles an ad-hoc signed `.app`; its supplied CS Claire headline, activation URL, public verification key and font resources are fitted, and the bundle audit rejects embedded Stripe keys, the private signing key and StoreKit markers.
 - A separate Ed25519 update-key rail signs versioned feed envelopes; the native Mac app checks only on request, refuses tampering and HTTP, verifies archive size/SHA-256, and leaves installation as an explicit owner action.
 
@@ -134,22 +155,37 @@ npm run build:product-hunt-gallery
 PRODUCT_HUNT_BASE_URL=http://127.0.0.1:3100 npm run test:product-hunt
 PRODUCT_HUNT_BASE_URL=https://www.founderaccount.com PRODUCT_HUNT_WAITLIST_MODE=locked npm run test:product-hunt
 ALLOW_INCOMPLETE=true npm run check:production-launch
+PRODUCTION_DEPLOYMENT_APPROVED=true npm run deploy:public-beta
 npm run check:stripe-webhook-live
 ```
 
+## Stripe Setup Plate
+
+The Stripe rail is not a single-price cabinet anymore. Sandbox and live checks now expect these labelled slots:
+
+```bash
+STRIPE_PRICE_MAC_LICENCE=
+STRIPE_PRICE_PROFILE_SETUP=
+STRIPE_PRICE_FOUNDER_OS=
+STRIPE_PRICE_VISIBILITY_OPS=
+```
+
+`/api/mcp/health` now reports the Stripe cabinet as configured only when the key/signing slots and all four offer-price slots are fitted together.
+
 The public mechanism is available at `/try`; the consented private-beta intake is at
-`/waitlist`. Product Hunt submission remains a no-go until the live routes, production
-owner sign-in, Cookiebot withdrawal/declaration, one owner-approved LinkedIn OAuth and
-text-post proof, and a real purchase/access route are verified.
+`/waitlist`. The live mobile routes and database migration are now deployed. Product
+Hunt submission remains a no-go until production owner sign-in, Cookiebot
+withdrawal/declaration, one owner-approved LinkedIn OAuth and text-post proof, and a
+real purchase/access route are verified.
 
 ## External Launch Fasteners
 
 1. Fit production Resend values and prove owner sign-in.
-2. Complete one owner-approved LinkedIn OAuth connection and public text-post proof; obtain the separate analytics grant.
+2. Complete one owner-approved LinkedIn OAuth connection and public text-post proof; obtain the separate `r_member_postAnalytics` grant and add it to `LINKEDIN_SCOPES` only after LinkedIn approves it.
 3. Configure and verify Cookiebot on every live domain.
 4. Fit Stripe's sandbox webhook signing secret and prove the complete genuine sandbox payment/refund/dispute/recovery lifecycle. Confirm the Stripe legal account country and tax registrations before creating matching live product/key/webhook parts.
 5. Build, Developer ID-sign, notarize and clean-Mac test the direct macOS cabinet; fit its signed update feed and connect the already-proved device activation API.
-6. Obtain owner approval before deploying any further production or domain-routing changes.
+6. Obtain owner approval before deploying any further production or domain-routing changes; the gated `deploy:public-beta` conveyor refuses to run without `PRODUCTION_DEPLOYMENT_APPROVED=true` and verifies the mobile session socket after deployment.
 7. Fit the server-only Deepgram and voice-access keys, review Deepgram region/retention settings, deploy with approval, and prove Press to Speak on a physical device.
 8. Fit `NEXT_PUBLIC_WAITLISTER_KEY`, whitelist the live and local domains, enable double opt-in, and prove confirmation, unsubscribe, export and deletion.
 9. Upload the audited launch film to YouTube and create the Product Hunt draft only after explicit owner approval.

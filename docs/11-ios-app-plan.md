@@ -25,7 +25,7 @@ Implemented today:
 - `/api/cron/publish-due` protected stub.
 - `apps/mcp-server`: local stdio MCP server with health, draft, and voice-check stubs.
 
-Still needed before a fully useful iOS app:
+Originally still needed before a fully useful iOS app:
 
 - Database migrations and durable models.
 - Real owner session storage beyond browser cookies.
@@ -35,7 +35,7 @@ Still needed before a fully useful iOS app:
 - Queue, publish-now, cron publish, retry, and failure recovery.
 - Profile copy, templates, analytics, audit log, and MCP backend integration.
 
-Conclusion: the iOS build can start with mocks once the API contract is written, but the first useful version depends on the backend MVP for drafts, voice checks, queueing, and profile copy.
+Current conclusion (2026-07-17): the first useful owner-only beta is fitted against the real backend. The remaining work is environment and live-proof work: apply the mobile migration to the approved deployment, fit production email/callback values, install the Xcode iOS platform component, inspect on simulator/physical device, and complete one owner-approved LinkedIn post.
 
 ## Recommended Product Scope
 
@@ -136,7 +136,7 @@ The iOS app cannot import TypeScript domain types directly, so the backend contr
 
 ## Backend API Additions For iOS
 
-The current auth model is browser-cookie based. Native iOS needs bearer-style mobile sessions.
+The web app remains browser-cookie based. Native iOS now uses its own bearer-style mobile sessions so LinkedIn credentials and browser cookies never cross into the app.
 
 Add:
 
@@ -262,73 +262,73 @@ If push notifications are added:
 
 ## Delivery Phases
 
-### Phase A - Contract And Backend Readiness
+### Phase A - Contract And Backend Readiness — complete in source
 
 Goal: make the backend consumable by native clients.
 
 Tasks:
 
 - Add OpenAPI or JSON-schema contract for Founder Above the Fold APIs.
-- Add mobile auth endpoints.
-- Add token revocation and refresh.
+- Add mobile auth endpoints. Done: one-use magic-link request/exchange, rotating refresh, logout, session inspection.
+- Add token revocation and refresh. Done: opaque hashes, one-use links, rotating access/refresh pairs, revocation and LinkedIn OAuth state.
 - Complete database-backed posts, profile copy, templates, LinkedIn status, and health endpoints.
 - Add fixtures for empty state, healthy state, failed publish, unsynced profile copy, and reconnect required.
 
 Exit criteria:
 
-- iOS can authenticate against local backend.
-- iOS can fetch session, health, posts, and profile copy from fixtures or real data.
+- iOS can authenticate against the real backend. Done in source and disposable-Postgres integration tests.
+- iOS can fetch session, health, posts, and profile copy from real data. Done in the native client and API contract.
 - Route errors are typed enough for native UI.
 
-### Phase B - Native Shell
+### Phase B - Native Shell — fitted in source; device proof pending
 
 Goal: create the iOS project and sign into Founder Above the Fold.
 
 Tasks:
 
-- Add `apps/ios`.
-- Build SwiftUI tab shell.
-- Implement `APIClient`, `AuthStore`, Keychain storage, and logout.
-- Implement magic-link request and exchange.
-- Implement Today health/status screen.
-- Add local mock mode using fixtures.
+- Add `apps/ios`. Done.
+- Build SwiftUI tab shell. Done: Today, Drafts, Queue, Profile, Manual and Settings.
+- Implement `APIClient`, `AuthStore`, Keychain storage, and logout. Done.
+- Implement magic-link request and exchange. Done.
+- Implement Today health/status screen. Done against live API shapes.
+- Add local mock mode using fixtures. Deferred; the client uses explicit setup/connection errors instead of pretending fixtures are live.
 
 Exit criteria:
 
-- App launches on simulator.
-- Owner can sign in and persist a session.
-- Today screen renders real or fixture backend health.
+- App launches on simulator. Swift type-check passes; full Xcode destination proof awaits the installed platform component.
+- Owner can sign in and persist a session. Done in source; production email proof pending.
+- Today screen renders real backend health. Done in source.
 
-### Phase C - Drafts, Voice, And Queue
+### Phase C - Drafts, Voice, And Queue — fitted in source; live proof pending
 
 Goal: cover the daily mobile operating loop.
 
 Tasks:
 
-- Build draft list and post detail.
-- Add create/edit draft flow.
-- Add run voice check action and result view.
-- Add queue scheduler sheet.
-- Add cancel queued post.
-- Add guarded publish-now confirmation.
+- Build draft list and post detail. Done.
+- Add create/edit draft flow. Done.
+- Add run voice check action and result view. Done.
+- Add queue scheduler sheet. Done.
+- Add cancel queued post. Done.
+- Add guarded publish-now confirmation. Done.
 
 Exit criteria:
 
-- A voice-passed draft can be queued from iOS.
-- Failed voice checks explain why queueing is blocked.
-- Queue and cancel actions return audit IDs.
+- A voice-passed draft can be queued from iOS. Done in server contract and client path.
+- Failed voice checks explain why queueing is blocked. Done.
+- Queue and cancel actions return audit IDs. Backend audits them; the current native response model displays the resulting state rather than exposing audit IDs yet.
 
-### Phase D - Profile Copy And Templates
+### Phase D - Profile Copy And Templates — profile path fitted; templates deferred
 
 Goal: support manual LinkedIn profile upkeep and safe outreach copy.
 
 Tasks:
 
-- Build profile-copy list/detail.
-- Add copy-to-clipboard.
-- Add mark-synced action.
-- Add template list/render read path if backend is ready.
-- Preserve manual-send reminders for outreach.
+- Build profile-copy list/detail. Done.
+- Add copy-to-clipboard. Done.
+- Add mark-synced action. Done.
+- Add template list/render read path if backend is ready. Deferred from the first beta surface.
+- Preserve manual-send reminders for outreach. Done.
 
 Exit criteria:
 
@@ -351,17 +351,17 @@ Exit criteria:
 - Owner can understand weekly content health from iOS.
 - Attention states reach the owner without opening the app.
 
-### Phase F - TestFlight And Launch
+### Phase F - TestFlight And Launch — source checks fitted; distribution pending
 
 Goal: make the app stable enough for real weekly use.
 
 Tasks:
 
-- Add unit tests for API client, auth refresh, and post actions.
-- Add SwiftUI previews for empty, loading, healthy, and failed states.
-- Add XCUITest smoke path for sign-in and queue view if feasible.
-- Add privacy strings and App Store metadata if distributing beyond local install.
-- Run a TestFlight build.
+- Add unit tests for API client, auth refresh, and post actions. Backend auth-refresh integration is covered; native XCTest remains pending.
+- Add SwiftUI previews for empty, loading, healthy, and failed states. Pending.
+- Add XCUITest smoke path for sign-in and queue view if feasible. Pending.
+- Add privacy strings and App Store metadata if distributing beyond local install. Privacy usage strings are fitted; store metadata pending.
+- Run a TestFlight build. Pending external Apple signing/distribution.
 
 Exit criteria:
 

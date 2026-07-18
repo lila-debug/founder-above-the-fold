@@ -14,36 +14,19 @@ enum AppScreen: String, CaseIterable, Identifiable {
 }
 
 struct RootView: View {
-    @Environment(AppModel.self) private var model
-    @Environment(\.horizontalSizeClass) private var sizeClass
+    @Environment(AuthStore.self) private var auth
 
     var body: some View {
         Group {
-        if sizeClass == .regular {
-            NavigationSplitView {
-                List(AppScreen.allCases) { screen in
-                    Button { model.selectedScreen = screen } label: {
-                        Label(screen.title, systemImage: screen.symbol)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    .foregroundStyle(model.selectedScreen == screen ? AppColour.orange : .primary)
-                }
-                    .navigationTitle("Above the Fold")
-            } detail: {
-                NavigationStack {
-                    ScreenRouter(screen: model.selectedScreen)
-                        .id(model.selectedScreen)
-                        .transition(.opacity.combined(with: .move(edge: .trailing)))
-                }
+            if !auth.restored {
+                ProgressView("Inspecting owner key…")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(AppColour.paper)
+            } else if auth.isAuthenticated {
+                MobileWorkbenchView()
+            } else {
+                MobileSignInView()
             }
-        } else {
-            NavigationStack {
-                ScreenRouter(screen: model.hasOnboarded ? model.selectedScreen : .welcome)
-                    .id(model.hasOnboarded ? model.selectedScreen : .welcome)
-                    .transition(.opacity.combined(with: .move(edge: .trailing)))
-                    .toolbar { if model.hasOnboarded { ToolbarItem(placement: .topBarTrailing) { NavigationLink { PartsIndex() } label: { Label("All screens", systemImage: "square.grid.3x3.fill") } } } }
-            }
-        }
         }
     }
 }
@@ -117,40 +100,40 @@ struct AuthView: View {
     let signup: Bool
     @State private var consent = false
     var body: some View { Panel(title: signup ? "Make a private home" : "Open your cabinet", part: signup ? "Part 03 · new cabinet" : "Part 02 · returning owner") {
-        Text(signup ? "One owner. Clear consent. Your words remain yours." : "This iPhone build is a quarantined interface prototype.").font(.title3.weight(.bold))
+        Text(signup ? "One owner. Clear consent. Your words remain yours." : "This iPhone build is the connected private-beta cabinet.").font(.title3.weight(.bold))
         if signup { Toggle("I agree to the privacy panel and terms", isOn: $consent) }
-        Button(signup ? "Inspect Mac licence" : "Open local prototype") {
+        Button(signup ? "Inspect Mac licence" : "Open beta cabinet") {
             if signup {
                 model.selectedScreen = .purchase
             } else {
                 model.selectedScreen = .dashboard
             }
         }.buttonStyle(HardButton()).disabled(signup && !consent)
-        Text("No payment, entitlement, or account action is available in this iPhone prototype.").font(.footnote.weight(.semibold))
+        Text("Apple commerce is intentionally separate; this cabinet signs into the owner backend.").font(.footnote.weight(.semibold))
         Label("No LinkedIn password. No automated DMs. No scraping.", systemImage: "checkmark.shield.fill").font(.footnote.weight(.bold))
-        ManualPanel(place: signup ? "Inspect consent, then read the Mac licence panel." : "Open the local interface prototype.", check: signup ? "Consent is specific and reversible." : "No purchase control is present in this build." , avoid: "Never display passwords or secrets.")
+        ManualPanel(place: signup ? "Inspect consent, then read the Mac licence panel." : "Open the connected beta cabinet.", check: signup ? "Consent is specific and reversible." : "No Apple purchase control is present in this build." , avoid: "Never display passwords or secrets.")
     } }
 }
 
 struct PurchaseView: View {
     @Environment(AppModel.self) private var model
-    var body: some View { Panel(title: "Direct Mac licence", part: "Part 04 · quarantined iPhone prototype") {
+    var body: some View { Panel(title: "Direct Mac licence", part: "Part 04 · separate Mac customer rail") {
         PartLabel(text: "No Apple commerce", colour: AppColour.yellow)
         Text("MAC\nONLY").font(AppFont.display(68).weight(.bold)).tracking(-3).minimumScaleFactor(0.65)
         Text("This iPhone interface does not sell, restore, or activate a licence.").font(.title2.weight(.black))
         ForEach(["Purchase through the Founder Above the Fold website", "Activate the separately distributed Mac app", "Keep this iPhone build as interface test evidence only"], id: \.self) { Label($0, systemImage: "checkmark.square.fill").font(.body.weight(.bold)) }
-        Link("Open Founder Above the Fold website", destination: URL(string: "https://founderabovethefold.com/pricing")!)
+        Link("Open Founder Above the Fold website", destination: URL(string: "https://www.founderaccount.com/pricing")!)
             .buttonStyle(HardButton())
-        Button("Continue through prototype") { model.selectedScreen = .dashboard }
+        Button("Continue to beta cabinet") { model.selectedScreen = .dashboard }
             .buttonStyle(HardButton(colour: .white, foreground: .black))
         Label("Apple purchase and restore controls are intentionally absent.", systemImage: "lock.fill").font(.footnote)
-        ManualPanel(place: "Use the direct website and Mac cabinet for the commercial product.", check: "This prototype performs no payment or licence action.", avoid: "Do not present the iPhone prototype as a product for sale.")
+        ManualPanel(place: "Use the direct website and Mac cabinet for the commercial product.", check: "This beta cabinet performs no Apple payment or licence action.", avoid: "Keep commercial activation on the separately distributed Mac rail.")
     } }
 }
 
 struct SuccessView: View {
     @Environment(AppModel.self) private var model
-    var body: some View { ZStack(alignment: .bottom) { AppColour.blue.ignoresSafeArea(); ChromeDog().frame(height: 310).opacity(0.8); VStack(alignment:.leading,spacing:20){ PartLabel(text:"Interface prototype", colour: AppColour.yellow); Text("YOUR TOOL\nIS ASSEMBLED.").font(AppFont.display(48).weight(.bold)).tracking(-2); Text("Local interface parts are open for testing; no commercial entitlement is implied.").font(AppFont.body(21).weight(.semibold)); Spacer(); Button("Open my workbench"){model.selectedScreen = .dashboard}.buttonStyle(HardButton()) }.padding(24) } }
+    var body: some View { ZStack(alignment: .bottom) { AppColour.blue.ignoresSafeArea(); ChromeDog().frame(height: 310).opacity(0.8); VStack(alignment:.leading,spacing:20){ PartLabel(text:"Beta cabinet", colour: AppColour.yellow); Text("YOUR TOOL\nIS ASSEMBLED.").font(AppFont.display(48).weight(.bold)).tracking(-2); Text("The owner-controlled workbench is ready for inspection. Public side effects remain guarded.").font(AppFont.body(21).weight(.semibold)); Spacer(); Button("Open my workbench"){model.selectedScreen = .dashboard}.buttonStyle(HardButton()) }.padding(24) } }
 }
 
 struct DashboardView: View {
@@ -492,7 +475,7 @@ struct SettingsView: View {
         .confirmationDialog("Remove local cabinet?", isPresented: $confirmRemoval, titleVisibility: .visible) {
             Button("Remove local data", role: .destructive) {
                 model.resetLocalCabinet()
-                status = "Local draft and imported-panel labels were removed. This prototype holds no commercial entitlement."
+                status = "Local draft and imported-panel labels were removed from this device."
             }
             Button("Keep cabinet", role: .cancel) {}
         } message: { Text("This does not change LinkedIn or any server-side account.") }

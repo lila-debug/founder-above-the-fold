@@ -2,6 +2,7 @@ import { timingSafeEqual } from "node:crypto";
 import type { NextRequest } from "next/server";
 import { getOwnerSessionFromRequest } from "@/lib/auth/session";
 import type { AuditActor } from "./audit";
+import { readBearerToken, readMobileSession } from "./mobile-auth";
 
 export async function getWriteActor(request: NextRequest): Promise<AuditActor | null> {
   if (hasValidMcpKey(request)) {
@@ -10,7 +11,26 @@ export async function getWriteActor(request: NextRequest): Promise<AuditActor | 
 
   const session = getOwnerSessionFromRequest(request);
 
-  return session ? "owner" : null;
+  if (session) {
+    return "owner";
+  }
+
+  const bearer = readBearerToken(request.headers.get("authorization"));
+  if (bearer) {
+    try {
+      const mobileSession = await readMobileSession(bearer);
+      if (mobileSession && isAllowedOwner(mobileSession.email)) return "owner";
+    } catch {
+      // Treat unavailable or invalid native sessions as unauthenticated.
+    }
+  }
+
+  return null;
+}
+
+function isAllowedOwner(email: string) {
+  const ownerEmail = process.env.DISPATCH_OWNER_EMAIL?.trim().toLowerCase();
+  return !ownerEmail || email.toLowerCase() === ownerEmail;
 }
 
 function hasValidMcpKey(request: NextRequest) {

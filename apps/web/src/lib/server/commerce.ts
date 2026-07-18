@@ -1,8 +1,9 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import type Stripe from "stripe";
+import { commerceOffers, isCommerceOfferKey, type CommerceOfferKey } from "../commerce-offers";
 import { sendLicenceRecoveryEmail } from "../auth/email";
 import { getDbPool } from "./db";
-import { getConfiguredStripeMode, getStripeClient, getStripeConfig, stripeObjectMatchesConfiguredMode } from "./stripe";
+import { getConfiguredStripeMode, getStripeClient, getStripeConfig, getStripeOfferPriceId, stripeObjectMatchesConfiguredMode } from "./stripe";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -26,11 +27,14 @@ export function normalizeCheckoutSessionId(value: string) {
 export async function createStripeSandboxCheckout(input: {
   email: string;
   termsAccepted: boolean;
+  offerKey: CommerceOfferKey;
 }) {
   if (!input.termsAccepted) throw new Error("Accept the licence and refund terms before checkout.");
 
   const email = normalizePurchaserEmail(input.email);
   const config = getStripeConfig({ requireCheckoutEnabled: true });
+  const offer = commerceOffers[input.offerKey];
+  const priceId = getStripeOfferPriceId(input.offerKey);
   const stripe = getStripeClient();
   const pool = getDbPool();
   const intentId = randomUUID();
@@ -45,21 +49,24 @@ export async function createStripeSandboxCheckout(input: {
   }
 
   await pool.query(
-    `insert into stripe_checkout_intents (id, purchaser_email) values ($1, $2)`,
-    [intentId, email],
+    `insert into stripe_checkout_intents (id, purchaser_email, offer_key, checkout_mode)
+     values ($1, $2, $3, $4)`,
+    [intentId, email, input.offerKey, offer.billing],
   );
 
   try {
     const session = await stripe.checkout.sessions.create({
-      mode: "payment",
+      mode: offer.billing,
       customer_email: email,
       client_reference_id: intentId,
-      line_items: [{ price: config.priceId, quantity: 1 }],
+      line_items: [{ price: priceId, quantity: 1 }],
       billing_address_collection: "required",
       customer_creation: "always",
       automatic_tax: { enabled: config.automaticTaxEnabled },
-      payment_intent_data: { metadata: { purchase_intent_id: intentId } },
-      metadata: { purchase_intent_id: intentId, licence_major_version: "1" },
+      ...(offer.billing === "payment"
+        ? { payment_intent_data: { metadata: { purchase_intent_id: intentId, offer_key: input.offerKey } } }
+        : { subscription_data: { metadata: { purchase_intent_id: intentId, offer_key: input.offerKey } } }),
+      metadata: { purchase_intent_id: intentId, offer_key: input.offerKey, licence_major_version: "1" },
       success_url: new URL("/purchase/success?session_id={CHECKOUT_SESSION_ID}", config.baseUrl).toString(),
       cancel_url: new URL("/pricing?checkout=cancelled", config.baseUrl).toString(),
     }, { idempotencyKey: `founder-checkout-${intentId}` });
@@ -112,6 +119,10 @@ export async function applyStripeEvent(event: Stripe.Event) {
       applied = await applyRefund(client, event.data.object as Stripe.Charge);
     } else if (event.type === "charge.dispute.created" || event.type === "charge.dispute.closed") {
       applied = await applyDispute(client, event.data.object as Stripe.Dispute, event.type);
+    } else if (event.type === "customer.subscription.updated" || event.type === "customer.subscription.deleted") {
+      applied = await applySubscription(client, event.data.object as Stripe.Subscription);
+    } else if (event.type === "invoice.paid" || event.type === "invoice.payment_failed") {
+      applied = await applyInvoice(client, event.data.object as Stripe.Invoice, event.type);
     }
 
     await client.query(
@@ -134,24 +145,33 @@ export async function getCheckoutReceiptStatus(sessionIdInput: string) {
     intent_status: string;
     licence_status: "active" | "refunded" | "disputed" | "revoked" | null;
     major_version: number | null;
+    offer_key: string;
+    order_status: string | null;
     purchased_at: Date | null;
   }>(
     `select
        intent.status as intent_status,
        licence.status as licence_status,
        licence.major_version,
-       licence.purchased_at
+       licence.purchased_at,
+       intent.offer_key,
+       access.status as order_status
      from stripe_checkout_intents intent
      left join founder_licences licence
        on licence.stripe_checkout_session_id = intent.stripe_checkout_session_id
+     left join founder_commerce_access access
+       on access.stripe_checkout_session_id = intent.stripe_checkout_session_id
      where intent.stripe_checkout_session_id = $1`,
     [sessionId],
   );
 
   const row = result.rows[0];
   if (!row) return { state: "not_found" as const };
-  if (!row.licence_status) {
+  const offerKey = isCommerceOfferKey(row.offer_key) ? row.offer_key : "mac_licence";
+  const fulfilledState = row.licence_status ?? row.order_status;
+  if (!fulfilledState) {
     return {
+      offerKey,
       state: row.intent_status === "failed"
         ? "failed" as const
         : row.intent_status === "cancelled"
@@ -161,7 +181,8 @@ export async function getCheckoutReceiptStatus(sessionIdInput: string) {
   }
 
   return {
-    state: row.licence_status,
+    state: fulfilledState as "active" | "past_due" | "cancelled" | "refunded" | "disputed" | "revoked",
+    offerKey,
     majorVersion: row.major_version,
     purchasedAt: row.purchased_at?.toISOString() ?? null,
   };
@@ -276,23 +297,37 @@ async function applyPaidCheckout(
   const intentId = session.metadata?.purchase_intent_id;
   if (!intentId) return false;
 
-  const intent = await client.query<{ purchaser_email: string }>(
-    `select purchaser_email from stripe_checkout_intents where id = $1 for update`,
+  const intent = await client.query<{ purchaser_email: string; offer_key: string; checkout_mode: string }>(
+    `select purchaser_email, offer_key, checkout_mode from stripe_checkout_intents where id = $1 for update`,
     [intentId],
   );
   const email = intent.rows[0]?.purchaser_email;
-  if (!email) return false;
+  const offerKey = intent.rows[0]?.offer_key;
+  if (!email || !isCommerceOfferKey(offerKey)) return false;
 
   const paymentIntentId = typeof session.payment_intent === "string" ? session.payment_intent : null;
   const customerId = typeof session.customer === "string" ? session.customer : null;
-  await client.query(
-    `insert into founder_licences
+  if (offerKey === "mac_licence") {
+    await client.query(
+      `insert into founder_licences
        (purchaser_email, stripe_customer_id, stripe_checkout_session_id,
         stripe_payment_intent_id, status, purchased_at)
      values ($1, $2, $3, $4, 'active', to_timestamp($5))
      on conflict (stripe_checkout_session_id) do nothing`,
-    [email, customerId, session.id, paymentIntentId, created],
-  );
+      [email, customerId, session.id, paymentIntentId, created],
+    );
+  } else {
+    const subscriptionId = typeof session.subscription === "string" ? session.subscription : null;
+    await client.query(
+      `insert into founder_commerce_access
+         (purchaser_email, offer_key, billing_kind, stripe_customer_id,
+          stripe_checkout_session_id, stripe_payment_intent_id, stripe_subscription_id,
+          status, purchased_at)
+       values ($1, $2, $3, $4, $5, $6, $7, 'active', to_timestamp($8))
+       on conflict (stripe_checkout_session_id) do nothing`,
+      [email, offerKey, intent.rows[0]?.checkout_mode, customerId, session.id, paymentIntentId, subscriptionId, created],
+    );
+  }
   await client.query(
     `update stripe_checkout_intents set status = 'paid', stripe_checkout_session_id = $2 where id = $1`,
     [intentId, session.id],
@@ -305,11 +340,16 @@ async function applyRefund(client: import("pg").PoolClient, charge: Stripe.Charg
   const paymentIntentId = typeof charge.payment_intent === "string" ? charge.payment_intent : null;
   if (!paymentIntentId) return false;
   const result = await client.query(
-    `update founder_licences set status = 'refunded'
-     where stripe_payment_intent_id = $1 and status <> 'refunded'`,
+    `with licence as (
+       update founder_licences set status = 'refunded'
+       where stripe_payment_intent_id = $1 and status <> 'refunded' returning 1
+     ), access as (
+       update founder_commerce_access set status = 'refunded'
+       where stripe_payment_intent_id = $1 and status <> 'refunded' returning 1
+     ) select (select count(*) from licence) + (select count(*) from access) as changed`,
     [paymentIntentId],
   );
-  return (result.rowCount ?? 0) > 0;
+  return Number(result.rows[0]?.changed ?? 0) > 0;
 }
 
 async function applyDispute(
@@ -326,9 +366,47 @@ async function applyDispute(
       ? "active"
       : "revoked";
   const result = await client.query(
-    `update founder_licences set status = $2
-     where stripe_payment_intent_id = $1 and status <> 'refunded'`,
+    `with licence as (
+       update founder_licences set status = $2
+       where stripe_payment_intent_id = $1 and status <> 'refunded' returning 1
+     ), access as (
+       update founder_commerce_access set status = $2
+       where stripe_payment_intent_id = $1 and status <> 'refunded' returning 1
+     ) select (select count(*) from licence) + (select count(*) from access) as changed`,
     [paymentIntentId, nextStatus],
+  );
+  return Number(result.rows[0]?.changed ?? 0) > 0;
+}
+
+async function applySubscription(client: import("pg").PoolClient, subscription: Stripe.Subscription) {
+  if (!stripeObjectMatchesConfiguredMode(subscription.livemode)) return false;
+  const status = subscription.status === "active" || subscription.status === "trialing"
+    ? "active"
+    : subscription.status === "past_due" || subscription.status === "unpaid" || subscription.status === "paused"
+      ? "past_due"
+      : "cancelled";
+  const result = await client.query(
+    `update founder_commerce_access set status = $2
+     where stripe_subscription_id = $1 and status <> 'refunded'`,
+    [subscription.id, status],
+  );
+  return (result.rowCount ?? 0) > 0;
+}
+
+async function applyInvoice(
+  client: import("pg").PoolClient,
+  invoice: Stripe.Invoice,
+  eventType: "invoice.paid" | "invoice.payment_failed",
+) {
+  if (!stripeObjectMatchesConfiguredMode(invoice.livemode)) return false;
+  const subscriptionId = typeof invoice.parent?.subscription_details?.subscription === "string"
+    ? invoice.parent.subscription_details.subscription
+    : null;
+  if (!subscriptionId) return false;
+  const result = await client.query(
+    `update founder_commerce_access set status = $2
+     where stripe_subscription_id = $1 and status <> 'refunded'`,
+    [subscriptionId, eventType === "invoice.paid" ? "active" : "past_due"],
   );
   return (result.rowCount ?? 0) > 0;
 }

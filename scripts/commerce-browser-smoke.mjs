@@ -19,9 +19,16 @@ try {
     console.log(`CHECK ${fixture.name}: locked checkout panel`);
     await page.goto(`${baseUrl}/pricing`, { waitUntil: "domcontentloaded" });
     await expectText(page, "CA$199");
-    await expectText(page, "Checkout safely locked");
+    await expectText(page, "Mac licence safely locked");
     const checkoutButton = page.getByRole("button", { name: "Open secure test checkout" });
     if (!(await checkoutButton.isDisabled())) throw new Error(`${fixture.name}: locked checkout button is enabled.`);
+    for (const offer of ["Profile setup", "Self-serve SaaS", "Visibility ops"]) {
+      await page.getByRole("button", { name: new RegExp(offer, "i") }).click();
+      await expectText(page, `${offer} safely locked`);
+      if (!(await checkoutButton.isDisabled())) throw new Error(`${fixture.name}: ${offer} checkout button is enabled.`);
+      checks += 2;
+    }
+    await page.getByRole("button", { name: /Mac licence/i }).click();
     checks += 3;
 
     await page.getByRole("button", { name: "Recover an existing licence" }).click();
@@ -41,7 +48,7 @@ try {
 
     console.log(`CHECK ${fixture.name}: untrusted return reference`);
     await page.goto(`${baseUrl}/purchase/success?session_id=cs_test_browser_missing_123456`, { waitUntil: "domcontentloaded" });
-    await expectText(page, "Licence needs inspection");
+    await expectText(page, "Payment needs inspection");
     if (await page.getByText("Licence fitted", { exact: true }).count()) {
       throw new Error(`${fixture.name}: unknown return reference unlocked a licence.`);
     }

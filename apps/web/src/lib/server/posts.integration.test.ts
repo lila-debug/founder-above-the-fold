@@ -281,7 +281,7 @@ test("core post conveyor uses real database state and safe LinkedIn rules", asyn
     assert.equal(requests.length, 1);
     assert.equal(requests[0].url, "https://api.linkedin.com/rest/posts");
     const headers = new Headers(requests[0].init?.headers);
-    assert.equal(headers.get("Linkedin-Version"), "202606");
+    assert.equal(headers.get("Linkedin-Version"), "202607");
     assert.equal(headers.get("X-Restli-Protocol-Version"), "2.0.0");
     const payload = JSON.parse(String(requests[0].init?.body)) as {
       author: string;

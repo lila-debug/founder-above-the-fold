@@ -18,6 +18,7 @@ type EnvReport = {
     liveApproval: "approved" | "not_approved";
     automaticTax: "enabled" | "disabled";
     keys: Record<string, EnvState>;
+    offerPrices: Record<string, EnvState>;
   };
 };
 
@@ -26,6 +27,7 @@ const requiredProductionKeys = [
   "DISPATCH_OWNER_EMAIL",
   "MAGIC_LINK_SECRET",
   "AUTH_CALLBACK_URL",
+  "MOBILE_AUTH_CALLBACK_URL",
   "DATABASE_URL",
   "CRON_SECRET",
   "MCP_API_KEY",
@@ -74,11 +76,16 @@ export function getEnvReport(): EnvReport {
   const stripeKeys = reportKeys([
     "STRIPE_SECRET_KEY",
     "STRIPE_WEBHOOK_SECRET",
-    "STRIPE_PRICE_ID",
     "LICENCE_DEVICE_HASH_SECRET",
     "LICENCE_SIGNING_PRIVATE_KEY",
     "LICENCE_SIGNING_PUBLIC_KEY",
   ] as const);
+  const stripeOfferPrices: Record<string, EnvState> = {
+    mac_licence: process.env.STRIPE_PRICE_MAC_LICENCE?.trim() || process.env.STRIPE_PRICE_ID?.trim() ? "configured" : "missing",
+    profile_setup: process.env.STRIPE_PRICE_PROFILE_SETUP?.trim() ? "configured" : "missing",
+    founder_os: process.env.STRIPE_PRICE_FOUNDER_OS?.trim() ? "configured" : "missing",
+    visibility_ops: process.env.STRIPE_PRICE_VISIBILITY_OPS?.trim() ? "configured" : "missing",
+  };
   const stripeSecretPrefix = process.env.STRIPE_SECRET_KEY?.trim() ?? "";
   const stripeDeclaredMode = process.env.STRIPE_MODE?.trim() || "sandbox";
   const stripeKeyMode = stripeSecretPrefix.startsWith("sk_test_") || stripeSecretPrefix.startsWith("rk_test_")
@@ -120,6 +127,7 @@ export function getEnvReport(): EnvReport {
       liveApproval: process.env.STRIPE_LIVE_APPROVED === "true" ? "approved" : "not_approved",
       automaticTax: process.env.STRIPE_AUTOMATIC_TAX_ENABLED === "true" ? "enabled" : "disabled",
       keys: stripeKeys,
+      offerPrices: stripeOfferPrices,
     },
   };
 }
