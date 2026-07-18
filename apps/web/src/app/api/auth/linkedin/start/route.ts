@@ -9,9 +9,8 @@ export async function GET(request: NextRequest) {
   const session = getOwnerSessionFromRequest(request);
 
   if (!session) {
-    const signInUrl = new URL("/", request.nextUrl.origin);
-    signInUrl.searchParams.set("linkedin", "owner-sign-in-required");
-    signInUrl.hash = "command-centre";
+    const signInUrl = new URL("/login", request.nextUrl.origin);
+    signInUrl.searchParams.set("auth", "sign-in-required");
 
     return NextResponse.redirect(signInUrl);
   }

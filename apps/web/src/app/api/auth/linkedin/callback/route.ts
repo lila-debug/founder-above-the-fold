@@ -90,10 +90,9 @@ export async function GET(request: NextRequest) {
 function redirectWithLinkedInState(request: NextRequest, state: string, mobile = false) {
   const redirectUrl = mobile
     ? new URL(`founderabovefold://linkedin/result?state=${encodeURIComponent(state)}`)
-    : new URL("/", request.nextUrl.origin);
+    : new URL("/dashboard", request.nextUrl.origin);
   if (!mobile) {
     redirectUrl.searchParams.set("linkedin", state);
-    redirectUrl.hash = "command-centre";
   }
 
   const response = NextResponse.redirect(redirectUrl);

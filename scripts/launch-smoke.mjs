@@ -7,7 +7,7 @@ const baseUrl = (process.env.LAUNCH_SMOKE_BASE_URL ?? "http://localhost:3000").r
 
 const results = [];
 
-await expectStatus("public landing", "/", 200);
+await expectRedirect("canonical root", "/", "/dashboard");
 await expectStatus("privacy panel", "/privacy", 200);
 await expectStatus("cookie panel", "/cookies", 200);
 await expectStatus("terms panel", "/terms", 200);
@@ -32,7 +32,7 @@ await expectStatus("dashboard owner redirect", "/dashboard", 307, {
 await expectRedirect(
   "LinkedIn start owner lock",
   "/api/auth/linkedin/start",
-  "/?linkedin=owner-sign-in-required#command-centre",
+  "/login?auth=sign-in-required",
 );
 await expectLinkedInCallbackRedirect(
   "LinkedIn callback missing-key return",
@@ -177,20 +177,18 @@ assert.equal(linkedInStatus.canConnect, false);
 assert.equal(hasTokenShapedKey(linkedInStatus), false);
 results.push("LinkedIn setup response exposes no token-shaped fields");
 
-const landingResponse = await fetch(`${baseUrl}/`, { redirect: "manual" });
+const landingResponse = await fetch(`${baseUrl}/login`, { redirect: "manual" });
 const landingHtml = await landingResponse.text();
-assert.match(landingHtml, /Private beta build/);
-assert.match(landingHtml, /Publishing stays locked until setup passes/);
-assert.match(landingHtml, /href="\/privacy"/);
-assert.match(landingHtml, /href="\/cookies"/);
-assert.match(landingHtml, /href="\/waitlist"/);
+assert.match(landingHtml, /Open the one real app/);
+assert.match(landingHtml, /Magic link access/);
+assert.match(landingHtml, /Send magic link/);
 assert.match(
   landingResponse.headers.get("content-security-policy") ?? "",
   /frame-ancestors 'none'/,
 );
 assert.equal(landingResponse.headers.get("x-frame-options"), "DENY");
 assert.equal(landingResponse.headers.get("x-content-type-options"), "nosniff");
-results.push("public preview labels, links, and security headers are fitted");
+results.push("single owner entrance and security headers are fitted");
 
 const waitlistResponse = await fetch(`${baseUrl}/waitlist`, { redirect: "manual" });
 const waitlistHtml = await waitlistResponse.text();
@@ -252,8 +250,7 @@ async function expectLinkedInCallbackRedirect(label, path) {
   const location = response.headers.get("location");
   assert.ok(location, `${label}: redirect location is missing`);
   const redirectUrl = new URL(location, baseUrl);
-  assert.equal(redirectUrl.pathname, "/", `${label}: wrong return panel`);
-  assert.equal(redirectUrl.hash, "#command-centre", `${label}: command-centre anchor missing`);
+  assert.equal(redirectUrl.pathname, "/dashboard", `${label}: wrong return panel`);
   assert.ok(
     ["missing-code", "owner-email-missing"].includes(
       redirectUrl.searchParams.get("linkedin") ?? "",
