@@ -1,0 +1,23 @@
+{
+  "artifact_name": "Founder Above the Fold Assembly Machine",
+  "project": "Founder Above the Fold",
+  "audience": "owner and beta testers who need one visible product map",
+  "source_summary": "One GitHub repository, one Vercel project, one domain, one protected app route, and a redacted key-routing jig.",
+  "visual_style": "monospaced late-1980s to mid-1990s IKEA and Rube Goldberg instruction manual",
+  "panels": [
+    {"id":"mission-control","title":"Mission Control","purpose":"show the whole machine at a glance","interactions":["click part","show job"]},
+    {"id":"parts-drawer","title":"Parts Drawer","purpose":"separate product components from product copies","interactions":[]},
+    {"id":"assembly-lane","title":"Assembly Lane","purpose":"move through the one app route","interactions":["mark done","remove check"]},
+    {"id":"status-lights","title":"Live Status Lights","purpose":"show dated cleanup evidence","interactions":[]},
+    {"id":"sandbox","title":"Try-It Sandbox","purpose":"route a key name without receiving its value","interactions":["select family","show safe cabinet"]},
+    {"id":"failure-capture","title":"Failure Capture","purpose":"classify where a tester stops","interactions":["save breakpoint"]},
+    {"id":"feedback-drawer","title":"Feedback Drawer","purpose":"export redacted test evidence","interactions":["set confidence","export JSON"]},
+    {"id":"finished-test","title":"Finished-Build Test","purpose":"prove the operator can work without guessing","interactions":["lock check"]}
+  ],
+  "steps": [
+    {"id":"step-01","title":"Open","plain_goal":"Use the canonical domain","user_action":"Open www.founderaccount.com","system_action":"Route to /dashboard","completion_check":"The workbench or login lock is visible","failure_modes":["wrong domain","stale deployment URL"],"risk_level":"low"},
+    {"id":"step-02","title":"Unlock","plain_goal":"Open the owner cabinet","user_action":"Request and open the private link","system_action":"Create the owner session","completion_check":"The real workbench loads","failure_modes":["email provider missing","wrong owner email","expired link"],"risk_level":"medium"}
+  ],
+  "feedback_capture": {"per_step_notes":true,"screenshot_upload":false,"blocked_reason":true,"tester_confidence_score":true},
+  "export_modes": ["html","markdown","json","agent_instructions"]
+}

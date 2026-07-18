@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A monospaced assembly manual for the one Founder Above the Fold product chain." />
+    <title>Founder Above the Fold · Assembly Machine</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="masthead">
+      <div><span class="part">MANUAL 01</span><h1>ONE APP.<br />ONE ROUTE.</h1></div>
+      <div class="stamp">NO KEYS<br />STORED HERE</div>
+    </header>
+
+    <main>
+      <section class="panel" id="mission-control">
+        <div class="panel-title"><span>01</span><div><p>Mission Control</p><h2>See the whole machine</h2></div></div>
+        <div class="machine" aria-label="Canonical product chain">
+          <button data-part="github"><b>A</b><span>GITHUB DRAWER</span><small>lila-debug/<br />founder-above-the-fold</small></button>
+          <i>→</i>
+          <button data-part="vercel"><b>B</b><span>VERCEL CONVEYOR</span><small>founder-above-the-fold</small></button>
+          <i>→</i>
+          <button data-part="domain"><b>C</b><span>FRONT DOOR</span><small>www.founderaccount.com</small></button>
+          <i>→</i>
+          <button data-part="app"><b>D</b><span>REAL APP</span><small>/dashboard</small></button>
+        </div>
+        <div class="callout" id="part-detail">Select a labelled part to inspect its one job.</div>
+      </section>
+
+      <section class="panel" id="parts-drawer">
+        <div class="panel-title"><span>02</span><div><p>Parts Drawer</p><h2>Four pieces, not four products</h2></div></div>
+        <div class="parts-grid">
+          <article><b>A</b><h3>Product drawer</h3><p>Source history. Private. The only product repository.</p></article>
+          <article><b>B</b><h3>Build conveyor</h3><p>Encrypted production slots and deployment history.</p></article>
+          <article><b>C</b><h3>Front door</h3><p>The only URL a normal operator needs to remember.</p></article>
+          <article><b>D</b><h3>Workbench</h3><p>Draft, voice, queue, profile copy, templates, analytics, manual.</p></article>
+        </div>
+        <div class="warning">⚠ apps/web + apps/ios + apps/macos + apps/mcp-server = components inside one product.</div>
+      </section>
+
+      <section class="panel" id="assembly-lane">
+        <div class="panel-title"><span>03</span><div><p>Assembly Lane</p><h2>Move the ball through the machine</h2></div></div>
+        <div class="lane" id="steps">
+          <article data-step="1"><span class="light">[ ]</span><b>1 · OPEN</b><p>Go to www.founderaccount.com.</p><button>Mark done</button></article>
+          <article data-step="2"><span class="light">[ ]</span><b>2 · ROUTE</b><p>The root sends you to /dashboard.</p><button>Mark done</button></article>
+          <article data-step="3"><span class="light">[ ]</span><b>3 · UNLOCK</b><p>If locked, /login sends the owner link.</p><button>Mark done</button></article>
+          <article data-step="4"><span class="light">[ ]</span><b>4 · OPERATE</b><p>Return to the real private workbench.</p><button>Mark done</button></article>
+        </div>
+      </section>
+
+      <section class="panel" id="status-lights">
+        <div class="panel-title"><span>04</span><div><p>Live Status Lights</p><h2>Evidence from the cleanup</h2></div></div>
+        <div class="status-grid">
+          <div><span class="ok">[✓]</span><b>GitHub</b><p>One private product repository</p></div>
+          <div><span class="ok">[✓]</span><b>Vercel</b><p>One product project</p></div>
+          <div><span class="ok">[✓]</span><b>Database</b><p>Production health: OK</p></div>
+          <div><span class="attention">[!]</span><b>Email sign-in</b><p>Resend slots still need fitting</p></div>
+        </div>
+        <p class="evidence">Checked 2026-07-18. Status is a dated inspection, not a live provider feed.</p>
+      </section>
+
+      <section class="panel" id="sandbox">
+        <div class="panel-title"><span>05</span><div><p>Try-It Sandbox</p><h2>Where does this key go?</h2></div></div>
+        <label for="key-family">Choose a slot family. Never enter a value.</label>
+        <select id="key-family">
+          <option value="">Select a labelled family…</option>
+          <option value="first-party">Magic link / cron / MCP / encryption</option>
+          <option value="linkedin">LinkedIn client key</option>
+          <option value="resend">Resend email key</option>
+          <option value="deepgram">Deepgram voice key</option>
+          <option value="stripe">Stripe key or webhook secret</option>
+          <option value="cookiebot">Cookiebot Domain Group ID</option>
+          <option value="update">Native update signing key</option>
+        </select>
+        <div class="router" id="key-route">[SELECT] → [LABEL] → [ONE SAFE CABINET]</div>
+      </section>
+
+      <section class="panel" id="failure-capture">
+        <div class="panel-title"><span>06</span><div><p>Failure Capture</p><h2>Record where the ball stopped</h2></div></div>
+        <div class="form-grid">
+          <label>Stopped at<select id="stopped-at"><option>Mission Control</option><option>Parts Drawer</option><option>Assembly Lane</option><option>Status Lights</option><option>Key Router</option><option>Finished-Build Test</option></select></label>
+          <label>Failure class<select id="failure-class"><option>app problem</option><option>manual problem</option><option>expectation problem</option><option>missing context problem</option><option>access/permission problem</option></select></label>
+          <label class="wide">What happened?<textarea id="failure-note" placeholder="No secrets, emails, or keys."></textarea></label>
+          <button id="save-failure">Clamp breakpoint</button>
+        </div>
+        <ul id="failure-list"></ul>
+      </section>
+
+      <section class="panel" id="feedback-drawer">
+        <div class="panel-title"><span>07</span><div><p>Feedback Drawer</p><h2>Export a redacted beta report</h2></div></div>
+        <label>Tester confidence <output id="confidence-output">3 / 5</output><input id="confidence" type="range" min="1" max="5" value="3" /></label>
+        <label>Manual note<textarea id="feedback-note" placeholder="What was unclear? Do not include credentials."></textarea></label>
+        <button id="export-report">Export report JSON</button>
+      </section>
+
+      <section class="panel" id="finished-test">
+        <div class="panel-title"><span>08</span><div><p>Finished-Build Test</p><h2>Can you operate without guessing?</h2></div></div>
+        <div class="checklist" id="checks">
+          <label><input type="checkbox" /> I can name the one product repository.</label>
+          <label><input type="checkbox" /> I can name the one Vercel project.</label>
+          <label><input type="checkbox" /> I can name the one front door.</label>
+          <label><input type="checkbox" /> I know /dashboard is the real app.</label>
+          <label><input type="checkbox" /> I know Notion is a map, not a key cabinet.</label>
+        </div>
+        <div class="gauge"><span id="gauge-fill"></span></div>
+        <strong id="gauge-label">0 / 5 fasteners locked</strong>
+      </section>
+    </main>
+
+    <footer>FOUNDER ABOVE THE FOLD™ · MANUAL DRAWER · NO SECRETS · 2026</footer>
+    <script src="manual.js"></script>
+  </body>
+</html>
