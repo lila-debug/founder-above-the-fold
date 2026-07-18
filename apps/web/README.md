@@ -13,6 +13,20 @@ npm run dev
 
 Then open `http://localhost:3000`.
 
+The root route is the single product entrance. It routes to `/dashboard`; signed-out
+owners are sent to the real `/login` magic-link panel. Preview and showroom routes are
+supporting material, not separate applications.
+
+```text
+GitHub: lila-debug/founder-above-the-fold
+  -> Vercel: founder-above-the-fold
+  -> Domain: https://www.founderaccount.com
+  -> App: /dashboard
+```
+
+Use `docs/34-canonical-app-and-key-map.md` as the redacted key-placement panel. Never
+copy secret values into source, chat, tickets, or Notion.
+
 Magic link auth is provider-neutral. Local development starts with `AUTH_PROVIDER=dev`, which generates a local test link without sending email.
 
 The direct licence panel lives at `/pricing`. It is intentionally locked until the

@@ -12,7 +12,7 @@ export default async function DashboardPage() {
   const session = await getOwnerSession();
 
   if (!session) {
-    redirect("/?auth=sign-in-required&next=/dashboard");
+    redirect("/login?auth=sign-in-required");
   }
 
   const [database, env, postTracker, profileTracker, linkedinConnection, analyticsTracker, analyticsReadiness] = await Promise.all([

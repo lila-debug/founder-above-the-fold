@@ -51,7 +51,8 @@ export async function GET(request: NextRequest) {
 }
 
 function redirectWithAuthState(request: NextRequest, state: string) {
-  const url = new URL("/", request.nextUrl.origin);
+  const destination = state === "signed-in" ? "/dashboard" : "/login";
+  const url = new URL(destination, request.nextUrl.origin);
   url.searchParams.set("auth", state);
 
   return NextResponse.redirect(url);
