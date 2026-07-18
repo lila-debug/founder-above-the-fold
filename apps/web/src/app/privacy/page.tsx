@@ -2,6 +2,11 @@ import Link from "next/link";
 
 const dataRows = [
   {
+    label: "Private-beta requests",
+    detail:
+      "Email, optional first name, working position, selected product problem, referral source, beta consent, optional marketing consent, confirmation status, and signup timestamps. Duplicate email requests are kept as one record.",
+  },
+  {
     label: "Owner cabinet",
     detail:
       "Email, session state, purchase state, and private setup settings used to open one owner's cabinet.",
