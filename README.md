@@ -6,6 +6,19 @@ The important boundary: Founder Above the Fold automates only what can be done t
 
 Internal note: the MCP tool namespace currently remains `dispatch.*` while the customer-facing product name is Founder Above the Fold.
 
+## Single Source of Truth
+
+Use only this working drawer:
+
+- Finder: `/Users/hella.crypto/Documents/Linkedin Profile MCP APP & App`
+- GitHub: `lila-debug/founder-above-the-fold`
+- Branch: `main`
+- Production cabinet: Vercel project `founder-above-the-fold`
+
+The web, MCP, iOS, Mac, visual guide, launch media, and assembly manuals belong in this
+one repository. Do not create another project copy to start a task. Use a Git branch or a
+registered temporary worktree, then remove that worktree after the work is fitted.
+
 ## What This Repo Contains
 
 - [Saved PRD](tasks/prd-dispatch-linkedin-mcp.md)
@@ -24,6 +37,7 @@ Internal note: the MCP tool namespace currently remains `dispatch.*` while the c
 - [iOS app plan](docs/11-ios-app-plan.md)
 - [Android app plan](docs/12-android-app-plan.md)
 - [Product delivery backlog](docs/13-product-delivery-backlog.md)
+- [Single-project cabinet manual](docs/37-single-project-cabinet-manual.md)
 - [Domain and deployment manual](docs/14-domain-and-deployment-manual.md)
 - [Owner access guard manual](docs/15-owner-access-manual.md)
 - [Interactive tutorial manual](docs/18-interactive-tutorial-manual.md)

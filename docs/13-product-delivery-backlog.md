@@ -10,6 +10,8 @@ order and every slice can be tested before the next one begins.
 
 Already in place:
 
+- 2026-07-19 the duplicate-project audit identified one canonical GitHub drawer and preserved the only unique local histories on labelled archive rails. The validated current web, MCP, native, visual-guide, manual and launch-media work now sits in the canonical local `main`; redundant Finder drawers and the separate manual repository remain removal-gated until the owner approves the exact Trash and GitHub list.
+
 - Next.js web app shell with a landing and command-centre UI.
 - Passwordless magic-link flow in dev mode.
 - Protected owner workbench route at `/dashboard`.
