@@ -5,10 +5,10 @@
 
 | Label | Part | Plain-English job | Where it lives | Owner |
 |---|---|---|---|---|
-| A | Working drawer | The only Finder folder used for product work | `/Users/hella.crypto/Documents/Founder Above the Fold` | Founder |
+| A | Working drawer | The only Finder folder used for product work | `/Users/hella.crypto/Projects/Founder Above the Fold` | Founder |
 | B | GitHub drawer | The only remote source and history | `lila-debug/founder-above-the-fold` | Founder |
 | C | Main rail | The finished and shared product line | `main` | Founder |
-| D | Archive rails | Preserve superseded local history without presenting it as current | `archive/legacy-founderacct`, `archive/stray-linkedin-capture` | Founder |
+| D | Archive rails | Preserve superseded local history without presenting it as current | `archive/legacy-founderacct`, `archive/legacy-projects-deploy`, `archive/stray-linkedin-capture` | Founder |
 | E | Manual rack | Keep product instructions beside the product | `docs/`, `manuals/`, and the in-app manual | Product |
 | F | Temporary worktree | Isolate short work without making a new product version | Git-registered temporary path | Codex |
 | G | Removal manifest | Names only the redundant drawers approved for the Trash | Cleanup handoff | Founder |
