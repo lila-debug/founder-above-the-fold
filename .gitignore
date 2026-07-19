@@ -13,5 +13,7 @@ coverage/
 .derived-ios/
 apps/macos/.build/
 output/macos/
+outputs/**/.thumbnails/
+outputs/**/.waveform-cache/
 .vercel
 .env*
