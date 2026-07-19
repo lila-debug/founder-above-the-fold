@@ -123,7 +123,8 @@ Avoid:
 - [x] Safety/setup language matches the tested product state.
 - [ ] Deploy current theme repairs with approval.
 - [ ] Recapture the repaired live privacy/cookie frames.
-- [ ] Record founder voice and edit/export both cuts.
+- [x] Edit and export both cuts (19 July 2026) - see docs/44-launch-film-cut-sheet.md.
+- [ ] Record founder voice and dub (optional; timed script in docs/44).
 
 ---
 
