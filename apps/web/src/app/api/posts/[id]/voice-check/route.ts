@@ -19,11 +19,12 @@ const AMERICANISMS = [
   'pants', 'sweater', 'sneakers', 'highway', 'subway', 'mall', 'drugstore'
 ];
 
-function runVoiceCheck(body: string): { status: 'passed' | 'failed'; failures: string[] } {
+function runVoiceCheck(body: string): { status: 'passed' | 'failed'; failures: string[]; warnings: string[] } {
   const failures: string[] = [];
+  const warnings: string[] = [];
   const lowerBody = body.toLowerCase();
 
-  // Check banned words
+  // Check banned words (hard fail)
   for (const word of BANNED_WORDS) {
     const regex = new RegExp(`\\b${word}\\b`, 'gi');
     if (regex.test(lowerBody)) {
@@ -35,17 +36,17 @@ function runVoiceCheck(body: string): { status: 'passed' | 'failed'; failures: s
   for (const word of AMERICANISMS) {
     const regex = new RegExp(`\\b${word}\\b`, 'gi');
     if (regex.test(lowerBody)) {
-      failures.push(`Americanism detected: "${word}" — consider British English alternative`);
+      warnings.push(`Americanism detected: "${word}" — consider British English alternative`);
     }
   }
 
-  // Check for emojis in text
+  // Check for emojis in text (hard fail)
   const emojiRegex = /[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu;
   if (emojiRegex.test(body)) {
     failures.push('Emojis detected — remove for professional tone');
   }
 
-  // Check sentence length (flag very long sentences)
+  // Check sentence length (hard fail; flag very long sentences)
   const sentences = body.split(/[.!?]+/).filter(s => s.trim().length > 0);
   const longSentences = sentences.filter(s => s.trim().split(/\s+/).length > 40);
   if (longSentences.length > 0) {
@@ -55,6 +56,7 @@ function runVoiceCheck(body: string): { status: 'passed' | 'failed'; failures: s
   return {
     status: failures.length === 0 ? 'passed' : 'failed',
     failures,
+    warnings,
   };
 }
 
@@ -86,6 +88,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       body_hash: post.body_hash,
       status: result.status,
       failures: result.failures.length > 0 ? JSON.stringify(result.failures) : null,
+      output: result.warnings.length > 0 ? JSON.stringify(result.warnings) : null,
     })
     .select()
     .single();
@@ -97,12 +100,14 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
   await logAudit(owner.id, 'voice_check', 'post', params.id, {
     status: result.status,
     failures: result.failures,
+    warnings: result.warnings,
   });
 
   return NextResponse.json({
     voiceCheck: {
       ...voiceCheck,
       failures: result.failures,
+      warnings: result.warnings,
     },
   });
 }

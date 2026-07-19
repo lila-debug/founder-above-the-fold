@@ -23,7 +23,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
     // Get the post
     const { data: post, error: postError } = await supabase
       .from('posts')
-      .select('*, voice_checks(*)')
+      .select('*')
       .eq('id', params.id)
       .eq('owner_id', owner.id)
       .single();
@@ -37,10 +37,14 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       return NextResponse.json({ error: 'Post must be in draft or failed status to queue' }, { status: 400 });
     }
 
-    // Check latest voice check
-    const latestVoiceCheck = post.voice_checks?.sort(
-      (a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    )[0];
+    // The query-builder shim doesn't support embedded joins — fetch separately.
+    const { data: voiceChecks } = await supabase
+      .from('voice_checks')
+      .select('*')
+      .eq('post_id', post.id)
+      .order('created_at', { ascending: false });
+
+    const latestVoiceCheck = (voiceChecks || [])[0];
 
     if (!latestVoiceCheck || latestVoiceCheck.status !== 'passed') {
       return NextResponse.json({ error: 'Voice check must pass before queueing' }, { status: 400 });

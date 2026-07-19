@@ -9,6 +9,7 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
+  const [devLink, setDevLink] = useState('');
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
@@ -28,6 +29,9 @@ export default function AuthPage() {
       if (!res.ok) {
         setError(data.error || 'Failed to send magic link');
       } else {
+        if (data.devMode && data.magicLink) {
+          setDevLink(data.magicLink);
+        }
         setSent(true);
       }
     } catch (err) {
@@ -46,13 +50,31 @@ export default function AuthPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h1 className="text-2xl font-tarsius text-imperial-500 mb-4">Check your email</h1>
-          <p className="text-ocean-500 mb-6">
-            We sent a magic link to <strong>{email}</strong>. Click it to sign in securely — no password required.
-          </p>
-          <p className="text-sm text-ocean-400">
-            The link expires in 15 minutes. If you do not see it, check your spam folder.
-          </p>
+          {devLink ? (
+            <>
+              <h1 className="text-2xl font-tarsius text-imperial-500 mb-4">Dev mode sign-in</h1>
+              <p className="text-ocean-500 mb-6">
+                No email provider is configured yet, so here is your sign-in link directly:
+              </p>
+              <a
+                href={devLink}
+                className="inline-flex items-center justify-center px-6 py-3 bg-sky-500 text-white font-mono text-sm uppercase tracking-wider rounded-lg hover:bg-sky-600 transition-colors mb-4"
+              >
+                Sign In Now
+              </a>
+              <p className="text-sm text-ocean-400">The link expires in 15 minutes.</p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-2xl font-tarsius text-imperial-500 mb-4">Check your email</h1>
+              <p className="text-ocean-500 mb-6">
+                We sent a magic link to <strong>{email}</strong>. Click it to sign in securely — no password required.
+              </p>
+              <p className="text-sm text-ocean-400">
+                The link expires in 15 minutes. If you do not see it, check your spam folder.
+              </p>
+            </>
+          )}
           <button
             onClick={() => { setSent(false); setEmail(''); }}
             className="mt-8 text-sky-500 hover:text-sky-600 font-mono text-sm uppercase tracking-wider"

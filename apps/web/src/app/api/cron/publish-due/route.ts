@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { decryptToken } from '@/lib/crypto';
 
 // This endpoint is called by Vercel Cron every 15 minutes
 export async function GET(request: NextRequest) {
@@ -13,9 +14,12 @@ export async function GET(request: NextRequest) {
     // Find due posts (queued and scheduled time has passed)
     const now = new Date().toISOString();
 
+    // The query-builder shim below only supports plain SELECT/WHERE, not
+    // Supabase-style embedded joins — fetch posts and each owner's token
+    // as separate queries instead of a single embedded select.
     const { data: duePosts, error: findError } = await supabase
       .from('posts')
-      .select('*, owner:owner_id(*), token:oauth_tokens!inner(*)')
+      .select('*')
       .eq('status', 'queued')
       .lte('scheduled_at', now)
       .order('scheduled_at', { ascending: true });
@@ -33,9 +37,25 @@ export async function GET(request: NextRequest) {
 
     for (const post of duePosts) {
       try {
+        const { data: token } = await supabase
+          .from('oauth_tokens')
+          .select('*')
+          .eq('owner_id', post.owner_id)
+          .single();
+
+        if (!token) {
+          await supabase.from('posts').update({
+            status: 'failed',
+            failure_reason: 'No LinkedIn token on file. Please reconnect.',
+            retry_count: post.retry_count + 1,
+          }).eq('id', post.id);
+          results.push({ id: post.id, status: 'failed', error: 'no token' });
+          continue;
+        }
+
         // Check if token is expired and needs refresh
-        let accessToken = post.token.access_token;
-        if (post.token.expires_at && new Date(post.token.expires_at) < new Date()) {
+        let accessToken = decryptToken(token.access_token);
+        if (token.expires_at && new Date(token.expires_at) < new Date()) {
           // Attempt refresh (simplified — full refresh logic would be more complex)
           console.log('Token expired for post', post.id);
           // Mark as failed and continue

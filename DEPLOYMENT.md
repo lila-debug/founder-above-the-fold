@@ -27,7 +27,7 @@
    - Add the following (replace placeholders with actual values):
 
 ```env
-DATABASE_URL=postgresql://neondb_owner:npg_vABc16UWMVif@ep-delicate-field-atbc3rct-pooler.c-9.us-east-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+DATABASE_URL=postgresql://<user>:<password>@<host>/<db>?channel_binding=require&sslmode=require
 
 NEXT_PUBLIC_APP_URL=https://founder-above-the-fold.vercel.app
 

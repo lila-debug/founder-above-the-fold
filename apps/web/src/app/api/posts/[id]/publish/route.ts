@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getOwnerFromRequest, logAudit } from '@/lib/api-utils';
 import { supabase } from '@/lib/supabase';
+import { decryptToken } from '@/lib/crypto';
 
 export async function POST(
   request: NextRequest,
@@ -45,9 +46,11 @@ export async function POST(
       return NextResponse.json({ error: 'LinkedIn token expired, please reconnect' }, { status: 401 });
     }
 
+    const accessToken = decryptToken(linkedinToken.access_token);
+
     // Get member ID from LinkedIn userinfo
     const userInfoResponse = await fetch('https://api.linkedin.com/v2/userinfo', {
-      headers: { Authorization: `Bearer ${linkedinToken.access_token}` },
+      headers: { Authorization: `Bearer ${accessToken}` },
     });
 
     if (!userInfoResponse.ok) {
@@ -62,7 +65,7 @@ export async function POST(
     const createPostResponse = await fetch('https://api.linkedin.com/v2/posts', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${linkedinToken.access_token}`,
+        'Authorization': `Bearer ${accessToken}`,
         'Content-Type': 'application/json',
         'LinkedIn-Version': '202412',
       },

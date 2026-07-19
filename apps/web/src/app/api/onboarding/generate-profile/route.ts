@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getOwnerFromRequest, logAudit } from '@/lib/api-utils';
 import { supabase } from '@/lib/supabase';
-import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
+
+export const maxDuration = 60;
+
+const MODEL = 'openai/gpt-4o-mini';
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export async function POST(request: NextRequest) {
   const owner = await getOwnerFromRequest(request);
@@ -28,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     // Generate headline (120 chars)
     const { text: headline } = await generateText({
-      model: openai('gpt-4o-mini'),
+      model: MODEL,
       prompt: `Write a LinkedIn headline for ${fullName}, ${currentRole} at ${company}.
       
 Expertise: ${expertise1}, ${expertise2}${expertise3 ? ', ' + expertise3 : ''}
@@ -46,9 +50,11 @@ Output ONLY the headline text.`,
       temperature: 0.7,
     });
 
+    await sleep(1200);
+
     // Generate About section (2000 chars)
     const { text: about } = await generateText({
-      model: openai('gpt-4o-mini'),
+      model: MODEL,
       prompt: `Write a LinkedIn About section for ${fullName}, ${currentRole} at ${company}.
 
 Role: ${currentRole}
@@ -76,9 +82,11 @@ Output ONLY the About text.`,
       temperature: 0.8,
     });
 
+    await sleep(1200);
+
     // Generate Experience description
     const { text: experience } = await generateText({
-      model: openai('gpt-4o-mini'),
+      model: MODEL,
       prompt: `Write a LinkedIn Experience description for ${fullName}'s role as ${currentRole} at ${company}.
 
 Industry: ${industry}
@@ -100,9 +108,11 @@ Output ONLY the experience description.`,
       temperature: 0.7,
     });
 
+    await sleep(1200);
+
     // Generate Featured section
     const { text: featured } = await generateText({
-      model: openai('gpt-4o-mini'),
+      model: MODEL,
       prompt: `Write a LinkedIn Featured section prompt for ${fullName}, ${currentRole} at ${company}.
 
 Expertise: ${expertise1}, ${expertise2}${expertise3 ? ', ' + expertise3 : ''}

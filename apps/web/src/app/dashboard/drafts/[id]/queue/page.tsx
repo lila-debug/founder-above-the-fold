@@ -3,12 +3,20 @@
 import { useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 
+// Default to tomorrow at 9 AM
+function getDefaultScheduledAt() {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(9, 0, 0, 0);
+  return tomorrow.toISOString().slice(0, 16);
+}
+
 export default function QueuePostPage() {
   const params = useParams();
   const router = useRouter();
   const postId = params.id as string;
 
-  const [scheduledAt, setScheduledAt] = useState('');
+  const [scheduledAt, setScheduledAt] = useState(getDefaultScheduledAt);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -40,12 +48,6 @@ export default function QueuePostPage() {
     }
   }
 
-  // Set default to tomorrow at 9 AM
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  tomorrow.setHours(9, 0, 0, 0);
-  const defaultDate = tomorrow.toISOString().slice(0, 16);
-
   return (
     <div className="max-w-lg">
       <div className="mb-8">
@@ -61,7 +63,6 @@ export default function QueuePostPage() {
             value={scheduledAt}
             onChange={(e) => setScheduledAt(e.target.value)}
             min={new Date().toISOString().slice(0, 16)}
-            defaultValue={defaultDate}
             required
             className="w-full px-4 py-3 border border-persian-400 rounded-lg focus:outline-none focus:border-sky-500 font-tarsius"
           />

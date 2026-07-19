@@ -16,6 +16,7 @@ interface Post {
     id: string;
     status: string;
     failures: string;
+    output?: string;
     created_at: string;
   }[];
 }
@@ -247,6 +248,13 @@ export default function DraftDetailPage() {
                 ))}
               </ul>
             )}
+            {voiceCheckResult.warnings && voiceCheckResult.warnings.length > 0 && (
+              <ul className="mt-2 space-y-1 border-t border-yellow-200 pt-2">
+                {voiceCheckResult.warnings.map((warning: string, i: number) => (
+                  <li key={i} className="text-sm text-ocean-500">◦ {warning}</li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
 
@@ -259,6 +267,13 @@ export default function DraftDetailPage() {
               <ul className="mt-2 space-y-1">
                 {JSON.parse(latestVoice.failures).map((failure: string, i: number) => (
                   <li key={i} className="text-sm text-yellow-700">• {failure}</li>
+                ))}
+              </ul>
+            )}
+            {latestVoice.output && (
+              <ul className="mt-2 space-y-1 border-t border-yellow-200 pt-2">
+                {JSON.parse(latestVoice.output).map((warning: string, i: number) => (
+                  <li key={i} className="text-sm text-ocean-500">◦ {warning}</li>
                 ))}
               </ul>
             )}

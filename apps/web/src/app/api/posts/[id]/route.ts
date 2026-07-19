@@ -9,7 +9,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
   const { data, error } = await supabase
     .from('posts')
-    .select('*, voice_checks(*)')
+    .select('*')
     .eq('id', params.id)
     .eq('owner_id', owner.id)
     .single();
@@ -18,7 +18,14 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     return NextResponse.json({ error: 'Post not found' }, { status: 404 });
   }
 
-  return NextResponse.json({ post: data });
+  // The query-builder shim doesn't support embedded joins — fetch separately.
+  const { data: voiceChecks } = await supabase
+    .from('voice_checks')
+    .select('*')
+    .eq('post_id', data.id)
+    .order('created_at', { ascending: false });
+
+  return NextResponse.json({ post: { ...data, voice_checks: voiceChecks || [] } });
 }
 
 // PATCH /api/posts/:id - update post

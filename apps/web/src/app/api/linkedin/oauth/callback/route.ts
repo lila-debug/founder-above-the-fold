@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getOwnerFromRequest, logAudit } from '@/lib/api-utils';
 import { supabase } from '@/lib/supabase';
+import { encryptToken } from '@/lib/crypto';
 
 export async function GET(request: NextRequest) {
   const owner = await getOwnerFromRequest(request);
@@ -68,12 +69,15 @@ export async function GET(request: NextRequest) {
       .eq('provider', 'linkedin')
       .single();
 
+    const encryptedAccessToken = encryptToken(tokenData.access_token);
+    const encryptedRefreshToken = tokenData.refresh_token ? encryptToken(tokenData.refresh_token) : null;
+
     if (existingToken) {
       await supabase
         .from('oauth_tokens')
         .update({
-          access_token: tokenData.access_token,
-          refresh_token: tokenData.refresh_token || null,
+          access_token: encryptedAccessToken,
+          refresh_token: encryptedRefreshToken,
           expires_at: tokenData.expires_in ? new Date(Date.now() + tokenData.expires_in * 1000).toISOString() : null,
           linkedin_member_id: profileData.sub,
           updated_at: new Date().toISOString(),
@@ -83,8 +87,8 @@ export async function GET(request: NextRequest) {
       await supabase.from('oauth_tokens').insert({
         owner_id: owner.id,
         provider: 'linkedin',
-        access_token: tokenData.access_token,
-        refresh_token: tokenData.refresh_token || null,
+        access_token: encryptedAccessToken,
+        refresh_token: encryptedRefreshToken,
         expires_at: tokenData.expires_in ? new Date(Date.now() + tokenData.expires_in * 1000).toISOString() : null,
         linkedin_member_id: profileData.sub,
       });

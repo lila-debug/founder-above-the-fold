@@ -1,0 +1,10 @@
+{
+  "buildCommand": "next build",
+  "outputDirectory": ".next",
+  "crons": [
+    {
+      "path": "/api/cron/publish-due",
+      "schedule": "*/15 * * * *"
+    }
+  ]
+}

@@ -66,6 +66,64 @@ class QueryBuilder {
   }
 }
 
+// Handles UPDATE and DELETE with an arbitrary number of chained .eq() filters
+// (e.g. .eq('id', x).eq('owner_id', y)) and an optional trailing .select().single().
+class MutationBuilder {
+  constructor(
+    private table: string,
+    private operation: 'update' | 'delete',
+    private data: Record<string, any>,
+    private whereClause: string = '',
+    private whereValues: any[] = [],
+    private returning: boolean = false
+  ) {}
+
+  eq(column: string, value: any) {
+    const newWhere = this.whereClause ? `${this.whereClause} AND ${column} = $${this.whereValues.length + 1}` : `${column} = $1`;
+    return new MutationBuilder(this.table, this.operation, this.data, newWhere, [...this.whereValues, value], this.returning);
+  }
+
+  select() {
+    return new MutationBuilder(this.table, this.operation, this.data, this.whereClause, this.whereValues, true);
+  }
+
+  private buildQuery() {
+    if (this.operation === 'delete') {
+      const where = this.whereClause ? `WHERE ${this.whereClause}` : '';
+      return { text: `DELETE FROM ${this.table} ${where}`.trim(), values: this.whereValues };
+    }
+
+    const keys = Object.keys(this.data);
+    const values = Object.values(this.data);
+    const setClause = keys.map((k, i) => `${k} = $${i + 1}`).join(',');
+    // Where-clause placeholders were numbered from $1 assuming no SET values ahead of them — shift them.
+    const shiftedWhere = this.whereClause.replace(/\$(\d+)/g, (_match, n) => `$${Number(n) + values.length}`);
+    const where = shiftedWhere ? `WHERE ${shiftedWhere}` : '';
+    const returning = this.returning ? 'RETURNING *' : '';
+    return {
+      text: `UPDATE ${this.table} SET ${setClause} ${where} ${returning}`.trim(),
+      values: [...values, ...this.whereValues],
+    };
+  }
+
+  async single() {
+    const { text, values } = this.buildQuery();
+    const result = await pool.query(text, values);
+    return { data: result.rows[0] || null, error: null };
+  }
+
+  async then(resolve: any, reject?: any) {
+    try {
+      const { text, values } = this.buildQuery();
+      const result = await pool.query(text, values);
+      return resolve({ data: this.returning ? result.rows : null, error: null });
+    } catch (err: any) {
+      if (reject) return reject({ data: null, error: err });
+      return resolve({ data: null, error: err });
+    }
+  }
+}
+
 // Legacy supabase wrapper for gradual migration
 export const supabase = {
   from: (table: string) => ({
@@ -119,50 +177,8 @@ export const supabase = {
         return resolve({ data: results, error: null });
       },
     }),
-    update: (data: any) => ({
-      eq: (column: string, value: any) => ({
-        select: () => ({
-          single: async () => {
-            const keys = Object.keys(data);
-            const values = Object.values(data);
-            const setClause = keys.map((k, i) => `${k} = $${i + 1}`).join(',');
-            const result = await pool.query(
-              `UPDATE ${table} SET ${setClause} WHERE ${column} = $${keys.length + 1} RETURNING *`,
-              [...values, value]
-            );
-            return { data: result.rows[0], error: null };
-          },
-          then: async (resolve: any) => {
-            const keys = Object.keys(data);
-            const values = Object.values(data);
-            const setClause = keys.map((k, i) => `${k} = $${i + 1}`).join(',');
-            const result = await pool.query(
-              `UPDATE ${table} SET ${setClause} WHERE ${column} = $${keys.length + 1} RETURNING *`,
-              [...values, value]
-            );
-            return resolve({ data: result.rows, error: null });
-          },
-        }),
-        then: async (resolve: any) => {
-          const keys = Object.keys(data);
-          const values = Object.values(data);
-          const setClause = keys.map((k, i) => `${k} = $${i + 1}`).join(',');
-          const result = await pool.query(
-            `UPDATE ${table} SET ${setClause} WHERE ${column} = $${keys.length + 1} RETURNING *`,
-            [...values, value]
-          );
-          return resolve({ data: result.rows, error: null });
-        },
-      }),
-    }),
-    delete: () => ({
-      eq: (column: string, value: any) => ({
-        then: async (resolve: any) => {
-          await pool.query(`DELETE FROM ${table} WHERE ${column} = $1`, [value]);
-          return resolve({ data: null, error: null });
-        },
-      }),
-    }),
+    update: (data: any) => new MutationBuilder(table, 'update', data),
+    delete: () => new MutationBuilder(table, 'delete', {}),
   }),
   rpc: async (fn: string, params: any) => {
     // RLS function — not needed with pg, handled in app layer

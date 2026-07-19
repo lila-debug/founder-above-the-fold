@@ -2,8 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getOwnerFromRequest, logAudit } from '@/lib/api-utils';
 import { supabase } from '@/lib/supabase';
 import crypto from 'crypto';
-import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
+
+// 14 sequential generations with spacing/retry can take well over Vercel's
+// default 60s function timeout — give this room so a slow run doesn't get
+// killed mid-loop (which would discard the single bulk insert at the end).
+export const maxDuration = 180;
+
+const MODEL = 'openai/gpt-4o-mini';
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const POST_ARCHETYPES = [
   'mistake_lesson',
@@ -79,25 +87,37 @@ Rules:
 
 Output ONLY the post text. No title, no hashtags, no meta-commentary.`;
 
-      try {
-        const { text } = await generateText({
-          model: openai('gpt-4o-mini'),
-          prompt,
-          temperature: 0.8,
-        });
+      // Space out sequential calls so a burst of 14 generations doesn't trip
+      // the AI Gateway's per-minute rate limit; back off harder on the retry.
+      if (i > 0) await sleep(1500);
 
+      let generated: string | null = null;
+      for (let attempt = 0; attempt < 2 && generated === null; attempt++) {
+        try {
+          const { text } = await generateText({
+            model: MODEL,
+            prompt,
+            temperature: 0.8,
+          });
+          generated = text.trim();
+        } catch (aiError) {
+          console.error('AI generation failed for post', i, 'attempt', attempt, aiError);
+          if (attempt === 0) await sleep(6000);
+        }
+      }
+
+      if (generated) {
         postsToCreate.push({
           owner_id: owner.id,
-          body: text.trim(),
-          body_hash: crypto.createHash('sha256').update(text.trim()).digest('hex'),
+          body: generated,
+          body_hash: crypto.createHash('sha256').update(generated).digest('hex'),
           status: 'draft',
           pillar: pillar?.name || theme,
           archetype,
           notes: `AI-generated from onboarding. Review before publishing.`,
         });
-      } catch (aiError) {
-        console.error('AI generation failed for post', i, aiError);
-        // Fallback to simple template if AI fails
+      } else {
+        // Fallback to simple template if AI fails after retry
         postsToCreate.push({
           owner_id: owner.id,
           body: `Write about ${theme} here. Share a specific insight from your ${yearsExperience} of experience in ${expertise1}.`,

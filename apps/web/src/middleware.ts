@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { verifySession } from './lib/auth';
+import { verifySession } from './lib/auth-edge';
 
-const PUBLIC_ROUTES = ['/', '/auth', '/auth/callback', '/privacy', '/cookies', '/terms', '/how-it-works'];
+const PUBLIC_ROUTES = ['/', '/auth', '/auth/callback', '/privacy', '/cookies', '/terms', '/how-it-works', '/api/auth/magic-link', '/api/auth/verify', '/api/cron/publish-due'];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
