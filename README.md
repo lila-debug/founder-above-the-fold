@@ -10,7 +10,7 @@ Internal note: the MCP tool namespace currently remains `dispatch.*` while the c
 
 Use only this working drawer:
 
-- Finder: `/Users/hella.crypto/Documents/Linkedin Profile MCP APP & App`
+- Finder: `/Users/hella.crypto/Documents/Founder Above the Fold`
 - GitHub: `lila-debug/founder-above-the-fold`
 - Branch: `main`
 - Production cabinet: Vercel project `founder-above-the-fold`

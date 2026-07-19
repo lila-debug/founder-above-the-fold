@@ -5,7 +5,7 @@
 
 | Label | Part | Plain-English job | Where it lives | Owner |
 |---|---|---|---|---|
-| A | Working drawer | The only Finder folder used for product work | `/Users/hella.crypto/Documents/Linkedin Profile MCP APP & App` | Founder |
+| A | Working drawer | The only Finder folder used for product work | `/Users/hella.crypto/Documents/Founder Above the Fold` | Founder |
 | B | GitHub drawer | The only remote source and history | `lila-debug/founder-above-the-fold` | Founder |
 | C | Main rail | The finished and shared product line | `main` | Founder |
 | D | Archive rails | Preserve superseded local history without presenting it as current | `archive/legacy-founderacct`, `archive/stray-linkedin-capture` | Founder |
@@ -35,7 +35,7 @@
 Diagram:
 
 ```text
-[Finder] ---> [Linkedin Profile MCP APP & App] ---> [git main]
+[Finder] ---> [Founder Above the Fold] ---> [git main]
 ```
 
 Do:
