@@ -1,5 +1,10 @@
 import { SignJWT, jwtVerify } from 'jose';
-import { supabase } from './supabase';
+
+// Lazy-load supabase (Node-only, uses pg) so it stays out of the Edge middleware bundle.
+async function getSupabase() {
+  const mod = await import('./supabase');
+  return mod.supabase;
+}
 
 const SECRET = new TextEncoder().encode(process.env.MAGIC_LINK_SECRET!);
 
@@ -8,6 +13,7 @@ export async function createMagicLinkToken(email: string): Promise<string> {
   const tokenHash = await hashToken(token);
   const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes
 
+  const supabase = await getSupabase();
   await supabase.from('magic_link_tokens').insert({
     email,
     token_hash: tokenHash,
@@ -19,6 +25,7 @@ export async function createMagicLinkToken(email: string): Promise<string> {
 
 export async function verifyMagicLink(token: string, email: string): Promise<boolean> {
   const tokenHash = await hashToken(token);
+  const supabase = await getSupabase();
 
   const { data, error } = await supabase
     .from('magic_link_tokens')
@@ -29,10 +36,10 @@ export async function verifyMagicLink(token: string, email: string): Promise<boo
     .single();
 
   if (error || !data) return false;
-  if (new Date(data.expires_at) < new Date()) return false;
+  if (new Date(data.expires_at as string) < new Date()) return false;
 
   // Mark as used
-  await supabase.from('magic_link_tokens').update({ used: true }).eq('id', data.id);
+  await supabase.from('magic_link_tokens').update({ used: true }).eq('id', (data as any).id);
 
   return true;
 }
@@ -47,24 +54,16 @@ export async function createSession(email: string): Promise<string> {
   return token;
 }
 
-export async function verifySession(token: string): Promise<{ email: string } | null> {
-  try {
-    const { payload } = await jwtVerify(token, SECRET, { clockTolerance: 60 });
-    return { email: payload.email as string };
-  } catch {
-    return null;
-  }
-}
-
 async function hashToken(token: string): Promise<string> {
   const encoder = new TextEncoder();
   const data = encoder.encode(token);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 export async function getOrCreateOwner(email: string) {
+  const supabase = await getSupabase();
   const { data: existing } = await supabase
     .from('owner_settings')
     .select('*')

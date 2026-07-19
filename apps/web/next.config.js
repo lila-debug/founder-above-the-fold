@@ -1,10 +1,12 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    unoptimized: true,
+  webpack: (config) => {
+    config.externals = config.externals || [];
+    config.externals.push({ 'pg-native': 'commonjs pg-native' });
+    return config;
   },
-  env: {
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+  // Keep Node-only DB drivers out of the Edge middleware bundle
+  experimental: {
+    serverComponentsExternalPackages: ['pg', 'pg-native', 'pgpass'],
   },
 };
 

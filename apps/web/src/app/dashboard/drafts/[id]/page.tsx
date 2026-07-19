@@ -15,6 +15,7 @@ interface Post {
     id: string;
     status: string;
     failures: string;
+    body_hash: string;
     created_at: string;
   }[];
 }

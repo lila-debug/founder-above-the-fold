@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { verifySession } from '@/lib/auth';
+import { verifySession } from '@/lib/session';
 import DashboardNav from '@/components/DashboardNav';
 
 export default async function DashboardLayout({

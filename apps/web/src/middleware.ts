@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { verifySession } from './lib/auth';
+import { verifySession } from './lib/session';
 
 const PUBLIC_ROUTES = ['/', '/auth', '/auth/callback', '/privacy', '/cookies', '/terms', '/how-it-works'];
 

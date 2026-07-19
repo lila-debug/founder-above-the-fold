@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { verifySession } from './auth';
+import { verifySession } from './session';
 import { supabase } from './supabase';
 
 export async function getOwnerFromRequest(request: NextRequest) {

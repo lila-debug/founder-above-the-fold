@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { verifySession } from '@/lib/auth';
+import { verifySession } from '@/lib/session';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
 
@@ -20,14 +20,14 @@ export default async function TodayPage() {
   if (!owner) return null;
 
   // Fetch dashboard data
-  const { data: posts } = await supabase
+  const { data: posts }: { data: any[] | null } = await supabase
     .from('posts')
     .select('*')
     .eq('owner_id', owner.id)
     .order('created_at', { ascending: false })
     .limit(5);
 
-  const { data: profileCopy } = await supabase
+  const { data: profileCopy }: { data: any[] | null } = await supabase
     .from('profile_copy')
     .select('*')
     .eq('owner_id', owner.id)
