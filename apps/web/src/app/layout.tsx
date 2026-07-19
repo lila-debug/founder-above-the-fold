@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import Script from "next/script";
 import { BrandFooter } from "./components/brand-footer";
 import "./globals.css";
+
+const claireMono = localFont({
+  src: "./fonts/CSClaireMono-Regular.otf",
+  variable: "--font-claire-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Founder Above the Fold - LinkedIn Profile MCP App",
@@ -17,7 +24,7 @@ export default function RootLayout({
   const cookiebotId = process.env.NEXT_PUBLIC_COOKIEBOT_ID?.trim();
 
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`${claireMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         {cookiebotId ? (
           <Script

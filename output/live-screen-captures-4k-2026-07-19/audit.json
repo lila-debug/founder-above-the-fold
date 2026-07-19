@@ -1,0 +1,1510 @@
+[
+  {
+    "format": "16x9",
+    "screen": "owner-sign-in",
+    "route": "/login",
+    "requestedUrl": "https://www.founderaccount.com/login",
+    "finalUrl": "https://www.founderaccount.com/login",
+    "title": "Owner Sign In · Founder Above the Fold",
+    "status": 200,
+    "fileName": "16x9/01-owner-sign-in.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 1286,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          4
+        ],
+        [
+          "rgb(255, 253, 244)",
+          1
+        ],
+        [
+          "rgb(255, 216, 77)",
+          1
+        ],
+        [
+          "rgb(3, 37, 108)",
+          1
+        ],
+        [
+          "rgb(234, 250, 255)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "sign-up",
+    "route": "/signup",
+    "requestedUrl": "https://www.founderaccount.com/signup",
+    "finalUrl": "https://www.founderaccount.com/signup",
+    "title": "Sign Up · Founder Above the Fold",
+    "status": 200,
+    "fileName": "16x9/02-sign-up.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 1286,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          6
+        ],
+        [
+          "rgb(244, 209, 61)",
+          3
+        ],
+        [
+          "rgb(255, 254, 248)",
+          3
+        ],
+        [
+          "rgb(240, 90, 40)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgba(255, 254, 248, 0.96)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ],
+        [
+          "rgb(73, 168, 148)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "pricing",
+    "route": "/pricing",
+    "requestedUrl": "https://www.founderaccount.com/pricing",
+    "finalUrl": "https://www.founderaccount.com/pricing",
+    "title": "One-time Licence · Founder Above the Fold",
+    "status": 200,
+    "fileName": "16x9/03-pricing.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 1570,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(244, 209, 61)",
+          7
+        ],
+        [
+          "rgb(255, 254, 248)",
+          6
+        ],
+        [
+          "rgb(255, 255, 255)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(73, 168, 148)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "purchase-result",
+    "route": "/purchase/success",
+    "requestedUrl": "https://www.founderaccount.com/purchase/success",
+    "finalUrl": "https://www.founderaccount.com/purchase/success",
+    "title": "Inspect Licence Receipt · Founder Above the Fold",
+    "status": 200,
+    "fileName": "16x9/04-purchase-result.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 1286,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          1
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(255, 212, 207)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "licence-recovery",
+    "route": "/purchase/recover/confirm",
+    "requestedUrl": "https://www.founderaccount.com/purchase/recover/confirm",
+    "finalUrl": "https://www.founderaccount.com/purchase/recover/confirm",
+    "title": "Recover Licence · Founder Above the Fold",
+    "status": 200,
+    "fileName": "16x9/05-licence-recovery.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 1286,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          1
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(255, 212, 207)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "perks",
+    "route": "/perks",
+    "requestedUrl": "https://www.founderaccount.com/perks",
+    "finalUrl": "https://www.founderaccount.com/perks",
+    "title": "Perks Hub · Founder Above the Fold",
+    "status": 200,
+    "fileName": "16x9/06-perks.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 1286,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          8
+        ],
+        [
+          "rgb(244, 209, 61)",
+          4
+        ],
+        [
+          "rgb(240, 90, 40)",
+          2
+        ],
+        [
+          "rgb(73, 168, 148)",
+          2
+        ],
+        [
+          "rgb(255, 254, 248)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgba(255, 254, 248, 0.96)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "build-manual",
+    "route": "/manual",
+    "requestedUrl": "https://www.founderaccount.com/manual",
+    "finalUrl": "https://www.founderaccount.com/manual",
+    "title": "Interactive Build Manual · Founder Above the Fold",
+    "status": 200,
+    "fileName": "16x9/07-build-manual.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 2788,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          6
+        ],
+        [
+          "rgb(255, 253, 244)",
+          5
+        ],
+        [
+          "rgb(255, 216, 77)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(6, 190, 225)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "try-the-mechanism",
+    "route": "/try",
+    "requestedUrl": "https://www.founderaccount.com/try",
+    "finalUrl": "https://www.founderaccount.com/try",
+    "title": "Try the Mechanism · Founder Above the Fold",
+    "status": 200,
+    "fileName": "16x9/08-try-the-mechanism.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 1359,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          6
+        ],
+        [
+          "rgb(244, 209, 61)",
+          3
+        ],
+        [
+          "rgb(255, 254, 248)",
+          3
+        ],
+        [
+          "rgb(0, 0, 0)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(240, 90, 40)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "private-beta-waitlist",
+    "route": "/waitlist",
+    "requestedUrl": "https://www.founderaccount.com/waitlist",
+    "finalUrl": "https://www.founderaccount.com/waitlist",
+    "title": "Join the Private Beta · Founder Above the Fold",
+    "status": 200,
+    "fileName": "16x9/09-private-beta-waitlist.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 2040,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          10
+        ],
+        [
+          "rgb(244, 209, 61)",
+          3
+        ],
+        [
+          "rgb(247, 241, 223)",
+          2
+        ],
+        [
+          "rgb(73, 168, 148)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ],
+        [
+          "rgb(255, 254, 248)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "no-circle-of-hell",
+    "route": "/no-circles",
+    "requestedUrl": "https://www.founderaccount.com/no-circles",
+    "finalUrl": "https://www.founderaccount.com/no-circles",
+    "title": "Free No Circle of Hell Skill · Founder Above the Fold",
+    "status": 200,
+    "fileName": "16x9/10-no-circle-of-hell.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 1742,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          3
+        ],
+        [
+          "rgb(255, 254, 248)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(244, 209, 61)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "privacy",
+    "route": "/privacy",
+    "requestedUrl": "https://www.founderaccount.com/privacy",
+    "finalUrl": "https://www.founderaccount.com/privacy",
+    "title": "Founder Above the Fold - LinkedIn Profile MCP App",
+    "status": 200,
+    "fileName": "16x9/11-privacy.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 2198,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 254, 248)",
+          5
+        ],
+        [
+          "rgb(255, 255, 255)",
+          1
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(73, 168, 148)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "cookies",
+    "route": "/cookies",
+    "requestedUrl": "https://www.founderaccount.com/cookies",
+    "finalUrl": "https://www.founderaccount.com/cookies",
+    "title": "Founder Above the Fold - LinkedIn Profile MCP App",
+    "status": 200,
+    "fileName": "16x9/12-cookies.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 1286,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(244, 209, 61)",
+          2
+        ],
+        [
+          "rgb(255, 255, 255)",
+          1
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(255, 254, 248)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "terms",
+    "route": "/terms",
+    "requestedUrl": "https://www.founderaccount.com/terms",
+    "finalUrl": "https://www.founderaccount.com/terms",
+    "title": "Founder Above the Fold - LinkedIn Profile MCP App",
+    "status": 200,
+    "fileName": "16x9/13-terms.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 3140,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 254, 248)",
+          4
+        ],
+        [
+          "rgb(255, 255, 255)",
+          1
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(244, 209, 61)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "16x9",
+    "screen": "product-showroom",
+    "route": "/product",
+    "requestedUrl": "https://www.founderaccount.com/product",
+    "finalUrl": "https://www.founderaccount.com/product",
+    "title": "Product Screens · Founder Above the Fold",
+    "status": 200,
+    "fileName": "16x9/14-product-showroom.png",
+    "pngWidth": 3840,
+    "pngHeight": 2160,
+    "expectedPixelWidth": 3840,
+    "expectedPixelHeight": 2160,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "largeBreakpointActive": true,
+    "documentWidth": 1920,
+    "documentHeight": 1286,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          6
+        ],
+        [
+          "rgb(244, 209, 61)",
+          3
+        ],
+        [
+          "rgb(73, 168, 148)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgba(255, 254, 248, 0.96)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ],
+        [
+          "rgb(240, 90, 40)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "owner-sign-in",
+    "route": "/login",
+    "requestedUrl": "https://www.founderaccount.com/login",
+    "finalUrl": "https://www.founderaccount.com/login",
+    "title": "Owner Sign In · Founder Above the Fold",
+    "status": 200,
+    "fileName": "9x16/01-owner-sign-in.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 1278,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          4
+        ],
+        [
+          "rgb(255, 253, 244)",
+          1
+        ],
+        [
+          "rgb(255, 216, 77)",
+          1
+        ],
+        [
+          "rgb(3, 37, 108)",
+          1
+        ],
+        [
+          "rgb(234, 250, 255)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "sign-up",
+    "route": "/signup",
+    "requestedUrl": "https://www.founderaccount.com/signup",
+    "finalUrl": "https://www.founderaccount.com/signup",
+    "title": "Sign Up · Founder Above the Fold",
+    "status": 200,
+    "fileName": "9x16/02-sign-up.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 1554,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          5
+        ],
+        [
+          "rgb(255, 254, 248)",
+          3
+        ],
+        [
+          "rgb(240, 90, 40)",
+          2
+        ],
+        [
+          "rgb(244, 209, 61)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgba(255, 254, 248, 0.96)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ],
+        [
+          "rgb(73, 168, 148)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "pricing",
+    "route": "/pricing",
+    "requestedUrl": "https://www.founderaccount.com/pricing",
+    "finalUrl": "https://www.founderaccount.com/pricing",
+    "title": "One-time Licence · Founder Above the Fold",
+    "status": 200,
+    "fileName": "9x16/03-pricing.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 2169,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(244, 209, 61)",
+          7
+        ],
+        [
+          "rgb(255, 254, 248)",
+          5
+        ],
+        [
+          "rgb(255, 255, 255)",
+          1
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(73, 168, 148)",
+          1
+        ],
+        [
+          "rgb(158, 213, 159)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "purchase-result",
+    "route": "/purchase/success",
+    "requestedUrl": "https://www.founderaccount.com/purchase/success",
+    "finalUrl": "https://www.founderaccount.com/purchase/success",
+    "title": "Inspect Licence Receipt · Founder Above the Fold",
+    "status": 200,
+    "fileName": "9x16/04-purchase-result.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 1278,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          1
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(255, 212, 207)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "licence-recovery",
+    "route": "/purchase/recover/confirm",
+    "requestedUrl": "https://www.founderaccount.com/purchase/recover/confirm",
+    "finalUrl": "https://www.founderaccount.com/purchase/recover/confirm",
+    "title": "Recover Licence · Founder Above the Fold",
+    "status": 200,
+    "fileName": "9x16/05-licence-recovery.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 1278,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          1
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(255, 212, 207)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "perks",
+    "route": "/perks",
+    "requestedUrl": "https://www.founderaccount.com/perks",
+    "finalUrl": "https://www.founderaccount.com/perks",
+    "title": "Perks Hub · Founder Above the Fold",
+    "status": 200,
+    "fileName": "9x16/06-perks.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 2319,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          5
+        ],
+        [
+          "rgb(240, 90, 40)",
+          2
+        ],
+        [
+          "rgb(73, 168, 148)",
+          2
+        ],
+        [
+          "rgb(244, 209, 61)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgba(255, 254, 248, 0.96)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ],
+        [
+          "rgb(255, 254, 248)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "build-manual",
+    "route": "/manual",
+    "requestedUrl": "https://www.founderaccount.com/manual",
+    "finalUrl": "https://www.founderaccount.com/manual",
+    "title": "Interactive Build Manual · Founder Above the Fold",
+    "status": 200,
+    "fileName": "9x16/07-build-manual.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 4977,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          6
+        ],
+        [
+          "rgb(255, 216, 77)",
+          2
+        ],
+        [
+          "rgb(255, 253, 244)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(6, 190, 225)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "try-the-mechanism",
+    "route": "/try",
+    "requestedUrl": "https://www.founderaccount.com/try",
+    "finalUrl": "https://www.founderaccount.com/try",
+    "title": "Try the Mechanism · Founder Above the Fold",
+    "status": 200,
+    "fileName": "9x16/08-try-the-mechanism.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 1822,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          3
+        ],
+        [
+          "rgb(244, 209, 61)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(240, 90, 40)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ],
+        [
+          "rgb(255, 254, 248)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "private-beta-waitlist",
+    "route": "/waitlist",
+    "requestedUrl": "https://www.founderaccount.com/waitlist",
+    "finalUrl": "https://www.founderaccount.com/waitlist",
+    "title": "Join the Private Beta · Founder Above the Fold",
+    "status": 200,
+    "fileName": "9x16/09-private-beta-waitlist.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 3398,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          5
+        ],
+        [
+          "rgb(244, 209, 61)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(73, 168, 148)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ],
+        [
+          "rgb(255, 254, 248)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "no-circle-of-hell",
+    "route": "/no-circles",
+    "requestedUrl": "https://www.founderaccount.com/no-circles",
+    "finalUrl": "https://www.founderaccount.com/no-circles",
+    "title": "Free No Circle of Hell Skill · Founder Above the Fold",
+    "status": 200,
+    "fileName": "9x16/10-no-circle-of-hell.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 2459,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          3
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(244, 209, 61)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ],
+        [
+          "rgb(255, 254, 248)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "privacy",
+    "route": "/privacy",
+    "requestedUrl": "https://www.founderaccount.com/privacy",
+    "finalUrl": "https://www.founderaccount.com/privacy",
+    "title": "Founder Above the Fold - LinkedIn Profile MCP App",
+    "status": 200,
+    "fileName": "9x16/11-privacy.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 2827,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 254, 248)",
+          4
+        ],
+        [
+          "rgb(255, 255, 255)",
+          1
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(73, 168, 148)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "cookies",
+    "route": "/cookies",
+    "requestedUrl": "https://www.founderaccount.com/cookies",
+    "finalUrl": "https://www.founderaccount.com/cookies",
+    "title": "Founder Above the Fold - LinkedIn Profile MCP App",
+    "status": 200,
+    "fileName": "9x16/12-cookies.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 1278,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(244, 209, 61)",
+          2
+        ],
+        [
+          "rgb(255, 255, 255)",
+          1
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(255, 254, 248)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "terms",
+    "route": "/terms",
+    "requestedUrl": "https://www.founderaccount.com/terms",
+    "finalUrl": "https://www.founderaccount.com/terms",
+    "title": "Founder Above the Fold - LinkedIn Profile MCP App",
+    "status": 200,
+    "fileName": "9x16/13-terms.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 4151,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 254, 248)",
+          2
+        ],
+        [
+          "rgb(255, 255, 255)",
+          1
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgb(244, 209, 61)",
+          1
+        ]
+      ]
+    }
+  },
+  {
+    "format": "9x16",
+    "screen": "product-showroom",
+    "route": "/product",
+    "requestedUrl": "https://www.founderaccount.com/product",
+    "finalUrl": "https://www.founderaccount.com/product",
+    "title": "Product Screens · Founder Above the Fold",
+    "status": 200,
+    "fileName": "9x16/14-product-showroom.png",
+    "pngWidth": 2160,
+    "pngHeight": 3840,
+    "expectedPixelWidth": 2160,
+    "expectedPixelHeight": 3840,
+    "exactDimensions": true,
+    "cameraRightClear": true,
+    "consoleErrors": [],
+    "viewportWidth": 540,
+    "viewportHeight": 960,
+    "largeBreakpointActive": false,
+    "documentWidth": 540,
+    "documentHeight": 1506,
+    "horizontalOffenders": [],
+    "circularElements": [],
+    "theme": {
+      "bodyBackground": "rgb(255, 255, 255)",
+      "bodyColour": "rgb(3, 37, 108)",
+      "bodyFont": "Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif",
+      "dominantBackgrounds": [
+        [
+          "rgb(255, 255, 255)",
+          5
+        ],
+        [
+          "rgb(73, 168, 148)",
+          2
+        ],
+        [
+          "rgb(244, 209, 61)",
+          2
+        ],
+        [
+          "rgb(247, 241, 223)",
+          1
+        ],
+        [
+          "rgba(255, 254, 248, 0.96)",
+          1
+        ],
+        [
+          "rgb(17, 17, 17)",
+          1
+        ],
+        [
+          "rgb(240, 90, 40)",
+          1
+        ],
+        [
+          "rgb(0, 0, 0)",
+          1
+        ]
+      ]
+    }
+  }
+]

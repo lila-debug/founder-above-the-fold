@@ -9,7 +9,7 @@
   --background: var(--white);
   --foreground: var(--imperial-blue);
   --font-geist-sans: Arial, Helvetica, sans-serif;
-  --font-geist-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-geist-mono: var(--font-claire-mono), "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
   /* Assembly-manual system: ink does line-work, paper is the canvas,
      yellow is the one accent reserved for primary/active state. */
@@ -19,6 +19,14 @@
   --panel-mint: #7adf8b;
   --panel-danger: #d94841;
   --panel-info: #eafaff;
+
+  /* Public showroom and legal/manual panels share one hard-edged parts palette. */
+  --founder-paper: #f7f1df;
+  --founder-yellow: #f4d13d;
+  --founder-orange: #f05a28;
+  --founder-teal: #49a894;
+  --founder-red: #cf3f4d;
+  --founder-ink: #111111;
 }
 
 @theme inline {
@@ -86,12 +94,6 @@ textarea:focus-visible {
 
 /* Founder app shell: cut-paper editorial typography meets a labelled assembly board. */
 .founder-shell {
-  --founder-paper: #f7f1df;
-  --founder-yellow: #f4d13d;
-  --founder-orange: #f05a28;
-  --founder-teal: #49a894;
-  --founder-red: #cf3f4d;
-  --founder-ink: #111111;
   background:
     radial-gradient(circle at 16% 9%, rgba(244, 209, 61, 0.2), transparent 24rem),
     linear-gradient(90deg, rgba(17, 17, 17, 0.025) 1px, transparent 1px),
@@ -137,14 +139,22 @@ textarea:focus-visible {
 
 .founder-wordmark {
   display: grid;
+  row-gap: 2px;
   font-family: Arial Black, Arial, sans-serif;
   font-size: 1.05rem;
   font-weight: 900;
-  line-height: 0.88;
+  line-height: 1;
   letter-spacing: -0.06em;
 }
 
-.founder-wordmark span:last-child { color: var(--founder-orange); }
+.founder-wordmark span:last-child {
+  width: fit-content;
+  margin-top: 0.12em;
+  background: var(--founder-ink);
+  color: var(--founder-orange);
+  padding: 0.1em 0.22em 0.14em;
+  letter-spacing: -0.04em;
+}
 
 .rail-button {
   display: flex;
@@ -166,8 +176,8 @@ textarea:focus-visible {
 
 .icon-key {
   display: inline-flex;
-  height: 42px;
-  width: 42px;
+  height: 44px;
+  width: 44px;
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
@@ -328,6 +338,7 @@ textarea:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .founder-rail,
   .hard-button { transition: none; }
+  .saas-screen-frame { animation: none; }
   html { scroll-behavior: auto; }
 }
 
@@ -344,7 +355,7 @@ textarea:focus-visible {
 .saas-stage-label p { font: 900 .63rem/1.2 var(--font-geist-mono), monospace; letter-spacing: .08em; }
 .saas-stage-label h1 { margin-top: .2rem; font-size: 1.05rem; font-weight: 900; line-height: 1; }
 .saas-screen-frame { animation: saas-panel-place 320ms cubic-bezier(.22,.7,.18,1) both; }
-@keyframes saas-panel-place { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes saas-panel-place { from { transform: translateY(10px); } to { transform: translateY(0); } }
 .saas-stepper { display: flex; align-items: center; justify-content: space-between; gap: .8rem; padding-top: 1.5rem; }
 .saas-stepper p { font: 900 .7rem/1 var(--font-geist-mono), monospace; }
 .saas-stepper button:disabled { cursor: not-allowed; opacity: .38; }
@@ -364,7 +375,7 @@ textarea:focus-visible {
 .saas-form-card { display: flex; flex-direction: column; justify-content: center; gap: 1.2rem; border-top: 2px solid #111; padding: clamp(1.5rem, 5vw, 4rem); }
 .saas-form-card label, .editor-grid label { display: grid; gap: .5rem; font-size: .72rem; font-weight: 900; text-transform: uppercase; }
 .saas-form-card input:not([type="checkbox"]), .editor-grid textarea { width: 100%; border: 2px solid #111; background: #fffef8; padding: .9rem; font-size: 1rem; font-weight: 650; text-transform: none; box-shadow: 3px 3px 0 #111; }
-.check-line { grid-template-columns: 22px 1fr !important; align-items: start; line-height: 1.55; text-transform: none !important; }
+.check-line { min-height: 44px; grid-template-columns: 22px 1fr !important; align-items: center; line-height: 1.55; text-transform: none !important; }
 .check-line input { width: 20px; height: 20px; accent-color: #111; }
 .check-line a { text-decoration: underline; }
 .form-note { display: flex; align-items: flex-start; gap: .45rem; font-size: .72rem; font-weight: 800; line-height: 1.5; }
@@ -375,7 +386,7 @@ textarea:focus-visible {
 .licence-card ul { display: grid; gap: .8rem; margin: 2rem 0; }
 .licence-card li { display: flex; align-items: center; gap: .55rem; font-weight: 800; }
 .licence-card li svg { padding: 2px; border: 2px solid #111; background: #f4d13d; }
-.text-button { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem; font-size: .75rem; font-weight: 900; text-decoration: underline; text-transform: uppercase; }
+.text-button { display: inline-flex; min-height: 44px; align-items: center; gap: .4rem; margin-top: 1rem; font-size: .75rem; font-weight: 900; text-decoration: underline; text-transform: uppercase; }
 .saas-panel { min-height: 650px; border: 2px solid #111; background: #fffef8; padding: clamp(1rem, 4vw, 3rem); box-shadow: 7px 7px 0 #111; }
 
 /* Direct commerce cabinet: real controls remain physically locked until every server fastener is green. */

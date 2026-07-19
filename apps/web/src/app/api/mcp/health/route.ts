@@ -45,10 +45,7 @@ export async function GET() {
             : "connection_required",
       analytics: analyticsReadiness.state,
       templateLibrary: database.ok ? "available" : "setup_required",
-      privateBetaWaitlist:
-        env.waitlist.NEXT_PUBLIC_WAITLISTER_KEY === "configured"
-          ? "available"
-          : "setup_required",
+      privateBetaWaitlist: database.ok ? "available" : "setup_required",
       mobileAuth,
       stripeSandbox:
         (env.stripe.mode === "sandbox" || env.stripe.mode === "live") &&
@@ -80,7 +77,7 @@ export async function GET() {
       consent: env.consent.NEXT_PUBLIC_COOKIEBOT_ID === "configured"
         ? "configured_browser_proof_required"
         : "setup_required",
-      waitlist: env.waitlist.NEXT_PUBLIC_WAITLISTER_KEY === "configured"
+      waitlist: database.ok && env.authReady
         ? "configured_confirmation_proof_required"
         : "setup_required",
     },

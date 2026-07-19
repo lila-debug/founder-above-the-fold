@@ -1,6 +1,6 @@
 # Launch Checklist
 
-## Current Gate - 16 July 2026
+## Current Gate - 19 July 2026
 
 - [x] Local working preview can be packaged for a truthful private-beta/build-in-public announcement.
 - [x] Public preview labels planned features as preview, setup-required, or planned.
@@ -9,11 +9,11 @@
 - [x] Final video and final local conveyor evidence are attached.
 - [x] Public `/try` mechanism and `/waitlist` intake routes are fitted with honest setup states.
 - [x] Product Hunt name, 59-character tagline, description, maker comment, bounded offer, five-panel real-UI gallery, thumbnail, and launch-day response board are assembled.
-- [x] Product Hunt browser jig passes the fail/pass/queue mechanism, Waitlister socket, desktop/mobile overflow and console checks.
-- [x] `/try` and `/waitlist` are deployed on the primary production domain; `/try` passes the full live browser mechanism and `/waitlist` fails closed until its provider key is fitted.
+- [x] Product Hunt browser jig passes the fail/pass/queue mechanism, internal waitlist form, desktop/mobile overflow and console checks.
+- [x] `/try` and `/waitlist` are deployed on the primary production domain; the no-write demo passes and the internal intake rejects incomplete submissions without writing.
 - [x] Bare and `www` `.com`, `.app`, and `.dev` routes preserve their path and resolve to the primary `.com` cabinet.
 - [ ] Founder approves a manual LinkedIn post.
-- [ ] Production Waitlister key, domain allow-list, double opt-in, unsubscribe, export and deletion are proved.
+- [ ] Production Resend confirmation, unsubscribe/export/deletion handling, and one genuine internal waitlist confirmation are proved.
 - [ ] Production sign-in, live Cookiebot consent, owner-approved LinkedIn OAuth/text-post proof, and immediate full-product access remain no-go.
 
 The private-beta announcement gate and the full-product gate are different assemblies.

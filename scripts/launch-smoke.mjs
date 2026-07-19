@@ -70,10 +70,12 @@ await expectStatus("cron lock", "/api/cron/publish-due", 401, {
 await expectStatus("analytics cron lock", "/api/cron/sync-analytics", 401, {
   method: "POST",
 });
-await expectStatus("Stripe checkout fuse", "/api/commerce/stripe/checkout", 503, {
+// Exercise validation before any database insert or Stripe session creation.
+// Checkout readiness itself is asserted from the redacted health panel below.
+await expectStatus("Stripe checkout non-mutating validation clamp", "/api/commerce/stripe/checkout", 503, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ email: "launch-smoke@example.test", termsAccepted: true, offerKey: "mac_licence" }),
+  body: JSON.stringify({ email: "launch-smoke@example.test", termsAccepted: false, offerKey: "mac_licence" }),
 });
 await expectStatus("Stripe webhook signature clamp", "/api/webhooks/stripe", 400, {
   method: "POST",

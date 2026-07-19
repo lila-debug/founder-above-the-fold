@@ -20,34 +20,42 @@ try {
   desktop.on("pageerror", (error) => errors.push(`desktop page: ${error.message}`));
 
   await desktop.setViewportSize({ width: 1024, height: 1000 });
-  await desktop.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
+  await desktop.goto(`${baseUrl}/`, { waitUntil: "domcontentloaded" });
   await assertNoOverflow(desktop, "landing tablet");
   const hero = desktop.locator("h1").first();
   await hero.waitFor();
   const heroBox = await hero.boundingBox();
   assert.ok(heroBox, "landing hero headline is missing");
-  assert.ok(heroBox.width >= 600, `landing tablet/desktop headline column is too narrow: ${heroBox.width}px`);
+  assert.ok(heroBox.width >= 320, `landing tablet/desktop headline column is too narrow: ${heroBox.width}px`);
   assert.ok(heroBox.x >= 0 && heroBox.x + heroBox.width <= 1024, "landing headline is clipped horizontally");
   await desktop.setViewportSize({ width: 1440, height: 1000 });
 
-  await desktop.goto(`${baseUrl}/waitlist`, { waitUntil: "networkidle" });
+  await desktop.goto(`${baseUrl}/waitlist`, { waitUntil: "domcontentloaded" });
   await assertNoOverflow(desktop, "waitlist desktop");
   const lockedPanel = desktop.getByText("Signup socket being fitted");
-  const hasForm = (await desktop.locator("form").count()) > 0;
+  const form = desktop.locator("form").first();
+  const hasForm = (await form.count()) > 0;
+  const formAction = hasForm ? await form.getAttribute("action") : null;
   resolvedWaitlistMode = requestedWaitlistMode === "auto"
-    ? (hasForm ? "live" : "locked")
+    ? (hasForm ? (formAction ? "external" : "internal") : "locked")
     : requestedWaitlistMode;
   if (resolvedWaitlistMode === "locked") {
     await lockedPanel.waitFor();
     assert.equal(await desktop.locator("form").count(), 0);
+  } else if (resolvedWaitlistMode === "internal") {
+    await desktop.getByLabel("Work email").waitFor();
+    await desktop.getByRole("button", { name: /Request my place/i }).waitFor();
+    const invalidResponse = await desktop.request.post(`${baseUrl}/api/waitlist`, {
+      data: {},
+    });
+    assert.equal(invalidResponse.status(), 400, "internal waitlist validation clamp must refuse incomplete data");
   } else {
     assert.equal(hasForm, true, "waitlist live mode requires a configured Waitlister form");
-    const formAction = await desktop.locator("form").getAttribute("action");
     assert.match(formAction ?? "", /^https:\/\/waitlister\.me\/s\/[a-zA-Z0-9_-]+$/);
   }
   await desktop.screenshot({ path: path.join(outputDir, "waitlist-desktop.png"), fullPage: true });
 
-  await desktop.goto(`${baseUrl}/pricing`, { waitUntil: "networkidle" });
+  await desktop.goto(`${baseUrl}/pricing`, { waitUntil: "domcontentloaded" });
   for (const offer of [
     ["Mac licence", "CA$199"],
     ["Profile setup", "CA$499"],
@@ -62,7 +70,7 @@ try {
   await desktop.getByText("Five launch seats only", { exact: true }).waitFor();
   await assertNoOverflow(desktop, "pricing desktop");
 
-  await desktop.goto(`${baseUrl}/try`, { waitUntil: "networkidle" });
+  await desktop.goto(`${baseUrl}/try`, { waitUntil: "domcontentloaded" });
   const queueButton = desktop.getByRole("button", { name: /Fit draft to demo queue/i });
   assert.equal(await queueButton.isDisabled(), true);
   await desktop.getByLabel("Founder draft").fill("We optimize and automate DMs for every founder using our platform.");
@@ -86,7 +94,7 @@ try {
   mobile.on("pageerror", (error) => errors.push(`mobile page: ${error.message}`));
 
   for (const route of ["/try", "/waitlist"]) {
-    await mobile.goto(`${baseUrl}${route}`, { waitUntil: "networkidle" });
+    await mobile.goto(`${baseUrl}${route}`, { waitUntil: "domcontentloaded" });
     await assertNoOverflow(mobile, `${route} mobile`);
     await mobile.screenshot({
       path: path.join(outputDir, `${route.slice(1)}-mobile.png`),

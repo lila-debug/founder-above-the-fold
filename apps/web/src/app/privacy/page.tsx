@@ -30,16 +30,17 @@ const dataRows = [
 
 export default function PrivacyPage() {
   return (
-    <main className="min-h-screen bg-white text-[#03256c]">
+    <main className="min-h-screen bg-[#f7f1df] text-[#111]">
       <section className="mx-auto w-full max-w-[1000px] px-5 py-10 lg:px-8">
         <Link
-          className="text-sm font-semibold text-[#1768ac] hover:text-[#2541b2]"
+          className="text-sm font-black uppercase underline"
           href="/"
         >
           Back to Founder Above the Fold
         </Link>
-        <h1 className="mt-6 text-4xl font-semibold md:text-6xl">Privacy</h1>
-        <p className="mt-4 max-w-3xl text-base leading-7 text-[#1768ac]">
+        <div className="mt-7"><span className="cut-label bg-[#49a894]">Owner-controlled data cabinet</span></div>
+        <h1 className="mt-6 text-5xl font-black uppercase leading-none md:text-7xl">Privacy</h1>
+        <p className="mt-5 max-w-3xl text-lg font-semibold leading-8">
           Founder Above the Fold is designed as a private, owner-controlled command
           centre sold as a one-time licence. It keeps collection narrow, makes voice
           and camera access explicit, and keeps LinkedIn publishing intentionally locked.
@@ -48,34 +49,34 @@ export default function PrivacyPage() {
         <div className="mt-8 grid gap-4">
           {dataRows.map((row) => (
             <article
-              className="rounded-lg border border-[#1768ac]/25 bg-[#f4fbff] p-4"
+              className="paper-card p-5"
               key={row.label}
             >
-              <h2 className="text-lg font-semibold">{row.label}</h2>
-              <p className="mt-2 text-sm leading-6 text-[#1768ac]">{row.detail}</p>
+              <h2 className="text-xl font-black uppercase">{row.label}</h2>
+              <p className="mt-2 text-sm leading-6">{row.detail}</p>
             </article>
           ))}
         </div>
 
         <section className="mt-8 grid gap-4 md:grid-cols-2">
-          <article className="rounded-lg border border-[#1768ac]/25 bg-[#f4fbff] p-4"><h2 className="text-lg font-semibold">Owner choices</h2><p className="mt-2 text-sm leading-6 text-[#1768ac]">The private web workbench can export owner settings, posts, profile copy, templates, analytics, voice checks, and audit history without OAuth tokens or server secrets. Its verified deletion control removes those personal bins, clears the session, and retains only a non-personal deletion receipt. LinkedIn can also be disconnected without deleting the rest of the cabinet.</p></article>
-          <article className="rounded-lg border border-[#1768ac]/25 bg-[#f4fbff] p-4"><h2 className="text-lg font-semibold">Retention fitted in code</h2><p className="mt-2 text-sm leading-6 text-[#1768ac]">Web owner content remains until the owner deletes it. LinkedIn tokens remain until disconnect, expiry, or workspace deletion. A web session expires after 30 days. The voice relay does not write audio to product storage, and the native app removes its temporary recording after each request. Daily voice request and byte totals are pruned after 31 days. Kept native transcripts, drafts, and labels remain on the device until the owner removes the local cabinet or deletes the app. Deepgram processing and retention follow the selected Deepgram account terms and settings. Stripe sandbox receipt records contain the normalized purchaser email, Stripe customer/session/payment references, licence state, version, device allowance and timestamps. Private recovery-link hashes expire after 15 minutes. Device activation stores a keyed hash and owner-visible device label, never the raw device identifier; signed offline receipts expire after 30 days. The final receipt/device retention and deletion boundary still requires legal review before sale.</p></article>
+          <article className="paper-card p-5"><h2 className="text-xl font-black uppercase">Owner choices</h2><p className="mt-2 text-sm leading-6">The private web workbench can export owner settings, posts, profile copy, templates, analytics, voice checks, and audit history without OAuth tokens or server secrets. Its verified deletion control removes those personal bins, clears the session, and retains only a non-personal deletion receipt. LinkedIn can also be disconnected without deleting the rest of the cabinet.</p></article>
+          <article className="paper-card p-5"><h2 className="text-xl font-black uppercase">Retention fitted in code</h2><p className="mt-2 text-sm leading-6">Web owner content remains until the owner deletes it. LinkedIn tokens remain until disconnect, expiry, or workspace deletion. A web session expires after 30 days. The voice relay does not write audio to product storage, and the native app removes its temporary recording after each request. Daily voice request and byte totals are pruned after 31 days. Kept native transcripts, drafts, and labels remain on the device until the owner removes the local cabinet or deletes the app. Deepgram processing and retention follow the selected Deepgram account terms and settings. Stripe sandbox receipt records contain the normalized purchaser email, Stripe customer/session/payment references, licence state, version, device allowance and timestamps. Private recovery-link hashes expire after 15 minutes. Device activation stores a keyed hash and owner-visible device label, never the raw device identifier; signed offline receipts expire after 30 days. The final receipt/device retention and deletion boundary still requires legal review before sale.</p></article>
         </section>
 
-        <section className="mt-8 rounded-lg border border-[#1768ac]/25 bg-[#fff7df] p-4">
-          <h2 className="text-lg font-semibold">Launch identity still required</h2>
-          <p className="mt-2 text-sm leading-6 text-[#1768ac]">Before public sale, insert the verified legal entity, privacy/support contact, named service providers, storage and backup regions, backup deletion limits, breach process, Quebec assessment, and final App Store privacy answers. Deepgram must be named with its selected processing region and account retention settings. Until those labels are fitted and reviewed, this page is an engineering disclosure rather than final legal advice.</p>
+        <section className="warning-strip mt-8">
+          <strong>Launch identity still required</strong>
+          <span>Before public sale, insert the verified legal entity, privacy/support contact, named service providers, storage and backup regions, backup deletion limits, breach process, Quebec assessment, and final App Store privacy answers. Deepgram must be named with its selected processing region and account retention settings. Until those labels are fitted and reviewed, this page is an engineering disclosure rather than final legal advice.</span>
         </section>
 
-        <section className="mt-8 rounded-lg border border-[#1768ac]/25 p-4">
-          <h2 className="text-lg font-semibold">Consent And Cookies</h2>
-          <p className="mt-2 text-sm leading-6 text-[#1768ac]">
+        <section className="paper-card mt-8 p-5">
+          <h2 className="text-xl font-black uppercase">Consent And Cookies</h2>
+          <p className="mt-2 text-sm leading-6">
             Non-essential tracking must stay blocked until consent is collected. The
             production site is wired for Cookiebot CMP and should publish a live cookie
             declaration after the Cookiebot domain scan is complete.
           </p>
           <Link
-            className="mt-4 inline-flex h-10 items-center rounded-md bg-[#03256c] px-4 text-sm font-semibold text-white hover:bg-[#2541b2]"
+            className="hard-button mt-4 w-fit bg-black text-white"
             href="/cookies"
           >
             Cookie declaration

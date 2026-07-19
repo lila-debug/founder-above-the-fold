@@ -1,0 +1,726 @@
+{
+  "baseUrl": "https://www.founderaccount.com",
+  "generatedAt": "2026-07-19T19:28:47.950Z",
+  "records": [
+    {
+      "fixture": "desktop",
+      "route": "/login",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 12,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/signup",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 20,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/pricing",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 21,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/purchase/success",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/purchase/recover/confirm",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/perks",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 14,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/manual",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 35,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/try",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 17,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/waitlist",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 32,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/no-circles",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 23,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/privacy",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 12,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/cookies",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/terms",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "desktop",
+      "route": "/product",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 15,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/login",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 12,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/signup",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 20,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/pricing",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 21,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/purchase/success",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/purchase/recover/confirm",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/perks",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 14,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/manual",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 35,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/try",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 17,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/waitlist",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 32,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/no-circles",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 23,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/privacy",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 12,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/cookies",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/terms",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "reflow-200",
+      "route": "/product",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 15,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/login",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 12,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/signup",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 20,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/pricing",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 21,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/purchase/success",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/purchase/recover/confirm",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/perks",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 14,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/manual",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 35,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/try",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 17,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/waitlist",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 1
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 32,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/no-circles",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 23,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/privacy",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 12,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/cookies",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/terms",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 11,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    },
+    {
+      "fixture": "portrait",
+      "route": "/product",
+      "status": 200,
+      "cameraRightClear": true,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 2
+        }
+      ],
+      "smallTargets": [],
+      "keyboard": {
+        "count": 15,
+        "missing": [],
+        "invisibleFocus": []
+      },
+      "runtimeErrors": []
+    }
+  ]
+}

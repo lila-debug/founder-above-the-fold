@@ -76,7 +76,7 @@ export function LicenceCheckout({ offerReadiness, offerConfigured, sandboxMode, 
       <section className="commerce-grid">
         <article className="licence-card commerce-licence-card">
           <span className="cut-label bg-[#f4d13d]">Part 04 · direct payment clamp</span>
-          <div className="offer-selector" aria-label="Choose a Founder Above the Fold offer">
+          <div className="offer-selector" aria-label="Choose a Founder Above the Fold offer" role="group">
             {(Object.keys(commerceOffers) as CommerceOfferKey[]).map((key) => (
               <button key={key} type="button" data-selected={offerKey === key} onClick={() => { setOfferKey(key); setError(null); setNotice(null); setMode("checkout"); }}>
                 <span>{commerceOffers[key].shortName}</span>

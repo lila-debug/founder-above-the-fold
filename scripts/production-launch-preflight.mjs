@@ -4,10 +4,15 @@ const baseUrl = (process.env.PRODUCTION_LAUNCH_BASE_URL ?? "https://www.foundera
 const allowIncomplete = process.env.ALLOW_INCOMPLETE === "true";
 const checks = [];
 
-const [home, demo, waitlist, cookies, thumbnail, galleryHero, stripeWebhook, healthResponse, linkedinResponse, mobileSession] = await Promise.all([
+const [home, demo, waitlist, waitlistValidation, cookies, thumbnail, galleryHero, stripeWebhook, healthResponse, linkedinResponse, mobileSession] = await Promise.all([
   get("/"),
   get("/try"),
   get("/waitlist"),
+  request("/api/waitlist", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: "{}",
+  }),
   get("/cookies"),
   get("/product-hunt/gallery/thumbnail-240.png"),
   get("/product-hunt/gallery/01-build-the-week.png"),
@@ -50,8 +55,13 @@ record(
   cookies.status === 200 ? "route available" : `HTTP ${cookies.status}`,
 );
 record(
-  "Waitlister configuration",
-  health.env?.waitlist?.NEXT_PUBLIC_WAITLISTER_KEY === "configured",
+  "private-beta intake storage",
+  waitlistValidation.status === 400 && health.database?.ok === true,
+  `validation HTTP ${waitlistValidation.status}, database=${health.database?.ok === true ? "ready" : "blocked"}`,
+);
+record(
+  "private-beta confirmation email",
+  health.proofs?.waitlist === "configured_confirmation_proof_required",
   health.proofs?.waitlist ?? "proof light unavailable",
 );
 record(

@@ -282,7 +282,7 @@ export function AssemblyTutorial({ build }: { build: AssemblyBuildState }) {
             </div>
             <button
               aria-pressed={betaMode}
-              className={`border-2 border-[#03256c] px-3 py-2 text-xs font-black uppercase ${betaMode ? "bg-[#ffd84d]" : "bg-white"}`}
+              className={`min-h-11 border-2 border-[#03256c] px-3 py-2 text-xs font-black uppercase ${betaMode ? "bg-[#ffd84d]" : "bg-white"}`}
               onClick={() => setBetaMode((current) => !current)}
               type="button"
             >
@@ -428,23 +428,23 @@ export function AssemblyTutorial({ build }: { build: AssemblyBuildState }) {
               <section className="border-2 border-[#03256c] bg-white p-4">
                 <div className="flex items-center gap-2"><AlertTriangle size={19} /><h3 className="font-black uppercase">Failure capture</h3></div>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {failureKinds.map((kind) => <button key={kind} aria-pressed={failureKind === kind} className={`border-2 border-[#03256c] px-2.5 py-1.5 text-xs font-bold ${failureKind === kind ? "bg-[#ffd84d]" : "bg-white"}`} onClick={() => setFailureKind(kind)} type="button">{kind}</button>)}
+                  {failureKinds.map((kind) => <button key={kind} aria-pressed={failureKind === kind} className={`min-h-11 border-2 border-[#03256c] px-2.5 py-1.5 text-xs font-bold ${failureKind === kind ? "bg-[#ffd84d]" : "bg-white"}`} onClick={() => setFailureKind(kind)} type="button">{kind}</button>)}
                 </div>
                 <textarea className="mt-3 min-h-24 w-full border-2 border-[#03256c] bg-[#fffdf4] p-3 text-sm outline-none" maxLength={600} onChange={(event) => setNote(event.target.value)} placeholder="Where did the tester stop, hesitate, or improvise?" value={note} />
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   <label className="grid gap-2 text-xs font-black uppercase">
                     Tester confidence · {confidence}/5
-                    <input min="1" max="5" onChange={(event) => setConfidence(Number(event.target.value))} type="range" value={confidence} />
+                    <input className="h-11" min="1" max="5" onChange={(event) => setConfidence(Number(event.target.value))} type="range" value={confidence} />
                   </label>
                   <label className="grid gap-2 text-xs font-black uppercase">
                     Screenshot label · local only
-                    <span className="inline-flex h-10 cursor-pointer items-center gap-2 border-2 border-[#03256c] bg-white px-3 normal-case">
+                    <span className="inline-flex h-11 cursor-pointer items-center gap-2 border-2 border-[#03256c] bg-white px-3 normal-case">
                       <FileImage size={16} /> {screenshotName || "Choose image"}
                       <input accept="image/*" className="sr-only" onChange={(event) => setScreenshotName(event.target.files?.[0]?.name ?? "")} type="file" />
                     </span>
                   </label>
                 </div>
-                <button className="mt-3 border-2 border-[#03256c] bg-[#06bee1]/20 px-3 py-2 text-sm font-black uppercase" onClick={saveFeedback} type="button">Fasten note locally</button>
+                <button className="mt-3 min-h-11 border-2 border-[#03256c] bg-[#06bee1]/20 px-3 py-2 text-sm font-black uppercase" onClick={saveFeedback} type="button">Fasten note locally</button>
                 {feedbackNotice ? <p aria-live="polite" className="mt-3 border-l-4 border-[#03256c] pl-3 text-sm font-semibold">{feedbackNotice}</p> : null}
               </section>
 
@@ -483,7 +483,7 @@ export function AssemblyTutorial({ build }: { build: AssemblyBuildState }) {
                 Profile edits and outreach stay manual. Publishing remains unclaimed
                 until OAuth, database, queue and one approved test post pass.
               </div>
-              <button className="mt-4 inline-flex items-center gap-2 border-2 border-[#03256c] bg-white px-3 py-2 text-sm font-black uppercase hover:bg-[#06bee1]/15" onClick={reset} type="button"><RotateCcw size={16} />Reset local tutorial</button>
+              <button className="mt-4 inline-flex min-h-11 items-center gap-2 border-2 border-[#03256c] bg-white px-3 py-2 text-sm font-black uppercase hover:bg-[#06bee1]/15" onClick={reset} type="button"><RotateCcw size={16} />Reset local tutorial</button>
             </section>
           </div>
         </div>

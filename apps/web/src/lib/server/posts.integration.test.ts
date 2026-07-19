@@ -86,7 +86,7 @@ test("core post conveyor uses real database state and safe LinkedIn rules", asyn
     );
     assert.equal(
       invalidStateResponse.headers.get("location"),
-      "http://localhost:3000/?linkedin=invalid-state#command-centre",
+      "http://localhost:3000/dashboard?linkedin=invalid-state",
     );
     assert.equal(requests.length, 0);
 
@@ -136,7 +136,7 @@ test("core post conveyor uses real database state and safe LinkedIn rules", asyn
     assert.equal(response.status, 307);
     assert.equal(
       response.headers.get("location"),
-      "http://localhost:3000/?linkedin=connected#command-centre",
+      "http://localhost:3000/dashboard?linkedin=connected",
     );
     assert.match(response.headers.get("set-cookie") ?? "", /dispatch_session=/);
     assert.doesNotMatch(response.headers.get("set-cookie") ?? "", /oauth-access-token/);
