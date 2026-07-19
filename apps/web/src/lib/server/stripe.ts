@@ -5,6 +5,7 @@ import { getRequiredEnv } from "./env";
 let stripeClient: Stripe | undefined;
 
 export type StripeMode = "sandbox" | "live";
+const APPROVED_LIVE_ACCOUNT_COUNTRY = "CA";
 
 export function getConfiguredStripeMode(): StripeMode {
   const mode = process.env.STRIPE_MODE?.trim() || "sandbox";
@@ -39,6 +40,14 @@ export function getStripeConfig(options: { requireCheckoutEnabled?: boolean } = 
     if (baseUrl.protocol !== "https:") {
       throw new Error("Live Stripe checkout requires an HTTPS product address.");
     }
+    if (
+      process.env.STRIPE_EXPECTED_ACCOUNT_COUNTRY?.trim().toUpperCase() !==
+      APPROVED_LIVE_ACCOUNT_COUNTRY
+    ) {
+      throw new Error(
+        "Live Stripe checkout requires the approved Canadian account-country fastener.",
+      );
+    }
   }
   if (options.requireCheckoutEnabled && process.env.STRIPE_CHECKOUT_ENABLED !== "true") {
     throw new Error(`Stripe ${mode} checkout is disabled.`);
@@ -52,6 +61,8 @@ export function getStripeConfig(options: { requireCheckoutEnabled?: boolean } = 
     priceId,
     baseUrl,
     automaticTaxEnabled: process.env.STRIPE_AUTOMATIC_TAX_ENABLED === "true",
+    expectedAccountCountry:
+      process.env.STRIPE_EXPECTED_ACCOUNT_COUNTRY?.trim().toUpperCase() || null,
   };
 }
 

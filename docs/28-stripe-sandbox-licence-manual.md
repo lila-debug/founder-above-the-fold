@@ -116,6 +116,7 @@ Check:
 - `npm run check:stripe` authenticates the live cabinet without printing secrets.
 - The price is live, CAD, one-time, active and exactly the approved amount.
 - The Stripe account country matches `STRIPE_EXPECTED_ACCOUNT_COUNTRY`.
+- Live checkout additionally clamps that labelled country slot to `CA`, matching the documented Canadian federal seller. A US sandbox cannot be promoted accidentally.
 
 Avoid:
 - Copying sandbox webhooks into live mode, assuming Stripe is the merchant of record, or opening checkout before tax/refund/support wording is approved.

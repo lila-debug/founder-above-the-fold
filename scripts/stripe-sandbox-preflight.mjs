@@ -62,7 +62,7 @@ if (liveMode) {
   assert.equal(process.env.STRIPE_LIVE_APPROVED, "true", "BLOCKED: live Stripe owner approval is missing.");
   assert.equal(process.env.STRIPE_AUTOMATIC_TAX_ENABLED, "true", "BLOCKED: live automatic-tax approval is missing.");
   assert.equal(new URL(required("NEXT_PUBLIC_APP_URL")).protocol, "https:", "BLOCKED: live Stripe requires HTTPS.");
-  assert.ok(expectedCountry, "BLOCKED: confirm STRIPE_EXPECTED_ACCOUNT_COUNTRY before live mode.");
+  assert.equal(expectedCountry, "CA", "BLOCKED: the documented Canadian seller requires STRIPE_EXPECTED_ACCOUNT_COUNTRY=CA before live mode.");
 }
 
 console.log(`PASS Stripe ${mode} key authenticated without exposing it.`);

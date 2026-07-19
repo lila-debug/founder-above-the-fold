@@ -11,6 +11,7 @@ const stripeNames = [
   "STRIPE_MODE",
   "STRIPE_LIVE_APPROVED",
   "STRIPE_AUTOMATIC_TAX_ENABLED",
+  "STRIPE_EXPECTED_ACCOUNT_COUNTRY",
   "NEXT_PUBLIC_APP_URL",
 ] as const;
 
@@ -48,6 +49,10 @@ test("live mode requires its separate owner, tax, HTTPS, and checkout fasteners"
   process.env.STRIPE_LIVE_APPROVED = "true";
   assert.throws(() => getStripeSandboxConfig(), /automatic-tax/);
   process.env.STRIPE_AUTOMATIC_TAX_ENABLED = "true";
+  assert.throws(() => getStripeSandboxConfig(), /Canadian account-country/);
+  process.env.STRIPE_EXPECTED_ACCOUNT_COUNTRY = "US";
+  assert.throws(() => getStripeSandboxConfig(), /Canadian account-country/);
+  process.env.STRIPE_EXPECTED_ACCOUNT_COUNTRY = "CA";
   assert.equal(getStripeSandboxConfig().mode, "live");
   assert.throws(() => getStripeSandboxConfig({ requireCheckoutEnabled: true }), /disabled/);
 });

@@ -1,14 +1,14 @@
 # Founder Above the Fold Terms, Refunds and Fraud Controls
 ## IKEA / Meccano Assembly Manual Edition — Counsel Draft
 
-**Status:** Draft for Canadian legal review. Not approved for publication or live checkout.  
-**Prepared:** 18 July 2026  
-**Seller:** Revolutionising Life Since 1982 Inc., a Canadian federal corporation  
-**Founder:** Lila Olufemi Abegunrin  
-**Contact:** contactus@founderaccount.com  
-**Founder-supplied registered/service address:** 10 N Keen Court, Hamilton, Ontario, `[POSTAL CODE TO CONFIRM]`  
-**Address publication approval:** `[CONFIRM — may be residential]`  
-**Federal corporation number:** `[CONFIRM FROM INCORPORATION CERTIFICATE]`  
+**Status:** Draft for Canadian legal review. Not approved for publication or live checkout.
+**Prepared:** 18 July 2026
+**Seller:** Revolutionising Life Since 1982 Inc., a Canadian federal corporation
+**Founder:** Lila Olufemi Abegunrin
+**Contact:** contactus@founderaccount.com
+**Founder-supplied registered/service address:** 10 N Keen Court, Hamilton, Ontario, `[POSTAL CODE TO CONFIRM]`
+**Address publication approval:** `[CONFIRM — may be residential]`
+**Federal corporation number:** `[CONFIRM FROM INCORPORATION CERTIFICATE]`
 **Exact incorporation date:** `[CONFIRM — founder reports early July 2026]`
 
 ### Box Contents
@@ -68,6 +68,58 @@ The selected checkout order controls the purchased offer:
 No offer includes automated LinkedIn scraping, profile edits, messages, follows, likes,
 comments or other prohibited automation. Customer approval remains required for public
 publishing and manual profile changes.
+
+#### 2.1 Professional Service Scope, Boundaries and Change Orders
+
+The professional-service offers include only the deliverables stated below and in the
+Customer's checkout order. Friendly or informal wording such as "one more thing", "a quick
+question", "a small change", "while you are there" or "it will only take a second" does not
+expand the purchased scope.
+
+**LinkedIn Profile Setup Concierge — one-time service**
+
+- one intake questionnaire or kickoff meeting;
+- one profile package containing a headline, About section, Experience recommendations,
+  featured-link plan, founder content pillars and ten initial post drafts;
+- one consolidated revision round requested within seven calendar days after initial
+  delivery; and
+- one final handover. The service ends on final handover or, if the Customer supplies no
+  revision request, fourteen calendar days after initial delivery.
+
+This offer does not include continuing posting, monthly profile management, ongoing access
+to the founder, unlimited revisions or later updates after handover.
+
+**Founder Visibility Ops — monthly service**
+
+Each paid billing month includes:
+
+- one monthly content and positioning plan;
+- up to four completed LinkedIn post drafts;
+- one consolidated revision round for each included post;
+- one scheduled meeting of up to 30 minutes;
+- one profile-positioning review; and
+- queue and publishing support for the included posts, subject to Customer approval and the
+  availability of LinkedIn's permitted official integration.
+
+The Seller's standard response target is two business days. It is not an emergency or
+same-day service. Included deliverables and meeting time expire at the end of the billing
+month and do not accumulate, roll over or convert to credit. Customer delays in supplying
+information or approvals do not extend the billing month or create additional deliverables.
+
+**Not included unless separately agreed in writing**
+
+Additional posts or meetings, extra revision rounds, rewrites after approval, direct-message
+or comment management, lead generation, community management, crisis communications,
+same-day work, graphic design, photography, video production, advertising management,
+legal review, factual investigation, platform-account recovery and work for another person
+or brand are outside scope.
+
+The Seller has no obligation to begin an additional request until the parties agree in
+writing to its deliverables, price and delivery date. At the Seller's option, an additional
+request may be quoted as an add-on or substituted for an unused included deliverable of
+similar effort. Silence, courtesy, prior exceptions and work performed for another Customer
+do not amend the scope. No additional fee may be charged to a consumer without the
+Customer's express agreement, and nothing in this section limits mandatory consumer rights.
 
 ### 3. Mac Licence Grant and Restrictions
 
