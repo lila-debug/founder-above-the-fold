@@ -15,38 +15,38 @@
     {
       "frame": 2,
       "slot_s": 6,
-      "voice_s": 5.568,
-      "tail_hold_s": 0.432,
+      "voice_s": 4.907,
+      "tail_hold_s": 1.093,
       "speed": 1.2,
-      "words": 18,
-      "asr_words": 19
+      "words": 12,
+      "asr_words": 12
     },
     {
       "frame": 3,
       "slot_s": 6,
-      "voice_s": 5.184,
-      "tail_hold_s": 0.816,
+      "voice_s": 4.608,
+      "tail_hold_s": 1.392,
       "speed": 1.2,
-      "words": 16,
-      "asr_words": 17
+      "words": 13,
+      "asr_words": 15
     },
     {
       "frame": 4,
       "slot_s": 7,
-      "voice_s": 6.72,
-      "tail_hold_s": 0.28,
+      "voice_s": 5.653,
+      "tail_hold_s": 1.347,
       "speed": 1.2,
-      "words": 21,
-      "asr_words": 21
+      "words": 16,
+      "asr_words": 16
     },
     {
       "frame": 5,
       "slot_s": 7,
-      "voice_s": 6.165,
-      "tail_hold_s": 0.835,
+      "voice_s": 4.437,
+      "tail_hold_s": 2.563,
       "speed": 1.2,
-      "words": 20,
-      "asr_words": 22
+      "words": 16,
+      "asr_words": 16
     },
     {
       "frame": 6,
@@ -60,11 +60,11 @@
     {
       "frame": 7,
       "slot_s": 7,
-      "voice_s": 6.272,
-      "tail_hold_s": 0.728,
+      "voice_s": 3.989,
+      "tail_hold_s": 3.011,
       "speed": 1.2,
-      "words": 19,
-      "asr_words": 19
+      "words": 15,
+      "asr_words": 15
     }
   ]
 }

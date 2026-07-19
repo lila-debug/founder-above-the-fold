@@ -1,116 +1,92 @@
 [
   {
     "id": "w0",
-    "text": "From",
-    "start": 0.07,
-    "end": 0.341
+    "text": "Operate",
+    "start": 0.02,
+    "end": 0.458
   },
   {
     "id": "w1",
-    "text": "neglected",
-    "start": 0.341,
-    "end": 0.951
+    "text": "the",
+    "start": 0.458,
+    "end": 0.645
   },
   {
     "id": "w2",
-    "text": "to",
-    "start": 0.951,
-    "end": 1.087
+    "text": "Toy",
+    "start": 0.645,
+    "end": 0.833
   },
   {
     "id": "w3",
-    "text": "credible",
-    "start": 1.087,
-    "end": 1.629
+    "text": "Box.",
+    "start": 0.833,
+    "end": 1.021
   },
   {
     "id": "w4",
-    "text": "above",
-    "start": 1.629,
-    "end": 1.968
+    "text": "See",
+    "start": 1.021,
+    "end": 1.208
   },
   {
     "id": "w5",
-    "text": "the",
-    "start": 1.968,
-    "end": 2.172
+    "text": "every",
+    "start": 1.208,
+    "end": 1.521
   },
   {
     "id": "w6",
-    "text": "fold",
-    "start": 2.172,
-    "end": 2.443
+    "text": "part.",
+    "start": 1.521,
+    "end": 1.771
   },
   {
     "id": "w7",
-    "text": "in",
-    "start": 2.443,
-    "end": 2.579
+    "text": "Keep",
+    "start": 1.771,
+    "end": 2.021
   },
   {
     "id": "w8",
-    "text": "48",
-    "start": 2.579,
-    "end": 2.714
+    "text": "the",
+    "start": 2.021,
+    "end": 2.209
   },
   {
     "id": "w9",
-    "text": "hours.",
-    "start": 2.714,
-    "end": 3.053
+    "text": "final",
+    "start": 2.209,
+    "end": 2.522
   },
   {
     "id": "w10",
-    "text": "Founder",
-    "start": 3.053,
-    "end": 3.528
+    "text": "call.",
+    "start": 2.522,
+    "end": 2.772
   },
   {
     "id": "w11",
-    "text": "Above",
-    "start": 3.528,
-    "end": 3.867
+    "text": "Founder",
+    "start": 2.772,
+    "end": 3.21
   },
   {
     "id": "w12",
-    "text": "the",
-    "start": 3.867,
-    "end": 4.07
+    "text": "Above",
+    "start": 3.21,
+    "end": 3.522
   },
   {
     "id": "w13",
-    "text": "Fold.",
-    "start": 4.07,
-    "end": 4.342
+    "text": "the",
+    "start": 3.522,
+    "end": 3.71
   },
   {
     "id": "w14",
-    "text": "Private",
-    "start": 4.342,
-    "end": 4.816
-  },
-  {
-    "id": "w15",
-    "text": "beta.",
-    "start": 4.816,
-    "end": 5.087
-  },
-  {
-    "id": "w16",
-    "text": "Five",
-    "start": 5.087,
-    "end": 5.359
-  },
-  {
-    "id": "w17",
-    "text": "founder",
-    "start": 5.359,
-    "end": 5.833
-  },
-  {
-    "id": "w18",
-    "text": "builds.",
-    "start": 5.833,
-    "end": 6.24
+    "text": "Fold.",
+    "start": 3.71,
+    "end": 3.96
   }
 ]

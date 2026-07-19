@@ -1,122 +1,98 @@
 [
   {
     "id": "w0",
-    "text": "Then",
-    "start": 0.04,
-    "end": 0.293
+    "text": "One",
+    "start": 0.03,
+    "end": 0.202
   },
   {
     "id": "w1",
-    "text": "say,",
-    "start": 0.293,
-    "end": 0.483
+    "text": "trigger",
+    "start": 0.202,
+    "end": 0.605
   },
   {
     "id": "w2",
-    "text": "make",
-    "start": 0.483,
-    "end": 0.736
+    "text": "builds",
+    "start": 0.605,
+    "end": 0.95
   },
   {
     "id": "w3",
-    "text": "me",
-    "start": 0.736,
-    "end": 0.862
+    "text": "drafts,",
+    "start": 0.95,
+    "end": 1.295
   },
   {
     "id": "w4",
-    "text": "visible",
-    "start": 0.862,
-    "end": 1.305
+    "text": "checks",
+    "start": 1.295,
+    "end": 1.64
   },
   {
     "id": "w5",
-    "text": "this",
-    "start": 1.305,
-    "end": 1.558
+    "text": "your",
+    "start": 1.64,
+    "end": 1.87
   },
   {
     "id": "w6",
-    "text": "week.",
-    "start": 1.558,
-    "end": 1.811
+    "text": "voice,",
+    "start": 1.87,
+    "end": 2.157
   },
   {
     "id": "w7",
-    "text": "Get",
-    "start": 1.811,
-    "end": 2
+    "text": "and",
+    "start": 2.157,
+    "end": 2.33
   },
   {
     "id": "w8",
-    "text": "voice-checked",
-    "start": 2,
-    "end": 2.759
+    "text": "unlocks",
+    "start": 2.33,
+    "end": 2.732
   },
   {
     "id": "w9",
-    "text": "drafts,",
-    "start": 2.759,
-    "end": 3.138
+    "text": "the",
+    "start": 2.732,
+    "end": 2.905
   },
   {
     "id": "w10",
-    "text": "a",
-    "start": 3.138,
-    "end": 3.265
+    "text": "queue",
+    "start": 2.905,
+    "end": 3.192
   },
   {
     "id": "w11",
-    "text": "two-week",
-    "start": 3.265,
-    "end": 3.707
+    "text": "only",
+    "start": 3.192,
+    "end": 3.422
   },
   {
     "id": "w12",
-    "text": "queue,",
-    "start": 3.707,
-    "end": 4.024
+    "text": "when",
+    "start": 3.422,
+    "end": 3.652
   },
   {
     "id": "w13",
-    "text": "reminders,",
-    "start": 4.024,
-    "end": 4.593
+    "text": "the",
+    "start": 3.652,
+    "end": 3.825
   },
   {
     "id": "w14",
-    "text": "and",
-    "start": 4.593,
-    "end": 4.782
+    "text": "copy",
+    "start": 3.825,
+    "end": 4.055
   },
   {
     "id": "w15",
-    "text": "every",
-    "start": 4.782,
-    "end": 5.099
-  },
-  {
-    "id": "w16",
-    "text": "manual",
-    "start": 5.099,
-    "end": 5.478
-  },
-  {
-    "id": "w17",
-    "text": "task",
-    "start": 5.478,
-    "end": 5.731
-  },
-  {
-    "id": "w18",
-    "text": "still",
-    "start": 5.731,
-    "end": 6.047
-  },
-  {
-    "id": "w19",
-    "text": "left.",
-    "start": 6.047,
-    "end": 6.3
+    "text": "passes.",
+    "start": 4.055,
+    "end": 4.4
   }
 ]

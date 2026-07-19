@@ -1,112 +1,82 @@
 [
   {
-    "text": "then",
-    "start": 0.04,
-    "end": 0.26
+    "text": "One",
+    "start": 0.03,
+    "end": 0.17
   },
   {
-    "text": "say",
-    "start": 0.26,
-    "end": 0.46
+    "text": "trigger",
+    "start": 0.17,
+    "end": 0.57
   },
   {
-    "text": "make",
-    "start": 0.46,
-    "end": 0.67
+    "text": "builds",
+    "start": 0.57,
+    "end": 0.92
   },
   {
-    "text": "me",
-    "start": 0.72,
-    "end": 0.85
+    "text": "drafts,",
+    "start": 0.92,
+    "end": 1.38
   },
   {
-    "text": "visible",
-    "start": 0.85,
-    "end": 1.31
+    "text": "checks",
+    "start": 1.38,
+    "end": 1.73
   },
   {
-    "text": "this",
-    "start": 1.31,
-    "end": 1.46
-  },
-  {
-    "text": "week.",
-    "start": 1.88,
+    "text": "your",
+    "start": 1.73,
     "end": 1.96
   },
   {
-    "text": "Get",
-    "start": 2,
-    "end": 2.11
-  },
-  {
-    "text": "voice",
-    "start": 2.16,
-    "end": 2.44
-  },
-  {
-    "text": "check",
-    "start": 2.44,
-    "end": 2.74
-  },
-  {
-    "text": "drafts",
-    "start": 2.74,
-    "end": 3.12
-  },
-  {
-    "text": "are",
-    "start": 3.12,
-    "end": 3.27
-  },
-  {
-    "text": "two",
-    "start": 3.27,
-    "end": 3.41
-  },
-  {
-    "text": "week",
-    "start": 3.41,
-    "end": 3.45
-  },
-  {
-    "text": "queue",
-    "start": 3.45,
-    "end": 3.92
-  },
-  {
-    "text": "reminders",
-    "start": 3.92,
-    "end": 4.44
+    "text": "voice,",
+    "start": 1.96,
+    "end": 2.36
   },
   {
     "text": "and",
-    "start": 4.48,
-    "end": 4.59
+    "start": 2.36,
+    "end": 2.48
   },
   {
-    "text": "every",
-    "start": 4.64,
-    "end": 4.94
+    "text": "unlocks",
+    "start": 2.48,
+    "end": 2.76
   },
   {
-    "text": "manual",
-    "start": 4.94,
-    "end": 5.32
+    "text": "the",
+    "start": 2.76,
+    "end": 2.88
   },
   {
-    "text": "task",
-    "start": 5.32,
-    "end": 5.57
+    "text": "queue",
+    "start": 2.92,
+    "end": 3.1
   },
   {
-    "text": "still",
-    "start": 5.57,
-    "end": 5.8
+    "text": "only",
+    "start": 3.1,
+    "end": 3.27
   },
   {
-    "text": "left.",
-    "start": 5.88,
-    "end": 6.3
+    "text": "when",
+    "start": 3.27,
+    "end": 3.44
+  },
+  {
+    "text": "the",
+    "start": 3.44,
+    "end": 3.6
+  },
+  {
+    "text": "copy",
+    "start": 3.6,
+    "end": 3.88
+  },
+  {
+    "text": "passes.",
+    "start": 3.88,
+    "end": 4.4
   }
 ]

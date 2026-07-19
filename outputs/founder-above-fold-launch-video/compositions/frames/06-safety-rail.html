@@ -1,37 +1,21 @@
 <template>
   <style>
-    #root{position:relative;width:1920px;height:1080px;overflow:hidden;container-type:size;font-family:"Arial Black",Arial,sans-serif;color:#111111}#root *{box-sizing:border-box}
-    .f06-ground{position:absolute;inset:0;background:#FAFAFA}.f06-hazard{position:absolute;inset:0;opacity:.11;background:repeating-linear-gradient(135deg,#111111 0 4px,transparent 4px 42px)}
-    .f06-stage{position:absolute;inset:0;padding:60px 70px 180px}.f06-pill{display:inline-block;padding:13px 20px;border:4px solid #111111;box-shadow:7px 7px 0 #111111;background:#F05A28;font:900 23px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}.f06-safe{position:absolute;right:72px;top:62px;padding:14px 20px;border:4px solid #111111;background:#27C7EF;font:900 22px Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase}
-    .f06-rail{position:absolute;left:80px;top:330px;width:1760px;height:28px;background:#111111;transform-origin:left center}.f06-clamps{position:absolute;left:90px;top:200px;width:1740px;display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:38px;align-items:start}.f06-card{height:340px;border:5px solid #111111;box-shadow:11px 11px 0 #111111;background:#FFFEF8;padding:32px;display:flex;flex-direction:column;justify-content:space-between}.f06-card-main{background:#27C7EF;height:390px}.f06-card small{font:900 20px Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase}.f06-card b{font-size:50px;line-height:.95;text-transform:uppercase;letter-spacing:-.035em}.f06-stamp{align-self:flex-start;width:74px;height:74px;border:5px solid #111111;background:#FFFEF8;display:grid;place-items:center;font-size:48px}.f06-x{background:#F69777}
-    .f06-warning{position:absolute;left:150px;top:695px;width:1620px;height:150px;border:5px solid #111111;box-shadow:10px 10px 0 #111111;background:#F05A28;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px 45px;font-size:48px;line-height:1;text-transform:uppercase}.f06-bolt{position:absolute;width:24px;height:24px;background:#111111}.f06-b1{left:95px;top:682px}.f06-b2{right:95px;top:682px}.f06-b3{left:95px;top:860px}.f06-b4{right:95px;top:860px}
+    #root{position:relative;width:1920px;height:1080px;overflow:hidden;container-type:size;font-family:"Arial Black",Arial,sans-serif;color:#1E3A5F}#root *{box-sizing:border-box}
+    .f06-ground{position:absolute;inset:0;background:#FEF9EF}.f06-grid{position:absolute;inset:0;opacity:.12;background:repeating-linear-gradient(135deg,#227C9D 0 3px,transparent 3px 42px)}
+    .f06-stage{position:absolute;inset:0;padding:58px 72px 180px}.f06-pill{display:inline-block;padding:12px 18px;border:4px solid #1E3A5F;box-shadow:6px 6px 0 #1E3A5F;background:#17C3B2;font:900 22px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+    .f06-in{position:absolute;left:-5px;top:450px;width:230px;height:18px;background:#1E3A5F}.f06-ball{position:absolute;left:150px;top:418px;width:76px;height:76px;border:5px solid #1E3A5F;border-radius:50%;background:#FE6D73;box-shadow:7px 7px 0 #1E3A5F}
+    .f06-funnel{position:absolute;left:310px;top:230px;width:1280px;height:500px}.f06-funnel:before{content:"";position:absolute;left:0;top:0;width:1280px;height:22px;background:#1E3A5F}.f06-gate{position:absolute;top:70px;width:330px;height:270px;border:6px solid #1E3A5F;box-shadow:10px 10px 0 #1E3A5F;display:grid;place-items:center;text-align:center;font-size:42px;text-transform:uppercase}.f06-bad1{left:0;background:#FE6D73}.f06-good{left:475px;background:#17C3B2}.f06-bad2{right:0;background:#FE6D73}.f06-mark{font-size:96px;line-height:1}.f06-trap{position:absolute;top:355px;width:330px;height:20px;background:#1E3A5F;transform-origin:left center}.f06-t1{left:0}.f06-t2{right:0}.f06-rail{position:absolute;left:785px;top:585px;width:350px;height:22px;background:#1E3A5F}.f06-rail:after{content:"";position:absolute;right:-1px;top:-18px;border-left:38px solid #1E3A5F;border-top:28px solid transparent;border-bottom:28px solid transparent}
+    .f06-bin{position:absolute;top:700px;width:350px;height:150px;border:6px solid #1E3A5F;background:#FFCB77;display:grid;place-items:center;font-size:64px}.f06-bin1{left:310px}.f06-bin2{right:330px}.f06-badge{position:absolute;left:770px;top:680px;width:380px;height:150px;border:6px solid #1E3A5F;background:#227C9D;color:#FEF9EF;box-shadow:10px 10px 0 #1E3A5F;display:grid;place-items:center;font-size:50px;text-transform:uppercase}.f06-out{position:absolute;right:-5px;top:450px;width:230px;height:18px;background:#1E3A5F}
   </style>
-  <div data-hf-id="hf-lece" id="root" data-composition-id="06-safety-rail" data-start="0" data-duration="7.4" data-width="1920" data-height="1080">
-    <div data-hf-id="hf-inan" id="f06-ground" class="clip f06-ground" data-start="0" data-duration="7" data-track-index="0"></div><div data-hf-id="hf-0ali" id="f06-hazard" class="clip f06-hazard" data-start="0" data-duration="7" data-track-index="1"></div>
-    <div data-hf-id="hf-bym1" id="f06-stage" class="clip f06-stage" data-start="0" data-duration="7" data-track-index="2">
-      <div data-hf-id="hf-o5s6" class="f06-pill">Part 06 · Safety rail</div><div data-hf-id="hf-mhy4" class="f06-safe">Account-safe by design</div><div data-hf-id="hf-ox0l" class="f06-rail"></div>
-      <div data-hf-id="hf-o3cl" class="f06-clamps">
-        <div data-hf-id="hf-ndsz" class="f06-card"><small data-hf-id="hf-g6qc">Remove</small><b data-hf-id="hf-9qz9">No scraping</b><div data-hf-id="hf-y0ne" class="f06-stamp f06-x">×</div></div>
-        <div data-hf-id="hf-avpc" class="f06-card f06-card-main"><small data-hf-id="hf-hens">Approved socket</small><b data-hf-id="hf-l10b">Official LinkedIn publishing</b><div data-hf-id="hf-0et7" class="f06-stamp">✓</div></div>
-        <div data-hf-id="hf-svxf" class="f06-card"><small data-hf-id="hf-igq4">Remove</small><b data-hf-id="hf-lg9i">No fake engagement</b><div data-hf-id="hf-1x8u" class="f06-stamp f06-x">×</div></div>
-      </div>
-      <div data-hf-id="hf-22ka" class="f06-warning">No risky outreach or profile automation</div><div data-hf-id="hf-p20e" class="f06-bolt f06-b1"></div><div data-hf-id="hf-l3wd" class="f06-bolt f06-b2"></div><div data-hf-id="hf-kc8k" class="f06-bolt f06-b3"></div><div data-hf-id="hf-7tq3" class="f06-bolt f06-b4"></div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
-    <script>
+  <div data-hf-id="hf-ty4f" id="root" data-composition-id="06-safety-rail" data-start="0" data-duration="7.9" data-width="1920" data-height="1080">
+    <div data-hf-id="hf-inan" id="f06-ground" class="clip f06-ground" data-start="0" data-duration="7" data-track-index="0"></div><div data-hf-id="hf-30du" id="f06-grid" class="clip f06-grid" data-start="0" data-duration="7" data-track-index="1"></div>
+    <div data-hf-id="hf-bym1" id="f06-stage" class="clip f06-stage" data-start="0" data-duration="7" data-track-index="2"><div data-hf-id="hf-b8ct" class="f06-pill">Part 06</div><div data-hf-id="hf-4h8c" class="f06-in"></div><div data-hf-id="hf-xwna" class="f06-ball"></div><div data-hf-id="hf-ickl" class="f06-funnel"><div data-hf-id="hf-jw7b" class="f06-gate f06-bad1">Scrape <span data-hf-id="hf-flwk" class="f06-mark">×</span></div><div data-hf-id="hf-hqcr" class="f06-gate f06-good">Official <span data-hf-id="hf-8heg" class="f06-mark">✓</span></div><div data-hf-id="hf-8p55" class="f06-gate f06-bad2">Fake <span data-hf-id="hf-4w9o" class="f06-mark">×</span></div><div data-hf-id="hf-wkhc" class="f06-trap f06-t1"></div><div data-hf-id="hf-7fyz" class="f06-trap f06-t2"></div></div><div data-hf-id="hf-ox0l" class="f06-rail"></div><div data-hf-id="hf-0i2a" class="f06-bin f06-bin1">×</div><div data-hf-id="hf-r2j3" class="f06-bin f06-bin2">×</div><div data-hf-id="hf-r7bs" class="f06-badge">Owner control</div><div data-hf-id="hf-ermr" class="f06-out"></div></div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script><script>
       window.__timelines=window.__timelines||{};const tl=gsap.timeline({paused:true});
-      tl.from(".f06-pill",{x:-70,opacity:0,duration:.4,ease:"power3.out"},0)
-        .from(".f06-rail",{scaleX:0,duration:.65,ease:"power3.inOut"},.25)
-        .from(".f06-card-main",{y:-150,opacity:0,duration:.65,ease:"back.out(1.5)"},.85)
-        .from(".f06-card-main .f06-stamp",{scale:0,duration:.35,ease:"back.out(2)"},1.35)
-        .from(".f06-card:first-child",{x:-240,opacity:0,duration:.55,ease:"power3.out"},1.75)
-        .from(".f06-card:first-child .f06-stamp",{scale:0,rotation:-12,duration:.35,ease:"back.out(2)"},2.25)
-        .from(".f06-card:last-child",{x:240,opacity:0,duration:.55,ease:"power3.out"},3.05)
-        .from(".f06-card:last-child .f06-stamp",{scale:0,rotation:12,duration:.35,ease:"back.out(2)"},3.55)
-        .from(".f06-warning",{scaleX:0,duration:.65,ease:"expo.out"},4.25)
-        .from(".f06-warning",{opacity:0,duration:.1},4.25)
-        .from(".f06-bolt",{scale:0,stagger:.08,duration:.25,ease:"back.out(2)"},4.85)
-        .from(".f06-safe",{x:120,opacity:0,duration:.45,ease:"power3.out"},5.55);
+      tl.from(".f06-pill",{x:-70,opacity:0,duration:.35,ease:"power3.out"},0).from(".f06-gate",{y:-160,opacity:0,stagger:.35,duration:.55,ease:"back.out(1.4)"},.25).fromTo(".f06-ball",{x:0,rotation:0},{x:790,rotation:720,duration:1.8,ease:"power1.inOut"},.55)
+        .to(".f06-t1",{rotation:22,duration:.3,ease:"power2.inOut"},2.05).to(".f06-bad1",{y:430,rotation:-12,opacity:0,duration:.7,ease:"power3.in"},2.2).from(".f06-bin1",{y:130,opacity:0,duration:.45,ease:"back.out(1.4)"},2.25)
+        .to(".f06-t2",{rotation:-22,duration:.3,ease:"power2.inOut",transformOrigin:"right center"},3.05).to(".f06-bad2",{y:430,rotation:12,opacity:0,duration:.7,ease:"power3.in"},3.2).from(".f06-bin2",{y:130,opacity:0,duration:.45,ease:"back.out(1.4)"},3.25)
+        .from(".f06-rail",{scaleX:0,duration:.5,ease:"power3.out",transformOrigin:"left center"},3.75).from(".f06-badge",{scale:.25,opacity:0,duration:.55,ease:"back.out(1.5)"},4.1).to(".f06-ball",{x:1590,rotation:1400,duration:1.45,ease:"power1.inOut"},4.25).from(".f06-out",{scaleX:0,duration:.35,ease:"power3.out",transformOrigin:"left center"},5.4);
       window.__timelines["06-safety-rail"]=tl;
     </script>
   </div>

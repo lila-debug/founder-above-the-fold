@@ -2,116 +2,181 @@
 ## IKEA / Meccano Assembly Manual Edition
 
 ### Box Contents
+
 | Label | Part | Plain-English job | Where it lives | Owner |
 |---|---|---|---|---|
-| A | Product brief | Locks the audience, promise, format, and safety boundary | `hyperframes.json` | Founder |
-| B | Spoken rail | Supplies the approved 45-second launch copy | `SCRIPT.md` | Founder |
-| C | Seven-panel plan | Routes each claim into one visible assembly | `STORYBOARD.md` | Creative operator |
-| D | Motion panels | Show the chore, machine, profile parts, queue, safety rail, and offer | `compositions/frames/` | Motion system |
-| E | Design plate | Locks the manual colours, type, borders, and shadows | `frame.md` | Brand system |
-| F | Final narrated film | Carries the locked launch story as a 1080p H.264/AAC delivery file | `renders/founder-above-fold-launch-final.mp4` | Launch owner |
-| G | Narration jig | Builds seven local en-GB clips, checks every scene slot and supplies exact-script word timings | `scripts/build-local-audio.mjs` | Audio operator |
-| H | Film inspection jig | Verifies the encoded picture, sound, captions, transcript, loudness and inspection plates | `scripts/audit-final-video.mjs` and `renders/final-audit.json` | Quality operator |
-| I | Optional presenter socket | Can add a separate avatar cut later without blocking the complete motion-graphics film | HeyGen connector | Founder + HeyGen |
+| A | Locked brief | Records the light-mode, minimal-text, Rube Goldberg direction | `BRIEF.md` | Founder |
+| B | Spoken rail | Carries explanation so the screen does not become a textbook | `SCRIPT.md` | Founder |
+| C | Seven-part machine plan | Routes one coral signal through every cause-and-effect beat | `STORYBOARD.md` | Creative operator |
+| D | Motion parts | Draws ramps, dominoes, gears, drawers, clamps, queue slots, and trapdoors | `compositions/frames/` | Motion system |
+| E | Colour plate | Locks the six-colour owner-supplied light-mode system | `frame.md` | Brand system |
+| F | Caption rail | Shows short timed fragments, never paragraphs | `caption_groups.json` and `compositions/captions.html` | Accessibility operator |
+| G | Narration jig | Builds seven local en-GB clips and exact-script timings | `scripts/build-local-audio.mjs` | Audio operator |
+| H | Inspection plates | Show representative frames before the expensive render | `snapshots/contact-sheet.jpg` | Quality operator |
+| I | Final film | Becomes the launch gate only after preview approval and encoded-file audit | `renders/founder-above-fold-launch-final.mp4` | Launch owner |
 
 ### Mission Control Board
+
 ```text
-[Founder hates LinkedIn admin]
-  |
-  v
-[Passwordless Profile OS + safe publishing rail]
-  |
-  v
-[Credible profile parts + two-week visibility queue]
-  |
-  v
-[Five paid beta conversations]
+[Recurring LinkedIn work]
+          |
+          v
+[One travelling signal + visible mechanism]
+          |
+          v
+[Profile cabinet -> voice clamp -> queue -> safety sorter]
+          |
+          v
+[Try the Toy Box]
 ```
 
 ### Assembly Steps
-#### Step 1 - Lock the promise
+
+#### Step 1 - Lock the visual law
+
 Diagram:
+
 ```text
-[Second job] ---> [Founder Above the Fold] ---> [Credible in 48 hours]
+[Paper] + [Navy ink] + [Five working accents]
+                    |
+                    v
+              [Light mode only]
 ```
+
 Do:
-1. Place the pain in the opening five seconds.
-2. Align the category statement behind it.
-3. Fasten the concrete 48-hour outcome to the close.
+
+1. Use paper `#FEF9EF` for the canvas.
+2. Draw every rail and border with ink `#1E3A5F`.
+3. Use blue `#227C9D`, yellow `#FFCB77`, coral `#FE6D73`, and teal `#17C3B2` only.
+4. Keep the closing frame light.
+5. Treat Benny™ as protected owner-supplied master artwork, never as a prompt. Do not generate, redraw, approximate, recolour, restyle, costume, or reconstruct him.
+6. Show only one Benny™ at a time. A duplicate, reflection, portrait, shadow-character, or generated variation fails continuity.
+7. Use the supplied Benny workshop clip only as a silent motion reference; its two apron-and-bow-tie cats are not canonical Benny™ assets.
 
 Check:
-- The film sells a founder operating system, not a generic scheduler.
+
+- The palette audit reports no extra hexadecimal colours.
+- The character audit reports one Benny maximum in every sampled frame.
+- Scene hand-offs are a single smooth lateral move; no duplicate transition timeline is present.
 
 Avoid:
-- Invented testimonials, analytics, customer results, or vendor claims.
 
-#### Step 2 - Assemble the operating parts
+- Dark-mode closing plates, gradients, glass cards, or an unapproved seventh colour.
+
+#### Step 2 - Route the signal
+
 Diagram:
+
 ```text
-[Magic link] -> [Profile cabinet] -> [Voice check] -> [Two-week queue]
+[Ramp] -> [Trap] -> [Gear] -> [Cabinet] -> [Clamp] -> [Sorter] -> [Build]
 ```
+
 Do:
-1. Insert the magic-link key.
-2. Place headline, About, experience, and featured-link parts into labelled bays.
-3. Route the founder command through drafts, voice check, queue, reminders, and manual tasks.
+
+1. Roll the same coral signal from left to right in every frame.
+2. Let each collision cause the next visible action.
+3. Use identical leftward push transitions so the exit and entry rails align.
+4. Finish with one action: `TRY THE TOY BOX`.
 
 Check:
-- Profile edits remain a manual paste operation.
-- The unfinished-task indicator is framed as an illustrative mechanism, not customer data.
+
+- The viewer can follow the mechanism with the sound muted.
 
 Avoid:
-- Fake product screenshots or claims that an unavailable surface is already live.
 
-#### Step 3 - Clamp the safety rail
+- Unconnected slide entrances, decorative motion with no consequence, or a second CTA.
+
+#### Step 3 - Remove the textbook
+
 Diagram:
+
 ```text
-[Official publishing] --X--> [Scraping / fake engagement / risky outreach]
+[Narration explains] + [Mechanism demonstrates] + [Short captions support]
 ```
+
 Do:
-1. Centre the approved publishing socket.
-2. Remove scraping and fake-engagement parts.
-3. Lock the warning strip above the caption keep-out.
+
+1. Keep visible frame copy to a part number, a short cue, or the product name.
+2. Keep each caption group to four words or fewer.
+3. Use the bottom caption rail for accessibility instead of repeating narration in the frame.
 
 Check:
-- All four safety statements remain readable on a paused frame.
+
+- Forty-five caption groups average about two words and none exceeds four.
+- No frame contains a paragraph, feature list, or large block of prose.
 
 Avoid:
-- DMs, follows, likes, comments, reposts, profile edits, or outreach through unofficial automation.
 
-#### Step 4 - Test and export
+- Product-page copy, university-textbook density, or narration duplicated on screen.
+
+#### Step 4 - Clamp the safety sorter
+
 Diagram:
+
 ```text
-[Lint] ---> [Validate] ---> [Inspect] ---> [Render] ---> [Watch]
+[SCRAPE x] ----> [Reject bin]
+[OFFICIAL ✓] --> [Owner control]
+[FAKE x] ------> [Reject bin]
 ```
+
 Do:
-1. Turn the checker until every panel is structurally valid.
-2. Inspect one still from the middle of every panel.
-3. Render the 1920×1080 film, then normalise the delivery sound to the labelled loudness rail.
-4. Run `npm run audit-final` to decode every frame and inspect the complete encoded file.
-5. Keep any future HeyGen presenter version in a separate drawer; it is optional and does not replace this finished cut.
+
+1. Drop scraping and fake engagement through visible trapdoors.
+2. Keep official publishing on the centre rail.
+3. Resolve the rail into owner control.
 
 Check:
-- The picture is exactly 45.0 seconds, 1,350 frames and 30 fps; the small 45.1-second container tail safely carries the last AAC packet.
-- The final soundtrack is stereo 48 kHz AAC at -16.05 LUFS and -0.99 dBTP.
-- The full file decodes, no black interval of 100 ms or longer is detected, and all three fifteen-second inspection plates read cleanly.
-- Tiny.en hears the complete 122-word normalised rail at 2.46% word-error rate; the visible caption rail remains the verbatim 116-token source script.
+
+- The safety boundary reads visually without a disclaimer paragraph.
 
 Avoid:
-- Treating an optional presenter experiment as a dependency of the finished launch film.
+
+- DMs, follows, likes, comments, reposts, scraping, profile editing, or unsafe outreach automation.
+
+#### Step 5 - Inspect, approve, render
+
+Diagram:
+
+```text
+[Check] -> [Contact sheet] -> [Studio preview] -> [Owner approval] -> [Render] -> [Encoded audit]
+```
+
+Do:
+
+1. Run the full HyperFrames check.
+2. Inspect a representative frame from every mechanism.
+3. Review the complete 45-second Studio preview with sound.
+4. Render only after explicit approval.
+5. Decode and audit the final MP4 before declaring the video gate green.
+
+Check:
+
+- Source check: 0 errors and 0 warnings.
+- Layout, motion, runtime, and contrast gates pass.
+- The final MP4 exists, decodes fully, and matches the approved preview.
+
+Avoid:
+
+- Reusing the old render or its old fingerprint after the source film changed.
 
 ### Safety Stickers
-- [Security] No passwords, keys, access tokens, or private customer data appear in the film.
+
+- [Security] No passwords, keys, access tokens, or private customer data appear.
 - [Privacy] No real profile, portrait, customer name, or LinkedIn account is fabricated or exposed.
-- [Cost] The local motion film uses no paid generation step; a future HeyGen render must stay within the connected plan.
-- [IP] The visual system is original manual-style motion graphics; no LinkedIn interface, logo, or third-party customer mark is copied.
-- [Evidence] “Five founder builds” is an offer limit. “Credible in 48 hours” must be tested in the beta and must not be presented as an already proven customer statistic.
+- [Cost] The motion film and local voice use no new paid generation step.
+- [IP] The mechanism is original manual-style motion graphics; no LinkedIn interface or third-party logo is copied.
+- [Evidence] The removed “credible in 48 hours” and “five founder builds” claims must not return without approved evidence.
 
 ### Finished-Build Test
-- [x] All seven frame files pass the HyperFrames checks.
-- [x] Midpoint snapshots show no clipping, overlap, or unreadable text.
-- [x] The final delivery MP4 is 1920×1080, 30 fps and exactly 1,350 picture frames.
-- [x] All seven narration clips fit their scene slots and all 55 caption groups match the approved script.
-- [x] The final file passes full decode, loudness, true-peak, black-gap and transcript checks.
-- [x] Official-publishing and no-risky-automation statements remain visible.
-- [x] The private-beta close reads “Five founder builds.”
-- [x] The final SHA-256 fingerprint is `472acd8e8a825a73e404d7b4816121d2630534cda48a2253959ec51824f53820`.
+
+- [x] Seven frame files form one left-to-right Rube Goldberg chain.
+- [x] Visible screen copy contains no paragraph or large text block.
+- [x] Captions contain at most four words per group.
+- [x] Only the six approved palette colours appear in the composition.
+- [x] HyperFrames reports 0 errors, 0 warnings, and 25/25 passing contrast checks.
+- [x] Midpoint snapshots show no clipping or layout collision.
+- [x] The old unsupported close has been removed.
+- [ ] Founder approves the complete Studio preview.
+- [ ] The new final MP4 is rendered from this source.
+- [ ] Full decode, loudness, peak, black-gap, caption, and transcript checks pass on the new MP4.
+- [ ] The new final SHA-256 fingerprint is recorded.

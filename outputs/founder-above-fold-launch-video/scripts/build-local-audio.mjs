@@ -107,7 +107,7 @@ for (const line of lines) {
   for (let attempt = 0; !reuseVoice && attempt < 2; attempt += 1) {
     run("npx", [
       "--yes",
-      "hyperframes@0.7.57",
+      "hyperframes@0.7.64",
       "tts",
       line.text,
       "--voice",
@@ -130,7 +130,7 @@ for (const line of lines) {
 
   run("npx", [
     "--yes",
-    "hyperframes@0.7.57",
+    "hyperframes@0.7.64",
     "transcribe",
     wavRel,
     "--engine",

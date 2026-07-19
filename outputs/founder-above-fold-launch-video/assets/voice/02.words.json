@@ -1,110 +1,74 @@
 [
   {
     "id": "w0",
-    "text": "Not",
-    "start": 0.03,
-    "end": 0.208
+    "text": "Schedulers",
+    "start": 0.06,
+    "end": 0.708
   },
   {
     "id": "w1",
-    "text": "another",
-    "start": 0.208,
-    "end": 0.622
+    "text": "move",
+    "start": 0.708,
+    "end": 0.967
   },
   {
     "id": "w2",
-    "text": "scheduler.",
-    "start": 0.622,
-    "end": 1.156
+    "text": "posts.",
+    "start": 0.967,
+    "end": 1.291
   },
   {
     "id": "w3",
-    "text": "Not",
-    "start": 1.156,
-    "end": 1.333
+    "text": "Bots",
+    "start": 1.291,
+    "end": 1.55
   },
   {
     "id": "w4",
-    "text": "another",
-    "start": 1.333,
-    "end": 1.748
+    "text": "chase",
+    "start": 1.55,
+    "end": 1.874
   },
   {
     "id": "w5",
-    "text": "engagement",
-    "start": 1.748,
-    "end": 2.341
+    "text": "attention.",
+    "start": 1.874,
+    "end": 2.458
   },
   {
     "id": "w6",
-    "text": "bot.",
-    "start": 2.341,
-    "end": 2.518
+    "text": "Founder",
+    "start": 2.458,
+    "end": 2.911
   },
   {
     "id": "w7",
-    "text": "The",
-    "start": 2.518,
-    "end": 2.696
+    "text": "visibility",
+    "start": 2.911,
+    "end": 3.559
   },
   {
     "id": "w8",
-    "text": "work",
-    "start": 2.696,
-    "end": 2.933
+    "text": "is",
+    "start": 3.559,
+    "end": 3.689
   },
   {
     "id": "w9",
-    "text": "is",
-    "start": 2.933,
-    "end": 3.052
+    "text": "a",
+    "start": 3.689,
+    "end": 3.818
   },
   {
     "id": "w10",
-    "text": "credibility—and",
-    "start": 3.052,
-    "end": 3.881
+    "text": "credibility",
+    "start": 3.818,
+    "end": 4.531
   },
   {
     "id": "w11",
-    "text": "the",
-    "start": 3.881,
-    "end": 4.059
-  },
-  {
-    "id": "w12",
-    "text": "admin",
-    "start": 4.059,
-    "end": 4.355
-  },
-  {
-    "id": "w13",
-    "text": "keeps",
-    "start": 4.355,
-    "end": 4.651
-  },
-  {
-    "id": "w14",
-    "text": "getting",
-    "start": 4.651,
-    "end": 5.066
-  },
-  {
-    "id": "w15",
-    "text": "in",
-    "start": 5.066,
-    "end": 5.185
-  },
-  {
-    "id": "w16",
-    "text": "the",
-    "start": 5.185,
-    "end": 5.362
-  },
-  {
-    "id": "w17",
-    "text": "way.",
-    "start": 5.362,
-    "end": 5.54
+    "text": "system.",
+    "start": 4.531,
+    "end": 4.92
   }
 ]

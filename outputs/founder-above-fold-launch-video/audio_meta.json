@@ -64,478 +64,370 @@
     {
       "frame": 2,
       "path": "assets/voice/02.wav",
-      "duration_s": 5.568,
+      "duration_s": 4.907,
       "words": [
         {
           "id": "w0",
-          "text": "Not",
-          "start": 0.03,
-          "end": 0.208
+          "text": "Schedulers",
+          "start": 0.06,
+          "end": 0.708
         },
         {
           "id": "w1",
-          "text": "another",
-          "start": 0.208,
-          "end": 0.622
+          "text": "move",
+          "start": 0.708,
+          "end": 0.967
         },
         {
           "id": "w2",
-          "text": "scheduler.",
-          "start": 0.622,
-          "end": 1.156
+          "text": "posts.",
+          "start": 0.967,
+          "end": 1.291
         },
         {
           "id": "w3",
-          "text": "Not",
-          "start": 1.156,
-          "end": 1.333
+          "text": "Bots",
+          "start": 1.291,
+          "end": 1.55
         },
         {
           "id": "w4",
-          "text": "another",
-          "start": 1.333,
-          "end": 1.748
+          "text": "chase",
+          "start": 1.55,
+          "end": 1.874
         },
         {
           "id": "w5",
-          "text": "engagement",
-          "start": 1.748,
-          "end": 2.341
+          "text": "attention.",
+          "start": 1.874,
+          "end": 2.458
         },
         {
           "id": "w6",
-          "text": "bot.",
-          "start": 2.341,
-          "end": 2.518
+          "text": "Founder",
+          "start": 2.458,
+          "end": 2.911
         },
         {
           "id": "w7",
-          "text": "The",
-          "start": 2.518,
-          "end": 2.696
+          "text": "visibility",
+          "start": 2.911,
+          "end": 3.559
         },
         {
           "id": "w8",
-          "text": "work",
-          "start": 2.696,
-          "end": 2.933
+          "text": "is",
+          "start": 3.559,
+          "end": 3.689
         },
         {
           "id": "w9",
-          "text": "is",
-          "start": 2.933,
-          "end": 3.052
+          "text": "a",
+          "start": 3.689,
+          "end": 3.818
         },
         {
           "id": "w10",
-          "text": "credibility—and",
-          "start": 3.052,
-          "end": 3.881
+          "text": "credibility",
+          "start": 3.818,
+          "end": 4.531
         },
         {
           "id": "w11",
-          "text": "the",
-          "start": 3.881,
-          "end": 4.059
-        },
-        {
-          "id": "w12",
-          "text": "admin",
-          "start": 4.059,
-          "end": 4.355
-        },
-        {
-          "id": "w13",
-          "text": "keeps",
-          "start": 4.355,
-          "end": 4.651
-        },
-        {
-          "id": "w14",
-          "text": "getting",
-          "start": 4.651,
-          "end": 5.066
-        },
-        {
-          "id": "w15",
-          "text": "in",
-          "start": 5.066,
-          "end": 5.185
-        },
-        {
-          "id": "w16",
-          "text": "the",
-          "start": 5.185,
-          "end": 5.362
-        },
-        {
-          "id": "w17",
-          "text": "way.",
-          "start": 5.362,
-          "end": 5.54
+          "text": "system.",
+          "start": 4.531,
+          "end": 4.92
         }
       ]
     },
     {
       "frame": 3,
       "path": "assets/voice/03.wav",
-      "duration_s": 5.184,
+      "duration_s": 4.608,
       "words": [
         {
           "id": "w0",
           "text": "Founder",
-          "start": 0.07,
-          "end": 0.461
+          "start": 0.09,
+          "end": 0.496
         },
         {
           "id": "w1",
           "text": "Above",
-          "start": 0.461,
-          "end": 0.741
+          "start": 0.496,
+          "end": 0.787
         },
         {
           "id": "w2",
           "text": "the",
-          "start": 0.741,
-          "end": 0.908
+          "start": 0.787,
+          "end": 0.961
         },
         {
           "id": "w3",
           "text": "Fold",
-          "start": 0.908,
-          "end": 1.132
+          "start": 0.961,
+          "end": 1.193
         },
         {
           "id": "w4",
-          "text": "is",
-          "start": 1.132,
-          "end": 1.244
+          "text": "turns",
+          "start": 1.193,
+          "end": 1.483
         },
         {
           "id": "w5",
-          "text": "the",
-          "start": 1.244,
-          "end": 1.411
+          "text": "that",
+          "start": 1.483,
+          "end": 1.715
         },
         {
           "id": "w6",
-          "text": "passwordless",
-          "start": 1.411,
-          "end": 2.082
+          "text": "work",
+          "start": 1.715,
+          "end": 1.948
         },
         {
           "id": "w7",
-          "text": "LinkedIn",
-          "start": 2.082,
-          "end": 2.529
+          "text": "into",
+          "start": 1.948,
+          "end": 2.18
         },
         {
           "id": "w8",
-          "text": "operating",
-          "start": 2.529,
-          "end": 3.032
+          "text": "one",
+          "start": 2.18,
+          "end": 2.354
         },
         {
           "id": "w9",
-          "text": "system",
-          "start": 3.032,
-          "end": 3.367
+          "text": "owner-controlled",
+          "start": 2.354,
+          "end": 3.225
         },
         {
           "id": "w10",
-          "text": "for",
-          "start": 3.367,
-          "end": 3.535
+          "text": "LinkedIn",
+          "start": 3.225,
+          "end": 3.689
         },
         {
           "id": "w11",
-          "text": "founders",
-          "start": 3.535,
-          "end": 3.982
+          "text": "operating",
+          "start": 3.689,
+          "end": 4.212
         },
         {
           "id": "w12",
-          "text": "who",
-          "start": 3.982,
-          "end": 4.15
-        },
-        {
-          "id": "w13",
-          "text": "hate",
-          "start": 4.15,
-          "end": 4.373
-        },
-        {
-          "id": "w14",
-          "text": "doing",
-          "start": 4.373,
-          "end": 4.653
-        },
-        {
-          "id": "w15",
-          "text": "LinkedIn.",
-          "start": 4.653,
-          "end": 5.1
+          "text": "system.",
+          "start": 4.212,
+          "end": 4.56
         }
       ]
     },
     {
       "frame": 4,
       "path": "assets/voice/04.wav",
-      "duration_s": 6.72,
+      "duration_s": 5.653,
       "words": [
         {
           "id": "w0",
-          "text": "Enter",
-          "start": 0.02,
-          "end": 0.323
+          "text": "A",
+          "start": 0.03,
+          "end": 0.154
         },
         {
           "id": "w1",
-          "text": "with",
-          "start": 0.323,
-          "end": 0.565
+          "text": "magic",
+          "start": 0.154,
+          "end": 0.463
         },
         {
           "id": "w2",
-          "text": "a",
-          "start": 0.565,
-          "end": 0.686
+          "text": "link",
+          "start": 0.463,
+          "end": 0.71
         },
         {
           "id": "w3",
-          "text": "magic",
-          "start": 0.686,
-          "end": 0.989
+          "text": "opens",
+          "start": 0.71,
+          "end": 1.019
         },
         {
           "id": "w4",
-          "text": "link.",
-          "start": 0.989,
-          "end": 1.231
+          "text": "your",
+          "start": 1.019,
+          "end": 1.266
         },
         {
           "id": "w5",
-          "text": "In",
-          "start": 1.231,
-          "end": 1.352
+          "text": "profile",
+          "start": 1.266,
+          "end": 1.699
         },
         {
           "id": "w6",
-          "text": "ten",
-          "start": 1.352,
-          "end": 1.534
+          "text": "cabinet:",
+          "start": 1.699,
+          "end": 2.131
         },
         {
           "id": "w7",
-          "text": "minutes,",
-          "start": 1.534,
-          "end": 1.957
+          "text": "headline,",
+          "start": 2.131,
+          "end": 2.626
         },
         {
           "id": "w8",
-          "text": "prepare",
-          "start": 1.957,
-          "end": 2.381
+          "text": "About,",
+          "start": 2.626,
+          "end": 2.934
         },
         {
           "id": "w9",
-          "text": "your",
-          "start": 2.381,
-          "end": 2.623
+          "text": "experience,",
+          "start": 2.934,
+          "end": 3.552
         },
         {
           "id": "w10",
-          "text": "headline,",
-          "start": 2.623,
-          "end": 3.108
+          "text": "featured",
+          "start": 3.552,
+          "end": 4.047
         },
         {
           "id": "w11",
-          "text": "About,",
-          "start": 3.108,
-          "end": 3.411
+          "text": "links,",
+          "start": 4.047,
+          "end": 4.356
         },
         {
           "id": "w12",
-          "text": "experience,",
-          "start": 3.411,
-          "end": 4.016
+          "text": "and",
+          "start": 4.356,
+          "end": 4.541
         },
         {
           "id": "w13",
-          "text": "featured",
-          "start": 4.016,
-          "end": 4.5
+          "text": "a",
+          "start": 4.541,
+          "end": 4.665
         },
         {
           "id": "w14",
-          "text": "links,",
-          "start": 4.5,
-          "end": 4.803
+          "text": "paste",
+          "start": 4.665,
+          "end": 4.974
         },
         {
           "id": "w15",
-          "text": "and",
-          "start": 4.803,
-          "end": 4.985
-        },
-        {
-          "id": "w16",
-          "text": "the",
-          "start": 4.985,
-          "end": 5.166
-        },
-        {
-          "id": "w17",
-          "text": "exact",
-          "start": 5.166,
-          "end": 5.469
-        },
-        {
-          "id": "w18",
-          "text": "manual",
-          "start": 5.469,
-          "end": 5.832
-        },
-        {
-          "id": "w19",
-          "text": "paste",
-          "start": 5.832,
-          "end": 6.135
-        },
-        {
-          "id": "w20",
           "text": "checklist.",
-          "start": 6.135,
-          "end": 6.68
+          "start": 4.974,
+          "end": 5.53
         }
       ]
     },
     {
       "frame": 5,
       "path": "assets/voice/05.wav",
-      "duration_s": 6.165,
+      "duration_s": 4.437,
       "words": [
         {
           "id": "w0",
-          "text": "Then",
-          "start": 0.04,
-          "end": 0.293
+          "text": "One",
+          "start": 0.03,
+          "end": 0.202
         },
         {
           "id": "w1",
-          "text": "say,",
-          "start": 0.293,
-          "end": 0.483
+          "text": "trigger",
+          "start": 0.202,
+          "end": 0.605
         },
         {
           "id": "w2",
-          "text": "make",
-          "start": 0.483,
-          "end": 0.736
+          "text": "builds",
+          "start": 0.605,
+          "end": 0.95
         },
         {
           "id": "w3",
-          "text": "me",
-          "start": 0.736,
-          "end": 0.862
+          "text": "drafts,",
+          "start": 0.95,
+          "end": 1.295
         },
         {
           "id": "w4",
-          "text": "visible",
-          "start": 0.862,
-          "end": 1.305
+          "text": "checks",
+          "start": 1.295,
+          "end": 1.64
         },
         {
           "id": "w5",
-          "text": "this",
-          "start": 1.305,
-          "end": 1.558
+          "text": "your",
+          "start": 1.64,
+          "end": 1.87
         },
         {
           "id": "w6",
-          "text": "week.",
-          "start": 1.558,
-          "end": 1.811
+          "text": "voice,",
+          "start": 1.87,
+          "end": 2.157
         },
         {
           "id": "w7",
-          "text": "Get",
-          "start": 1.811,
-          "end": 2
+          "text": "and",
+          "start": 2.157,
+          "end": 2.33
         },
         {
           "id": "w8",
-          "text": "voice-checked",
-          "start": 2,
-          "end": 2.759
+          "text": "unlocks",
+          "start": 2.33,
+          "end": 2.732
         },
         {
           "id": "w9",
-          "text": "drafts,",
-          "start": 2.759,
-          "end": 3.138
+          "text": "the",
+          "start": 2.732,
+          "end": 2.905
         },
         {
           "id": "w10",
-          "text": "a",
-          "start": 3.138,
-          "end": 3.265
+          "text": "queue",
+          "start": 2.905,
+          "end": 3.192
         },
         {
           "id": "w11",
-          "text": "two-week",
-          "start": 3.265,
-          "end": 3.707
+          "text": "only",
+          "start": 3.192,
+          "end": 3.422
         },
         {
           "id": "w12",
-          "text": "queue,",
-          "start": 3.707,
-          "end": 4.024
+          "text": "when",
+          "start": 3.422,
+          "end": 3.652
         },
         {
           "id": "w13",
-          "text": "reminders,",
-          "start": 4.024,
-          "end": 4.593
+          "text": "the",
+          "start": 3.652,
+          "end": 3.825
         },
         {
           "id": "w14",
-          "text": "and",
-          "start": 4.593,
-          "end": 4.782
+          "text": "copy",
+          "start": 3.825,
+          "end": 4.055
         },
         {
           "id": "w15",
-          "text": "every",
-          "start": 4.782,
-          "end": 5.099
-        },
-        {
-          "id": "w16",
-          "text": "manual",
-          "start": 5.099,
-          "end": 5.478
-        },
-        {
-          "id": "w17",
-          "text": "task",
-          "start": 5.478,
-          "end": 5.731
-        },
-        {
-          "id": "w18",
-          "text": "still",
-          "start": 5.731,
-          "end": 6.047
-        },
-        {
-          "id": "w19",
-          "text": "left.",
-          "start": 6.047,
-          "end": 6.3
+          "text": "passes.",
+          "start": 4.055,
+          "end": 4.4
         }
       ]
     },
@@ -633,121 +525,97 @@
     {
       "frame": 7,
       "path": "assets/voice/07.wav",
-      "duration_s": 6.272,
+      "duration_s": 3.989,
       "words": [
         {
           "id": "w0",
-          "text": "From",
-          "start": 0.07,
-          "end": 0.341
+          "text": "Operate",
+          "start": 0.02,
+          "end": 0.458
         },
         {
           "id": "w1",
-          "text": "neglected",
-          "start": 0.341,
-          "end": 0.951
+          "text": "the",
+          "start": 0.458,
+          "end": 0.645
         },
         {
           "id": "w2",
-          "text": "to",
-          "start": 0.951,
-          "end": 1.087
+          "text": "Toy",
+          "start": 0.645,
+          "end": 0.833
         },
         {
           "id": "w3",
-          "text": "credible",
-          "start": 1.087,
-          "end": 1.629
+          "text": "Box.",
+          "start": 0.833,
+          "end": 1.021
         },
         {
           "id": "w4",
-          "text": "above",
-          "start": 1.629,
-          "end": 1.968
+          "text": "See",
+          "start": 1.021,
+          "end": 1.208
         },
         {
           "id": "w5",
-          "text": "the",
-          "start": 1.968,
-          "end": 2.172
+          "text": "every",
+          "start": 1.208,
+          "end": 1.521
         },
         {
           "id": "w6",
-          "text": "fold",
-          "start": 2.172,
-          "end": 2.443
+          "text": "part.",
+          "start": 1.521,
+          "end": 1.771
         },
         {
           "id": "w7",
-          "text": "in",
-          "start": 2.443,
-          "end": 2.579
+          "text": "Keep",
+          "start": 1.771,
+          "end": 2.021
         },
         {
           "id": "w8",
-          "text": "48",
-          "start": 2.579,
-          "end": 2.714
+          "text": "the",
+          "start": 2.021,
+          "end": 2.209
         },
         {
           "id": "w9",
-          "text": "hours.",
-          "start": 2.714,
-          "end": 3.053
+          "text": "final",
+          "start": 2.209,
+          "end": 2.522
         },
         {
           "id": "w10",
-          "text": "Founder",
-          "start": 3.053,
-          "end": 3.528
+          "text": "call.",
+          "start": 2.522,
+          "end": 2.772
         },
         {
           "id": "w11",
-          "text": "Above",
-          "start": 3.528,
-          "end": 3.867
+          "text": "Founder",
+          "start": 2.772,
+          "end": 3.21
         },
         {
           "id": "w12",
-          "text": "the",
-          "start": 3.867,
-          "end": 4.07
+          "text": "Above",
+          "start": 3.21,
+          "end": 3.522
         },
         {
           "id": "w13",
-          "text": "Fold.",
-          "start": 4.07,
-          "end": 4.342
+          "text": "the",
+          "start": 3.522,
+          "end": 3.71
         },
         {
           "id": "w14",
-          "text": "Private",
-          "start": 4.342,
-          "end": 4.816
-        },
-        {
-          "id": "w15",
-          "text": "beta.",
-          "start": 4.816,
-          "end": 5.087
-        },
-        {
-          "id": "w16",
-          "text": "Five",
-          "start": 5.087,
-          "end": 5.359
-        },
-        {
-          "id": "w17",
-          "text": "founder",
-          "start": 5.359,
-          "end": 5.833
-        },
-        {
-          "id": "w18",
-          "text": "builds.",
-          "start": 5.833,
-          "end": 6.24
+          "text": "Fold.",
+          "start": 3.71,
+          "end": 3.96
         }
       ]
     }

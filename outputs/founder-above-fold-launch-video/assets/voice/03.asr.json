@@ -1,87 +1,77 @@
 [
   {
     "text": "Founder",
-    "start": 0.07,
+    "start": 0.09,
     "end": 0.47
   },
   {
     "text": "above",
     "start": 0.47,
-    "end": 0.8
+    "end": 0.74
   },
   {
     "text": "the",
-    "start": 0.8,
-    "end": 0.98
+    "start": 0.85,
+    "end": 1.03
   },
   {
     "text": "fold",
-    "start": 1.01,
-    "end": 1.04
+    "start": 1.03,
+    "end": 1.31
   },
   {
-    "text": "is",
-    "start": 1.29,
-    "end": 1.36
+    "text": "turns",
+    "start": 1.31,
+    "end": 1.51
   },
   {
-    "text": "the",
-    "start": 1.41,
-    "end": 1.5
+    "text": "that",
+    "start": 1.75,
+    "end": 1.84
   },
   {
-    "text": "passwordless",
-    "start": 1.51,
-    "end": 2.05
+    "text": "work",
+    "start": 1.84,
+    "end": 1.97
+  },
+  {
+    "text": "into",
+    "start": 2.02,
+    "end": 2.24
+  },
+  {
+    "text": "one",
+    "start": 2.24,
+    "end": 2.42
+  },
+  {
+    "text": "owner",
+    "start": 2.42,
+    "end": 2.68
+  },
+  {
+    "text": "controlled",
+    "start": 2.73,
+    "end": 3.2
   },
   {
     "text": "linked",
-    "start": 2.09,
-    "end": 2.36
+    "start": 3.2,
+    "end": 3.52
   },
   {
     "text": "in",
-    "start": 2.4,
-    "end": 2.5
+    "start": 3.52,
+    "end": 3.62
   },
   {
     "text": "operating",
-    "start": 2.5,
-    "end": 3
+    "start": 3.62,
+    "end": 4.12
   },
   {
-    "text": "system",
-    "start": 3,
-    "end": 3.37
-  },
-  {
-    "text": "for",
-    "start": 3.58,
-    "end": 3.64
-  },
-  {
-    "text": "founders",
-    "start": 3.7,
-    "end": 4
-  },
-  {
-    "text": "who",
-    "start": 4,
-    "end": 4.16
-  },
-  {
-    "text": "hate",
-    "start": 4.16,
-    "end": 4.39
-  },
-  {
-    "text": "doing",
-    "start": 4.4,
+    "text": "system.",
+    "start": 4.12,
     "end": 4.56
-  },
-  {
-    "text": "LinkedIn.",
-    "start": 4.56,
-    "end": 5.1
   }
 ]

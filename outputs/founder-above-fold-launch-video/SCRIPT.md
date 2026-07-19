@@ -16,30 +16,30 @@
 ## Line 2 — Not another scheduler (Frame 2)
 
 **Time:** 5.0 – 11.0s
-**Delivery:** Two clipped rejections, then slow slightly on “credibility”.
+**Delivery:** Crisp contrast; land “credibility system”.
 
-    Not another scheduler. Not another engagement bot. The work is credibility—and the admin keeps getting in the way.
+    Schedulers move posts. Bots chase attention. Founder visibility is a credibility system.
 
 ## Line 3 — Name the machine (Frame 3)
 
 **Time:** 11.0 – 17.0s
 **Delivery:** Confident category statement without launch-day bombast.
 
-    Founder Above the Fold is the passwordless LinkedIn operating system for founders who hate doing LinkedIn.
+    Founder Above the Fold turns that work into one owner-controlled LinkedIn operating system.
 
 ## Line 4 — Fit the profile parts (Frame 4)
 
 **Time:** 17.0 – 24.0s
-**Delivery:** Mechanical and precise; let each profile part register.
+**Delivery:** Mechanical and precise; leave a beat between cabinet parts.
 
-    Enter with a magic link. In ten minutes, prepare your headline, About, experience, featured links, and the exact manual paste checklist.
+    A magic link opens your profile cabinet: headline, About, experience, featured links, and a paste checklist.
 
 ## Line 5 — Make me visible (Frame 5)
 
 **Time:** 24.0 – 31.0s
-**Delivery:** Quote the command naturally, then accelerate through the outputs.
+**Delivery:** Let each cause-and-effect step click into place.
 
-    Then say, make me visible this week. Get voice-checked drafts, a two-week queue, reminders, and every manual task still left.
+    One trigger builds drafts, checks your voice, and unlocks the queue only when the copy passes.
 
 ## Line 6 — Safety rail (Frame 6)
 
@@ -51,6 +51,6 @@
 ## Line 7 — Finished build (Frame 7)
 
 **Time:** 38.0 – 45.0s
-**Delivery:** Resolve warmly, then make the five-build limit crisp.
+**Delivery:** Resolve warmly; make the Toy Box invitation unmistakable.
 
-    From neglected to credible above the fold in 48 hours. Founder Above the Fold. Private beta. Five founder builds.
+    Operate the Toy Box. See every part. Keep the final call. Founder Above the Fold.

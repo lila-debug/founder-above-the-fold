@@ -3,11 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npx --yes hyperframes@0.7.57 preview",
-    "check": "npx --yes hyperframes@0.7.57 check",
+    "dev": "npx --yes hyperframes@0.7.64 preview",
+    "check": "npx --yes hyperframes@0.7.64 check",
     "audit-final": "node scripts/audit-final-video.mjs .",
     "finalize-audio": "node scripts/finalize-audio-slots.mjs .",
-    "render": "npx --yes hyperframes@0.7.57 render",
-    "publish": "npx --yes hyperframes@0.7.57 publish"
+    "render": "npx --yes hyperframes@0.7.64 render",
+    "publish": "npx --yes hyperframes@0.7.64 publish"
   }
 }

@@ -1,27 +1,32 @@
 ---
 format: 1920x1080
-message: "The passwordless LinkedIn operating system for founders who hate doing LinkedIn"
-arc: "PAS with feature-benefit progression"
+message: "Founder visibility becomes one owner-controlled mechanism instead of a second job"
+arc: "One continuous Rube Goldberg cause-and-effect chain"
 audience: "Founders, fractional executives, consultants, coaches, agency owners, recruiters, and indie builders"
 language: en-GB
 target_duration: 45s
 audio: narrated
-music: "minimal warm electronic pulse, restrained mechanical rhythm, no vocals"
+music: none
 ---
 
 ## Video direction
 
-- palette system: Cycle the remapped BlockFrame grounds across cream #27C7EF, blue #FBD1C3, pink #97E4F7, green #F69777, yellow #F05A28, and off-white #FAFAFA. Use #111111 for all structural ink and borders, #FFFEF8 for card faces, and reserve the inverted black closing plate for the final build.
-- type system: Arial Black display roles are uppercase, tightly tracked, and dominant; Space Grotesk-style label chrome becomes the numbered manual rail. No type smaller than the video legibility floor carries meaning.
-- reveal model: Every part arrives only when its spoken cue is reached. Entrances use smooth long-tail settles; internal swaps use velocity-matched cuts. No content dump in the first quarter of a frame.
-- rhythm: Frames 1–5 build continuously; Frame 6 deliberately slows into three readable safety clamps; Frame 7 holds the completed assembly for the close.
+- palette system: Light mode only. Paper #FEF9EF is the canvas, ink #1E3A5F draws every rail and border, blue #227C9D and teal #17C3B2 mark working parts, yellow #FFCB77 carries energy, and coral #FE6D73 marks the travelling signal and stop states.
+- type system: Visible copy is limited to one short label, one product name, or one two-word cue per mechanism. Narration carries the explanation; no paragraph, feature list, or textbook block appears on screen.
+- reveal model: One coral signal ball causes every action. It rolls, knocks, presses, opens, clamps, sorts, and triggers the next frame's entry rail so the film reads as one physical machine.
+- character continuity: Benny™ is the one inventor-operator guiding the signal through the workshop. Never show more than one Benny at once; do not use mirrors, portraits, shadows, background cameos, or duplicated poses that read as a second character.
+- Benny source lock: Use only owner-supplied canonical Benny™ artwork. Benny is the founder's original copyrighted and trademarked 1990s Saturday-morning-cartoon character, created from her visual memory of her childhood orange cat, Andy. Never generate, redraw, approximate, recolour, restyle, costume, or reconstruct him.
+- reference exclusion: The generated apron-and-bow-tie cats in the workshop reference are not Benny™ and must not be used as character assets.
+- reference use: The silent workshop reference supplies atmosphere, spatial continuity, and cause-and-effect choreography only. The final film keeps the approved light palette and excludes the reference soundtrack.
+- rhythm: Frames 1–6 are continuous cause and effect. Frame 7 completes the mechanism, reveals the product name, and offers one action.
+- transition rhythm: Use one gentle leftward camera hand-off between scenes, approximately 0.9 seconds with a smooth sine ease. No scale warps, blur zooms, hard wipes, or stacked transition effects.
 - hold rule: Once a frame resolves, it stays still. At most a bounded low-amplitude jitter may remain on one label. No breathing cards and no late camera drift.
-- density: Each frame has a ground texture, a dominant message, labelled chrome, structural arrows or rails, and at least one foreground registration mark while keeping the bottom 17% clear.
-- negative list: No glossy SaaS gradients, rounded glass cards, fake LinkedIn interface, customer logos, invented analytics, scraping imagery, automated engagement, account-risky profile editing, front-loaded slideshow motion, or independently floating screensaver motion.
+- density: The machine fills the top 83% of every frame, but words do not. Meaning comes from ramps, gears, dominoes, drawers, clamps, trapdoors, bins, and the travelling signal.
+- negative list: No generated, redrawn, approximate, recoloured, restyled, re-costumed, or second Benny™; no dark-mode closing plate, glossy SaaS gradients, rounded glass cards, big blocks of text, feature-list slides, fake LinkedIn interface, customer logos, invented analytics, scraping imagery, automated engagement, account-risky profile editing, frantic soundtrack, scale-warp transition, blur zoom, or independently floating screensaver motion.
 
 ## Frame 1 — The second job
 
-- scene: Giant words assemble into a direct challenge while numbered manual parts snap around them.
+- scene: A coral signal ball rolls down a ramp, knocks three dominoes, tips a lever, and wakes a clock. Only the cue SECOND JOB? appears.
 - voiceover: "LinkedIn should not feel like a second job."
 - duration: 5s
 - poster: 3s
@@ -49,11 +54,11 @@ Scene 4 (4.3–5.0s): The completed sentence settles and holds dead still; a sma
 
 ## Frame 2 — Not another scheduler
 
-- scene: Familiar tool labels crowd the founder's workbench before the word CREDIBILITY cuts through them.
-- voiceover: "Not another scheduler. Not another engagement bot. The work is credibility—and the admin keeps getting in the way."
+- scene: The signal ball drops a calendar, bot, and chart into a trap; the single CREDIBILITY token rises from beneath the workbench.
+- voiceover: "Schedulers move posts. Bots chase attention. Founder visibility is a credibility system."
 - duration: 6s
 - poster: 4s
-- transition_in: squeeze
+- transition_in: push-slide LEFT
 - status: animated
 - src: compositions/frames/02-not-scheduler.html
 - type: pain_point
@@ -77,11 +82,11 @@ Scene 4 (4.4–6.0s): ADMIN, REWRITE, REMEMBER, PASTE, and POST bubbles close in
 
 ## Frame 3 — Name the machine
 
-- scene: Labelled parts orbit a central product plate, then lock into the Founder Above the Fold wordmark.
-- voiceover: "Founder Above the Fold is the passwordless LinkedIn operating system for founders who hate doing LinkedIn."
+- scene: Four coloured parts enter a gear, compress into one plate, and reveal the Founder Above the Fold name.
+- voiceover: "Founder Above the Fold turns that work into one owner-controlled LinkedIn operating system."
 - duration: 6s
 - poster: 4s
-- transition_in: zoom-through
+- transition_in: push-slide LEFT
 - status: animated
 - src: compositions/frames/03-name-machine.html
 - type: product_intro
@@ -105,8 +110,8 @@ Scene 4 (5.2–6.0s): The full lockup holds in the upper 75% with registration m
 
 ## Frame 4 — Fit the profile parts
 
-- scene: A magic-link key opens a profile cabinet; headline, About, experience, links, and paste checklist slot into labelled bays.
-- voiceover: "Enter with a magic link. In ten minutes, prepare your headline, About, experience, featured links, and the exact manual paste checklist."
+- scene: The signal becomes a magic-link key, turns the cabinet handle, opens four symbol drawers, and drops four checklist slips into a tray.
+- voiceover: "A magic link opens your profile cabinet: headline, About, experience, featured links, and a paste checklist."
 - duration: 7s
 - poster: 5s
 - transition_in: push-slide LEFT
@@ -132,8 +137,8 @@ Scene 4 (5.5–7.0s): A full-width yellow rail labelled MANUAL PASTE CHECKLIST l
 
 ## Frame 5 — Make me visible
 
-- scene: The spoken command enters a tool socket; drafts pass through a voice jig onto a two-week queue conveyor with reminders attached.
-- voiceover: "Then say, make me visible this week. Get voice-checked drafts, a two-week queue, reminders, and every manual task still left."
+- scene: The ball presses GO; one draft block crosses a voice clamp and rolls onto a queue rail with five visible slots.
+- voiceover: "One trigger builds drafts, checks your voice, and unlocks the queue only when the copy passes."
 - duration: 7s
 - poster: 5s
 - transition_in: push-slide LEFT
@@ -161,11 +166,11 @@ Scene 5 (6.0–7.0s): The cursor lands on REVIEW WEEK and the assembled workflow
 
 ## Frame 6 — Safety rail
 
-- scene: Three warning stickers clamp the conveyor: OFFICIAL PUBLISHING, NO SCRAPING, NO FAKE ENGAGEMENT.
+- scene: A three-way safety sorter drops SCRAPE and FAKE through trapdoors while OFFICIAL stays on the rail and produces OWNER CONTROL.
 - voiceover: "Official publishing only. No scraping. No fake engagement. No risky outreach or profile automation."
 - duration: 7s
 - poster: 5s
-- transition_in: squeeze
+- transition_in: push-slide LEFT
 - status: animated
 - src: compositions/frames/06-safety-rail.html
 - type: benefit_highlight
@@ -190,11 +195,11 @@ Scene 5 (6.2–7.0s): All four safety statements hold dead still; only a final �
 
 ## Frame 7 — Finished build
 
-- scene: The completed cabinet is stamped CREDIBLE IN 48 HOURS and collapses into the private-beta closing plate.
-- voiceover: "From neglected to credible above the fold in 48 hours. Founder Above the Fold. Private beta. Five founder builds."
+- scene: The signal hits the final button, two gears mesh, the finished-build light turns on, and the product name resolves above one Toy Box action.
+- voiceover: "Operate the Toy Box. See every part. Keep the final call. Founder Above the Fold."
 - duration: 7s
 - poster: 5s
-- transition_in: zoom-through
+- transition_in: push-slide LEFT
 - status: animated
 - src: compositions/frames/07-finished-build.html
 - type: cta
@@ -203,8 +208,8 @@ Scene 5 (6.2–7.0s): All four safety statements hold dead still; only a final �
 - blueprint: logo-assemble-lockup
 - asset_candidates:
 
-narrativeRole: Resolve the old chore into a credible founder outcome and a specific beta invitation.
-keyMessage: Five founders can receive the 48-hour credibility build.
+narrativeRole: Resolve the machine into one clear, interactive invitation.
+keyMessage: Try the Toy Box and inspect how owner control works.
 
 - blueprint: logo-assemble-lockup (Adapt)
 - focal: none — the outcome stamp and wordmark are drawn in HTML

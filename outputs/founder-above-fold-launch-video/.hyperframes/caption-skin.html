@@ -71,10 +71,10 @@
   .caption-pill {
     max-width: 80%;
     padding: 18px 40px 22px;
-    background: var(--cap-canvas, #ffffff);
-    border: 4px solid var(--cap-ink, #000000);
+    background: var(--cap-canvas, #FEF9EF);
+    border: 4px solid var(--cap-ink, #1E3A5F);
     border-radius: 0;
-    box-shadow: 8px 8px 0 var(--cap-ink, #000000);
+    box-shadow: 8px 8px 0 var(--cap-ink, #1E3A5F);
   }
   .caption-line {
     display: flex;
@@ -93,18 +93,18 @@
   .caption-word {
     display: inline-block;
     padding: 0 0.1em;
-    color: color-mix(in srgb, var(--cap-ink, #000000) 40%, var(--cap-canvas, #ffffff));
+    color: color-mix(in srgb, var(--cap-ink, #1E3A5F) 40%, var(--cap-canvas, #FEF9EF));
   }
   /* current word — THE yellow stamp-block (box-shadow spread = a hard square block
      w/o layout shift; no blur), black ink reading on top — blockframe's signature stamp */
   .caption-word.is-active {
-    color: var(--cap-ink, #000000);
-    background: var(--cap-accent, #f7cb46);
-    box-shadow: 0 0 0 0.08em var(--cap-accent, #f7cb46);
+    color: var(--cap-ink, #1E3A5F);
+    background: var(--cap-accent, #FFCB77);
+    box-shadow: 0 0 0 0.08em var(--cap-accent, #FFCB77);
   }
   /* already spoken — solid black ink, stamp cleared */
   .caption-word.is-spoken {
-    color: var(--cap-ink, #000000);
+    color: var(--cap-ink, #1E3A5F);
     background: transparent;
     box-shadow: none;
   }
@@ -112,18 +112,18 @@
   /* optional per-word accents (dormant until a word-classer tags them) */
   /* brand / key term — heavier ink weight, blockframe's display is already 900 */
   .caption-word.cap-brand {
-    color: var(--cap-ink, #000000);
+    color: var(--cap-ink, #1E3A5F);
   }
   /* numerals / data — the body voice, slightly recessed */
   .caption-word.cap-num {
     font-family: var(--font-body, "Inter"), ui-monospace, monospace;
-    color: color-mix(in srgb, var(--cap-ink, #000000) 74%, var(--cap-canvas, #ffffff));
+    color: color-mix(in srgb, var(--cap-ink, #1E3A5F) 74%, var(--cap-canvas, #FEF9EF));
   }
   /* emphasis — a cream hard underline bar (the second-chroma accent) */
   .caption-word.cap-cta {
     text-decoration: underline;
     text-decoration-thickness: 4px;
-    text-decoration-color: var(--cap-accent-2, #ffdc8b);
+    text-decoration-color: var(--cap-accent-2, #17C3B2);
     text-underline-offset: 0.12em;
   }
 

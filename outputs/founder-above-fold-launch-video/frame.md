@@ -11,14 +11,18 @@ unit: the frame — 1920×1080 primary; 9:16 and 1:1 documented
 principle: atoms are sacred · composition is free · numbers come from the script
 
 colors:
-  black: "#111111"
-  white: "#FFFEF8"
-  offwhite: "#FAFAFA"
-  pink: "#97E4F7"
-  blue: "#FBD1C3"
-  green: "#F69777"
-  yellow: "#F05A28"
-  cream: "#27C7EF"
+  ink: "#1E3A5F"
+  paper: "#FEF9EF"
+  blue: "#227C9D"
+  yellow: "#FFCB77"
+  coral: "#FE6D73"
+  teal: "#17C3B2"
+  black: "#1E3A5F"
+  white: "#FEF9EF"
+  offwhite: "#FEF9EF"
+  pink: "#FE6D73"
+  green: "#17C3B2"
+  cream: "#FEF9EF"
 
 borders: { primary: "4px solid black", thin: "3px solid black" }
 shadows: { default: "8px 8px 0 black", small: "4px 4px 0 black", hover: "6px 6px 0 black", close-yellow: "12px 12px 0 yellow", close-white: "6px 6px 0 white" }
@@ -91,22 +95,22 @@ components:
     size: "12px"
     description: "The ONLY round shape, pinned to stat cards."
   close-frame:
-    backgroundColor: "{colors.black}"
-    textColor: "{colors.white}"
-    border: "0.4cqw solid {colors.white}"
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+    border: "0.4cqw solid {colors.ink}"
     rounded: "0"
-    shadow: "1.2cqw 1.2cqw 0 {colors.yellow}"
-    description: "Inverted closer — the only colored shadow."
+    shadow: "1.2cqw 1.2cqw 0 {colors.coral}"
+    description: "Light-mode finished-build plate with one Toy Box action."
 ---
 
 # BlockFrame — Frame (video / frame layer)
 
 ## Brand adaptation (READ FIRST — the frontmatter is the source of truth)
 
-This is the **blockframe** preset remixed onto the captured brand. The YAML frontmatter above (colors · typography · components) is **normative and already correct — use it verbatim.** The prose below is the ORIGINAL preset's intent; read it THROUGH the frontmatter:
+This is the **blockframe** preset rebuilt around the owner-supplied light-mode palette. The YAML frontmatter above (colors · typography · components) is **normative and already correct — use it verbatim.** The prose below is the ORIGINAL preset's intent; read it THROUGH the frontmatter:
 
 - **Fonts** — already set to **Arial Black** (display) / **Arial** (body); ignore any preset font name lingering in prose.
-- **Colors** — use the frontmatter hex; preset color NAMES in prose (e.g. "cobalt", "cream") mean the remapped brand values.
+- **Colors** — use only paper `#FEF9EF`, ink `#1E3A5F`, blue `#227C9D`, yellow `#FFCB77`, coral `#FE6D73`, and teal `#17C3B2`. The film stays in light mode, including its closing frame.
 
 
 ## Overview

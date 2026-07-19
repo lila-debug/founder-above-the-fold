@@ -2,97 +2,79 @@
   {
     "id": "w0",
     "text": "Founder",
-    "start": 0.07,
-    "end": 0.461
+    "start": 0.09,
+    "end": 0.496
   },
   {
     "id": "w1",
     "text": "Above",
-    "start": 0.461,
-    "end": 0.741
+    "start": 0.496,
+    "end": 0.787
   },
   {
     "id": "w2",
     "text": "the",
-    "start": 0.741,
-    "end": 0.908
+    "start": 0.787,
+    "end": 0.961
   },
   {
     "id": "w3",
     "text": "Fold",
-    "start": 0.908,
-    "end": 1.132
+    "start": 0.961,
+    "end": 1.193
   },
   {
     "id": "w4",
-    "text": "is",
-    "start": 1.132,
-    "end": 1.244
+    "text": "turns",
+    "start": 1.193,
+    "end": 1.483
   },
   {
     "id": "w5",
-    "text": "the",
-    "start": 1.244,
-    "end": 1.411
+    "text": "that",
+    "start": 1.483,
+    "end": 1.715
   },
   {
     "id": "w6",
-    "text": "passwordless",
-    "start": 1.411,
-    "end": 2.082
+    "text": "work",
+    "start": 1.715,
+    "end": 1.948
   },
   {
     "id": "w7",
-    "text": "LinkedIn",
-    "start": 2.082,
-    "end": 2.529
+    "text": "into",
+    "start": 1.948,
+    "end": 2.18
   },
   {
     "id": "w8",
-    "text": "operating",
-    "start": 2.529,
-    "end": 3.032
+    "text": "one",
+    "start": 2.18,
+    "end": 2.354
   },
   {
     "id": "w9",
-    "text": "system",
-    "start": 3.032,
-    "end": 3.367
+    "text": "owner-controlled",
+    "start": 2.354,
+    "end": 3.225
   },
   {
     "id": "w10",
-    "text": "for",
-    "start": 3.367,
-    "end": 3.535
+    "text": "LinkedIn",
+    "start": 3.225,
+    "end": 3.689
   },
   {
     "id": "w11",
-    "text": "founders",
-    "start": 3.535,
-    "end": 3.982
+    "text": "operating",
+    "start": 3.689,
+    "end": 4.212
   },
   {
     "id": "w12",
-    "text": "who",
-    "start": 3.982,
-    "end": 4.15
-  },
-  {
-    "id": "w13",
-    "text": "hate",
-    "start": 4.15,
-    "end": 4.373
-  },
-  {
-    "id": "w14",
-    "text": "doing",
-    "start": 4.373,
-    "end": 4.653
-  },
-  {
-    "id": "w15",
-    "text": "LinkedIn.",
-    "start": 4.653,
-    "end": 5.1
+    "text": "system.",
+    "start": 4.212,
+    "end": 4.56
   }
 ]
