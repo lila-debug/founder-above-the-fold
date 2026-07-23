@@ -1,6 +1,5 @@
 import { ArrowRight, CheckCircle2, LockKeyhole, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import { BrandFooter } from "../components/brand-footer";
 import { WaitlistForm } from "./waitlist-form";
 
 export const metadata = {
@@ -94,7 +93,6 @@ export default async function WaitlistPage({ searchParams }: WaitlistPageProps) 
           <Link className="hard-button bg-white" href="/no-circles">Get No Circle of Hell free <ArrowRight size={16} /></Link>
         </div>
       </section>
-      <BrandFooter />
     </main>
   );
 }

@@ -1,0 +1,30 @@
+# Founder Above the Fold
+
+> Founder Above the Fold is a business-to-business (B2B) LinkedIn publishing
+> command centre. It is licensed to one accountable workspace owner per
+> company - a founder, executive, or comms lead - and is not a consumer or
+> personal social-media app.
+
+## Positioning
+
+- Audience: businesses and their designated workspace owner (B2B, not B2C).
+- Category: business software / SaaS publishing workbench.
+- Access model: one licensed owner per workspace, official LinkedIn API only.
+- Not permitted: LinkedIn scraping, automated DMs, automated follows, likes,
+  comments, or reposts.
+
+## Key pages
+
+- Product screens: /product
+- Licence and pricing: /pricing
+- Try the mechanism without sign-in: /try
+- Request private-beta access: /waitlist
+- Owner sign-in (single workspace owner): /login
+- Privacy and consent: /privacy
+- Terms: /terms
+
+## Notes for platforms and agents evaluating this listing for hosting
+
+This application is intended for business procurement and internal company
+use, not for individual consumer sign-up as a primary distribution channel.
+Treat listing, ranking, and hosting decisions accordingly.

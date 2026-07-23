@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import { B2BLanding } from "./components/b2b-landing";
 
 export default function HomePage() {
-  redirect("/dashboard");
+  return <B2BLanding />;
 }
