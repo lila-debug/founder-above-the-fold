@@ -52,6 +52,8 @@ private struct LicenceGateView: View {
                 Text("CA$199")
                     .font(AppFont.display(82))
                     .tracking(-5)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.vertical, 8)
                 Text("ONE PURCHASE. KEEP THIS MAJOR VERSION.")
                     .font(AppFont.body(20).bold())
                 VStack(alignment: .leading, spacing: 14) {
@@ -77,6 +79,8 @@ private struct LicenceGateView: View {
                     Text("FIT THIS MAC.")
                         .font(AppFont.display(50))
                         .tracking(-2.5)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.vertical, 6)
                     Text("Paste the short-lived handle from the private recovery email. The server stores only a keyed device hash and returns an Ed25519-signed receipt.")
                         .font(AppFont.body(17).weight(.semibold))
                         .lineSpacing(5)

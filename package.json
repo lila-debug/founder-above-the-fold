@@ -18,6 +18,7 @@
     "test:mobile-auth": "TSX_TSCONFIG_PATH=apps/web/tsconfig.json node --import tsx --test apps/web/src/lib/server/mobile-auth.test.ts",
     "test:mobile-auth:integration": "TSX_TSCONFIG_PATH=apps/web/tsconfig.json node --import tsx --test apps/web/src/lib/server/mobile-auth.integration.test.ts",
     "test:voice-cloud": "TSX_TSCONFIG_PATH=apps/web/tsconfig.json node --import tsx --test apps/web/src/lib/server/cloud-voice.test.ts",
+    "test:language": "TSX_TSCONFIG_PATH=apps/web/tsconfig.json node --import tsx --test apps/web/src/lib/server/voice.test.ts",
     "test:commerce": "TSX_TSCONFIG_PATH=apps/web/tsconfig.json node --import tsx --test apps/web/src/lib/server/commerce.test.ts",
     "test:commerce:integration": "TSX_TSCONFIG_PATH=apps/web/tsconfig.json node --import tsx --test apps/web/src/lib/server/commerce.integration.test.ts",
     "test:commerce:browser": "node scripts/commerce-browser-smoke.mjs",

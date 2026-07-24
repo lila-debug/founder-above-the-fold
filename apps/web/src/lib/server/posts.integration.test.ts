@@ -227,6 +227,35 @@ test("core post conveyor uses real database state and safe LinkedIn rules", asyn
     );
   });
 
+  await t.test("language and dialect labels are stored and invalidate stale passes", async () => {
+    await resetWorkflow();
+    const frenchDraft = await createDraftPost({
+      actor: "owner",
+      input: {
+        body: "Une stratégie claire aide l’équipe à expliquer ses décisions.",
+        languageCode: "fr-CA",
+      },
+    });
+
+    assert.equal(frenchDraft.languageCode, "fr-CA");
+    const checked = await runVoiceCheckForPost({
+      actor: "owner",
+      id: frenchDraft.id,
+    });
+    assert.equal(checked?.item.voiceCheckedLanguageCode, "fr-CA");
+    assert.equal(checked?.item.canQueue, true);
+
+    const relabelled = await updateDraftPost({
+      actor: "owner",
+      id: frenchDraft.id,
+      input: { languageCode: "fr-FR" },
+    });
+    assert.equal(relabelled?.languageCode, "fr-FR");
+    assert.equal(relabelled?.voiceStatus, "unchecked");
+    assert.equal(relabelled?.voiceCheckedLanguageCode, null);
+    assert.equal(relabelled?.canQueue, false);
+  });
+
   await t.test("queue and cancellation preserve audited workflow state", async () => {
     await resetWorkflow();
     const draft = await createVoicePassedDraft();

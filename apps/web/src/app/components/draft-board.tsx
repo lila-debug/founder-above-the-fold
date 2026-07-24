@@ -13,6 +13,12 @@ import {
   Trash2,
 } from "lucide-react";
 import { FormEvent, useMemo, useState } from "react";
+import {
+  CONTENT_LANGUAGES,
+  DEFAULT_CONTENT_LANGUAGE,
+  contentLanguageLabel,
+  type ContentLanguage,
+} from "@/lib/content-languages";
 import type { PostRecord, PostTracker, VoiceCheckRecord } from "@/lib/posts";
 
 type DraftWriteResponse = {
@@ -26,6 +32,7 @@ type DraftForm = {
   pillar: string;
   archetype: string;
   notes: string;
+  languageCode: ContentLanguage;
 };
 
 type Notice = {
@@ -38,6 +45,7 @@ const EMPTY_FORM: DraftForm = {
   pillar: "",
   archetype: "",
   notes: "",
+  languageCode: DEFAULT_CONTENT_LANGUAGE,
 };
 
 export function DraftBoard({ initialTracker }: { initialTracker: PostTracker }) {
@@ -304,7 +312,7 @@ export function DraftBoard({ initialTracker }: { initialTracker: PostTracker }) 
                       {post.body}
                     </p>
                     <p className="rail-label mt-2 text-xs font-black uppercase text-[#1768ac]">
-                      {post.pillar ?? "Unlabelled"} / {post.voiceStatus}
+                      {post.pillar ?? "Unlabelled"} / {contentLanguageLabel(post.languageCode)} / {post.voiceStatus}
                     </p>
                   </div>
                   <span className="rail-label shrink-0 border-2 border-[#03256c] px-2 py-1 text-xs font-black text-[#03256c]">
@@ -347,6 +355,26 @@ export function DraftBoard({ initialTracker }: { initialTracker: PostTracker }) 
           />
 
           <div className="grid gap-3 md:grid-cols-2">
+            <label className="rail-label grid gap-2 text-xs font-black uppercase text-[#1768ac]" htmlFor="draft-language">
+              Language and dialect
+              <select
+                className="h-10 w-full border-2 border-[#03256c]/25 bg-white px-3 text-sm font-normal normal-case text-[#03256c] outline-none focus:border-[#06bee1] focus:ring-2 focus:ring-[#06bee1]/25"
+                id="draft-language"
+                onChange={(event) =>
+                  setForm((current) => ({
+                    ...current,
+                    languageCode: event.target.value as ContentLanguage,
+                  }))
+                }
+                value={form.languageCode}
+              >
+                {CONTENT_LANGUAGES.map((language) => (
+                  <option key={language.code} value={language.code}>
+                    {language.label}
+                  </option>
+                ))}
+              </select>
+            </label>
             <DraftInput
               label="Pillar"
               value={form.pillar}
@@ -486,6 +514,7 @@ function postToForm(post: PostRecord): DraftForm {
     pillar: post.pillar ?? "",
     archetype: post.archetype ?? "",
     notes: post.notes ?? "",
+    languageCode: post.languageCode,
   };
 }
 

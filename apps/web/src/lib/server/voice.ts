@@ -1,6 +1,10 @@
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
+import {
+  contentLanguageLabel,
+  type ContentLanguage,
+} from "@/lib/content-languages";
 
 export type VoiceCommandResult = {
   status: "passed" | "failed";
@@ -20,11 +24,14 @@ export class VoiceCommandSetupError extends Error {}
 const MAX_OUTPUT_BYTES = 64_000;
 const TIMEOUT_MS = 30_000;
 
-export async function runVoiceCommand(body: string): Promise<VoiceCommandResult> {
-  const command = getVoiceCommandSpec();
+export async function runVoiceCommand(
+  body: string,
+  language: ContentLanguage,
+): Promise<VoiceCommandResult> {
+  const command = getVoiceCommandSpec(language);
 
   if (!command) {
-    return runBuiltInVoiceCheck(body);
+    return runBuiltInVoiceCheck(body, language);
   }
 
   return new Promise((resolve, reject) => {
@@ -114,7 +121,10 @@ const BUILT_IN_PROHIBITED = [
   "unlock your potential",
 ];
 
-function runBuiltInVoiceCheck(body: string): VoiceCommandResult {
+function runBuiltInVoiceCheck(
+  body: string,
+  language: ContentLanguage,
+): VoiceCommandResult {
   const text = body.trim();
   const lowered = text.toLowerCase();
   const failures: string[] = [];
@@ -123,9 +133,11 @@ function runBuiltInVoiceCheck(body: string): VoiceCommandResult {
     failures.push("Draft body is empty.");
   }
 
-  for (const [american, british] of Object.entries(BUILT_IN_REPLACEMENTS)) {
-    if (new RegExp(`\\b${american}\\b`, "i").test(text)) {
-      failures.push(`US spelling found: ${american}. Use ${british}.`);
+  if (language === "en-GB") {
+    for (const [american, british] of Object.entries(BUILT_IN_REPLACEMENTS)) {
+      if (new RegExp(`\\b${american}\\b`, "i").test(text)) {
+        failures.push(`US spelling found: ${american}. Use ${british}.`);
+      }
     }
   }
 
@@ -145,17 +157,20 @@ function runBuiltInVoiceCheck(body: string): VoiceCommandResult {
 
   return {
     status: failures.length === 0 ? "passed" : "failed",
-    command: "built-in-british-voice-gate-v1",
+    command: `built-in-language-voice-gate-v2:${language}`,
     stdout:
       failures.length === 0
-        ? "PASSED\nBritish English and Founder Above the Fold voice checks passed."
+        ? `PASSED\n${contentLanguageLabel(language)} and Founder Above the Fold voice checks passed.`
         : `FAILED\n${failures.map((failure) => `- ${failure}`).join("\n")}`,
     stderr: null,
   };
 }
 
-function getVoiceCommandSpec(): CommandSpec | null {
-  const raw = process.env.VOICE_CHECK_COMMAND?.trim();
+function getVoiceCommandSpec(language: ContentLanguage): CommandSpec | null {
+  const localeSlot = `VOICE_CHECK_COMMAND_${language.replace("-", "_").toUpperCase()}`;
+  const raw =
+    process.env[localeSlot]?.trim() ||
+    (language === "en-GB" ? process.env.VOICE_CHECK_COMMAND?.trim() : undefined);
 
   if (!raw || raw === "builtin") {
     return null;

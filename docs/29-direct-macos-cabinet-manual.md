@@ -124,6 +124,7 @@ Avoid:
 - [x] Separate update key generation, signed-envelope tamper test, feed-stamping jig and native check/download/checksum controls pass locally.
 - [x] App launches and exposes the purchase, recovery, status and instruction controls to macOS accessibility.
 - [x] Supplied CS Claire Mono headline font visibly renders in the native gate.
+- [x] Large licence and recovery headings include explicit vertical clearance; a rebuilt 1180 × 780 gate inspection shows no clipped ascenders, descenders, numerals, currency mark or punctuation.
 - [x] Duplicate text-shadow defect found in the first visual inspection was repaired with backing plates and rechecked.
 - [x] Corrected release `.app` was rebuilt and the bundle audit again passed identity, activation scheme, public key, font and secret-exclusion checks.
 - [x] No StoreKit or Apple purchase control exists in the Mac source.

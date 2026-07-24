@@ -106,9 +106,9 @@ const MANUALS: Record<ScreenId, { part: string; route: string; check: string; av
   },
   content: {
     part: "D · Draft workbench",
-    route: "Insert a draft, fasten its pillar, run the British-English gauge, then queue it.",
-    check: "A changed body invalidates the previous voice check.",
-    avoid: "Do not queue text that has not passed the exact-body voice check.",
+    route: "Insert a draft, label its language or dialect, run the matching gauge, then queue it.",
+    check: "A changed body or language label invalidates the previous voice check.",
+    avoid: "Do not queue text that has not passed the exact-body and exact-language check.",
   },
   queue: {
     part: "E · Conveyor belt",
@@ -288,7 +288,7 @@ function OverviewScreen({
           <span className="cut-label bg-[#f4d13d]">Founder operating system · private build</span>
           <h2 className="display-title mt-5">MAKE THE WEEK.<br /><span>KEEP IT HUMAN.</span></h2>
           <p className="mt-5 max-w-2xl text-base font-semibold leading-7 sm:text-lg">
-            One bright workbench for canonical profile copy, British-English drafts,
+            One bright workbench for canonical profile copy, dialect-labelled drafts,
             a controlled queue, and an owner-scoped MCP adapter rail.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -322,7 +322,7 @@ function OverviewScreen({
             <EvidenceRow label="Owner cabinet" ready={build.owner} readyText="Locked" stopText="Session needed" />
             <EvidenceRow label="Parts bin" ready={build.database} readyText="Connected" stopText="DATABASE_URL needed" />
             <EvidenceRow label="LinkedIn socket" ready={build.linkedin} readyText="Fitted" stopText="Environment slots needed" />
-            <EvidenceRow label="Voice gauge" ready={build.voice} readyText="Fitted" stopText="Command + en_GB needed" />
+            <EvidenceRow label="Voice gauge" ready={build.voice} readyText="Fitted" stopText="Built-in gate available" />
             <EvidenceRow label="Consent shield" ready={build.consent} readyText="Fitted" stopText="Cookiebot ID needed" />
             <EvidenceRow label="MCP key" ready={build.mcp} readyText="Fitted" stopText="MCP_API_KEY needed" />
             <EvidenceRow label="Analytics scope" ready={build.analytics} readyText="Fitted" stopText="LinkedIn grant needed" />
@@ -347,7 +347,7 @@ function SetupScreen({ build }: { build: BuildState }) {
   const steps = [
     { number: "01", title: "About you", body: "Place the founder name, role, company, notable wins, and approved links.", fields: ["Full name", "Role", "Company", "Notable wins", "Links"] },
     { number: "02", title: "Your audience", body: "Align the people you help with the offers you can actually deliver.", fields: ["Target audience", "What you offer"] },
-    { number: "03", title: "Voice jig", body: "Lock British English, warmth, formality, boldness, writing samples, and banned phrases.", fields: ["British English", "Formality", "Warmth", "Boldness", "Writing samples"] },
+    { number: "03", title: "Voice jig", body: "Lock the chosen English dialect or French region, warmth, formality, boldness, writing samples, and banned phrases.", fields: ["Language / dialect", "Formality", "Warmth", "Boldness", "Writing samples"] },
   ];
 
   return (
@@ -490,7 +490,7 @@ function TasksScreen({ build }: { build: BuildState }) {
     { label: "Connect the database parts bin", ready: build.database, owner: "Owner + builder" },
     { label: "Verify LinkedIn products, scopes, and redirect", ready: build.linkedin, owner: "Owner" },
     { label: "Fit Cookiebot Domain ID", ready: build.consent, owner: "Owner" },
-    { label: "Test Hunspell en_GB voice gate", ready: build.voice, owner: "Builder" },
+    { label: "Test every language and dialect latch", ready: build.voice, owner: "Builder" },
     { label: "Fit queue scheduling rail", ready: build.queue, owner: "Builder" },
     { label: "Prove text-only publishing", ready: build.publishing, owner: "Owner + builder" },
   ];

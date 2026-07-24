@@ -42,6 +42,7 @@ export class FounderClient {
 
   async createDraft(input: {
     body: string;
+    languageCode?: string;
     pillar?: string;
     archetype?: string;
     notes?: string;
@@ -75,7 +76,13 @@ export class FounderClient {
 
   async updateDraft(
     postId: string,
-    input: { body?: string; pillar?: string; archetype?: string; notes?: string },
+    input: {
+      body?: string;
+      languageCode?: string;
+      pillar?: string;
+      archetype?: string;
+      notes?: string;
+    },
   ) {
     return this.request(`/api/posts/${encodeURIComponent(postId)}`, {
       method: "PATCH",

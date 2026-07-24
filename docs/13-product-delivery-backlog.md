@@ -10,6 +10,9 @@ order and every slice can be tested before the next one begins.
 
 Already in place:
 
+- 2026-07-24 the universal British-English clamp was removed. Every draft now carries an explicit Canadian, British, American, Australian, owner-defined English, Parisian French, or Québécois French label; the queue latch binds the pass to both the exact text and exact language, and the web, MCP, iOS, PRD, tests, and matching assembly manual expose the same choices.
+- 2026-07-23 owner-approved access repair corrected the encrypted production `DISPATCH_OWNER_EMAIL` slot to the founder-confirmed address and redeployed the exact previously live bundle as `dpl_9v7iKyj8mu2KbEWn1GygyUhPnJAF`, without including local uncommitted work. The live login panel accepted the owner address and confirmed a fresh 15-minute Resend magic link was sent; the owner must still open that private email to prove the resulting dashboard session in her browser.
+- 2026-07-19 owner-approved production deployment `dpl_HoS5VE6JMaocZApSfvAhGc3aNWAp` fitted the Resend sender and production auth slots without storing secrets in this drawer. A real magic-link email was delivered, its 15-minute fastener opened `https://www.founderaccount.com/dashboard?auth=signed-in`, and the private cabinet rendered the configured owner identity. LinkedIn OAuth and the first owner-approved text-only post remain separate proof gates.
 - 2026-07-19 fourteen actual deployed public routes were captured as twenty-eight video-ready PNG frames: exact 3840×2160 landscape and 2160×3840 compact portrait. Every frame passes the camera-right overflow and console-error gauges. The local production repair now bundles the supplied CS Claire Mono font, lifts the showroom palette to every public panel, replaces the rounded privacy/cookie treatment with hard-edged assembly parts, and makes the Stripe smoke probe non-mutating. Deployment and a fresh 4K evidence pass still require owner approval.
 - 2026-07-19 the release accessibility rail now proves all fourteen public screens across desktop, 200% reflow and portrait: 42/42 pass with zero WCAG 2.1 A/AA violations, missing keyboard stops, invisible focus states, undersized portrait targets, camera-right overflows or console errors. Wordmark contrast, opacity fade, target sizing and the offer-selector role were repaired; human VoiceOver proof remains a physical-device gate.
 - 2026-07-19 a new disposable local Postgres cabinet received every migration and all database-backed suites: core 15/15, mobile auth 1/1 and commerce 8/8. The only initial failure was a retired root-anchor redirect expected by the test; both OAuth success/error assertions now match the current `/dashboard?linkedin=…` return panel. The disposable database was removed after proof.
@@ -108,7 +111,7 @@ Known setup gaps:
 - Purchased `.com`, `.app`, and `.dev` domains are connected to the Vercel project. `.com` is the selected primary product cabinet; secondary-domain redirect rules are prepared and need deployment approval plus live verification.
 - Production `DATABASE_URL` is configured and reports healthy; local disposable database tests cover all current migrations and workflow writes.
 - Profile copy, drafts, exact-revision voice checks, queue/cancel, official publish, analytics, templates, OAuth disconnect, export and verified deletion are backed by server state and private UI.
-- Production owner sign-in remains locked because `AUTH_PROVIDER=resend`, `RESEND_API_KEY`, and `MAGIC_LINK_FROM` are not fitted; the web and mobile callback slots are configured.
+- Production owner sign-in is open: `AUTH_PROVIDER=resend`, `RESEND_API_KEY`, and `MAGIC_LINK_FROM` are fitted, and one live owner magic-link session opened the private dashboard on 2026-07-19.
 - Live publishing still needs one owner-approved OAuth and text-post proof; analytics additionally needs LinkedIn's separate `r_member_postAnalytics` grant.
 - The LinkedIn Company Page still needs a human to apply the prepared Overview, HTTPS website URL, founder-confirmed legal type/year/location, specialties, company cover and first featured proof post. Company-page edits must not be automated.
 - Cookiebot still needs its live Domain ID, scans, cookie classification and withdrawal test.
@@ -131,7 +134,7 @@ Read-only inspection of `https://www.founderaccount.com` found:
 Required next physical actions, each behind owner/provider approval:
 
 1. Create or open the Waitlister cabinet, obtain the public waitlist key, whitelist `founderaccount.com`, `www.founderaccount.com`, and `localhost`, enable double opt-in, and verify confirmation/unsubscribe/export/deletion. A paid Waitlister tier may be required; do not spend without approval.
-2. Fit the production Resend sender, callback and key slots without pasting secrets into chat; prove one owner magic link.
+2. Completed 2026-07-19: production Resend sender, callback and key slots were fitted without recording the key, and one owner magic link opened the live private dashboard.
 3. Fit Cookiebot's Domain ID, scan every live domain, classify cookies, and prove withdrawal plus the populated declaration.
 4. Approve deployment of this prepared build, then rerun launch smoke and `test:product-hunt` against the primary domain.
 5. Sign in as the owner, complete LinkedIn OAuth, approve one text-only public proof post, and inspect the stored LinkedIn post ID and audit record. This is a public side effect and remains manual/approval-gated.

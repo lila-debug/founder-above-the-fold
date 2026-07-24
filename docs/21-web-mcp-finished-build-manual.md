@@ -141,7 +141,7 @@ Avoid:
 - [Privacy] The owner can disconnect, export or type the exact verified-deletion phrase; deletion clears the session and personal bins.
 - [Cost] Cron frequency is 15 minutes for publishing and daily for analytics; inspect provider limits before increasing it.
 - [IP] Only owner-supplied or approved copy enters the conveyor.
-- [Evidence] Local database, browser and MCP tests passed. A live first publish, analytics grant, Resend delivery, Cookiebot scan and production redirect remain external evidence gates.
+- [Evidence] Local database, browser and MCP tests passed. Production Resend delivery and the real owner dashboard sign-in passed on 2026-07-19. A live first publish, analytics grant and Cookiebot scan remain external evidence gates.
 
 ### Finished-Build Test
 - [x] Local Postgres migrations `0001`–`0003` apply.
@@ -151,8 +151,11 @@ Avoid:
 - [x] `.app` and `.dev` redirect rules pass local host-header checks.
 - [ ] Owner completes one approved live OAuth connection and text-only publish.
 - [ ] LinkedIn grants analytics scope and returns a live snapshot.
-- [ ] Production Resend and Cookiebot slots are fitted and tested.
-- [ ] Owner approves and verifies the production deployment.
+- [x] Production Resend slots are fitted and one real owner magic-link sign-in is proved.
+- [x] Founder-confirmed owner email was re-fitted on 2026-07-23; the repaired live panel accepted it and confirmed a fresh magic link was sent.
+- [ ] Cookiebot slots are fitted and tested.
+- [x] Owner approved and verified production deployment `dpl_HoS5VE6JMaocZApSfvAhGc3aNWAp`.
+- [x] Public `/try` panel keeps the mechanism visible without a wall of introductory text.
 
 ---
 

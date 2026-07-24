@@ -86,10 +86,10 @@ const steps: Step[] = [
   {
     id: "voice",
     label: "D",
-    title: "Clamp the British voice gate",
-    action: "Fit Hunspell en_GB and VOICE_CHECK_COMMAND.",
-    check: "Good draft passes; bad draft fails.",
-    avoid: "A labelled command does not prove the dictionary works.",
+    title: "Clamp the selected language gate",
+    action: "Label the dialect, then fit its built-in or optional locale-specific command.",
+    check: "Text and language must both match the saved pass.",
+    avoid: "Never force one English dialect or one French region onto every draft.",
     live: "voice",
   },
   {

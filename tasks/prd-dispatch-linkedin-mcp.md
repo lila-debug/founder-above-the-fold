@@ -50,9 +50,14 @@ One user: the founder. No accounts, no permissions system, no multi-tenant logic
 
 Draft posts stored with a scheduled publish time. A scheduled job calls the LinkedIn Posts API at the set time. Failed publishes retry once, then flag for manual attention - never fail silently.
 
-### 6.2 Voice Lock
+### 6.2 Language And Voice Lock
 
-Every draft runs through the existing `british_qa.py` hard-fail gate (OED British English, Hunspell `en_GB`) before it can be queued. Same enforcement already built for Benny - reused, not rebuilt.
+Every draft carries an explicit language/dialect label and must pass the matching
+voice gate before it can be queued. Supported settings are Canadian, British,
+American, Australian, and owner-defined English, plus Parisian French and
+Québécois French. British spelling rules apply only when British English is
+selected. Changing either the draft body or its language label removes the old
+pass and requires a fresh check.
 
 ### 6.3 Canonical Profile Copy Tracker
 
@@ -99,7 +104,8 @@ Both require LinkedIn's own review before going live - this is LinkedIn's proces
 
 ## 11. Success Metrics
 
-- Zero posts published in a voice that fails `british_qa.py`.
+- Zero posts published without a voice pass for the current text revision and
+  selected language/dialect.
 - Zero manual LinkedIn logins required for scheduled posting.
 - Profile copy drift caught within 24 hours of a canonical edit, every time.
 

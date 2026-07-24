@@ -123,7 +123,9 @@ being presented as successful.
 Fully automated in this product means:
 
 - AI can draft and revise posts against a stored voice system.
-- Drafts cannot be queued until they pass the British English voice gate.
+- Drafts cannot be queued until the current text revision passes its selected
+  language/dialect gate. Options include five English settings, Parisian French,
+  and Québécois French.
 - Queued posts publish on schedule through the LinkedIn Posts API.
 - Failed publishes retry once and then require manual attention.
 - Post analytics sync on a schedule for posts published by Founder Above the Fold.

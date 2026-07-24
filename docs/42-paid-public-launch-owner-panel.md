@@ -5,7 +5,7 @@
 | Label | Part | Plain-English job | Current state | Owner |
 |---|---|---|---|---|
 | A | Production build | Serves the repaired web product on every live domain | 🟩 Deployed | Release operator |
-| B | Resend key | Sends owner magic links and waitlist confirmations | 🟥 Missing | Owner/provider |
+| B | Resend key | Sends owner magic links and waitlist confirmations | 🟩 Owner sign-in proved; waitlist unproved | Owner/provider |
 | C | Cookiebot plate | Collects consent and publishes the cookie declaration | 🟥 Missing | Owner/provider |
 | D | LinkedIn socket | Connects the one owner through approved OAuth | 🟨 Configured, unproved | Owner |
 | E | Stripe live rail | Collects real payment and fits signed access | 🟨 Test mode only | Owner/provider |
@@ -28,7 +28,7 @@
                    [PAY → RECEIPT → ACTIVATE → USE]
 ```
 
-### Live Gauge — Deployment `dpl_GUZUfbZR9nq7jGvYknkAiibDKXJ6`
+### Live Gauge — Deployment `dpl_9v7iKyj8mu2KbEWn1GygyUhPnJAF`
 | Rail | Light | Evidence |
 |---|:---:|---|
 | `.com`, `.app`, `.dev` aliases | 🟩 | All aliases attached; non-primary paths preserved |
@@ -37,7 +37,7 @@
 | Accessibility | 🟩 | 42/42 WCAG/keyboard/reflow assemblies pass |
 | Live 4K media | 🟩 | 28/28 exact; right edge/console/circle gauges clear |
 | Database/mobile/cloud voice | 🟩 | Available |
-| Owner email delivery | 🟥 | `provider=dev`, Resend slots missing |
+| Owner email delivery | 🟩 | Production owner label corrected and a fresh Resend link confirmed sent on 2026-07-23; the private email click remains the browser-session proof |
 | Consent/declaration | 🟥 | Cookiebot ID missing |
 | LinkedIn owner proof | 🟥 | OAuth configured; connection/post unproved |
 | Payment | 🟨 | Signed sandbox rail configured; no live checkout |
@@ -167,7 +167,8 @@ Check:
 - [x] Owner selected paid public launch.
 - [x] Owner approved and production deployment completed.
 - [x] Live routes, accessibility, browser journeys and 4K evidence pass.
-- [ ] Resend owner sign-in and waitlist confirmation proved.
+- [x] Resend owner sign-in proved on the live `.com` cabinet.
+- [ ] Waitlist confirmation proved.
 - [ ] Cookiebot consent/declaration/withdrawal proved.
 - [ ] LinkedIn OAuth and one owner-approved text post proved.
 - [ ] Legal/tax/refund/privacy labels approved.

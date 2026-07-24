@@ -40,6 +40,10 @@ server.registerTool(
       "Create a Founder Above the Fold draft post. This does not publish to LinkedIn.",
     inputSchema: {
       body: z.string().min(1),
+      languageCode: z
+        .enum(["en-CA", "en-GB", "en-US", "en-AU", "en", "fr-FR", "fr-CA"])
+        .optional()
+        .describe("Draft language/dialect. Defaults to Canadian English."),
       pillar: z.string().optional(),
       archetype: z.string().optional(),
       notes: z.string().optional(),
@@ -63,7 +67,7 @@ server.registerTool(
   "dispatch.run_voice_check",
   {
     title: "Run Voice Check",
-    description: "Run the British English voice gate for a draft post.",
+    description: "Run the draft's selected language and voice gate.",
     inputSchema: {
       post_id: z.string().min(1),
     },
@@ -115,6 +119,9 @@ server.registerTool(
     inputSchema: {
       post_id: z.string().min(1),
       body: z.string().min(1).optional(),
+      languageCode: z
+        .enum(["en-CA", "en-GB", "en-US", "en-AU", "en", "fr-FR", "fr-CA"])
+        .optional(),
       pillar: z.string().optional(),
       archetype: z.string().optional(),
       notes: z.string().optional(),
@@ -300,7 +307,7 @@ server.registerResource(
   "dispatch://voice-guide",
   {
     title: "Founder Above the Fold Voice Guide",
-    description: "British English and Prototype Cafe voice rules.",
+    description: "Selected language/dialect and Prototype Cafe voice rules.",
     mimeType: "text/markdown",
   },
   async (uri) => ({
@@ -311,7 +318,7 @@ server.registerResource(
         text: [
           "# Founder Above the Fold Voice Guide",
           "",
-          "- British English only.",
+          "- Preserve the draft's selected English dialect, Parisian French, or Québécois French.",
           "- No engagement bait.",
           "- No fabricated client results.",
           "- Calm confidence, exact product judgement, warm commercial clarity.",
@@ -370,7 +377,7 @@ server.registerResource(
           "1. Open the owner cabinet with a passwordless link.",
           "2. Fasten the database parts bin and inspect dispatch.health.",
           "3. Insert the official LinkedIn OAuth socket. Never provide LinkedIn keys to ChatGPT.",
-          "4. Clamp the British English voice gate before a post can enter the queue.",
+          "4. Label the draft's language or dialect, then clamp the matching voice gate before queueing.",
           "5. Create drafts, run the voice check, then queue or cancel them with the dispatch tools.",
           "6. Keep profile edits and outreach sending manual.",
           "7. Use dispatch.publish_post_now only after the owner explicitly confirms the public post.",

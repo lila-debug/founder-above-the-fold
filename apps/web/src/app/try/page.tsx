@@ -1,4 +1,4 @@
-import { ArrowRight, BookOpen, ShieldCheck } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import Link from "next/link";
 import { PublicProductDemo } from "../components/public-product-demo";
 
@@ -20,25 +20,20 @@ export default function TryPage() {
               <Link className="hard-button bg-black text-white" href="/waitlist">Join the private beta <ArrowRight size={16} /></Link>
             </div>
           </nav>
-          <div className="py-12 md:py-16">
-            <span className="cut-label bg-[#f4d13d]">Immediate-access mechanism demo</span>
-            <h1 className="mt-7 max-w-5xl font-black uppercase leading-[0.88] tracking-[-0.07em] text-[clamp(3.5rem,9vw,7.2rem)]">
-              Try the clamp.
-              <br />
-              Keep control.
-            </h1>
-            <p className="mt-7 max-w-3xl text-lg font-semibold leading-8">
-              Route a draft through the same product logic: the current revision must pass
-              before the queue unlocks. This public jig runs entirely in your browser and
-              cannot publish, schedule, scrape, or connect to LinkedIn.
-            </p>
-            <p className="mt-4 flex max-w-3xl items-start gap-2 text-sm font-black uppercase">
-              <ShieldCheck className="shrink-0" size={19} /> Demonstration evidence, not a claim that your account is connected
+          <div className="flex flex-col gap-3 py-6 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <span className="cut-label bg-[#f4d13d]">Live product demo</span>
+              <h1 className="mt-4 text-4xl font-black uppercase leading-none tracking-[-0.05em] sm:text-6xl">
+                Draft → Check → Queue
+              </h1>
+            </div>
+            <p className="max-w-sm text-sm font-bold leading-6">
+              Try the mechanism below. Nothing is posted to LinkedIn.
             </p>
           </div>
         </div>
       </section>
-      <section className="mx-auto w-full max-w-[1200px] px-5 py-12 lg:px-8">
+      <section className="mx-auto w-full max-w-[1200px] px-5 py-7 lg:px-8">
         <PublicProductDemo />
       </section>
     </main>

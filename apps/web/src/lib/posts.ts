@@ -1,3 +1,5 @@
+import type { ContentLanguage } from "@/lib/content-languages";
+
 export const POST_STATUSES = [
   "draft",
   "queued",
@@ -19,9 +21,11 @@ export type PostRecord = {
   pillar: string | null;
   archetype: string | null;
   notes: string | null;
+  languageCode: ContentLanguage;
   status: PostStatus;
   voiceStatus: VoiceStatus;
   voiceCheckedHash: string | null;
+  voiceCheckedLanguageCode: ContentLanguage | null;
   scheduledAt: string | null;
   publishedAt: string | null;
   linkedinPostId: string | null;
@@ -62,6 +66,7 @@ export type VoiceCheckRecord = {
   postId: string;
   bodyHash: string;
   status: VoiceStatus;
+  languageCode: ContentLanguage;
   command: string;
   stdout: string | null;
   stderr: string | null;
@@ -81,9 +86,11 @@ export function toPostRecord(row: {
   pillar: string | null;
   archetype: string | null;
   notes: string | null;
+  language_code: ContentLanguage;
   status: PostStatus;
   voice_status: VoiceStatus;
   voice_checked_hash: string | null;
+  voice_checked_language_code: ContentLanguage | null;
   scheduled_at: Date | string | null;
   published_at: Date | string | null;
   linkedin_post_id: string | null;
@@ -95,6 +102,8 @@ export function toPostRecord(row: {
 }): PostRecord {
   const body = row.body.trim();
   const voiceMatchesBody = row.voice_checked_hash === row.body_hash;
+  const voiceMatchesLanguage =
+    row.voice_checked_language_code === row.language_code;
 
   return {
     id: row.id,
@@ -103,9 +112,11 @@ export function toPostRecord(row: {
     pillar: row.pillar,
     archetype: row.archetype,
     notes: row.notes,
+    languageCode: row.language_code,
     status: row.status,
     voiceStatus: row.voice_status,
     voiceCheckedHash: row.voice_checked_hash,
+    voiceCheckedLanguageCode: row.voice_checked_language_code,
     scheduledAt: toIso(row.scheduled_at),
     publishedAt: toIso(row.published_at),
     linkedinPostId: row.linkedin_post_id,
@@ -118,7 +129,11 @@ export function toPostRecord(row: {
     wordCount: countWords(body),
     canEdit: row.status === "draft",
     canDelete: row.status === "draft",
-    canQueue: row.status === "draft" && row.voice_status === "passed" && voiceMatchesBody,
+    canQueue:
+      row.status === "draft" &&
+      row.voice_status === "passed" &&
+      voiceMatchesBody &&
+      voiceMatchesLanguage,
   };
 }
 

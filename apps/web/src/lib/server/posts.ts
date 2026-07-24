@@ -1,5 +1,10 @@
 import { createHash } from "node:crypto";
 import {
+  DEFAULT_CONTENT_LANGUAGE,
+  parseContentLanguage,
+  type ContentLanguage,
+} from "@/lib/content-languages";
+import {
   POST_STATUSES,
   type PostRecord,
   type PostStatus,
@@ -27,9 +32,11 @@ type PostRow = {
   pillar: string | null;
   archetype: string | null;
   notes: string | null;
+  language_code: ContentLanguage;
   status: PostStatus;
   voice_status: VoiceStatus;
   voice_checked_hash: string | null;
+  voice_checked_language_code: ContentLanguage | null;
   scheduled_at: Date | string | null;
   published_at: Date | string | null;
   linkedin_post_id: string | null;
@@ -45,6 +52,7 @@ type VoiceCheckRow = {
   post_id: string;
   body_hash: string;
   status: VoiceStatus;
+  language_code: ContentLanguage;
   command: string;
   stdout: string | null;
   stderr: string | null;
@@ -56,6 +64,7 @@ export type DraftWriteInput = {
   pillar?: unknown;
   archetype?: unknown;
   notes?: unknown;
+  languageCode?: unknown;
 };
 
 export class DraftPostError extends Error {
@@ -212,11 +221,13 @@ export async function createDraftPost({
         pillar,
         archetype,
         notes,
+        language_code,
         status,
         voice_status,
-        voice_checked_hash
+        voice_checked_hash,
+        voice_checked_language_code
       )
-      values ($1, $2, $3, $4, $5, 'draft', 'unchecked', null)
+      values ($1, $2, $3, $4, $5, $6, 'draft', 'unchecked', null, null)
       returning *
     `,
     [
@@ -225,6 +236,7 @@ export async function createDraftPost({
       normalized.pillar,
       normalized.archetype,
       normalized.notes,
+      normalized.languageCode,
     ],
   );
   const row = result.rows[0];
@@ -238,6 +250,7 @@ export async function createDraftPost({
       bodyHash: row.body_hash,
       pillar: row.pillar,
       archetype: row.archetype,
+      languageCode: row.language_code,
     },
   });
 
@@ -269,6 +282,8 @@ export async function updateDraftPost({
   });
   const bodyHash = hashPostBody(normalized.body);
   const bodyChanged = bodyHash !== current.body_hash;
+  const languageChanged = normalized.languageCode !== current.language_code;
+  const voiceLockChanged = bodyChanged || languageChanged;
 
   const result = await dbQuery<PostRow>(
     `
@@ -278,8 +293,10 @@ export async function updateDraftPost({
           pillar = $4,
           archetype = $5,
           notes = $6,
-          voice_status = case when $7 then 'unchecked' else voice_status end,
-          voice_checked_hash = case when $7 then null else voice_checked_hash end
+          language_code = $7,
+          voice_status = case when $8 then 'unchecked' else voice_status end,
+          voice_checked_hash = case when $8 then null else voice_checked_hash end,
+          voice_checked_language_code = case when $8 then null else voice_checked_language_code end
       where id = $1
       returning *
     `,
@@ -290,7 +307,8 @@ export async function updateDraftPost({
       normalized.pillar,
       normalized.archetype,
       normalized.notes,
-      bodyChanged,
+      normalized.languageCode,
+      voiceLockChanged,
     ],
   );
   const row = result.rows[0];
@@ -302,6 +320,7 @@ export async function updateDraftPost({
     entityId: row.id,
     metadata: {
       bodyChanged,
+      languageChanged,
       bodyHash: row.body_hash,
       voiceStatus: row.voice_status,
     },
@@ -363,7 +382,7 @@ export async function runVoiceCheckForPost({
   let commandResult: VoiceCommandResult;
 
   try {
-    commandResult = await runVoiceCommand(current.body);
+    commandResult = await runVoiceCommand(current.body, current.language_code);
   } catch (error) {
     if (error instanceof VoiceCommandSetupError) {
       throw new VoiceCheckError(error.message, 503);
@@ -377,17 +396,19 @@ export async function runVoiceCheckForPost({
       insert into voice_checks (
         post_id,
         body_hash,
+        language_code,
         status,
         command,
         stdout,
         stderr
       )
-      values ($1, $2, $3, $4, $5, $6)
+      values ($1, $2, $3, $4, $5, $6, $7)
       returning *
     `,
     [
       current.id,
       current.body_hash,
+      current.language_code,
       commandResult.status,
       commandResult.command,
       commandResult.stdout,
@@ -398,11 +419,12 @@ export async function runVoiceCheckForPost({
     `
       update posts
       set voice_status = $2,
-          voice_checked_hash = $3
+          voice_checked_hash = $3,
+          voice_checked_language_code = $4
       where id = $1
       returning *
     `,
-    [current.id, commandResult.status, current.body_hash],
+    [current.id, commandResult.status, current.body_hash, current.language_code],
   );
   const check = toVoiceCheckRecord(checkResult.rows[0]);
   const item = toPostRecord(postResult.rows[0]);
@@ -416,6 +438,7 @@ export async function runVoiceCheckForPost({
       bodyHash: current.body_hash,
       voiceStatus: commandResult.status,
       command: commandResult.command,
+      languageCode: current.language_code,
     },
   });
 
@@ -443,7 +466,8 @@ export async function queuePost({
 
   if (
     current.voice_status !== "passed" ||
-    current.voice_checked_hash !== current.body_hash
+    current.voice_checked_hash !== current.body_hash ||
+    current.voice_checked_language_code !== current.language_code
   ) {
     throw new PostWorkflowError(
       "Run a passing voice check on the current draft before queueing it.",
@@ -629,7 +653,8 @@ async function publishPost({
 
   if (
     current.voice_status !== "passed" ||
-    current.voice_checked_hash !== current.body_hash
+    current.voice_checked_hash !== current.body_hash ||
+    current.voice_checked_language_code !== current.language_code
   ) {
     throw new PostWorkflowError(
       "The current draft revision must pass the voice gate before publishing.",
@@ -647,6 +672,7 @@ async function publishPost({
         and status = $2
         and voice_status = 'passed'
         and voice_checked_hash = body_hash
+        and voice_checked_language_code = language_code
         and ($3::boolean = false or scheduled_at <= now())
       returning *
     `,
@@ -780,6 +806,7 @@ function toVoiceCheckRecord(row: VoiceCheckRow): VoiceCheckRecord {
     postId: row.post_id,
     bodyHash: row.body_hash,
     status: row.status,
+    languageCode: row.language_code,
     command: row.command,
     stdout: row.stdout,
     stderr: row.stderr,
@@ -838,7 +865,28 @@ function normalizeDraftInput(
     pillar: normalizeOptionalText(input.pillar, options.current?.pillar),
     archetype: normalizeOptionalText(input.archetype, options.current?.archetype),
     notes: normalizeOptionalText(input.notes, options.current?.notes),
+    languageCode: normalizeContentLanguage(
+      input.languageCode,
+      options.current?.language_code,
+    ),
   };
+}
+
+function normalizeContentLanguage(
+  value: unknown,
+  fallback?: ContentLanguage,
+): ContentLanguage {
+  if (value === undefined) {
+    return fallback ?? DEFAULT_CONTENT_LANGUAGE;
+  }
+
+  const language = parseContentLanguage(value);
+
+  if (!language) {
+    throw new DraftPostError("Choose a supported English or French language option.", 400);
+  }
+
+  return language;
 }
 
 function normalizeOptionalText(value: unknown, fallback?: string | null) {
@@ -895,9 +943,11 @@ function seedDraft({
     pillar,
     archetype,
     notes,
+    language_code: DEFAULT_CONTENT_LANGUAGE,
     status: "draft",
     voice_status: "unchecked",
     voice_checked_hash: null,
+    voice_checked_language_code: null,
     scheduled_at: null,
     published_at: null,
     linkedin_post_id: null,
