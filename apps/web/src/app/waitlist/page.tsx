@@ -33,7 +33,7 @@ export default async function WaitlistPage({ searchParams }: WaitlistPageProps) 
             <Link className="founder-wordmark" href="/"><span>ABOVE</span><span>THE FOLD</span></Link>
             <div className="flex flex-wrap gap-3">
               <Link className="hard-button bg-[#f4d13d]" href="/no-circles">Free No Circle skill</Link>
-              <Link className="hard-button bg-white" href="/try">Try the mechanism <ArrowRight size={16} /></Link>
+              <Link className="hard-button bg-white" href="/product">Try the mechanism <ArrowRight size={16} /></Link>
             </div>
           </nav>
 

@@ -44,7 +44,7 @@ export default async function ManualPage() {
               <span>THE FOLD</span>
             </Link>
             <div className="flex flex-wrap gap-3">
-              <Link className="hard-button bg-white" href="/try">
+              <Link className="hard-button bg-white" href="/product">
                 Try the voice clamp <ArrowRight size={16} />
               </Link>
               <Link className="hard-button bg-black text-white" href="/login">
