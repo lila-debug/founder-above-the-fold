@@ -17,7 +17,7 @@ export function BrandFooter({ children }: { children?: ReactNode }) {
         <div className="flex flex-wrap items-center gap-4 pt-2">
           <Link className="font-black uppercase underline" href="/waitlist">Private beta</Link>
           <Link className="font-black uppercase underline" href="/no-circles">Free No Circle of Hell skill</Link>
-          <Link className="font-black uppercase underline" href="/try">Try the mechanism</Link>
+          <Link className="font-black uppercase underline" href="/product">Try the mechanism</Link>
           <Link className="font-black uppercase underline" href="/product">Product screens</Link>
           <Link className="font-black uppercase underline" href="/pricing">One-time licence</Link>
           <Link className="font-black uppercase underline" href="/perks">Perks Hub</Link>
