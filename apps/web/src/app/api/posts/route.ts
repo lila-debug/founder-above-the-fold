@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 
   if (!actor) {
     return NextResponse.json(
-      { error: "Sign in with the owner magic link before reading drafts." },
+      { error: "Owner access is required before reading drafts." },
       { status: 401 },
     );
   }
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
 
   if (!actor) {
     return NextResponse.json(
-      { error: "Sign in with the owner magic link before creating drafts." },
+      { error: "Owner access is required before creating drafts." },
       { status: 401 },
     );
   }

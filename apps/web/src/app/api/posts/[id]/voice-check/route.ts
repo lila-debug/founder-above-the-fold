@@ -14,7 +14,7 @@ export async function POST(
 
   if (!actor) {
     return NextResponse.json(
-      { error: "Sign in with the owner magic link before running voice checks." },
+      { error: "Owner access is required before running voice checks." },
       { status: 401 },
     );
   }

@@ -66,7 +66,7 @@ const SCREENS: Array<{ id: ShowroomScreen; label: string; icon: LucideIcon }> = 
 
 const MANUAL: Record<ShowroomScreen, [string, string, string]> = {
   welcome: ["Place your private founder cabinet.", "Choose start or returning owner.", "No LinkedIn access is requested."],
-  login: ["Insert the email key.", "Open the private sign-in link.", "Never display passwords or secrets."],
+  login: ["Open the public demo first.", "Keep paid access on the licence rail.", "Never display passwords or secrets."],
   signup: ["Label the new cabinet.", "Read the privacy panel before fastening.", "Consent must be specific and reversible."],
   purchase: ["Inspect the proposed one-time macOS licence.", "Use the verified direct web checkout once fitted.", "Apple is not the merchant or payment rail."],
   success: ["Confirm the server-verified licence receipt.", "Open the finished workbench.", "Recover access through the owner account."],
@@ -173,7 +173,7 @@ function ChromeDog() {
 
 function AuthCard({ kind, onNext }: { kind: "login" | "signup"; onNext: () => void }) {
   const signup = kind === "signup";
-  return <section className="saas-form-wrap"><div className={`saas-form-poster ${signup ? "tone-orange" : "tone-yellow"}`}><span className="cut-label bg-white">{signup ? "New cabinet" : "Returning owner"}</span><h2>{signup ? "MAKE A\nPRIVATE HOME." : "OPEN YOUR\nCABINET."}</h2><p>{signup ? "One owner. Clear consent. Your words remain yours." : "We send a private sign-in link. There is no password to remember."}</p></div><form className="saas-form-card" onSubmit={(event) => { event.preventDefault(); onNext(); }}><label>Email address<input type="email" required placeholder="founder@company.ca" /></label>{signup ? <label>Display name<input required placeholder="Your name" /></label> : null}{signup ? <label className="check-line"><input type="checkbox" required /><span>I have read the <Link href="/privacy">privacy panel</Link> and agree to the <Link href="/terms">terms</Link>.</span></label> : null}<button className="hard-button bg-black text-white" type="submit">{signup ? "Continue to licence" : "Send private link"}<ArrowRight size={16} /></button><p className="form-note"><ShieldCheck size={16} /> No LinkedIn password. No automated DMs. No scraping.</p></form></section>;
+  return <section className="saas-form-wrap"><div className={`saas-form-poster ${signup ? "tone-orange" : "tone-yellow"}`}><span className="cut-label bg-white">{signup ? "New cabinet" : "Returning owner"}</span><h2>{signup ? "MAKE A\nPRIVATE HOME." : "OPEN YOUR\nCABINET."}</h2><p>{signup ? "One owner. Clear consent. Your words remain yours." : "Use the public mechanism first. Paid access belongs on the licence rail, not an email gate."}</p></div><form className="saas-form-card" onSubmit={(event) => { event.preventDefault(); onNext(); }}><label>Email address<input type="email" required placeholder="founder@company.ca" /></label>{signup ? <label>Display name<input required placeholder="Your name" /></label> : null}{signup ? <label className="check-line"><input type="checkbox" required /><span>I have read the <Link href="/privacy">privacy panel</Link> and agree to the <Link href="/terms">terms</Link>.</span></label> : null}<button className="hard-button bg-black text-white" type="submit">{signup ? "Continue to licence" : "Open demo"}<ArrowRight size={16} /></button><p className="form-note"><ShieldCheck size={16} /> No LinkedIn password. No automated DMs. No scraping.</p></form></section>;
 }
 
 function Purchase({ onNext }: { onNext: () => void }) {

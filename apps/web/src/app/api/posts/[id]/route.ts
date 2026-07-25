@@ -19,7 +19,7 @@ export async function GET(
 
   if (!actor) {
     return NextResponse.json(
-      { error: "Sign in with the owner magic link before reading drafts." },
+      { error: "Owner access is required before reading drafts." },
       { status: 401 },
     );
   }
@@ -42,7 +42,7 @@ export async function PATCH(
 
   if (!actor) {
     return NextResponse.json(
-      { error: "Sign in with the owner magic link before editing drafts." },
+      { error: "Owner access is required before editing drafts." },
       { status: 401 },
     );
   }
@@ -92,7 +92,7 @@ export async function DELETE(
 
   if (!actor) {
     return NextResponse.json(
-      { error: "Sign in with the owner magic link before deleting drafts." },
+      { error: "Owner access is required before deleting drafts." },
       { status: 401 },
     );
   }

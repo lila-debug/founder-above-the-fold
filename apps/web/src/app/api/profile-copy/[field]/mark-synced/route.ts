@@ -14,7 +14,7 @@ export async function POST(
 
   if (!actor) {
     return NextResponse.json(
-      { error: "Sign in with the owner magic link before marking profile copy synced." },
+      { error: "Owner access is required before marking profile copy synced." },
       { status: 401 },
     );
   }
