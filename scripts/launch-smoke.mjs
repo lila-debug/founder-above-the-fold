@@ -7,7 +7,7 @@ const baseUrl = (process.env.LAUNCH_SMOKE_BASE_URL ?? "http://localhost:3000").r
 
 const results = [];
 
-await expectRedirect("canonical root", "/", "/dashboard");
+await expectRedirect("canonical root", "/", "/try");
 await expectStatus("privacy panel", "/privacy", 200);
 await expectStatus("cookie panel", "/cookies", 200);
 await expectStatus("terms panel", "/terms", 200);
