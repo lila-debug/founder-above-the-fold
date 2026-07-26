@@ -10,6 +10,7 @@
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
     "lucide-react": "^0.561.0",
     "next": "16.2.10",
     "pg": "^8.22.0",

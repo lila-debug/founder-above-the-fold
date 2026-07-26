@@ -1,6 +1,5 @@
 import { ArrowRight, Check, Download, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-import { BrandFooter } from "../components/brand-footer";
 
 export const metadata = {
   title: "Free No Circle of Hell Skill · Founder Above the Fold",
@@ -71,7 +70,6 @@ export default function NoCirclesPage() {
           </div>
         </aside>
       </section>
-      <BrandFooter />
     </main>
   );
 }
