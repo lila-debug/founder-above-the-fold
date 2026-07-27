@@ -60,7 +60,7 @@ const steps: Step[] = [
     id: "owner",
     label: "A",
     title: "Open the owner cabinet",
-    action: "Open the workbench with the passwordless owner link.",
+    action: "Open the workbench only after the public mechanism and licence rail are clear.",
     check: "Workbench opens; owner light turns green.",
     avoid: "A public preview is not an owner session.",
     live: "owner",

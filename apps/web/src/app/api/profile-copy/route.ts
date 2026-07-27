@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
   if (!actor) {
     return NextResponse.json(
-      { error: "Sign in with the owner magic link before changing profile copy." },
+      { error: "Owner access is required before changing profile copy." },
       { status: 401 },
     );
   }

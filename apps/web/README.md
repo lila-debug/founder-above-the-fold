@@ -13,15 +13,16 @@ npm run dev
 
 Then open `http://localhost:3000`.
 
-The root route is the single product entrance. It routes to `/dashboard`; signed-out
-owners are sent to the real `/login` magic-link panel. Preview and showroom routes are
-supporting material, not separate applications.
+The root route is the public product entrance. It routes to `/try` so builders, judges,
+and buyers can operate the no-write demo without a magic link. The owner workbench stays
+at `/dashboard`; signed-out owners are sent to the real `/login` magic-link panel.
 
 ```text
 GitHub: lila-debug/founder-above-the-fold
   -> Vercel: founder-above-the-fold
   -> Domain: https://www.founderaccount.com
-  -> App: /dashboard
+  -> Public app: /try
+  -> Owner workbench: /dashboard
 ```
 
 Use `docs/34-canonical-app-and-key-map.md` as the redacted key-placement panel. Never

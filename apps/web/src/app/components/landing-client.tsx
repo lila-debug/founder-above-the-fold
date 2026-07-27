@@ -7,22 +7,19 @@ import {
   ClipboardCopy,
   Copy,
   ExternalLink,
-  KeyRound,
   Link2,
   Loader2,
-  Mail,
   RefreshCcw,
   Save,
   Unplug,
 } from "lucide-react";
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type {
   ProfileCopyField,
   ProfileCopyRecord,
   ProfileCopyTracker,
 } from "@/lib/profile-copy";
 
-type MagicState = "idle" | "sending" | "sent" | "missing" | "error";
 type LinkedInState =
   | "loading"
   | "setup_required"
@@ -30,14 +27,6 @@ type LinkedInState =
   | "connected"
   | "attention_required"
   | "error";
-
-type MagicLinkResponse = {
-  error?: string;
-  magicLink?: string;
-  message?: string;
-  mode?: "dev" | "resend";
-  sent?: boolean;
-};
 
 type LinkedInStatusResponse = {
   state: Exclude<LinkedInState, "loading" | "error">;
@@ -71,142 +60,30 @@ type ProfileCopyWriteResponse = {
 };
 
 export function OwnerAccessPanel() {
-  const [email, setEmail] = useState("");
-  const [magicState, setMagicState] = useState<MagicState>("idle");
-  const [message, setMessage] = useState("");
-  const [magicLink, setMagicLink] = useState("");
-  const [sessionMessage, setSessionMessage] = useState("");
-
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const authState = url.searchParams.get("auth");
-
-    if (!authState) {
-      return;
-    }
-
-    const messageByState: Record<string, string> = {
-      "signed-in": "Signed in with magic link. The private workbench is ready.",
-      "sign-in-required": "Sign in to open the private workbench.",
-      "missing-token": "That magic link is missing its token. Request a fresh one.",
-      "wrong-owner": "That magic link is not for this owner workspace.",
-      "invalid-token": "That magic link could not be used. Request a fresh one.",
-    };
-
-    const nextSessionMessage =
-      messageByState[authState] ?? "Request a fresh magic link to continue.";
-
-    url.searchParams.delete("auth");
-    url.searchParams.delete("next");
-    window.history.replaceState({}, "", `${url.pathname}${url.search}`);
-    queueMicrotask(() => setSessionMessage(nextSessionMessage));
-  }, []);
-
-  async function sendMagicLink(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setMagicState("sending");
-    setMessage("");
-    setMagicLink("");
-
-    const response = await fetch("/api/auth/magic-link", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-    const result = (await response.json()) as MagicLinkResponse;
-
-    if (response.status === 501) {
-      setMagicState("missing");
-      setMessage(result.message ?? "Magic link provider is not configured yet.");
-      return;
-    }
-
-    if (!response.ok) {
-      setMagicState("error");
-      setMessage(result.error ?? "Magic link request failed.");
-      return;
-    }
-
-    setMagicState("sent");
-    setMagicLink(result.magicLink ?? "");
-    setMessage(result.message ?? "Magic link sent.");
-  }
-
   return (
     <section className="panel w-full bg-white p-4">
       <div className="flex items-center gap-2">
-        <Mail size={19} strokeWidth={2.2} />
-        <h3 className="text-base font-black uppercase">Magic link access</h3>
+        <CheckCircle2 size={19} strokeWidth={2.2} />
+        <h3 className="text-base font-black uppercase">Public access restored</h3>
       </div>
-      <form className="mt-4 grid gap-3" onSubmit={sendMagicLink}>
-        <label className="rail-label block text-xs font-black uppercase text-[#1768ac]" htmlFor="owner-email">
-          Email
-        </label>
-        <input
-          className="h-11 w-full border-2 border-[#03256c]/35 bg-white px-3 text-sm text-[#03256c] outline-none focus:border-[#06bee1] focus:ring-2 focus:ring-[#06bee1]/25"
-          id="owner-email"
-          type="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder="you@example.com"
-          required
-        />
-        <button
-          className="panel panel-tap inline-flex h-11 w-full items-center justify-center gap-2 bg-[#03256c] px-4 text-sm font-black uppercase text-white disabled:cursor-not-allowed disabled:bg-[#1768ac]/55"
-          disabled={magicState === "sending"}
-          type="submit"
-        >
-          <KeyRound size={17} strokeWidth={2.2} />
-          {magicState === "sending" ? "Sending" : "Send magic link"}
-        </button>
-        {message ? (
-          <p
-            className={`text-sm font-bold ${
-              magicState === "error" || magicState === "missing"
-                ? "text-[#d94841]"
-                : "text-[#1768ac]"
-            }`}
-          >
-            {message}
-          </p>
-        ) : null}
-        {magicLink ? (
-          <a
-            className="panel panel-tap inline-flex h-10 w-full items-center justify-center gap-2 bg-white px-3 text-sm font-black uppercase text-[#03256c]"
-            href={magicLink}
-          >
-            Open local magic link
-            <ArrowRight size={16} strokeWidth={2.2} />
-          </a>
-        ) : null}
-        {sessionMessage ? (
-          <div className="grid gap-3 border-2 border-[#03256c]/20 bg-[#eafaff] p-3">
-            <p className="text-sm font-bold text-[#1768ac]">{sessionMessage}</p>
-            {sessionMessage.includes("ready") ? (
-              <a
-                className="panel panel-tap inline-flex h-10 w-full items-center justify-center gap-2 bg-[#03256c] px-3 text-sm font-black uppercase text-white"
-                href="/dashboard"
-              >
-                Open private workbench
-                <ArrowRight size={16} strokeWidth={2.2} />
-              </a>
-            ) : null}
-          </div>
-        ) : null}
-      </form>
       <div className="mt-5 border-2 border-[#03256c]/20 bg-[#eafaff] p-4">
-        <div className="flex items-center gap-2 text-sm font-black uppercase">
-          <CheckCircle2 size={17} strokeWidth={2.2} />
-          Passwordless by default
-        </div>
-        <p className="mt-3 text-sm leading-6 text-[#1768ac]">
-          The app keeps owner access separate from LinkedIn connection. LinkedIn OAuth
-          remains a separate, owner-approved connection rail.
+        <p className="text-sm leading-6 text-[#1768ac]">
+          The old email gate has been removed from the public path. Visitors can inspect
+          the no-write mechanism first; paid or private workspace access should use the
+          licence rail instead of blocking the front door.
         </p>
+        <a
+          className="panel panel-tap mt-4 inline-flex h-10 w-full items-center justify-center gap-2 bg-[#03256c] px-3 text-sm font-black uppercase text-white"
+          href="/try"
+        >
+          Open the public mechanism
+          <ArrowRight size={16} strokeWidth={2.2} />
+        </a>
       </div>
     </section>
   );
 }
+
 
 export function LinkedInConnectionPanel() {
   const [status, setStatus] = useState<LinkedInStatusResponse | null>(null);

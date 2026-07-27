@@ -96,7 +96,7 @@ AUTH_CALLBACK_URL=https://YOUR_DOMAIN/auth/callback
 ```
 
 The magic link expires after 15 minutes. Successful sign-in sets an httpOnly `dispatch_session` cookie.
-The private owner workbench lives at `/dashboard`; unauthenticated visitors are routed back to the public page for sign-in.
+The public entrance routes to `/try` so visitors can operate the no-write product mechanism without a magic link. The private owner workbench lives at `/dashboard`; unauthenticated owners are routed to `/login` for sign-in.
 
 Native beta setup additionally requires:
 
