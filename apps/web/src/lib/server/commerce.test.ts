@@ -6,7 +6,7 @@ import { getStripeSandboxConfig, resetStripeClientForTests } from "./stripe";
 const stripeNames = [
   "STRIPE_SECRET_KEY",
   "STRIPE_WEBHOOK_SECRET",
-  "STRIPE_PRICE_ID",
+  "STRIPE_PRICE_FOUNDER_TRANSFORMATION",
   "STRIPE_CHECKOUT_ENABLED",
   "STRIPE_MODE",
   "STRIPE_LIVE_APPROVED",
@@ -71,7 +71,7 @@ test("keeps a valid sandbox configuration locked until checkout is explicitly en
 function fitConfig(secretKey: string) {
   process.env.STRIPE_SECRET_KEY = secretKey;
   process.env.STRIPE_WEBHOOK_SECRET = "whsec_fake_for_unit_test";
-  process.env.STRIPE_PRICE_ID = "price_fake_for_unit_test";
+  process.env.STRIPE_PRICE_FOUNDER_TRANSFORMATION = "price_fake_for_unit_test";
   process.env.STRIPE_CHECKOUT_ENABLED = "false";
   process.env.NEXT_PUBLIC_APP_URL = "https://example.test";
 }

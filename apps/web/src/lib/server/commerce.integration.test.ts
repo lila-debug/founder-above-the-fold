@@ -33,7 +33,7 @@ process.env.MAGIC_LINK_FROM = "Founder Above the Fold <test@example.test>";
 process.env.NEXT_PUBLIC_APP_URL = "https://example.test";
 process.env.STRIPE_SECRET_KEY = "sk_test_integration_only";
 process.env.STRIPE_WEBHOOK_SECRET = "whsec_integration_only";
-process.env.STRIPE_PRICE_ID = "price_integration_only";
+process.env.STRIPE_PRICE_FOUNDER_TRANSFORMATION = "price_integration_only";
 const signingKeys = generateKeyPairSync("ed25519");
 process.env.LICENCE_DEVICE_HASH_SECRET = "integration-device-hash-secret-at-least-32-bytes";
 process.env.LICENCE_SIGNING_PRIVATE_KEY = signingKeys.privateKey
@@ -52,8 +52,8 @@ test("Stripe sandbox receipt and recovery conveyor uses real database state", as
   const sessionId = "cs_test_checkout_integration_123456";
   await dbQuery(
     `insert into stripe_checkout_intents
-       (id, purchaser_email, status, stripe_checkout_session_id)
-     values ($1, 'buyer@example.ca', 'checkout_open', $2)`,
+       (id, purchaser_email, status, stripe_checkout_session_id, offer_key)
+     values ($1, 'buyer@example.ca', 'checkout_open', $2, 'founder_transformation')`,
     [intentId, sessionId],
   );
 
@@ -62,12 +62,13 @@ test("Stripe sandbox receipt and recovery conveyor uses real database state", as
     assert.deepEqual(await applyStripeEvent(paid), { duplicate: false, applied: true });
     assert.deepEqual(await applyStripeEvent(paid), { duplicate: true, applied: false });
 
-    const counts = await dbQuery<{ licences: number; events: number }>(
+    const counts = await dbQuery<{ licences: number; access: number; events: number }>(
       `select
          (select count(*)::int from founder_licences) as licences,
+         (select count(*)::int from founder_commerce_access) as access,
          (select count(*)::int from stripe_webhook_events) as events`,
     );
-    assert.deepEqual(counts.rows[0], { licences: 1, events: 1 });
+    assert.deepEqual(counts.rows[0], { licences: 1, access: 1, events: 1 });
     const receipt = await getCheckoutReceiptStatus(sessionId);
     assert.equal(receipt.state, "active");
   });
@@ -128,8 +129,8 @@ test("Stripe sandbox receipt and recovery conveyor uses real database state", as
     const signedSessionId = "cs_test_signed_route_123456789";
     await dbQuery(
       `insert into stripe_checkout_intents
-         (id, purchaser_email, status, stripe_checkout_session_id)
-       values ($1, 'signed@example.ca', 'checkout_open', $2)`,
+         (id, purchaser_email, status, stripe_checkout_session_id, offer_key)
+       values ($1, 'signed@example.ca', 'checkout_open', $2, 'founder_transformation')`,
       [signedIntentId, signedSessionId],
     );
     const event = checkoutEvent("evt_test_signed_route", signedIntentId, signedSessionId, "pi_test_signed_route");
@@ -167,8 +168,8 @@ test("Stripe sandbox receipt and recovery conveyor uses real database state", as
       const sessionId = `cs_test_${fixture.suffix}_session_123456`;
       await dbQuery(
         `insert into stripe_checkout_intents
-           (id, purchaser_email, status, stripe_checkout_session_id)
-         values ($1, $2, 'checkout_open', $3)`,
+           (id, purchaser_email, status, stripe_checkout_session_id, offer_key)
+         values ($1, $2, 'checkout_open', $3, 'founder_transformation')`,
         [intentId, `${fixture.suffix}@example.ca`, sessionId],
       );
       const result = await applyStripeEvent(stoppedCheckoutEvent(
@@ -179,65 +180,50 @@ test("Stripe sandbox receipt and recovery conveyor uses real database state", as
       ));
       assert.equal(result.applied, true);
       assert.equal((await getCheckoutReceiptStatus(sessionId)).state, fixture.expected);
-      const licence = await dbQuery<{ count: number }>(
-        "select count(*)::int as count from founder_licences where stripe_checkout_session_id = $1",
+      const grants = await dbQuery<{ licences: number; access: number }>(
+        `select
+           (select count(*)::int from founder_licences where stripe_checkout_session_id = $1) as licences,
+           (select count(*)::int from founder_commerce_access where stripe_checkout_session_id = $1) as access`,
         [sessionId],
       );
-      assert.equal(licence.rows[0]?.count, 0);
+      assert.deepEqual(grants.rows[0], { licences: 0, access: 0 });
     }
-  });
-
-  await t.test("subscription checkout fits SaaS access without minting a Mac licence", async () => {
-    const subscriptionIntentId = "55555555-5555-4555-8555-555555555555";
-    const subscriptionSessionId = "cs_test_founder_os_subscription_123456";
-    await dbQuery(
-      `insert into stripe_checkout_intents
-         (id, purchaser_email, status, stripe_checkout_session_id, offer_key, checkout_mode)
-       values ($1, 'saas@example.ca', 'checkout_open', $2, 'founder_os', 'subscription')`,
-      [subscriptionIntentId, subscriptionSessionId],
-    );
-    const paid = checkoutEvent(
-      "evt_test_saas_paid",
-      subscriptionIntentId,
-      subscriptionSessionId,
-      null,
-      "sub_test_founder_os",
-      "founder_os",
-    );
-    assert.deepEqual(await applyStripeEvent(paid), { duplicate: false, applied: true });
-    const active = await getCheckoutReceiptStatus(subscriptionSessionId);
-    assert.equal(active.state, "active");
-    assert.equal(active.offerKey, "founder_os");
-
-    await applyStripeEvent(subscriptionEvent("evt_test_saas_past_due", "past_due"));
-    assert.equal((await getCheckoutReceiptStatus(subscriptionSessionId)).state, "past_due");
-    const counts = await dbQuery<{ licences: number; access: number }>(
-      `select
-         (select count(*)::int from founder_licences where stripe_checkout_session_id = $1) as licences,
-         (select count(*)::int from founder_commerce_access where stripe_checkout_session_id = $1) as access`,
-      [subscriptionSessionId],
-    );
-    assert.deepEqual(counts.rows[0], { licences: 0, access: 1 });
   });
 
   await t.test("disputes and refunds change the same receipt instead of minting another", async () => {
     await applyStripeEvent(disputeEvent("evt_test_dispute_open", "charge.dispute.created", "needs_response"));
     assert.equal((await getCheckoutReceiptStatus(sessionId)).state, "disputed");
+    assert.deepEqual(await fulfilmentStates(), { licence: "disputed", access: "disputed" });
 
     await applyStripeEvent(disputeEvent("evt_test_dispute_won", "charge.dispute.closed", "won"));
     assert.equal((await getCheckoutReceiptStatus(sessionId)).state, "active");
+    assert.deepEqual(await fulfilmentStates(), { licence: "active", access: "active" });
 
     await applyStripeEvent(disputeEvent("evt_test_dispute_lost", "charge.dispute.closed", "lost"));
     assert.equal((await getCheckoutReceiptStatus(sessionId)).state, "revoked");
+    assert.deepEqual(await fulfilmentStates(), { licence: "revoked", access: "revoked" });
 
     await dbQuery("update founder_licences set status = 'active'");
     await applyStripeEvent(refundEvent("evt_test_full_refund"));
     assert.equal((await getCheckoutReceiptStatus(sessionId)).state, "refunded");
+    assert.deepEqual(await fulfilmentStates(), { licence: "refunded", access: "refunded" });
     assert.deepEqual(await verifyLicenceReceipt(signedReceipt), { valid: false, state: "inactive" });
     const count = await dbQuery<{ count: number }>(
       "select count(*)::int as count from founder_licences where stripe_payment_intent_id = 'pi_test_founder_purchase'",
     );
     assert.equal(count.rows[0]?.count, 1);
+
+    async function fulfilmentStates() {
+      const states = await dbQuery<{ licence: string; access: string }>(
+        `select licence.status as licence, access.status as access
+         from founder_licences licence
+         join founder_commerce_access access
+           on access.stripe_checkout_session_id = licence.stripe_checkout_session_id
+         where licence.stripe_checkout_session_id = $1`,
+        [sessionId],
+      );
+      return states.rows[0];
+    }
   });
 });
 
@@ -253,7 +239,7 @@ function checkoutEvent(
   sessionId: string,
   paymentIntentId: string | null = "pi_test_founder_purchase",
   subscriptionId: string | null = null,
-  offerKey = "mac_licence",
+  offerKey = "founder_transformation",
 ) {
   return {
     id,
@@ -275,19 +261,6 @@ function checkoutEvent(
     pending_webhooks: 0,
     request: null,
     type: "checkout.session.completed",
-  } as unknown as Stripe.Event;
-}
-
-function subscriptionEvent(id: string, status: string) {
-  return {
-    id,
-    object: "event",
-    created: Math.floor(Date.now() / 1000),
-    data: { object: { id: "sub_test_founder_os", object: "subscription", livemode: false, status } },
-    livemode: false,
-    pending_webhooks: 0,
-    request: null,
-    type: "customer.subscription.updated",
   } as unknown as Stripe.Event;
 }
 

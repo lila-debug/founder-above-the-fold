@@ -1,174 +1,225 @@
-# Founder Above the Fold Stripe Payment And Licence Rail
+# Stripe-Native Staging Cabinet
 ## IKEA / Meccano Assembly Manual Edition
 
+Checked: 28 July 2026
+
 ### Box Contents
+
 | Label | Part | Plain-English job | Where it lives | Owner |
 |---|---|---|---|---|
-| A | Mode-labelled key | Opens Stripe's simulated or live parts bin, never both | Encrypted local/hosting environment | Founder |
-| B | Four-offer price rack | Holds Mac ownership, profile setup, SaaS and visibility-ops prices in separate slots | Stripe sandbox + `commerce-offers.ts` | Founder |
-| C | Webhook fastener | Proves a commerce event came from Stripe | `STRIPE_WEBHOOK_SECRET` | Server |
-| D | Checkout fuse | Keeps checkout off until receipt and recovery tests pass | `STRIPE_CHECKOUT_ENABLED` | Server |
-| E | Preflight gauge | Rejects mode-mismatched keys/prices, subscriptions, inactive products, wrong currency and wrong amount | `scripts/stripe-sandbox-preflight.mjs` | Build system |
-| F | Receipt window | Polls the database record created by the signed event; never trusts the return redirect | `/purchase/success` | Customer |
-| G | Recovery handle | Sends a short-lived private link without revealing whether an address owns a licence | `/api/commerce/licence/recover` | Customer |
-| H | Signed device receipt | Binds one hashed Mac identifier to the paid licence and signs a 30-day offline receipt with Ed25519 | `/api/commerce/licence/activate` | Server + Mac app |
-| I | Production fitting jig | Audits first, then creates one test webhook and fits encrypted Vercel slots only after two approval flags | `scripts/provision-stripe-sandbox-webhook.mjs` | Build system + Founder |
-| J | Catalogue fitting jig | Reuses exact products, blocks duplicates and creates missing sandbox products/prices only after price approval | `scripts/provision-stripe-sandbox-catalogue.mjs` | Build system + Founder |
+| A | Fresh workspace | Keeps staging changes separate from the trashed, unregistered worktree | Registered worktree from `origin/main` | Build system |
+| B | US native sandbox | Isolates fake Stripe records; evidence only, never promotable | Current US Stripe business account | Founder |
+| C | Staging app | Hosts the stable checkout-return and webhook sockets | `founder-above-the-fold-stripe-staging` | Build system |
+| D | Empty data bin | Receives migrations from scratch and no copied production records | Neon project `founder-above-the-fold-stripe-staging` | Build system |
+| E | One premium offer | Sells the bounded founder transformation once | `founder_transformation` · CA$7,500 | Founder |
+| F | Provisioning jig | Audits and fits the product, price and webhook without production access | `scripts/provision-stripe-sandbox-*.mjs` | Build system |
+| G | Runtime key | Creates staging Checkout Sessions and verifies no provider writes beyond runtime needs | `STRIPE_SECRET_KEY` | Server |
+| H | Provisioning key | Creates staging catalogue and webhook parts; never becomes a runtime key | `STRIPE_PROVISIONING_KEY` | Founder |
+| I | Checkout fuse | Starts false, opens only for an approved test window, and returns to false | `STRIPE_CHECKOUT_ENABLED` | Founder + build system |
 
 ### Mission Control Board
+
 ```text
-[Stripe mode-labelled key]
-          |
-          v
-[four labelled CAD prices] ---> [signed webhook] ---> [licence / service / subscription bin]
-          |
-          +-- wrong/live/missing part ---> [checkout remains locked]
+[fresh origin/main worktree]
+             |
+             v
+[US Stripe native sandbox] ---> [CA$7,500 transformation price]
+             |                                |
+             v                                v
+[dedicated Vercel staging] ------> [blank Neon staging database]
+             |
+             v
+[genuine signed lifecycle]
+             |
+             v
+[checkout false + evidence retained]
 ```
 
 ### Assembly Steps
-#### Step 1 - Place the sandbox parts
+
+#### Step 1 — Place the workspace and local panel
+
 Do:
-1. Use a Stripe sandbox or test secret key only.
-2. Place secrets in `apps/web/.env.local` locally or encrypted hosting variables; never in source control or chat.
-3. Create four active CAD prices: Mac licence and profile setup as one-time parts; Founder Profile OS and Visibility Ops as monthly parts.
-4. Keep `STRIPE_MODE=sandbox`, `STRIPE_LIVE_APPROVED=false`, and `STRIPE_CHECKOUT_ENABLED=false`.
+
+1. Work only in the registered `nassau` worktree on its generated branch.
+2. Keep `/Users/hella.crypto/.Trash/nassau` untouched.
+3. Put staging values only in ignored `apps/web/.env.stripe-sandbox.local`.
+4. Keep that file mode `0600`; never copy keys into chat, docs, `.context`, logs or `.env.local`.
 
 Check:
-- Run `npm run check:stripe`.
-- The gauge reports all four active products, exact CAD amounts, correct one-time/monthly shape and currency without printing any secret.
+
+- `git worktree list` shows the workspace.
+- `stat -f '%Sp %N' apps/web/.env.stripe-sandbox.local` reports `-rw-------`.
 
 Avoid:
-- Placing a live key in sandbox mode, enabling recurring billing, or granting a licence from the browser redirect.
 
-Catalogue fitting jig:
-```text
-[Read active sandbox parts]
-            |
-            v
-[Reuse exact match / block duplicate]
-            |
-            v
-[Owner approves four prices] ---> [Create missing parts] ---> [Fit non-secret price IDs]
+- Renaming the branch, restoring the Trash copy or reusing the retired test cabinet.
+
+#### Step 2 — Fit the isolated provider cabinets
+
+Do:
+
+1. In the current US Stripe account, create a blank native sandbox named `Founder Above the Fold — Staging`.
+2. Record its non-secret `acct_…` ID in `STRIPE_EXPECTED_ACCOUNT_ID`.
+3. Create separate minimum-permission runtime and provisioning test keys.
+4. Create one active CAD one-time price:
+   - `Founder Above the Fold — Founder Transformation`
+   - CA$7,500 once
+   - product metadata `founder_offer_key=founder_transformation`
+5. Create a blank Neon project and dedicated Vercel project, both named `founder-above-the-fold-stripe-staging`.
+6. Put the Vercel link at `.context/stripe-staging-vercel/.vercel/project.json`.
+
+Check:
+
+```bash
+npm run staging:stripe:catalogue:audit
+npm run staging:stripe:preflight
+npm run staging:db:audit
 ```
 
-Run `npm run check:stripe-catalogue` first. It changes nothing. Only after the owner
-approves all four exact prices, run with both `STRIPE_CATALOGUE_APPROVED=true` and
-`APPLY_STRIPE_SANDBOX_CATALOGUE=true`.
-
-#### Step 2 - Fit the receipt clamp
-Do:
-1. Create the server Checkout Session from the selected labelled offer price ID.
-2. Verify Stripe's signature against the unmodified webhook body.
-3. Make event processing idempotent.
-4. Grant access only after the payment is confirmed.
-5. Route Mac purchases to the licence bin, other one-time purchases to the service bin, and monthly purchases to the subscription bin.
-6. Revoke or flag the matching part on refund, failed renewal, cancellation or chargeback according to the reviewed terms.
-
-Check:
-- Duplicate, forged, delayed, failed, refunded and disputed test events cannot create two licences or preserve invalid access.
-
 Avoid:
-- Trusting the success-page redirect as proof of payment.
 
-Production fitting jig:
-```text
-[Dry-run route + endpoint audit]
-              |
-              v
-[Explicit deployment approval]
-              |
-              v
-[Create one sandbox endpoint] ---> [Fit encrypted Vercel slots] ---> [Redeploy + test]
+- The retired US test catalogue: CA$199 Mac, CA$499 setup, CA$69/month SaaS and CA$750/month operations.
+- The canonical Vercel project `founder-above-the-fold` or project ID `prj_6w4u0Tb8mCz57OrObk6VqM8ZDaJ7`.
+- A Neon branch, import or copy from production.
+- Any provider prompt that introduces payment, a paid plan or new contractual terms.
+
+#### Step 3 — Fit catalogue, database, deployment and webhook
+
+Do:
+
+1. Set `STRIPE_CATALOGUE_APPROVED=true` only after inspecting the exact CA$7,500 offer.
+2. Run `npm run staging:stripe:catalogue:provision`.
+3. Set `STAGING_DATABASE_APPROVED=true` only for the blank Neon database, then run `npm run staging:db:migrate`.
+4. Configure the dedicated Vercel project with `apps/web` as its root and only the new Neon `DATABASE_URL`.
+5. Deploy with checkout false:
+
+```bash
+STAGING_DEPLOYMENT_APPROVED=true npm run staging:deploy
 ```
 
-Run `npm run check:stripe-webhook-live` without approval flags first. It changes nothing.
-Only after explicit approval, run the same jig with both
-`PRODUCTION_DEPLOYMENT_APPROVED=true` and `APPLY_STRIPE_SANDBOX_WEBHOOK=true`.
-`ENABLE_STRIPE_SANDBOX_CHECKOUT=true` is a separate test-checkout fuse.
+6. Confirm the stable staging URL returns HTTP 400 for an unsigned POST to `/api/webhooks/stripe`.
+7. Fit exactly one enabled webhook with:
+   - `checkout.session.completed`
+   - `checkout.session.async_payment_succeeded`
+   - `checkout.session.async_payment_failed`
+   - `checkout.session.expired`
+   - `charge.refunded`
+   - `charge.dispute.created`
+   - `charge.dispute.closed`
 
-#### Step 3 - Fit licence recovery before opening checkout
-Do:
-1. Bind the verified receipt to the purchaser's normalized email and Stripe customer reference.
-2. Send a private 15-minute recovery link to the original purchaser address.
-3. Hash the stable device identifier with a separate server secret; never store the raw identifier.
-4. Enforce the receipt's device allowance inside a database transaction.
-5. Sign a seven-day-refresh / 30-day-offline receipt with Ed25519 and return only the signed token to the Mac app.
+8. Run `npm run staging:stripe:webhook:audit` before the approval-gated provisioning command.
 
 Check:
-- Missing and genuine purchaser addresses receive the same browser response.
-- A genuine purchaser can inspect the active receipt without contacting Stripe or buying twice.
-- The same Mac can refresh its receipt; a second Mac cannot exceed a one-device allowance.
-- A refund or revoked licence fails the next online receipt verification.
+
+- Runtime and provisioning keys are different test keys for the exact expected `acct_…` ID.
+- Account country is `US`.
+- The only current catalogue contract is CA$7,500 CAD once.
+- The migration ledger exactly matches the repository.
+- Operational staging tables have zero copied records before the test lifecycle.
+- `PRODUCTION_DATABASE_HOST` is fitted as a non-secret comparison label and differs from the staging Neon host.
+- Vercel writes are scoped through the `.context` staging link.
 
 Avoid:
-- Publishing the purchaser email, raw recovery token, Stripe reference or licence state in telemetry.
-- Claiming device activation is finished: the macOS installer handoff is still a separate assembly part.
 
-#### Step 4 - Promote to live only through the second lock
+- Subscription and invoice events: the approved offer is not recurring.
+- Canonical Production or Preview variables.
+- Enabling checkout during initial deployment.
+
+#### Step 4 — Prove the genuine lifecycle
+
 Do:
-1. Confirm the Stripe account's legal country and the founder's tax registrations.
-2. Create separate live one-time product, price and webhook parts.
-3. Fit the matching live key only with `STRIPE_MODE=live`.
-4. Approve Stripe Tax settings and the product tax code before setting `STRIPE_AUTOMATIC_TAX_ENABLED=true`.
-5. Set `STRIPE_LIVE_APPROVED=true` and `STRIPE_CHECKOUT_ENABLED=true` only after explicit owner approval and the final production proof.
+
+1. Run local verification:
+
+```bash
+npm run test:stripe-provisioning
+npm run test:commerce
+npm run lint
+npm run typecheck
+npm run build
+BASE_URL=http://localhost:3100 npm run test:commerce:browser
+```
+
+2. Obtain explicit approval before submitting Stripe test instruments.
+3. Enable checkout only in the dedicated staging project and redeploy.
+4. Complete and record:
+   - paid transformation creates exactly one `founder_commerce_access` row and one active Mac licence;
+   - same-device activation succeeds and a second device exceeds the allowance;
+   - cancelled, declined, expired and asynchronous-failed payments grant nothing;
+   - duplicate delivery remains idempotent;
+   - full refund updates both matching access parts;
+   - dispute creation, win and loss produce disputed, active and revoked states;
+   - recovery remains non-enumerating and reaches the active receipt;
+   - unknown return links and forged signatures grant nothing.
+5. With the successful test session and purchaser evidence slots fitted, run `npm run staging:lifecycle`.
+6. Set staging checkout back to false and redeploy.
 
 Check:
-- `npm run check:stripe` authenticates the live cabinet without printing secrets.
-- The price is live, CAD, one-time, active and exactly the approved amount.
-- The Stripe account country matches `STRIPE_EXPECTED_ACCOUNT_COUNTRY`.
-- Live checkout additionally clamps that labelled country slot to `CA`, matching the documented Canadian federal seller. A US sandbox cannot be promoted accidentally.
+
+- The final staging deployment is locked.
+- Fake Stripe and Neon evidence remains available for audit.
+- Production has not changed.
 
 Avoid:
-- Copying sandbox webhooks into live mode, assuming Stripe is the merchant of record, or opening checkout before tax/refund/support wording is approved.
 
-#### Step 5 - Inspect the customer panels
-Do:
-1. Open `/pricing` on desktop and mobile.
-2. Confirm the checkout button is physically disabled while the webhook fastener is missing.
-3. Toggle the recovery panel and submit an address.
-4. Open `/purchase/success` with an unknown test Checkout Session reference.
+- Live cards, live keys, real customer data or a promotion attempt.
 
-Check:
-- The page does not overflow horizontally.
-- The unknown return reference never displays `Licence fitted`.
-- The manual states `Redirect ≠ receipt` beside the control.
+#### Step 5 — Record the panel
+
+Provider evidence to fill after external assembly:
+
+| Evidence | Value |
+|---|---|
+| Stripe sandbox account ID | Pending external sandbox creation |
+| Transformation price ID | Pending external catalogue fitting |
+| Webhook endpoint ID | Pending external webhook fitting |
+| Vercel project | `founder-above-the-fold-stripe-staging` · `prj_J3w9v8P5ezVkDjwumcIsmlqGa8gj` |
+| Staging base URL | Pending external Vercel deployment |
+| Neon project | `founder-above-the-fold-stripe-staging` |
+| Genuine lifecycle date | Pending approved test submission |
+| Final checkout state | Must be `false` |
+
+Permanent boundary:
+
+> The US Stripe sandbox is evidence-only and cannot be promoted. Before any live product, price, key or charge is created, repeat configuration and lifecycle proof under the Canadian seller account. The live application clamp remains `STRIPE_EXPECTED_ACCOUNT_COUNTRY=CA`.
 
 ### Safety Stickers
-- [Money] Test keys cannot create real card-network charges. Live mode needs separate owner-approval and checkout fuses.
-- [Security] Secret and webhook keys stay server-side and are never logged.
-- [Tax] Standard Stripe and merchant-of-record services assign different tax responsibilities; approve the chosen rail before live mode.
-- [Evidence] A green preflight proves configuration shape, not a completed purchase lifecycle.
+
+- [Money] Stripe test instruments only; every live fuse remains off.
+- [Security] Runtime and provisioning keys are separate, server-side and never printed.
+- [Privacy] Staging starts empty and receives no production users or content.
+- [Production] Scripts reject the canonical Vercel name and ID.
+- [Country] US sandbox evidence does not satisfy the Canadian live-account gate.
+- [Cost] Stop on any request for payment, a paid plan or new terms.
+- [Workspace] The trashed `nassau` directory remains untouched.
 
 ### Finished-Build Test
-- [x] Active `Founder Above the Fold` sandbox product and one-time CA$199 price created.
-- [x] Four-offer fail-closed catalogue fitted locally: CA$199 Mac licence, proposed CA$499 profile setup, proposed CA$69/month Founder Profile OS and proposed CA$750/month Visibility Ops.
-- [x] Subscription checkout and webhook routing cannot mint a Mac licence; real-database proof covers active and past-due SaaS access.
-- [x] Idempotent catalogue jig audits existing sandbox parts, blocks duplicates and withholds creation until the exact price approval flags are fitted.
-- [x] Compromised sandbox credentials rotated/expired; replacement test key and non-secret price ID fitted only in the ignored local cabinet.
-- [x] Mode-separated Checkout, signature verification, idempotent event and licence-state code compiles.
-- [x] Key/price mode mismatch, live approval, tax, HTTPS, checkout fuse, email and Checkout Session validation tests pass.
-- [x] Preflight authenticates the test key and confirms the active one-time CA$199 price; it correctly stops at the missing webhook secret.
-- [x] The real sandbox now contains all four approved Founder offer prices: CA$199 once, CA$499 once, CA$69/month and CA$750/month.
-- [x] The webhook fitting bench is linked and loaded: `.vercel/project.json` points at `founder-above-the-fold`, the local Stripe/licence fasteners expected by the fitting jig are present, and the old broken Replit endpoint remains untouched before approval.
-- [x] The owner-approved sandbox endpoint `we_1TuP9LGtSbDyVF5VJY9zGvwr` now exists with the complete Founder event drawer, and the encrypted Vercel production slots for Stripe mode, Stripe secret, webhook secret, offer prices and licence fasteners are fitted while checkout remains disabled.
-- [x] Commerce migration applies to the dedicated local non-production database.
-- [x] Simulated paid event creates exactly one recoverable licence in a real local database.
-- [x] Expired/cancelled and asynchronous-failed Checkout Sessions close their intent and create no licence in the local database jig.
-- [x] Duplicate event creates no duplicate licence; the raw-body route rejects a forged signature and accepts the matching locally generated Stripe test signature.
-- [x] Local full-refund and dispute-created/won/lost events produce the documented receipt states.
-- [x] Private recovery response resists address enumeration and a valid short-lived link opens the active receipt.
-- [x] Migration `0006` stores only the hashed device identifier and enforces one device row per licence/device pair.
-- [x] Dedicated local key generator fits a matched Ed25519 keypair and device-hash secret without printing them.
-- [x] Local activation fits one device, permits the same device to refresh, refuses a second device, rejects a tampered receipt and makes the receipt inactive after refund.
-- [x] Native recovery assembly copy renders once with separate Place/Check/Avoid rows; release build and visual capture pass with the bundled CS Claire Mono face.
-- [x] Dry-run production fitting jig reaches the deployed `https://www.founderaccount.com/api/webhooks/stripe` socket first, proves it responds `400`, finds zero matching Founder sandbox endpoints, names the still-missing LinkedIn offer price slots, and changes no Stripe or Vercel state.
-- [x] Desktop/mobile browser jig passes 20 checkout, cancellation, recovery, receipt, overflow and console checks.
-- [x] Redeploy production so the fitted Stripe webhook secret enters the running build; the live health board now reports `stripeSandbox=configured_safely_disabled`, and the deployed webhook socket still answers `400`.
-- [ ] Owner approves or replaces the three proposed LinkedIn prices; matching Stripe sandbox products and price IDs are then fitted.
-- [ ] Run real sandbox payment, cancellation, failed-payment, refund, dispute and recovery lifecycle.
-- [ ] Embed only the public key in the signed macOS build and prove its recovery-token/device-activation handoff.
-- [ ] Confirm account country, Stripe Tax/product tax code, refund wording and legal identity before creating live parts.
-- [ ] Live keys remain absent until the owner explicitly approves launch.
+
+- [x] Fresh worktree is registered from `origin/main`.
+- [x] Staging environment panel exists with mode `0600`.
+- [x] Runtime code exposes one CA$7,500 `founder_transformation` offer.
+- [x] Paid transformation logic atomically fits service access and one Mac licence.
+- [x] Provisioning scripts bind test-key prefix, account ID, US country, exact price and dedicated project.
+- [x] Deployment and webhook jigs reject the canonical Vercel project.
+- [x] Blank-database jig requires a new Neon host and zero tables before migrations.
+- [x] Local unit, seven-check disposable-Postgres integration, guard, alignment, lint, typecheck, build and 20 responsive browser checks pass.
+- [x] Dedicated Vercel staging project exists with `apps/web` root, Next.js preset and zero environment variables.
+- [ ] Dedicated Stripe native sandbox and account ID exist.
+- [ ] One fresh CA$7,500 price passes provider preflight.
+- [ ] Empty Neon project has every migration and no copied production data.
+- [ ] Dedicated staging URL answers unsigned webhook probe with HTTP 400.
+- [ ] Exactly one enabled webhook has the seven-event one-time drawer.
+- [ ] Genuine paid/failure/refund/dispute/recovery lifecycle passes.
+- [ ] Staging checkout is disabled again after proof.
+- [x] Canonical production resources and live Stripe mode were not modified during local assembly.
+
+### 2026-07-28 Repair Panel - Restored Public Panels and Offer-Key Jig
+
+- The public `/try` mechanism panel and the `/auth/callback` route had been removed by two stray web deletions; both panels were re-hung from git history, and `/try` again appears in the production build route table.
+- The launch smoke still mailed the retired `mac_licence` offer key to the checkout clamp; it now sends the single `founder_transformation` key, matching the one-offer catalogue.
+- This workspace has no secret slots fitted (fresh clone; the sandbox environment panel is an empty template). Browser checks ran against a local server with Stripe's public documentation dummy test key so the sandbox cabinet renders without touching Stripe; no provider state was created or modified.
+- Re-run results: 5/5 commerce unit, 3/3 provisioning guard, pricing alignment, lint, typecheck, production build, 20/20 responsive commerce browser checks, 36/36 launch assemblies, and the full Product Hunt browser jig all pass.
 
 ---
 

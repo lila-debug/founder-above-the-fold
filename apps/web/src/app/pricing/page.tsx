@@ -1,8 +1,8 @@
 import { LicenceCheckout } from "../components/licence-checkout";
 import { getEnvReport } from "@/lib/server/env";
-import type { CommerceOfferKey } from "@/lib/commerce-offers";
+import { commerceOffers, type CommerceOfferKey } from "@/lib/commerce-offers";
 
-export const metadata = { title: "One-time Licence · Founder Above the Fold" };
+export const metadata = { title: "Founder Transformation · Founder Above the Fold" };
 
 export default async function PricingPage({
   searchParams,
@@ -25,13 +25,13 @@ export default async function PricingPage({
   const offerReadiness = Object.fromEntries(
     Object.entries(stripe.offerPrices).map(([key, state]) => [
       key,
-      baseConfigured && checkoutApproved && state === "configured" && (key !== "mac_licence" || licenceReady),
+      baseConfigured && checkoutApproved && state === "configured" && (!commerceOffers[key as CommerceOfferKey].includesMacLicence || licenceReady),
     ]),
   ) as Record<CommerceOfferKey, boolean>;
   const offerConfigured = Object.fromEntries(
     Object.entries(stripe.offerPrices).map(([key, state]) => [
       key,
-      baseConfigured && state === "configured" && (key !== "mac_licence" || licenceReady),
+      baseConfigured && state === "configured" && (!commerceOffers[key as CommerceOfferKey].includesMacLicence || licenceReady),
     ]),
   ) as Record<CommerceOfferKey, boolean>;
   return <LicenceCheckout offerReadiness={offerReadiness} offerConfigured={offerConfigured} sandboxMode={stripe.mode === "sandbox"} checkoutCancelled={checkout === "cancelled"} />;

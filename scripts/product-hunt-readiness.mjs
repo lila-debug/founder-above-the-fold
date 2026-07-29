@@ -56,18 +56,16 @@ try {
   await desktop.screenshot({ path: path.join(outputDir, "waitlist-desktop.png"), fullPage: true });
 
   await desktop.goto(`${baseUrl}/pricing`, { waitUntil: "domcontentloaded" });
-  for (const offer of [
-    ["Mac licence", "CA$199"],
-    ["Profile setup", "CA$499"],
-    ["Self-serve SaaS", "CA$69"],
-    ["Visibility ops", "CA$750"],
-  ]) {
-    const button = desktop.getByRole("button", { name: new RegExp(offer[0], "i") });
-    await button.waitFor();
-    assert.match(await button.innerText(), new RegExp(offer[1].replace("$", "\\$")));
+  const transformation = desktop.getByRole("button", { name: /Founder transformation/i });
+  await transformation.waitFor();
+  assert.match(await transformation.innerText(), /CA\$7,500/);
+  for (const retiredPrice of ["CA$199", "CA$499", "CA$69", "CA$750"]) {
+    assert.equal(
+      await desktop.getByText(retiredPrice, { exact: false }).count(),
+      0,
+      `retired price ${retiredPrice} returned to the public catalogue`,
+    );
   }
-  await desktop.getByRole("button", { name: /Visibility ops/i }).click();
-  await desktop.getByText("Five launch seats only", { exact: true }).waitFor();
   await assertNoOverflow(desktop, "pricing desktop");
 
   await desktop.goto(`${baseUrl}/try`, { waitUntil: "domcontentloaded" });

@@ -3,7 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, LockKeyhole, RotateCcw, ShieldCheck } from "lucide-react";
-import { commerceOffers, type CommerceOfferKey } from "@/lib/commerce-offers";
+import {
+  commerceOffers,
+  offerIncludesMacLicence,
+  PRIMARY_COMMERCE_OFFER_KEY,
+  type CommerceOfferKey,
+} from "@/lib/commerce-offers";
 
 type Props = {
   offerReadiness: Record<CommerceOfferKey, boolean>;
@@ -13,7 +18,7 @@ type Props = {
 };
 
 export function LicenceCheckout({ offerReadiness, offerConfigured, sandboxMode, checkoutCancelled }: Props) {
-  const [offerKey, setOfferKey] = useState<CommerceOfferKey>("mac_licence");
+  const offerKey = PRIMARY_COMMERCE_OFFER_KEY;
   const [email, setEmail] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [mode, setMode] = useState<"checkout" | "recovery">("checkout");
@@ -76,13 +81,11 @@ export function LicenceCheckout({ offerReadiness, offerConfigured, sandboxMode, 
       <section className="commerce-grid">
         <article className="licence-card commerce-licence-card">
           <span className="cut-label bg-[#f4d13d]">Part 04 · direct payment clamp</span>
-          <div className="offer-selector" aria-label="Choose a Founder Above the Fold offer" role="group">
-            {(Object.keys(commerceOffers) as CommerceOfferKey[]).map((key) => (
-              <button key={key} type="button" data-selected={offerKey === key} onClick={() => { setOfferKey(key); setError(null); setNotice(null); setMode("checkout"); }}>
-                <span>{commerceOffers[key].shortName}</span>
-                <strong>{commerceOffers[key].displayPrice} <small>{commerceOffers[key].cadence}</small></strong>
-              </button>
-            ))}
+          <div className="offer-selector" aria-label="Founder Above the Fold offer">
+            <button type="button" data-selected="true" disabled>
+              <span>{offer.shortName}</span>
+              <strong>{offer.displayPrice} <small>{offer.cadence}</small></strong>
+            </button>
           </div>
           <h1>{offer.displayPrice}</h1>
           <p className="text-lg font-black uppercase">{offer.promise}</p>
@@ -127,7 +130,7 @@ export function LicenceCheckout({ offerReadiness, offerConfigured, sandboxMode, 
               {busy ? "Inspecting…" : mode === "checkout" ? sandboxMode ? "Open secure test checkout" : "Open secure checkout" : "Send private recovery link"}
               <ArrowRight size={16} />
             </button>
-            {offerKey === "mac_licence" ? <button className="text-button" type="button" onClick={() => { setMode(mode === "checkout" ? "recovery" : "checkout"); setError(null); setNotice(null); }}>
+            {offerIncludesMacLicence(offerKey) ? <button className="text-button" type="button" onClick={() => { setMode(mode === "checkout" ? "recovery" : "checkout"); setError(null); setNotice(null); }}>
               <RotateCcw size={15} /> {mode === "checkout" ? "Recover an existing licence" : "Return to checkout"}
             </button> : null}
           </form>

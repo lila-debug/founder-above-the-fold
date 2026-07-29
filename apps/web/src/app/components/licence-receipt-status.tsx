@@ -3,7 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, Clock3, RotateCcw, ShieldAlert } from "lucide-react";
-import { commerceOffers, type CommerceOfferKey } from "@/lib/commerce-offers";
+import {
+  commerceOffers,
+  offerIncludesMacLicence,
+  PRIMARY_COMMERCE_OFFER_KEY,
+  type CommerceOfferKey,
+} from "@/lib/commerce-offers";
 
 type Receipt = {
   state: "processing" | "active" | "past_due" | "cancelled" | "failed" | "refunded" | "disputed" | "revoked" | "not_found";
@@ -38,8 +43,9 @@ export function LicenceReceiptStatus({ sessionId }: { sessionId: string }) {
 
   const active = receipt.state === "active";
   const processing = receipt.state === "processing";
-  const offer = commerceOffers[receipt.offerKey ?? "mac_licence"];
-  const macLicence = (receipt.offerKey ?? "mac_licence") === "mac_licence";
+  const offerKey = receipt.offerKey ?? PRIMARY_COMMERCE_OFFER_KEY;
+  const offer = commerceOffers[offerKey];
+  const macLicence = offerIncludesMacLicence(offerKey);
   return (
     <article className="receipt-card" data-state={receipt.state}>
       {active ? <CheckCircle2 size={42} /> : processing ? <Clock3 size={42} /> : <ShieldAlert size={42} />}

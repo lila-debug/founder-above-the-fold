@@ -160,7 +160,7 @@ Checked on 2026-07-06:
 - The Glaze customer cabinet passes its focused publishing safety test, type-check, lint and production build. Its interactive Assembly Manual is wired into the shipped navigation.
 - Public `/try` and `/waitlist` launch routes pass a repeatable desktop/mobile Product Hunt browser jig: the demo fails and passes the voice clamp correctly, the queue stays locked until pass, the Waitlister form uses a validated public socket, no horizontal overflow appears, and no console errors occur.
 - Five 1270×760 Product Hunt gallery panels and a 240×240 thumbnail build from real product captures with `npm run build:product-hunt-gallery`.
-- Stripe commerce unit tests, a dedicated local Postgres lifecycle jig and 20 responsive browser checks prove separated sandbox/live configuration, exactly-one receipt creation, duplicate suppression, cancelled/failed sessions, recovery non-enumeration, hashed-device allowance, Ed25519 offline receipts, refund/dispute states and an unknown return link that cannot unlock. The current commercial rack is four-offer: direct Mac ownership, one-time profile setup, monthly Founder Profile OS, and limited monthly Visibility Ops.
+- Stripe commerce unit tests, provisioning guards and 20 responsive browser checks prove separated sandbox/live configuration, duplicate suppression, cancelled/failed sessions, recovery non-enumeration, hashed-device allowance, Ed25519 offline receipts, refund/dispute states and an unknown return link that cannot unlock. The current commercial contract is one CA$7,500 `founder_transformation`; its signed payment creates one service-access record and one owned Mac licence.
 - A native macOS SwiftUI target builds and assembles an ad-hoc signed `.app`; its supplied CS Claire headline, activation URL, public verification key and font resources are fitted, and the bundle audit rejects embedded Stripe keys, the private signing key and StoreKit markers.
 - A separate Ed25519 update-key rail signs versioned feed envelopes; the native Mac app checks only on request, refuses tampering and HTTP, verifies archive size/SHA-256, and leaves installation as an explicit owner action.
 
@@ -175,18 +175,17 @@ PRODUCTION_DEPLOYMENT_APPROVED=true npm run deploy:public-beta
 npm run check:stripe-webhook-live
 ```
 
-## Stripe Setup Plate
+## Stripe Staging Setup Plate
 
-The Stripe rail is not a single-price cabinet anymore. Sandbox and live checks now expect these labelled slots:
+The retired US test cabinet and four low-price offers are historical only. New staging uses a separate Stripe-native sandbox, Vercel project and blank Neon database. The only current price slot is:
 
 ```bash
-STRIPE_PRICE_MAC_LICENCE=
-STRIPE_PRICE_PROFILE_SETUP=
-STRIPE_PRICE_FOUNDER_OS=
-STRIPE_PRICE_VISIBILITY_OPS=
+STRIPE_PRICE_FOUNDER_TRANSFORMATION=
 ```
 
-`/api/mcp/health` now reports the Stripe cabinet as configured only when the key/signing slots and all four offer-price slots are fitted together.
+Staging-only setup lives in ignored `apps/web/.env.stripe-sandbox.local` and requires separate `STRIPE_SECRET_KEY` and `STRIPE_PROVISIONING_KEY` values, the exact expected `acct_…` ID, `STRIPE_EXPECTED_ACCOUNT_COUNTRY=US`, the dedicated staging URL/project, and explicit approval flags. The provisioning and deployment jigs reject the canonical Vercel project. See [the Stripe-native staging manual](docs/28-stripe-sandbox-licence-manual.md).
+
+The US sandbox is evidence-only and cannot be promoted. Any future live configuration must be recreated and proved under the Canadian seller account; the live runtime clamp remains `STRIPE_EXPECTED_ACCOUNT_COUNTRY=CA`.
 
 The public mechanism is available at `/try`; the consented private-beta intake is at
 `/waitlist`. The live mobile routes and database migration are now deployed. Product

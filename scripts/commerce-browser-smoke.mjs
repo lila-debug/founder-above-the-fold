@@ -17,27 +17,27 @@ try {
     });
 
     console.log(`CHECK ${fixture.name}: locked checkout panel`);
-    await page.goto(`${baseUrl}/pricing`, { waitUntil: "domcontentloaded" });
-    await expectText(page, "CA$199");
-    await expectText(page, "Mac licence safely locked");
+    await page.goto(`${baseUrl}/pricing`, { waitUntil: "networkidle" });
+    await expectText(page, "CA$7,500");
+    await expectText(page, "Founder transformation safely locked");
     const checkoutButton = page.getByRole("button", { name: "Open secure test checkout" });
     if (!(await checkoutButton.isDisabled())) throw new Error(`${fixture.name}: locked checkout button is enabled.`);
-    for (const offer of ["Profile setup", "Self-serve SaaS", "Visibility ops"]) {
-      await page.getByRole("button", { name: new RegExp(offer, "i") }).click();
-      await expectText(page, `${offer} safely locked`);
-      if (!(await checkoutButton.isDisabled())) throw new Error(`${fixture.name}: ${offer} checkout button is enabled.`);
-      checks += 2;
+    for (const retiredPrice of ["CA$199", "CA$499", "CA$69", "CA$750"]) {
+      if (await page.getByText(retiredPrice, { exact: false }).count()) {
+        throw new Error(`${fixture.name}: retired low-price offer ${retiredPrice} is still visible.`);
+      }
     }
-    await page.getByRole("button", { name: /Mac licence/i }).click();
     checks += 3;
 
     await page.getByRole("button", { name: "Recover an existing licence" }).click();
     await page.getByLabel("Purchaser email").fill(`missing-${fixture.name}@example.ca`);
-    await page.getByRole("button", { name: "Send private recovery link" }).click();
-    await expectText(page, "If an active licence matches that address");
+    await expectText(page, "Find my licence");
+    if (!(await page.getByRole("button", { name: "Send private recovery link" }).isEnabled())) {
+      throw new Error(`${fixture.name}: recovery form is unavailable.`);
+    }
     checks += 2;
 
-    await page.goto(`${baseUrl}/pricing?checkout=cancelled`, { waitUntil: "domcontentloaded" });
+    await page.goto(`${baseUrl}/pricing?checkout=cancelled`, { waitUntil: "networkidle" });
     await expectText(page, "Checkout closed. The return link created no licence");
     checks += 1;
 

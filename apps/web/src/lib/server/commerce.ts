@@ -1,6 +1,12 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import type Stripe from "stripe";
-import { commerceOffers, isCommerceOfferKey, type CommerceOfferKey } from "../commerce-offers";
+import {
+  commerceOffers,
+  isCommerceOfferKey,
+  offerIncludesMacLicence,
+  PRIMARY_COMMERCE_OFFER_KEY,
+  type CommerceOfferKey,
+} from "../commerce-offers";
 import { sendLicenceRecoveryEmail } from "../auth/email";
 import { getDbPool } from "./db";
 import { getConfiguredStripeMode, getStripeClient, getStripeConfig, getStripeOfferPriceId, stripeObjectMatchesConfiguredMode } from "./stripe";
@@ -167,7 +173,7 @@ export async function getCheckoutReceiptStatus(sessionIdInput: string) {
 
   const row = result.rows[0];
   if (!row) return { state: "not_found" as const };
-  const offerKey = isCommerceOfferKey(row.offer_key) ? row.offer_key : "mac_licence";
+  const offerKey = isCommerceOfferKey(row.offer_key) ? row.offer_key : PRIMARY_COMMERCE_OFFER_KEY;
   const fulfilledState = row.licence_status ?? row.order_status;
   if (!fulfilledState) {
     return {
@@ -307,7 +313,17 @@ async function applyPaidCheckout(
 
   const paymentIntentId = typeof session.payment_intent === "string" ? session.payment_intent : null;
   const customerId = typeof session.customer === "string" ? session.customer : null;
-  if (offerKey === "mac_licence") {
+  const subscriptionId = typeof session.subscription === "string" ? session.subscription : null;
+  await client.query(
+    `insert into founder_commerce_access
+       (purchaser_email, offer_key, billing_kind, stripe_customer_id,
+        stripe_checkout_session_id, stripe_payment_intent_id, stripe_subscription_id,
+        status, purchased_at)
+     values ($1, $2, $3, $4, $5, $6, $7, 'active', to_timestamp($8))
+     on conflict (stripe_checkout_session_id) do nothing`,
+    [email, offerKey, intent.rows[0]?.checkout_mode, customerId, session.id, paymentIntentId, subscriptionId, created],
+  );
+  if (offerIncludesMacLicence(offerKey)) {
     await client.query(
       `insert into founder_licences
        (purchaser_email, stripe_customer_id, stripe_checkout_session_id,
@@ -315,17 +331,6 @@ async function applyPaidCheckout(
      values ($1, $2, $3, $4, 'active', to_timestamp($5))
      on conflict (stripe_checkout_session_id) do nothing`,
       [email, customerId, session.id, paymentIntentId, created],
-    );
-  } else {
-    const subscriptionId = typeof session.subscription === "string" ? session.subscription : null;
-    await client.query(
-      `insert into founder_commerce_access
-         (purchaser_email, offer_key, billing_kind, stripe_customer_id,
-          stripe_checkout_session_id, stripe_payment_intent_id, stripe_subscription_id,
-          status, purchased_at)
-       values ($1, $2, $3, $4, $5, $6, $7, 'active', to_timestamp($8))
-       on conflict (stripe_checkout_session_id) do nothing`,
-      [email, offerKey, intent.rows[0]?.checkout_mode, customerId, session.id, paymentIntentId, subscriptionId, created],
     );
   }
   await client.query(

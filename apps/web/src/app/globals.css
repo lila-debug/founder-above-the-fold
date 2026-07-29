@@ -394,6 +394,7 @@ textarea:focus-visible {
 .commerce-header { display: flex; min-height: 64px; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 2px solid #111; background: #fffef8; padding: .8rem clamp(1rem, 3vw, 2.5rem); font-size: .72rem; font-weight: 900; text-transform: uppercase; }
 .commerce-header a { font-size: .9rem; }
 .commerce-grid { display: grid; width: min(100% - 2rem, 1240px); gap: 1.5rem; margin: 0 auto; padding: 1.5rem 0 5rem; }
+.commerce-licence-card, .commerce-control-stack { min-width: 0; }
 .commerce-licence-card { min-height: 0; }
 .commerce-licence-card h1 { margin-top: 2rem; font: 900 clamp(4rem, 12vw, 8rem)/.82 Arial Black, Arial, sans-serif; letter-spacing: -.09em; }
 .offer-selector { display: grid; width: 100%; gap: .55rem; margin-top: 1.25rem; }
@@ -425,7 +426,7 @@ textarea:focus-visible {
 .receipt-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.3rem; }
 
 @media (min-width: 900px) {
-  .commerce-grid { grid-template-columns: 1.05fr .95fr; padding-top: 2.5rem; }
+  .commerce-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); padding-top: 2.5rem; }
 }
 
 .file-grid, .perk-grid { display: grid; gap: 1rem; }

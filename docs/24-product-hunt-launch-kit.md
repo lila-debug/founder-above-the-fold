@@ -11,7 +11,7 @@ Checked against Product Hunt's official launch, scheduling and featuring guidanc
 | C | Listing copy | Fits the name, tagline, description, tags and maker story into Product Hunt | This panel | Founder |
 | D | Gallery crate | Shows real product surfaces at Product Hunt's recommended size | `output/product-hunt/gallery/` | Product |
 | E | Launch film | Shows the 45-second product story | `outputs/founder-above-fold-launch-video/renders/founder-above-fold-launch-final.mp4` | Product |
-| F | Three-rail / four-offer plate | Separates two limited hands-on services from open self-serve SaaS and outright macOS ownership | Product Hunt listing + price page | Founder |
+| F | One-offer plate | Presents one bounded founder transformation without a low-price product ladder | Product Hunt listing + price page | Founder |
 | G | Response board | Keeps every launch-day comment answered without canned automation | `docs/25-product-hunt-response-plan.md` | Founder |
 
 ### Mission Control Board
@@ -25,7 +25,7 @@ Checked against Product Hunt's official launch, scheduling and featuring guidanc
 [Visitors inspect, comment, and request private-beta access]
               |
               v
-[Qualified service customers + self-serve owners + product evidence]
+[Qualified transformation customers + product evidence]
 ```
 
 ### Assembly Steps
@@ -53,7 +53,7 @@ Avoid:
 
 ### Product Hunt Description
 
-`Founder Above the Fold is an owner-controlled LinkedIn workbench for founders and fractional product leaders. Draft from text or voice, clamp every revision to a defined voice, organise canonical profile copy, and publish only through the official API rail. Choose self-serve SaaS or own the macOS app outright; hands-on setup has limited seats. No scraping, automated DMs, engagement bots, or LinkedIn password sharing. Every workflow ships with a visual assembly manual and a finished-build test.`
+`Founder Above the Fold is an owner-controlled founder transformation and private LinkedIn workbench. We repair positioning, assemble the headline, About, Experience and Featured sections, define the founder voice, and deliver ten launch posts plus an owned Mac licence. No scraping, automated DMs, engagement bots, or LinkedIn password sharing. Every workflow ships with a visual assembly manual and a finished-build test.`
 
 Character count: 498 of Product Hunt's current 500-character maximum.
 
@@ -79,40 +79,33 @@ Founder Above the Fold takes a different route:
 
 It deliberately does not scrape profiles, automate DMs, send connections, or generate engagement theatre. Profile edits remain a visible manual paste because LinkedIn does not provide a personal-profile editing API.
 
-The product has three rails and four offers: limited hands-on profile setup, limited monthly Visibility Ops, an open self-serve Founder Profile OS, and an outright macOS purchase for people who prefer to own their software. The two founder-delivered services are limited; ordinary product access is not.
+The product has one commercial offer: a bounded Founder Above the Fold Transformation combining founder positioning, assembled profile assets, launch content, handover, private workbench access and one owned Mac licence.
 
 You can try the no-write draft → voice clamp → queue mechanism immediately. Pricing and availability will be fastened only after the purchase, support, privacy, update, and refund labels pass their live tests.
 
 I would value specific feedback: where does your founder LinkedIn workflow actually break—positioning, finding the first draft, protecting your voice, or keeping the week moving?
 
-#### Step 3 - Fasten the three offer rails
+#### Step 3 - Fasten the one-offer rail
 Diagram:
 ```text
-                           +--> [Service: setup once / Visibility Ops monthly]
-[Founder chooses a rail] -+--> [Self-serve: Founder Profile OS monthly]
-                           +--> [Ownership: macOS licence once]
+[CA$7,500 once] ---> [positioning + profile + launch content + handover + workbench]
 ```
 
 Do:
-1. Limit only the founder-delivered setup service because it consumes the founder's time.
-2. Keep ordinary self-serve SaaS access open when its live privacy and purchase rails pass.
-3. Offer the macOS application as an outright purchase for owners who reject recurring rent.
-4. State the included update period, supported macOS versions, licence scope, and later-major-upgrade policy before accepting payment.
-5. Complete Product Hunt's promo field only when the matching checkout path accepts the exact offer.
+1. Present one bounded `founder_transformation` package rather than a low-price ladder.
+2. State the positioning, profile, content, revision and handover boundary before payment.
+3. State the included Mac update period, supported versions, licence scope and later-major-upgrade policy.
+4. Complete Product Hunt's promo field only when the matching checkout path accepts the exact offer.
 
 Proposed Canadian launch-price plate, still locked behind owner approval and the genuine Stripe lifecycle:
 
 ```text
-[MAC LICENCE]        CA$199 once
-[PROFILE SETUP]      CA$499 once
-[FOUNDER PROFILE OS] CA$69 / month
-[VISIBILITY OPS]     CA$750 / month · five service seats
+[FOUNDER TRANSFORMATION] CA$7,500 once
 ```
 
 Check:
-- The service cap is not presented as artificial scarcity for the self-serve products.
-- SaaS billing frequency and cancellation are visible before purchase.
-- macOS currency, taxes, refund wording, licence scope, update period, and device allowance are visible before purchase.
+- The package is CA$7,500 once with no subscription.
+- Currency, taxes, refund wording, delivery scope, update period and device allowance are visible before purchase.
 - “Lifetime updates” does not appear.
 
 Avoid:
@@ -194,7 +187,7 @@ Avoid:
 - [ ] Owner-approved LinkedIn OAuth and one text-only post proof pass without token leakage.
 - [ ] Stripe's genuine sandbox lifecycle passes; live account country, tax, price, webhook and explicit owner approval are fitted before any paid offer is advertised as available.
 - [x] Listing name, 59-character tagline, description, maker comment, and bounded offer are drafted.
-- [x] Three-rail / four-offer price plate matches the fail-closed Stripe catalogue and labels both service offers as proposed until approved.
+- [x] One-offer CA$7,500 transformation plate matches the fail-closed Stripe catalogue.
 - [x] Five real-UI gallery panels and a square thumbnail have a repeatable build jig.
 - [ ] YouTube upload and Product Hunt draft are owner-approved and visually inspected.
 - [ ] Launch date remains unset until every required live light is green.

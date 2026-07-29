@@ -75,7 +75,7 @@ await expectStatus("analytics cron lock", "/api/cron/sync-analytics", 401, {
 await expectStatus("Stripe checkout non-mutating validation clamp", "/api/commerce/stripe/checkout", 503, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ email: "launch-smoke@example.test", termsAccepted: false, offerKey: "mac_licence" }),
+  body: JSON.stringify({ email: "launch-smoke@example.test", termsAccepted: false, offerKey: "founder_transformation" }),
 });
 await expectStatus("Stripe webhook signature clamp", "/api/webhooks/stripe", 400, {
   method: "POST",
