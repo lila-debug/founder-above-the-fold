@@ -7,13 +7,13 @@ export const commerceOffers = {
     billing: "payment",
     priceEnv: "STRIPE_PRICE_FOUNDER_TRANSFORMATION",
     includesMacLicence: true,
-    promise: "One founder credibility transformation. Built properly. Owned outright.",
+    promise: "A premium founder credibility build, not a bargain LinkedIn tool.",
     parts: [
       "Founder positioning and above-the-fold credibility repair",
-      "Headline, About, Experience and Featured-section assembly",
-      "Founder signal map, voice guide and 10 launch posts",
-      "Private macOS and web operating workbench",
-      "Assembly, handover and one bounded revision round",
+      "Headline, About, Experience and Featured-section assembly kit",
+      "Founder signal map, voice guide and 10 launch-ready posts",
+      "Private macOS and web operating workbench with official LinkedIn API boundaries",
+      "Assembly handover, safety manual and one bounded revision round",
     ],
   },
 } as const;

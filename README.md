@@ -37,6 +37,7 @@ registered temporary worktree, then remove that worktree after the work is fitte
 - [iOS app plan](docs/11-ios-app-plan.md)
 - [Android app plan](docs/12-android-app-plan.md)
 - [Product delivery backlog](docs/13-product-delivery-backlog.md)
+- [Developer onboarding manual](docs/45-developer-onboarding-manual.md)
 - [Single-project cabinet manual](docs/37-single-project-cabinet-manual.md)
 - [Domain and deployment manual](docs/14-domain-and-deployment-manual.md)
 - [Owner access guard manual](docs/15-owner-access-manual.md)
